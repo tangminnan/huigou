@@ -1,0 +1,61 @@
+<!--logs.wxml-->
+<view class="DD-box1 bg-W">
+    <view class="zhuangT">
+        <image src="/images/DDxq.png"></image>
+        <text>待付款</text>
+    </view>
+    <view class="tishi">30分钟内未付款，系统自动取消订单</view>
+</view>
+
+<view class="DD-box2">
+    <text>北京市顺义区</text>
+    <text class="dz">宏远航城广场M做5层</text>
+    <text>张三 187013650779</text>
+</view>
+
+<view class="DD-box3">
+    <view class="upbox">
+        <image src="/images/PH1.png"></image>
+        <view class="txt">
+            <text class="t1">元玉浆（酸马奶）</text>
+            <text class="t2">经典牛奶1箱</text>
+            <text class="t3">¥2000</text>
+            <view class="shuL">x1</view>
+        </view>
+    </view>
+    <view class="lodbox">
+        <text>订单备注</text>
+        <text class="t-txt">无</text>
+    </view>
+</view>
+
+<view class="DD-box4">
+    <view class="ddlist">
+        <text class="fl">订单编号</text>
+        <text class="fr">12388473473467</text>
+    </view>
+    <view class="ddlist">
+        <text class="fl">下单时间</text>
+        <text class="fr">2020-07-09 11:11:52</text>
+    </view>
+</view>
+
+<view class="DD-box4 DD-box5">
+    <view class="ddlist">
+        <text class="fl">配送方式</text>
+        <text class="fr">快递</text>
+    </view>
+    <view class="ddlist">
+        <text class="fl">运费</text>
+        <text class="fr">￥0.00</text>
+    </view>
+    <view class="ddlist">
+        <text class="fl">商品金额</text>
+        <text class="fr c-red">￥2000.00</text>
+    </view>
+</view>
+
+<view class="fixBtn">
+    <button>取消订单</button>
+    <button class="sure">立即支付</button>
+</view>

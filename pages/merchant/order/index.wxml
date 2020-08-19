@@ -1,0 +1,33 @@
+<view class="container">
+	<view class="tabs bg-white">
+		<view bindtap="onChangeActiveTab" data-index="{{index}}"
+			class="tab-item {{index === activeTab ? 'tab-item__selected':''}}" wx:for="{{tabs}}" wx:key="{{item.type}}">
+			{{item.title}}
+		</view>
+	</view>
+	<block wx:if="{{activeTab == 0}}">
+		<scroll-view class="order-list">
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+		</scroll-view>
+	</block>
+	<block wx:if="{{activeTab == 1}}">
+		<scroll-view class="order-list">
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+		</scroll-view>
+	</block>
+	<block wx:if="{{activeTab == 2}}">
+		<scroll-view class="order-list">
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+		</scroll-view>
+	</block>
+	<block wx:if="{{activeTab == 3}}">
+		<scroll-view class="order-list">
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+		</scroll-view>
+	</block>
+	<block wx:if="{{activeTab == 4}}">
+		<scroll-view class="order-list">
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+		</scroll-view>
+	</block>
+</view>

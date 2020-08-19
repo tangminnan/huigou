@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="panel panel-square withdraw">
+    <view class="flex-hbox cross-center title">
+      <text class="flex-spread">提现到</text>
+      <text>微信零钱<text class="iconfont icon-hgweixin"></text></text>
+    </view>
+    <view class="body">
+      <view class="withdraw-input flex-hbox cross-center">
+        <text class="label">¥</text>
+        <input value="{{money}}" bindinput="onInputMoeny" type="number" placeholder="请输入提现金额" class="input flex-spread"></input>
+      </view>
+      <view class="flex-hbox cross-center desc">
+        <text class="flex-spread">可提现余额￥{{balance}}</text>
+        <view class="color-r2328" bindtap="onClickWithdrawAll">全部提现</view>
+      </view>
+    </view>
+  </view>
+  <view class="withdraw-btn" bindtap="onClickSubmit">2小时到账，确认提现</view>
+</view>

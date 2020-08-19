@@ -1,0 +1,56 @@
+
+<!--列表-->
+<view class="wodelist">
+
+  <view class="Hlist">
+    <text>姓名</text>
+    <view class="right">
+        <input class="input" name="userName" placeholder="未填写" 
+    bindinput="userNameInput"/>
+    </view>
+  </view>
+
+  <view class="Hlist">
+    <text>性别</text>
+    <view class="right">
+      <radio-group bindchange="radiochange">
+        <p><radio value='Mr'></radio>男</p>
+        <p><radio value='Mis'></radio>女</p>
+      </radio-group>
+    </view>
+  </view>
+
+   <view class="Hlist">
+      <text>联系方式</text>
+      <view class="right">
+          <input class="input" name="userName" placeholder="请填写联系方式" 
+      bindinput="userNameInput"/>
+      </view>
+    </view>
+
+  <view class="Hlist" bindtap='biaoqian'>
+    <text>我的标签</text>
+    <view class="right">
+        <text>辣妈</text>
+        <view class="arrow"></view>
+    </view>
+   </view>
+
+   <view class="Hlist" bindtap='shequ'>
+    <text>我的社区</text>
+    <view class="right">
+        <text>北京汇创青年社区</text>
+        <view class="arrow"></view>
+    </view>
+   </view> 
+
+</view> 
+
+<view class="tijiao">
+    <button>保存并返回</button>
+</view>
+
+
+
+
+

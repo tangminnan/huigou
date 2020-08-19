@@ -1,0 +1,5 @@
+.wodelist{margin:30rpx 0;}
+.Hlist{line-height:100rpx;position:relative;margin-bottom:1px;background: #fff;padding:0 30rpx;}
+.Hlist image{width:60rpx;height:60rpx;vertical-align:middle;margin-right:20rpx;}
+.Hlist .arrow{width:20rpx;height:20rpx;border-top:2rpx solid #666;border-right:2rpx solid #666;transform:rotate(45deg);position: absolute;right:40rpx;top:40rpx;}
+.Tchu{background: #fff;font-size: 36rpx;color: #FF3B30;}

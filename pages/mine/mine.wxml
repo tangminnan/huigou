@@ -1,0 +1,151 @@
+<!--头部-->
+<view class="top mb-24">
+    <image class="mine_pic" src="/images/touxiang.jpg"></image>
+    <view class="mine_xx">
+        <view class="t1">最靓的仔</view>
+        <view class="t2" bindtap="onGoSign">
+            <image src="/images/jinbi.png"></image>
+            签到领现金 >
+        </view>
+    </view>
+    <view class="mine_edit" bindtap='bianji'>
+        <image src="/images/bianji.png"></image>
+        编辑资料
+    </view>
+</view>
+
+<!-- nav导航 -->
+<view class="wode bg-W">
+  <view class="mine_dd">
+      <view class="left">全部订单</view>
+      <view class="right" bindtap='findDD'><image src="/images/search.png"></image>找回订单</view>
+  </view>
+  <view class="mine_DDlist">
+      <view bindtap='allDD'>
+        <image src="/images/mine-1.png" mode='aspectFit'></image>
+        <text>待支付</text>
+      </view>
+      <view bindtap='allDD'>
+        <image src="/images/mine-2.png" mode='aspectFit'></image>
+        <text>待收货</text>
+      </view>
+      <view bindtap='allDD'>
+        <image src="/images/mine-3.png" mode='aspectFit'></image>
+        <text>已完成</text>
+      </view>
+      <view bindtap='allDD'>
+        <image src="/images/mine-4.png" mode='aspectFit'></image>
+        <text>退换/售后</text>
+      </view>
+      <view bindtap='allDD'>
+        <image src="/images/mine-5.png" mode='aspectFit'></image>
+        <text>全部</text>
+      </view>
+  </view>
+
+  <view class="mine_dd">
+      <view class="left">我的钱包</view>
+      <view class="right"><image src="/images/wenhao.png"></image>提现规则</view>
+  </view>
+  <view class="mine_DDlist bdn">
+      <view>
+        <p>￥500</p>
+        <text>待入账</text>
+      </view>
+      <view>
+         <p>￥1500</p>
+        <text>余额</text>
+      </view>
+      <view class="line"></view>
+      <view>
+        <image src="/images/mine-6.png" mode='aspectFit'></image>
+        <text>结算账单</text>
+      </view>
+      <view bindtap='myMoney'>
+        <image src="/images/mine-7.png" mode='aspectFit'></image>
+        <text>钱包</text>
+      </view>
+  </view>
+</view>
+
+<!--列表-->
+<view class="wodelist bg-W mb-24">
+  <view class="mine_dd">
+      <view class="left">工具与服务</view>
+  </view>
+  <view class="Hlist">
+    <image src="/images/gongju-1.png" mode='aspectFit'></image>
+    <text>任务中心</text>
+    <view class="arrow"></view>
+  </view>
+
+  <view class="Hlist" bindtap='myDZ'>
+    <image src="/images/gongju-2.png" mode='aspectFit'></image>
+    <text>我的地址</text>
+    <view class="arrow"></view>
+  </view>
+
+  <view class="Hlist">
+    <image src="/images/gongju-3.png" mode='aspectFit'></image>
+    <text>拨打客服</text>
+    <view class="arrow"></view>
+  </view>
+
+  <view class="Hlist" bindtap='showview'>
+    <image src="/images/gongju-4.png" mode='aspectFit'></image>
+    <text>关注公众号</text>
+    <view class="arrow"></view>
+  </view>
+
+  <view class="Hlist" style="border-bottom:none;" bindtap='myshezhi'>
+    <image src="/images/gongju-5.png" mode='aspectFit'></image>
+    <text>设置</text>
+    <view class="arrow"></view>
+  </view>
+
+</view> 
+
+<view class="wodelist bg-W mb-24">
+  <view class="Hlist" bindtap="onApplyMerchant">
+    <image src="/images/gengduo.png" mode='aspectFit'></image>
+    <text>成为商家</text>
+    <view class="arrow"></view>
+  </view>
+
+  <view class="Hlist" style="border-bottom:none;" bindtap="onApplyPromote">
+    <image src="/images/gongju-6.png" mode='aspectFit'></image>
+    <text>成为推广</text>
+    <view class="arrow"></view>
+  </view>
+</view>
+
+<!--公众号弹框  -->
+<view class='showModel' wx:if="{{model == 1}}" catchtouchmove="return">
+  <view class='van-modal' style='height:{{windowHeight}}px;width: {{windowWidth}}px' bindtap='model1'></view>
+  <view class='selectedGoodMsg'>
+      <!--未关注和已关注两个请自行使用-->
+      <view class="erweima">
+          <view>关注公众号</view>
+          <image src="/images/yaoqm.jpg" mode='aspectFit'></image>
+      </view>
+      <!--<view class="erweima_YY">
+          <view>关注公众号</view>
+          <image src="/images/red.png" mode='aspectFit'></image>
+          <text>已关注</text>
+      </view>-->
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

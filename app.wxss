@@ -1,0 +1,409 @@
+@import './assets/iconfont.wxss';
+@import './weui.wxss';
+@import './parts.wxss';
+
+page {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+
+.container {
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+page {
+  background: #f5f5f5;
+  box-sizing: border-box;
+  color: #333;
+  font-size: 28rpx;
+}
+
+.bg-W {
+  background: #fff;
+  overflow: hidden;
+}
+
+.p-12 {
+  padding: 0 12rpx;
+}
+
+.mb-24 {
+  margin-bottom: 24rpx;
+}
+
+.m-24 {
+  margin: 0 24rpx;
+}
+
+.bdr-15 {
+  border-radius: 15rpx;
+}
+
+.pop {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9;
+}
+
+.popTxt {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 5rpx;
+  z-index: 999;
+  box-sizing: border-box;
+}
+
+/*公用课程样式*/
+.kecheng {
+  margin-bottom: 5rpx;
+  padding: 20rpx 30rpx;
+  background: #fff;
+  overflow: hidden;
+}
+
+.kecheng image {
+  float: left;
+  width: 160rpx;
+  height: 220rpx;
+}
+
+.kecheng .Txt {
+  float: left;
+  margin-left: 35rpx;
+}
+
+.kecheng .Txt text {
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.kecheng .Txt text.T1 {
+  font-size: 32rpx;
+  color: #000;
+}
+
+.kecheng .Txt text.T2 {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.T3 {
+  font-size: 36rpx;
+  color: #ff6a06;
+}
+
+.kecheng .Txt .btn button {
+  font-size: 20rpx;
+  margin-right: 20rpx;
+  color: #fff;
+  background: #ff9300;
+  border-radius: 50rpx;
+  margin-bottom: 5rpx;
+}
+
+/*公用器材样式*/
+.qicai {
+  margin-bottom: 20rpx;
+}
+
+.qicai .box {
+  background: #fff;
+  width: 49%;
+  overflow: hidden;
+  padding-bottom: 20rpx;
+  margin-bottom: 15rpx;
+  border-radius: 5rpx;
+}
+
+.qicai .box:nth-child(odd) {
+  float: left;
+}
+
+.qicai .box:nth-child(even) {
+  float: right;
+}
+
+.qicai .box image {
+  width: 340rpx;
+  height: 260rpx;
+}
+
+.qicai .box text {
+  padding: 0 15rpx;
+  margin-bottom: 10rpx;
+}
+
+.qicai .box .T1 {
+  font-size: 28rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+/*公用资讯样式*/
+.zixun .box {
+  background: #fff;
+  margin-bottom: 10rpx;
+}
+
+.zixun .box image {
+  width: 690rpx;
+  height: 295rpx;
+}
+
+.zixun .box text {
+  font-size: 30rpx;
+  line-height: 80rpx;
+  padding: 0 25rpx;
+}
+
+/*公用弹框样式*/
+.moneyTxt {
+  width: 80%;
+  height: 500rpx;
+  text-align: center;
+  padding: 50rpx 30rpx;
+}
+
+.base-1 {
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 50rpx;
+}
+
+.base-1 text {
+  display: block;
+  font-size: 30rpx;
+  margin-bottom: 50rpx;
+}
+
+.base-2 button {
+  width: 70%;
+  background: #fe9912;
+  color: #fff;
+  font-size: 36rpx;
+  border-radius: 60rpx;
+  margin-top: 10rpx;
+}
+
+.base-2 .bgN {
+  background: #fff;
+  color: #fe9912;
+}
+
+.base-2 .bgN::after {
+  border: none !important;
+}
+
+/*--时间段选择弹框--*/
+.timeTxt {
+  width: 90%;
+  height: 670rpx;
+  padding: 5rpx;
+}
+
+.timeCho {
+  display: block;
+  text-align: center;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #ddd;
+  line-height: 110rpx;
+}
+
+.timeS {
+  margin: 40rpx 0;
+  overflow: hidden;
+}
+
+.timeS text {
+  float: left;
+  width: 184rpx;
+  line-height: 56rpx;
+  text-align: center;
+  border: 1rpx solid #999;
+  border-radius: 5rpx;
+  margin: 15rpx;
+}
+
+.timeS text.on {
+  background: #ff9300;
+  color: #fff;
+  border-color: #ff9300;
+}
+
+.ANbtn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.ANbtn text {
+  float: left;
+  width: 50%;
+  text-align: center;
+  line-height: 90rpx;
+}
+
+.T-btn1 {
+  border-top: 1rpx solid #eee;
+}
+
+.T-btn2 {
+  background: #ff9300;
+  color: #fff;
+}
+
+.org-48 {
+  color: #ff9300;
+  font-size: 48rpx !important;
+}
+
+/*--请支付预约费弹框--*/
+.QDTxt {
+  width: 90%;
+  height: 75%;
+  padding: 30rpx 30rpx 0;
+}
+
+.qdZT {
+  border-bottom: 1rpx solid #eee;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.qdZT image {
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 30rpx;
+}
+
+.upTxt {
+  text-align: center;
+  padding-bottom: 40rpx;
+}
+
+.upTxt text {
+  display: block;
+  font-size: 24rpx;
+  line-height: 56rpx;
+}
+
+.upTxt text.big {
+  font-size: 36rpx;
+  margin-bottom: 10rpx;
+}
+
+.zhuYi {
+  margin-bottom: 40rpx;
+  color: #666;
+  line-height: 42rpx;
+}
+
+.zhuYi text {
+  display: block;
+}
+
+.guanbi image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.Cbig {
+  font-size: 48rpx !important;
+  margin-top: 30rpx;
+}
+
+.orgTxt text {
+  color: #ff9300;
+}
+
+.mtC-30 {
+  margin-top: 40rpx;
+}
+
+.CSTxt {
+  width: 90%;
+  height: 55%;
+  padding: 30rpx 30rpx 0;
+}
+
+/*--支付完成弹框--*/
+.ZFwcTxt {
+  width: 80%;
+  height: 40%;
+  text-align: center;
+}
+
+.ZFwcTxt image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-top: 100rpx;
+}
+
+.ZFwcTxt text {
+  display: block;
+  font-size: 36rpx;
+  margin-top: 30rpx;
+}
+
+/*--联系客服--*/
+.keFuTxt {
+  width: 80%;
+  height: 40%;
+  padding: 30rpx;
+}
+
+.kefuKK {
+  text-align: center;
+}
+
+.kefuKK image {
+  width: 60rpx;
+  height: 55rpx;
+  margin: 40rpx 0 20rpx;
+}
+
+.kefuKK text {
+  display: block;
+  margin-bottom: 20rpx;
+  letter-spacing: 2rpx;
+}
+
+/*--订单完成去评价--*/
+.PJTxt {
+  width: 80%;
+  height: 40%;
+  padding: 30rpx;
+}
+
+.qupj {
+  text-align: center;
+  margin-bottom: 50rpx;
+}
+
+.qupj image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-top: 30rpx;
+}
+
+.qupj text {
+  display: block;
+  font-size: 36rpx;
+  margin-top: 30rpx;
+}

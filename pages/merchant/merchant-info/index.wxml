@@ -1,0 +1,148 @@
+<view class="container">
+  <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+  <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+    <mp-cells>
+      <mp-cell prop="name" title="填写姓名">
+        <input data-field="name" class="weui-input" type="text" placeholder="姓名"></input>
+      </mp-cell>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label mg-l-16">性别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker value="{{info.selectedSexIndex}}" range="{{sexList}}" range-key="label" bindchange="onSexChange">
+            <view class="weui-select">
+              {{sexList[info.selectedSexIndex || 0].label || '请选择性别'}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <mp-cell prop="mobile" title="联系方式">
+        <input data-field="mobile" class="weui-input" type="text" placeholder="联系电话"></input>
+      </mp-cell>
+      <view class="weui-cell weui-cell_select" bindtap="onChooseAddress">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label mg-l-16">选择地址</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view class="weui-select">
+            <view class="address-info" wx:if="{{info.address}}">
+              <view class="address-userName">{{info.address.userName}} - {{info.address.telNumber}}</view>
+              <view class="address-detail">
+                {{info.address.provinceName}}{{info.address.cityName}}{{info.address.countyName}}{{info.address.detailInfo}}
+              </view>
+            </view>
+            <view wx:else class="color-888">请选择地址</view>
+          </view>
+        </view>
+      </view>
+      <mp-cell prop="shopName" title="商铺名称">
+        <input data-field="shopName" class="weui-input" type="text" placeholder="请输入商铺名称"></input>
+      </mp-cell>
+      <view class="weui-cell weui-cell__textarea">
+        <view class="weui-cell__hd">
+          <view class="weui-label">商品说明</view>
+        </view>
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入文本" />
+          </view>
+      </view>
+    </mp-cells>
+    <block wx:if="{{type === 'enterprise'}}">
+    <view class="img-uploader">
+      <view class="img-uploader-title">品牌授权</view>
+      <view class="img-uploader-btn" data-type="auth" bindtap="onUploadImage">
+        <block wx:if="{{info.auth && info.auth.length}}">
+          <image wx:for="{{info.auth}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
+        </block>
+        <block wx:else>
+          <mp-icon icon="add" size="48" color="#999"></mp-icon>
+          <text>只支持.jpg格式</text>
+        </block>
+      </view>
+    </view>
+    <view class="img-uploader">
+      <view class="img-uploader-title">营业执照上传</view>
+      <view class="img-uploader-btn" data-type="license" bindtap="onUploadImage">
+        <block wx:if="{{info.license && info.license.length}}">
+          <image wx:for="{{info.license}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
+        </block>
+        <block wx:else>
+          <mp-icon icon="add" size="48" color="#999"></mp-icon>
+          <text>只支持.jpg格式</text>
+        </block>
+      </view>
+    </view>
+    <view class="img-uploader">
+      <view class="img-uploader-title">其他执照上传</view>
+      <view class="img-uploader-btn" count="10" data-type="others" bindtap="onUploadImage">
+        <block wx:if="{{info.others && info.others.length}}">
+          <image wx:for="{{info.others}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
+        </block>
+        <block wx:else>
+          <mp-icon icon="add" size="48" color="#999"></mp-icon>
+          <text>只支持.jpg格式</text>
+        </block>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="img-uploader">
+      <view class="img-uploader-title">营业执照上传</view>
+      <view class="img-uploader-btn" data-type="license" bindtap="onUploadImage">
+        <block wx:if="{{info.license && info.license.length}}">
+          <image wx:for="{{info.license}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
+        </block>
+        <block wx:else>
+          <mp-icon icon="add" size="48" color="#999"></mp-icon>
+          <text>只支持.jpg格式</text>
+        </block>
+      </view>
+    </view>
+    <view class="img-uploader">
+      <view class="img-uploader-title">相关证书上传(例: 食品安全证、其他证件)</view>
+      <view class="img-uploader-btn" data-type="otherAuth" bindtap="onUploadImage">
+        <block wx:if="{{info.otherAuth && info.otherAuth.length}}">
+          <image wx:for="{{info.otherAuth}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
+        </block>
+        <block wx:else>
+          <mp-icon icon="add" size="48" color="#999"></mp-icon>
+          <text>只支持.jpg格式</text>
+        </block>
+      </view>
+    </view>
+    <view class="img-uploader">
+      <view class="img-uploader-title">其他执照上传</view>
+      <view class="img-uploader-btn" data-count="10" data-type="others" bindtap="onUploadImage">
+        <block wx:if="{{info.others && info.others.length}}">
+          <image wx:for="{{info.others}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
+        </block>
+        <block wx:else>
+          <mp-icon icon="add" size="48" color="#999"></mp-icon>
+          <text>只支持.jpg格式</text>
+        </block>
+      </view>
+    </view>
+  </block>
+    <view class="warn-tips">
+      <view><text>注意事项</text></view>
+      <view><text>1、请保证照片清晰完整，无任何遮挡，反光。</text></view>
+      <view><text>2、请尽量让照片沾满屏幕，并且露出图片边缘。</text></view>
+      <view><text>3、上传成功后，请耐心等待系统审核。</text></view>
+    </view>
+    <checkbox-group bindchange="onAgreeChange">
+        <label class="weui-agree" for="weuiAgree">
+            <view class="weui-agree__text">
+                <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{info.isAgree}}" />
+                <view class="weui-agree__checkbox-icon">
+                    <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{info.isAgree}}"></icon>
+                </view>
+                我已同意<navigator url="/pages/merchant-agreement/index" class="weui-agree__link">《商家协议》</navigator>
+            </view>
+        </label>
+    </checkbox-group>
+	</mp-form>
+  <view class="next-btn">
+      <button class="weui-btn" type="primary" bindtap="submitForm">下一步</button>
+  </view>
+</view>

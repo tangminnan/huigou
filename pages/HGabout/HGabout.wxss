@@ -1,0 +1,7 @@
+page{background: #fff;}
+.about{padding:50rpx 35rpx;}
+.logo{text-align: center;font-size: 32rpx;margin-bottom: 50rpx;}
+.logo image{width: 200rpx;height: 200rpx;margin-bottom: 24rpx;}
+.txt p{display: block;margin-bottom:30rpx;}
+
+

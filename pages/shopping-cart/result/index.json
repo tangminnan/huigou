@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "OrderItem": "../../components/order-item"
+  },
+  "navigationBarTitleText": "支付结果"
+}

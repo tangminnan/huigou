@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="result mg-b-24">
+    <image src="{{img}}"></image>
+    <view class="desc">{{desc}}</view>
+    <view class="detail">{{detail}}</view>
+  </view>
+  <OrderItem mode='order' count="{{count}}" total="{{total}}" originTotal="{{originTotal}}"></OrderItem>
+</view>

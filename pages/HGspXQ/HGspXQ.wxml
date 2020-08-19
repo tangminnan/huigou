@@ -1,0 +1,141 @@
+<!-------------轮播图----------------- -->
+<view class='swiper'>
+    <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" duration="{{duration}}" interval='{{interval}}'indicator-active-color="#007aff" bindchange="bindchange" circular="{{circular}}" style="height:{{imgheights[current]}}rpx;">
+        <block wx:for='{{imgUrls}}' wx:key="{{index}}">
+            <swiper-item>
+                <image src="{{item}}" data-id='{{index}}' class="slide-image" mode="widthFix" bindload="imageLoad" />
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
+<view class="share" bindtap='shareBox'><image src="/images/share.png" mode='aspectFit'></image></view>
+
+<view class="spTxt bg-W mb-10">
+    <view class="T1 mb-10"><text class="redC">￥499.00</text><text class="lineT">￥899.00</text></view>
+    <view class="T2">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+</view>
+
+<view class="mb-10">
+    <view class="Hlist" bindtap="clickme">
+        <text>规格</text>
+        <view class="right">
+            <text>选择规格</text>
+            <view class="arrow"></view>
+        </view>
+    </view>
+    <view class="Hlist" bindtap='shouhuoDZ'>
+        <text>送至</text>
+        <view class="right">
+            <text>选择地址</text>
+            <view class="arrow"></view>
+        </view>
+    </view>
+    <view class="Hlist" style="background:none;">
+        <text>快递</text>
+        <view class="right">
+            <text>8元</text>
+        </view>
+    </view>
+</view>
+
+<view class="shangjia bg-W" bindtap='sjXQ'>
+    <image src="/images/PH1.png"></image>
+    <text>蒙牛惠购旗舰店</text>
+    <view class="arr"></view>
+</view>
+<view class="biaoQ">商品详情</view>
+
+<view class="botFix">
+    <view class="fix1" bindtap='dianpu'>
+        <image src="/images/gengduo.png"></image>
+        <view>店铺</view>
+    </view>
+    <view class="fix1" bindtap="onGoToShoppingCart">
+        <image src="/images/che.png"></image>
+        <view>购物车 <text>1</text></view>
+    </view>
+    <view class="fix2">
+        <button bindtap="clickme">加入购物车</button>
+        <button bindtap="clickme" class="liji">立即购买</button>
+    </view>
+</view>
+
+<!--===========点击购买选择套餐的弹框=================-->
+  <!--屏幕背景变暗的背景  -->
+  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+  <!--购买弹出框  -->
+  <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+        <view class="V1">
+            <image src="/images/PH1.png"></image>
+            <view>
+                <text class="t1">¥499.00</text>
+                <text class="t2">重量：1.55kg</text>
+                <text class="t2">重量：1.55kg</text>
+            </view>
+        </view>
+        <view class="V2">
+            <text class="t1">选择套餐</text>
+            <view class="color">
+                <view class="iconusecont-div {{state==index?'active-tag':''}}" bindtap="select_use" wx:for="{{use}}" data-key='{{index}}'>
+                    <view class="flex-item">
+                        <rich-text class='use_name'>{{item.use_name}}</rich-text>
+                    </view>
+                </view>
+            </view>
+            <!-- 数量加减主容器 -->  
+            <view class="Num">
+                <view class="goum">购买数量</view>
+                <view class="stepper">  
+                    <!-- 减号 -->  
+                    <text class="{{minusStatus}}" bindtap="bindMinus">-</text>  
+                    <!-- 数值 -->  
+                    <input type="number" bindchange="bindManual" value="{{num}}" />  
+                    <!-- 加号 -->  
+                    <text class="normal" bindtap="bindPlus">+</text>  
+                </view>  
+            </view>
+        </view>
+        <!-- 关闭按钮 -->
+        <view class="close"><image src="/images/close.png"></image></view> 
+        <!-- 确定按钮 -->
+        <button class="sure" bindtap="showok">确定</button>
+  </view>
+
+<!--==================点击分享的弹框==========================-->
+<!-- 分享弹框内容一-->
+<view class='showModel' wx:if="{{modelA == 1}}" catchtouchmove="return">
+  <view class='van-modal' style='height:{{windowHeight}}px;width: {{windowWidth}}px' bindtap='model1A'></view>
+  <view class='shareMsg'>
+      <view class='share-btn'>
+            <image class='share-icon' src='/images/share-3.png'></image>
+            <text>分享小程序</text>
+      </view>
+
+    <view class='share-btn' open-type='share' bindtap='showview'>
+        <image class='share-icon' src='/images/share-2.png'></image>
+        <text>分享商品图</text>
+    </view>
+
+    <view class="quxiao"><button>取消</button></view>
+  </view>
+</view>
+
+<!-- 生成图片分享弹框内容-->
+<view class='showModel' wx:if="{{model == 1}}" catchtouchmove="return">
+  <view class='van-modal van-modalA' style='height:{{windowHeight}}px;width: {{windowWidth}}px' bindtap='model1'></view>
+  <view class='selectedGoodMsg'>
+      <view class="sharePic">
+            <view class="name"><image src="/images/touxiang.jpg"></image><text>最靓的仔</text></view>
+            <view class="p1"><image src="/images/PH6.png"></image></view>
+            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+            <view class="t2">￥ 420.00</view>
+            <view class="p2"><image src="/images/yaoqm.jpg"></image></view>
+      </view>
+      <view class="shareBtn">
+            <view><image src="/images/share-1.png"></image>保存手机</view>
+            <view><image src="/images/share-2.png"></image>保存手机</view>
+            <view><image src="/images/share-3.png"></image>保存手机</view>
+      </view>
+  </view>
+</view>
+

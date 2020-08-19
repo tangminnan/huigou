@@ -1,0 +1,157 @@
+/* 头部 */
+.header {
+  height: 240rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header::after {
+  background-image: linear-gradient(90deg, rgba(228, 45, 46, 1) 0%, rgba(250, 100, 0, 1) 100%);
+  z-index: -1;
+  display: block;
+  content: " ";
+  position: absolute;
+  top: -7240rpx;
+  left: 50%;
+  margin-left: -3750rpx;
+  width: 7500rpx;
+  height: 7500rpx;
+  border-bottom-left-radius: 7500rpx;
+  border-bottom-right-radius: 7500rpx;
+}
+
+
+
+.header .avatar {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 24rpx;
+}
+
+.header .avatar .name {
+  margin-left: 16rpx;
+  color: #fff;
+  font-weight: 500;
+  font-size: 36rpx;
+}
+
+.header .avatar .sign-btn {
+  font-size: 28rpx;
+  font-weight: normal;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #FFCE38;
+  border-radius: 28rpx;
+  padding: 0 10rpx;
+  margin-top: 16rpx;
+}
+
+.header .avatar .sign-btn image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 6rpx;
+
+}
+
+.header .avatar .image {
+  display: block;
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 130rpx;
+  overflow: hidden;
+}
+
+.header .profile-btn {
+  color: #fff;
+  font-size: 24rpx;
+  margin-right: 24rpx;
+}
+
+.header .profile-btn .iconfont {
+  font-size: 24rpx;
+  margin-right: 6rpx;
+}
+
+/* 钱包面板 */
+.wallet-panel {
+  margin-top: 48rpx;
+  padding: 0 24rpx;
+  padding-bottom: 24rpx;
+}
+
+.wallet-panel .wallet-panel-title {
+  font-size: 30rpx;
+  padding: 24rpx 0;
+  font-weight: 500;
+}
+
+.wallet-panel .wallet-panel-title .rule .iconfont {
+  margin-right: 6rpx;
+}
+
+.wallet-panel .wallet-panel-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 156rpx;
+}
+
+.wallet-panel .wallet-panel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  align-self: stretch;
+}
+
+.wallet-panel .wallet-panel-item .money {
+  font-size: 32rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  color: #FA6400;
+  font-weight: 500;
+}
+
+.wallet-panel .wallet-panel-item .icon-hgqianbao {
+  font-size: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  color: #FA6400;
+}
+
+.wallet-panel .wallet-panel-item text {
+  color: #666;
+  font-size: 24rpx;
+  margin-top: 16rpx;
+}
+
+/* 分享链接btn */
+.action-panel {
+  margin-top: 24rpx;
+  padding: 60rpx 32rpx;
+}
+
+.action-panel .action-item {
+  height: 104rpx;
+}
+
+.action-panel .action-item .icon {
+  margin-right: 32rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+/* 保存二维码图片 */
+.panel-qrcode {
+  margin: 46rpx;
+  margin-bottom: 70rpx;
+  height: 500rpx;
+}

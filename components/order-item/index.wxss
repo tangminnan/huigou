@@ -1,0 +1,80 @@
+.order-item {
+  background-color: #fff;
+  padding: 32rpx 32rpx 0rpx;
+  overflow: hidden;
+}
+
+.order-item .row {
+  height: 40rpx;
+}
+
+.order-item .product-img {
+  width: 138rpx;
+  height: 138rpx;
+  margin-right: 32rpx;
+}
+
+.order-item .product-info {
+  margin-top: 30rpx;
+  height: 138rpx;
+  margin-bottom: 40rpx;
+}
+
+.order-item .title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+}
+
+.order-item .spu {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+}
+
+.order-item .count {
+  align-self: flex-end;
+  padding-bottom: 25rpx;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: 104rpx;
+  text-align: right;
+}
+
+.order-item .origin-price {
+  font-size: 27rpx;
+  color: #a3a3a3;
+  margin-right: 32rpx;
+}
+
+.order-item .price {
+  font-size: 36rpx;
+}
+
+.order-item .detail {
+  padding-bottom: 29rpx;
+}
+
+.order-item .extra {
+  border-top: 1px solid #ddd;
+  height: 100rpx;
+}
+
+.order-item .extra .desc {
+  text-align: right;
+}
+
+.order-item .extra .action-btn {
+  height: 64rpx;
+  line-height: 64rpx;
+  background-color: #FFF9F9;
+  color: #FF3B2B;
+  border-radius: 32rpx;
+  padding: 0 32rpx;
+}

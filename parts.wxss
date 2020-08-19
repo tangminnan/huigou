@@ -1,0 +1,158 @@
+.container-white {
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.container-stack {
+  padding: 72rpx 35rpx;
+}
+
+.panel {
+  background-color: #fff;
+  border-radius: 32rpx;
+}
+
+.panel.panel-stack {
+  margin: 0 32rpx;
+}
+
+.panel.panel-square {
+  border-radius: 0;
+}
+
+/*  */
+.mg-b-24 {
+  margin-bottom: 24rpx;
+}
+.mg-l-16 {
+  margin-left: 32rpx;
+}
+
+.mg-r-6 {
+  margin-right: 6rpx;
+}
+
+.mg-r-16 {
+  margin-right: 16rpx;
+}
+
+.mg-t-24 {
+  margin-top: 24rpx;
+}
+
+.mg-t-16 {
+  margin-top: 16rpx;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.flex-vbox {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-hbox {
+  display: flex;
+  flex-direction: row;
+}
+
+.cross-center {
+  align-items: center;
+}
+
+.cross-stretch {
+  align-items: stretch;
+}
+
+.self-strech {
+  align-self: stretch;
+}
+
+.flex-spread {
+  flex: 1;
+}
+
+.font-bold {
+  font-weight: 500;
+}
+
+.font-36 {
+  font-size: 36rpx;
+}
+
+.font-34 {
+  font-size: 34rpx;
+}
+
+.font-30 {
+  font-size: 30rpx;
+}
+
+.font-28 {
+  font-size: 28rpx;
+}
+
+.font-26 {
+  font-size: 26rpx;
+}
+
+.font-24 {
+  font-size: 24rpx;
+}
+
+.color-888 {
+  color: #888;
+}
+
+.color-999 {
+  color: #999;
+}
+
+.color-green {
+  color: green;
+}
+
+.color-r2328 {
+  color: #FF2328;
+}
+
+.status-important {
+  color: #FF3B23;
+}
+
+.status-normal {
+  color: #565656;
+}
+
+.text-del {
+  text-decoration: line-through;
+}
+
+.text-ellipis-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+}
+
+.text-ellipis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+}
+
+.text-ellipis-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+}

@@ -1,0 +1,42 @@
+<view class="shangjia">
+        <image src="/images/PH1.png"></image>
+        <text>蒙牛惠购旗舰店</text>
+</view>
+
+<view class="Plei">
+    <view class="tit">商家品类</view>
+    <view class="Pleies">
+        <text>纯牛奶</text>
+        <text>酸奶</text>
+        <text>儿童成长奶</text>
+        <text>纯牛奶</text>
+        <text>酸奶</text>
+        <text>儿童成长奶</text>
+    </view>
+</view>
+
+<view class="wodelist bg-W mb-24">
+    <view class="Hlist">
+        <image src="/images/gengduo.png" mode='aspectFit'></image>
+        <text>联系客服</text>
+        <view class="arrow"></view>
+    </view>
+    <view class="Hlist bdn">
+        <image src="/images/gongju-7.png" mode='aspectFit'></image>
+        <text>证照信息</text>
+        <view class="arrow"></view>
+    </view>
+</view>
+
+<view class="wodelist bg-W mb-24">
+    <view class="Hlist">
+        <image src="/images/gengduo.png" mode='aspectFit'></image>
+        <text>店铺简介</text>
+        <view class="DPjj">本店经营XXX欢迎光临…</view>
+    </view>
+    <view class="Hlist bdn">
+        <image src="/images/gongju-8.png" mode='aspectFit'></image>
+        <text>店铺地址</text>
+        <view class="DPjj">北京/顺义/XXX A做301</view>
+    </view>
+</view>

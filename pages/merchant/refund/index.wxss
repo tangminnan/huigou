@@ -1,0 +1,76 @@
+.panel-action {
+  padding: 50rpx 32rpx;
+}
+
+.action-btn {
+  height: 64rpx;
+  line-height: 64rpx;
+  background-color: #FFF9F9;
+  color: #FF3B00;
+  border-radius: 32rpx;
+  padding: 0 32rpx;
+  margin-bottom: 32rpx;
+  text-align: center;
+}
+
+.action-btn:last-child {
+  margin-bottom: 0;
+}
+
+.next-btn {
+  margin-top: 32rpx;
+  margin-bottom: 54rpx;
+}
+
+.next-btn button.weui-btn {
+  width: 686rpx;
+  border-radius: 90rpx;
+  background: linear-gradient(270deg, rgba(255, 94, 77, 1) 0%, rgba(255, 59, 48, 1) 100%);
+}
+
+.steps {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+  width: 200rpx;
+  margin: 0 auto;
+  margin-top: 80rpx;
+}
+.steps.steps-4 {
+  width: 500rpx;
+}
+.steps .step-track {
+  position: absolute;
+  top: 50%;
+  margin-top: -2rpx;
+  height: 4rpx;
+  left: 0;
+  right: 0;
+  background-color: #e5e5e5;
+}
+
+
+.steps .step-dot {
+  background-color: #e5e5e5;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 16rpx;
+  flex: 0 0 16rpx;
+  position: relative;
+}
+
+.steps .step-dot__open {
+  background-color: #FF2328;
+}
+
+.steps .step-dot .step-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200rpx;
+  text-align: center;
+  top: 100%;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+}

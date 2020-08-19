@@ -1,0 +1,240 @@
+.swiper image {width: 100%;height: auto;}
+.swiper-image {height: 100%;width: 100%;} 
+.slide-image {height: 100%;width: 100%; display: block;}
+.share{position: absolute;top:35rpx;right:35rpx;background:#e8e8e8;border-radius:60rpx;overflow: hidden;}
+.share image{width: 206rpx;height:60rpx;display: block;}
+
+.spTxt{position: relative;padding:30rpx;}
+.spTxt .T1 .redC{font-size:42rpx;color: #ff6a06;}
+.spTxt .T1 .lineT{font-size:30rpx;color: #666;text-decoration: line-through;margin-left: 15rpx;}
+.spTxt .T2{font-size: 34rpx;width: 100%;}
+
+.Hlist{background:#fff;margin-bottom:3rpx;padding:0 30rpx;line-height:120rpx;position:relative;font-size: 30rpx;}
+.Hlist .right{position: absolute;right:40rpx;top:0;color:#999;}
+.Hlist .arrow{width:20rpx;height:20rpx;border-top:2rpx solid #666;border-right:2rpx solid #666;transform:rotate(45deg);display:inline-block;}
+.Hlist .right input{height: 120rpx;text-align:right;}
+
+.shangjia{padding:20rpx;line-height: 120rpx;margin-bottom: 40rpx;}
+.shangjia image{width: 120rpx;height: 120rpx;vertical-align: middle;}
+.shangjia text{font-size: 32rpx;margin-left: 24rpx;font-weight: bold;}
+.shangjia .arr{
+  float: right;
+  margin-top:50rpx;
+  width: 28rpx;
+  height:28rpx;
+  border-top:2rpx solid #666;
+  border-right:2rpx solid #666;
+  transform:rotate(45deg);
+  display: inline-block;
+}
+.biaoQ{
+  font-size: 30rpx;
+  line-height: 42rpx;
+  margin:16rpx 24rpx;
+  margin-bottom: 150rpx;
+  border-left:8rpx solid #666;
+  padding-left:15rpx;
+}
+.botFix{
+  background: #fff;
+  overflow: hidden;
+  padding:15rpx 20rpx 10rpx;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.botFix .fix1{
+  float: left;
+  text-align: center;
+  color: #A3A3A3;
+  margin:8rpx 30rpx 0;
+  font-size: 22rpx;
+  position: relative;
+}
+.botFix .fix1 view text{
+  position: absolute;
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  background: #FF3B30;
+  color: #fff;
+  top:-5px;
+  right:-3px;
+}
+.botFix .fix1 image{width: 40rpx;height: 34rpx;}
+.botFix .fix2{float: right;}
+.botFix .fix2 button{
+  display: inline-block;
+  width: 220rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  border-radius:60rpx;
+  background: -webkit-linear-gradient(left,#E3D0A5,#F2E6C7);
+  color: #7E6D3D;
+  margin-left:16rpx;
+  padding: 0;
+} 
+.botFix .fix2 button.liji{
+  background: -webkit-linear-gradient(left,#FF3B30,#FF5E4D);
+  color: #fff;
+}
+.mb-10{margin-bottom: 20rpx;}
+.tijiao button{width:100%;background: #ff8c03;color: #fff;position: fixed;bottom: 0;}
+
+/*======== 点击购买选择套餐的弹框样式 =========*/
+/*使屏幕变暗  */
+.commodity_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
+  z-index: 1000;
+  color: #fff;
+}
+/*对话框 */
+.commodity_attr_box {
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2000;
+  background: #fff;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+.V1{ overflow: hidden; margin-bottom: 30rpx;}
+.V1 image{float: left;width:200rpx;height: 200rpx;border: 1rpx solid #eee;border-radius: 10rpx;}
+.V1 view{float: left;margin-left: 30rpx;}
+.V1 view text{display: block;font-size: 28rpx;}
+.V1 view .t1{color: #FF3B00;margin:20rpx 0;font-size: 42rpx;}
+.V1 view .t2{font-size: 24rpx;color: #666;margin-bottom: 16rpx;}
+.V2{margin-bottom: 50rpx;overflow: hidden;}
+.V2 .t1{font-size: 36rpx;margin-bottom:30rpx;display: block;}
+.V2 .color{overflow: hidden;padding-bottom:20rpx;}
+/* 选择套餐 */
+.iconusecont-div {
+  text-align: center;
+  margin-bottom: 16rpx;
+  border-radius:60rpx;
+  line-height: 80rpx;
+  font-size:30rpx;
+  background:#F6F6F6;
+  overflow: hidden;
+}
+.active-tag {
+  background: #FFF2F2;
+  color: #FF2328;
+  border: 1rpx solid #FF2328;
+}
+.goum{line-height:60rpx;float: left;font-size: 32rpx;}
+/*主容器*/  
+.stepper {  
+  height: 26px;  
+  /*给主容器设一个边框*/  
+  border: 1px solid #ccc;  
+  border-radius: 3px;  
+  float: right; 
+}  
+/*加号和减号*/  
+.stepper text {  
+  width: 35px;  
+  line-height: 26px;  
+  text-align: center;  
+  float: left; 
+  font-size: 36rpx; 
+}  
+/*数值*/  
+.stepper input {  
+  width: 50px;  
+  height: 26px;  
+  float: left;  
+  margin: 0 auto;  
+  text-align: center;  
+  font-size: 12px;  
+  /*给中间的input设置左右边框即可*/  
+  border-left: 1px solid #ccc;  
+  border-right: 1px solid #ccc;  
+}  
+/*普通样式*/  
+.stepper .normal{  
+  color: black;  
+}  
+/*禁用样式*/  
+.stepper .disabled{  
+  color: #ccc;  
+} 
+.close image{width: 46rpx;height: 46rpx;position: absolute;top:30rpx;right:30rpx;} 
+.sure{width:100% !important;background: #FF3B30;color: #fff;border-radius:60rpx;font-size: 30rpx;}
+
+/*======== 点击分享的弹框样式 =========*/
+.van-modal{
+  -moz-opacity: 0.8;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.8);
+  z-index:10;
+}
+.shareMsg{
+  position: fixed;
+  bottom:0;
+  left:0;
+  z-index:20;
+  width:100%;
+  background: #F2F2F2;
+  border-top-left-radius:20rpx;
+  border-top-right-radius:20rpx;
+  padding-top: 50rpx;
+  }
+.van-modalA{z-index:30;}
+.selectedGoodMsg{
+  position: fixed;
+  top: 50%;
+  left:50%;
+  transform: translate(-50% ,-50%);
+  right: auto;
+  z-index:40;
+  width: 80%;
+}
+.share-btn{
+  display: inline-block;
+  text-align: center;
+  font-size:24rpx;
+  color:#666; 
+  margin-left: 45rpx;
+  margin-bottom: 30rpx;
+}
+.share-icon{
+  border-radius:50%;
+  width: 96rpx;
+  height: 96rpx;
+  display:block;
+  margin:0 auto 10rpx;
+}
+.shareMsg button::after{border: none;}  
+.quxiao button{background: #fff;font-size: 32rpx;height: 100rpx;line-height: 100rpx;border-radius:0;}
+
+.sharePic{background: #fff;padding:40rpx 40rpx 70rpx;position: relative;border-radius:20rpx;margin-bottom: 25rpx;}
+.sharePic .name image{width: 80rpx;height: 80rpx;border-radius: 50%;vertical-align: middle;margin-right: 24rpx;}
+.sharePic .p1 image{width: 270rpx;height: 310rpx;display: block;margin:50rpx auto 30rpx;}
+.sharePic .t1{font-size: 30rpx;margin-bottom: 15rpx;}
+.sharePic .t2{font-size: 42rpx;color: #FF3B00;}
+.sharePic .p2 image{width: 100rpx;height: 100rpx;position: absolute;bottom: 20rpx;right: 50rpx;}
+.shareBtn{display: flex;justify-content:space-around;color: #fff;font-size: 24rpx;}
+.shareBtn image{width: 96rpx;height: 96rpx;border-radius: 50%;display: block;margin-bottom:16rpx;}
+
+
+
+

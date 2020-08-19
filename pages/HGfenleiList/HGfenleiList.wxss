@@ -1,0 +1,40 @@
+.nav_right_items{background:#fff;margin-top: 20rpx;overflow: hidden;padding:0 48rpx;}
+.nav_right_items .box{border-bottom: 1px solid #eee;overflow: hidden;padding:20rpx 0;}
+.box_titpic{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius:5rpx;
+  float: left;
+}
+.box_txt{
+  float: left;
+  margin-left:24rpx;
+  width: 70%;
+}
+.box_txt .t1{font-size: 30rpx;}
+.box_txt .t2{
+ font-size: 36rpx;
+ color: #FF3B2B;
+ margin: 15rpx 0 25rpx;
+}
+.box_txt .t2 .t2_2{
+ font-size: 26rpx;
+ color: #999;
+ text-decoration: line-through;
+ margin-left:12rpx;
+}
+.box_txt .t3 .t3_1{float: left;font-size: 26rpx;}
+.box_txt .t3 .t3_2{float: right;}
+.box_txt .t3 image{
+   width: 44rpx;
+   height: 40rpx;
+   margin-right:30rpx;
+}
+.box_txt .t3 .arr{
+   width: 28rpx;
+   height:28rpx;
+   border-top:2rpx solid #666;
+   border-right:2rpx solid #666;
+   transform:rotate(45deg);
+   display: inline-block;
+}

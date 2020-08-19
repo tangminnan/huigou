@@ -1,0 +1,43 @@
+
+<view class="weui-search-img"><image src="/images/zhaohuiDD.png"></image></view>
+<view class="weui-search-bar">
+    <!-- 搜索框 -->
+    <input type="text" class="weui-search-bar__input" placeholder="请输入订单号"/>
+    <!-- 搜索按钮,调用搜索查询方法 -->
+    <view bindtap='showview' class="weui-search-bar__cancel-btn">查询</view>
+</view>
+
+<!--订单搜索弹框  -->
+<view class='showModel' wx:if="{{model == 1}}" catchtouchmove="return">
+  <view class='van-modal' style='height:{{windowHeight}}px;width: {{windowWidth}}px' bindtap='model1'></view>
+  <view class='selectedGoodMsg'>
+      <!--订单存在和不存在两个请自行使用-->
+
+      <view class="zhaohui">
+          <image class="topCZ" src="/images/cunzai.png" mode='aspectFit'></image>
+          <view class="cunzai">
+                <image src="/images/yongjin.png" mode='aspectFit'></image>
+                <text class="t1">等待返佣金</text>
+                <text class="t2">请在我的钱包->待入账中查看</text>
+          </view>
+          <view class="zhaohuiBtn">
+                <button class="know">知道了</button>
+          </view>
+      </view>
+      <!--<view class="zhaohui">
+          <image class="topCZ" src="/images/bucunzai.png" mode='aspectFit'></image>
+          <view class="bucunzai">
+                <text>可能原因是：</text>
+                <text>1、订单编号输入有误</text>
+                <text>2、订单延迟、建议下单5分钟后再试</text>
+                <text>3、不是通过惠购平台下的单</text>
+                <text>4、领了他人的优惠券或用了超级红包</text>
+          </view>
+          <view class="zhaohuiBtn">
+                <button class="know">联系客服</button>
+                <button class="know_en">知道了</button>
+          </view>
+      </view>-->
+
+  </view>
+</view>

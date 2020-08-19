@@ -1,0 +1,60 @@
+<view class="container">
+  <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+  <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+    <mp-cells>
+      <mp-cell prop="name" title="填写姓名">
+        <input data-field="name" class="weui-input" type="text" placeholder="姓名"></input>
+      </mp-cell>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label mg-l-32">性别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker value="{{userInfo.selectedSexIndex}}" range="{{sexList}}" range-key="label" bindchange="onSexChange">
+            <view class="weui-select fake-input">
+              {{sexList[userInfo.selectedSexIndex || 0].label || '请选择性别'}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <mp-cell prop="mobile" title="联系方式">
+        <input data-field="mobile" class="weui-input" type="text" placeholder="联系电话"></input>
+      </mp-cell>
+      <mp-cell prop="shopName" title="物业/社区">
+        <input data-field="shopName" class="weui-input" type="text" placeholder="请输入商铺名称"></input>
+      </mp-cell>
+    </mp-cells>
+    <view class="img-uploader">
+      <view class="img-uploader-title">上传认证资料</view>
+      <view class="img-uploader-btn" bindtap="onUploadCert">
+        <block wx:if="{{userInfo.cert}}">
+          <image class="upload-preview-image" src="{{userInfo.cert}}"></image>
+        </block>
+        <block wx:else>
+          <mp-icon icon="add" size="48" color="#999"></mp-icon>
+          <text>只支持.jpg格式</text>
+        </block>
+      </view>
+    </view>
+    <view class="warn-tips">
+      <view><text>注意事项</text></view>
+      <view><text>1、请保证照片清晰完整，无任何遮挡，反光。</text></view>
+      <view><text>2、请尽量让照片沾满屏幕，并且露出图片边缘。</text></view>
+      <view><text>3、上传成功后，请耐心等待系统审核。</text></view>
+    </view>
+    <checkbox-group bindchange="onAgreeChange">
+      <label class="weui-agree" for="weuiAgree">
+        <view class="weui-agree__text">
+          <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{userInfo.isAgree}}" />
+          <view class="weui-agree__checkbox-icon">
+            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{userInfo.isAgree}}"></icon>
+          </view>
+          我已同意<navigator url="" class="weui-agree__link">《平台规则协议》</navigator>
+        </view>
+      </label>
+    </checkbox-group>
+  </mp-form>
+  <view class="next-btn">
+    <button class="weui-btn" type="primary" bindtap="submitForm">提交</button>
+  </view>
+</view>

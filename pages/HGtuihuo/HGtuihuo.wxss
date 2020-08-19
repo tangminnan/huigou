@@ -1,0 +1,12 @@
+/**index.wxss**/
+.ddTxt{overflow:hidden;margin:1px 0 30rpx;padding:70rpx 30rpx;}
+.ddTxt image{width: 138rpx;height: 138rpx;float: left;}
+.ddTxt text{width: 375rpx;float: left;font-size: 30rpx;color: #3A3A3A;margin-left: 35rpx;margin-top: 20rpx;}
+
+.wodelist{border-radius:10rpx;}
+.Hlist{position:relative;padding-left:24rpx; overflow: hidden;}
+.Hlist image{width:55rpx;height:55rpx;vertical-align:middle;margin-right:20rpx;float: left;margin-top:36rpx;}
+.Hlist .txt{border-bottom: 1rpx solid #F6F6F6;float:right;width: 88%;padding:24rpx 0;}
+.Hlist .txt .t1{font-size: 34rpx;display: block;margin-bottom: 5rpx;}
+.Hlist .txt .t2{font-size: 30rpx;color: #999;}
+.Hlist .arrow{width:20rpx;height:20rpx;border-top:2rpx solid #666;border-right:2rpx solid #666;transform:rotate(45deg);position: absolute;right:40rpx;top:60rpx;}

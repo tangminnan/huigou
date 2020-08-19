@@ -1,0 +1,59 @@
+/**index.wxss**/
+.top{ background: -webkit-linear-gradient(top,#E42D2E,#FA6400);text-align:center;overflow:hidden;padding:0 24rpx 180rpx;}
+.DW{float: left;color:#fff;line-height:60rpx;}
+.DW image{width:30rpx;height:30rpx;vertical-align:middle;margin-right:10rpx;}
+.search{  
+  width: 80%;  
+  float:right;
+  position: relative;
+}  
+.search_arr {  
+  border: 1px solid #fff;  
+  border-radius: 30rpx;  
+  margin-left: 20rpx;  
+  opacity:.6;
+}  
+.search_arr input{  
+  margin-left: 60rpx;  
+  height: 60rpx;  
+  text-align:left;
+  color:#fff;
+}  
+.holderClass{color: #fff;}
+.bc_text {  
+  line-height: 68rpx;  
+  height: 68rpx;  
+  margin-top: 34rpx;  
+}  
+.searchcion {   
+  position: absolute; 
+  left:25rpx; 
+  margin:15rpx;
+  z-index: 2;   
+}  
+.giftList{padding:180rpx 20rpx 20rpx;font-size:24rpx;text-align:center;overflow:hidden;}
+.boshilun{display: block;width:700rpx;height:280rpx;position:absolute;top:100rpx;left: 25rpx;}
+.iconImage image{width:88rpx;height:88rpx;}
+.giftList text{display:block;margin-top:12rpx;}
+.iconImage{float:left;width:20%;margin-bottom:30rpx;}
+
+.topPH{padding:24rpx;margin:0 24rpx 30rpx;}
+.Phtxt{font-size: 30rpx;}
+.Phtxt text{font-size: 26rpx;color:#999;margin-left:22rpx;}
+.topPH .rank{width: 315rpx;background: #fff;}
+.rank:nth-child(odd){float:left;}
+.rank:nth-child(even){float:right;}
+.topPH .rank image{width: 315rpx;height: 315rpx;}
+.rank .txt1{font-size: 30rpx;margin-bottom:20rpx;}
+.rank .txt2{font-size: 36rpx;color: #FF3B30;}
+.rank .txt2 text{font-size: 30rpx;color: #999;text-decoration:line-through;}
+
+.tuijian{margin:24rpx;}
+.TJtit{font-size: 30rpx;line-height: 42rpx;margin-bottom: 20rpx;}
+.tuijian .rank{width: 340rpx;background: #fff;border-radius:10rpx;margin-bottom:30rpx;padding-bottom:24rpx;}
+.tuijian .rank image{width: 340rpx;height: 340rpx;}
+.tuijian .rank view{padding:0 24rpx;}
+
+
+
+

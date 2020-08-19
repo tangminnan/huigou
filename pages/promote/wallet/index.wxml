@@ -1,0 +1,53 @@
+<view class="container">
+  <view class="tabs bg-white">
+    <view bindtap="onTabClick" data-index="{{index}}" class="tab-item {{index === activeTab ? 'tab-item__selected':''}}" wx:for="{{tabs}}" wx:key="item">{{item}}
+    </view>
+  </view>
+  <!-- 待入账 -->
+  <view wx:if="{{activeTab === 0}}" class="tab-content tab-content-notrecorded">
+    <view class="list">
+      <view class="list-item flex-hbox cross-center">
+        <view class="info flex-vbox flex-spread">
+          <text class="title font-32 font-bold">入账标题</text>
+          <text class="font-28 color-999">2020-06-19 23:48:03</text>
+        </view>
+        <view class="extra">5.00 元</view>
+      </view>
+      <view class="list-item flex-hbox cross-center">
+        <view class="info flex-vbox flex-spread">
+          <text class="title font-32 font-bold">入账标题</text>
+          <text class="font-28 color-999">2020-06-19 23:48:03</text>
+        </view>
+        <view class="extra">5.00 元</view>
+      </view>
+    </view>
+  </view>
+  <!-- 余额 -->
+  <view wx:if="{{activeTab === 1}}" class="tab-content">
+    <view class="balance flex-vbox cross-center bg-white">
+      <text class="iconfont icon-hgyue"></text>
+      <text class="color-666 font-32">我的余额</text>
+      <text class="color-r2328 font-bold">￥3000.00</text>
+    </view>
+    <view class="withdraw-btn" bindtap="onClickWithdraw">提 现</view>
+  </view>
+  <!-- 提现明细 -->
+  <view wx:if="{{activeTab === 2}}" class="tab-content withdraw">
+    <view class="list">
+      <view class="list-item flex-hbox cross-center">
+        <view class="info flex-vbox flex-spread">
+          <text class="title font-32 font-bold">微信余额</text>
+          <text class="font-28 color-999">2020-06-19 23:48:03</text>
+        </view>
+        <view class="extra">5.00 元</view>
+      </view>
+      <view class="list-item flex-hbox cross-center">
+        <view class="info flex-vbox flex-spread">
+          <text class="title font-32 font-bold">微信余额</text>
+          <text class="font-28 color-999">2020-06-19 23:48:03</text>
+        </view>
+        <view class="extra">5.00 元</view>
+      </view>
+    </view>
+  </view>
+</view>

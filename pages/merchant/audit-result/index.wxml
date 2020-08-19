@@ -1,0 +1,7 @@
+<view class="container">
+	<view class="result">
+		<image src="{{img}}"></image>
+		<view class="desc">{{desc}}</view>
+		<view class="detail">{{detail}}</view>
+	</view>
+</view>

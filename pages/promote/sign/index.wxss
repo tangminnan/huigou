@@ -1,0 +1,182 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 656rpx;
+  background-image: linear-gradient(90deg, rgba(228, 45, 46, 1) 0%, rgba(250, 100, 0, 1) 100%);
+}
+
+.header .sign-rule {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  font-size: 30rpx;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.header .sign-rule image {
+  margin-right: 8rpx;
+}
+
+.header .sign-icon {
+  width: 77rpx;
+  margin: 0 auto;
+  margin-top: 44rpx;
+}
+
+.header .sign-tip {
+  font-size: 40rpx;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  margin-top: 24rpx;
+}
+
+.header .sign-progress {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  border-radius: 20rpx;
+  margin: 0 24rpx;
+  margin-top: 24rpx;
+  height: 136rpx;
+  width: 688rpx;
+  position: relative;
+}
+
+.header .sign-progress .sign-progress-track {
+  position: absolute;
+  height: 8rpx;
+  background-color: #ddd;
+  left: 80rpx;
+  right: 80rpx;
+  top: 50%;
+  margin-top: -4rpx;
+  z-index: 0;
+}
+
+.header .sign-progress .sign-progress-item {
+  display: inline-block;
+  flex: 0 0 60rpx;
+  background-color: bisque;
+  color: chocolate;
+  height: 60rpx;
+  width: 60rpx;
+  border-radius: 60rpx;
+  font-weight: 500;
+  text-align: center;
+  font-size: 36rpx;
+  position: relative;
+  z-index: 1;
+  border: 2px solid #fff;
+}
+
+.header .sign-btn {
+  background-image: linear-gradient(to bottom, #FFE200 0%, #FFC000 100%);
+  color: chocolate;
+  font-size: 36rpx;
+  font-weight: 500;
+  text-align: center;
+  width: 228rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 80rpx;
+  margin: 0 auto;
+  margin-top: 36rpx;
+}
+
+.v-body {
+  position: relative;
+  top: -120rpx;
+}
+
+.panel-task {
+
+  height: 540rpx;
+  margin: 0 24rpx;
+  padding: 0 32rpx;
+}
+
+.panel-task>.title {
+  font-size: 30rpx;
+  font-weight: 500;
+  height: 88rpx;
+  line-height: 88rpx;
+  /* padding-left: 32rpx; */
+  margin-bottom: 80rpx;
+}
+
+.panel-task .task-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 32rpx;
+}
+
+.task-item .task-icon {
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 32rpx;
+}
+
+.task-item .info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-item .info .title {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.task-item .info .award {
+  font-size: 26rpx;
+  color: #FD7300;
+}
+
+.task-item .info .desc {
+  font-size: 26rpx;
+  color: #A3A3A3;
+}
+
+.task-item .status-desc {
+  font-size: 24rpx;
+  color: #A3A3A3;
+}
+
+.task-item .status-desc.status-desc__complete {
+  color: #FF7B00;
+}
+
+.panel-history {
+  position: relative;
+  margin: 0 24rpx;
+  padding: 0 32rpx;
+  overflow: hidden;
+  margin-bottom: 60rpx;
+  margin-top: 24rpx;
+}
+
+.panel-history>.title {
+  font-size: 30rpx;
+  font-weight: 500;
+  height: 88rpx;
+  line-height: 88rpx;
+  /* margin-bottom: 80rpx; */
+}
+
+.panel-history .history-item {
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-bottom: 26rpx;
+}
+
+.panel-history .info {
+  color: #a2a2a2;
+  font-size: 28rpx;
+}

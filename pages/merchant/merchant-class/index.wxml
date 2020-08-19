@@ -1,0 +1,6 @@
+<view class="container container-white">
+	<view class="class-list">
+		<view class="class-item {{index === 0 ? 'class-item__selected': ''}}" wx:for="{{classList}}" wx:key="name" data-name="{{item.name}}">{{item.name}}</view>
+	</view>
+	<view class="next-btn">确定</view>
+</view>

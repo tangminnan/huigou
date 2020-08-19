@@ -1,0 +1,52 @@
+/**index.wxss**/
+.newDZ{margin:20rpx 0;font-size: 34rpx;}
+.fl{float:left;}
+.fr{float:right;}
+.newDZ .DZ{padding: 0 30rpx;background: #fff;margin-bottom: 1px;overflow: hidden;line-height: 120rpx;position: relative;}
+.newDZ .DZ text{float:left;width: 20%;} 
+.newDZ .DZ input{float:right;height: 120rpx;width: 75%;text-align:left;}
+.newDZ .DZ p{margin-left:5%;color: #666;}
+.arrow{width: 23rpx;height:23rpx;border-top:2rpx solid #999;border-right:2rpx solid #999;transform:rotate(45deg);position:absolute;top:50rpx;right:30rpx;}
+
+.moren{padding:30rpx;font-size: 34rpx;}
+switch{zoom:0.8;}
+.button-sp-area{
+  margin: 0 auto;
+  width: 60%;
+}
+.button-sp-area{
+  position: fixed;
+  bottom:0;
+  background: #fff;
+  width: 100%;
+  text-align: center;
+  padding:15rpx 0 10rpx;
+}
+.button-sp-area button{
+  width:45%;
+  color: #fff;
+  background: #FF2328;
+  border:none;
+  border-radius:60rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 34rpx;
+  display: inline-block;
+  margin:0 10rpx;
+}
+.button-sp-area button.shanchu{background: #fff;color: #333;border:1px solid #eee;}
+
+picker{display: inline-block;}
+.Hlist{background:#fff;margin-bottom:1px;padding:0 30rpx;line-height:120rpx;position:relative;}
+.Hlist .right{position: absolute;right:0;top:0;width:70%;text-align: right;padding-right: 60rpx;}
+.Hlist .arrow{width:20rpx;height:20rpx;border-top:2rpx solid #666;border-right:2rpx solid #666;transform:rotate(45deg);display:inline-block;}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+.h2 {
+  color: #565656;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.p {
+  color: #565656;
+  font-size: 30rpx;
+  margin-top: 1em;
+}

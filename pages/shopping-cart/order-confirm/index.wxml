@@ -1,0 +1,47 @@
+<view class="container">
+  <view class="panel panel-stack address-panel flex-hbox cross-center">
+    <view class="flex-vbox flex-spread">
+      <view class="font-28">北京市顺义区</view>
+      <view class="font-30 font-bold">宏远航城广场M座5层</view>
+      <view class="font-28">张三 187013650779</view>
+    </view>
+  </view>
+  <view class="panel panel-stack merchant-panel">
+    <view class="title font-28 font-bold">商家名称</view>
+    <view class="product-item flex-hbox cross-center">
+      <image class="product-image" src="/images/PH1.png"></image>
+      <view class="product-info flex-vbox flex-spread">
+        <view class="flex-hbox flex-spread">
+          <text class="flex-spread text-ellipis-2 font-30">维他奶 茶饮料 250ml*24盒柠檬茶</text>
+        </view>
+        <view class="flex-hbox">
+          <text class="price font-36 font-bold flex-spread">¥4.20</text>
+          <view class="flex-hbox">x {{count}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="order-remark">
+      <view class="title font-28 font-bold">订单备注</view>
+      <view class="content">
+        <text class="font-30 color-999">无</text>
+      </view>
+    </view>
+  </view>
+  <view class="panel panel-stack express-panel flex-vbox">
+    <view class="flex-hbox">
+      <text class="flex-spread">配送方式</text>
+      <text>快递</text>
+    </view>
+    <view class="flex-hbox mg-t-16">
+      <text class="flex-spread">商品金额</text>
+      <text class="font-28 color-r2328">￥{{total}}</text>
+    </view>
+    <view class="flex-hbox mg-t-16">
+      <text class="flex-spread">运费</text>
+      <text>￥0.00</text>
+    </view>
+  </view>
+  <view class="fix-btn flex-hbox cross-center">
+    <view class="submit-btn" bindtap="onClickSubmit">立即支付</view>
+  </view>
+</view>

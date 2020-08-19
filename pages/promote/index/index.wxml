@@ -1,0 +1,64 @@
+<view class="container">
+  <view class="header">
+    <view class="avatar">
+      <view class="image">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="name">
+        <view>
+          <open-data type="userNickName" lang="zh_CN"></open-data>
+        </view>
+        <view class="sign-btn" bindtap="sign">
+          <image src="../../../assets/coin.png"></image>
+          签到领现金
+          <mp-icon icon="arrow" color="#fff" size="9"></mp-icon>
+        </view>
+      </view>
+    </view>
+    <view class="profile-btn"><text class="iconfont icon-hgbianji"></text>编辑资料</view>
+  </view>
+  <view class="panel wallet-panel">
+    <view class="wallet-panel-title flex-hbox cross-center">
+      <text class="flex-spread">我的钱包</text>
+      <text class="color-666 font-26 rule">
+        <text class="font-26 iconfont icon-hgguize"></text>提现规则
+      </text>
+    </view>
+    <view class="wallet-panel-body">
+      <view class="wallet-panel-item">
+        <text class="money">￥{{walletInfo.notRecorded}}</text>
+        <text>待入账</text>
+      </view>
+      <view class="wallet-panel-item">
+        <text class="money">￥{{walletInfo.balance}}</text>
+        <text>余额</text>
+      </view>
+      <view class="wallet-panel-item" bindtap="handleGoWallet">
+        <text class="iconfont icon-hgqianbao"></text>
+        <text>钱包</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="panel action-panel">
+    <view class="action-item flex-hbox cross-center" bindtap="shareProductToFriend">
+      <image class="icon" src="../../../assets/share-product.png"></image>
+      <text class="content flex-spread">分享商品给好友</text>
+      <mp-icon icon="arrow" color="#ccc" size="12"></mp-icon>
+    </view>
+    <view class="action-item flex-hbox cross-center" bindtap="shareMiniprogramToFriend">
+      <image class="icon" src="../../../assets/share-miniprogram.png"></image>
+      <text class="content flex-spread">分享小程序给好友</text>
+      <mp-icon icon="arrow" color="#ccc" size="12"></mp-icon>
+    </view>
+    <view class="action-item flex-hbox cross-center" bindtap="shareQRCode">
+      <image class="icon" src="../../../assets/share-qrcode.png"></image>
+      <text class="content flex-spread">分享二维码图片给好友</text>
+      <mp-icon icon="arrow" color="#ccc" size="12"></mp-icon>
+    </view>
+  </view>
+
+  <view class="panel panel-qrcode">
+
+  </view>
+</view>

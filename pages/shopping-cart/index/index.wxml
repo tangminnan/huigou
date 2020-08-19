@@ -1,0 +1,100 @@
+<view class="container">
+  <scroll-view class="scoll-list">
+    <view class="merchant-panel">
+      <view class="merchant-name font-30 font-bold" bindtap="toggleChange">
+        <view class="hg-checkbox {{isChecked ? 'hg-checkbox__checked' : ''}}">
+          <mp-icon icon="done" size="14" color="#fff" />
+        </view>蒙牛惠购旗舰店
+      </view>
+      <view class="panel panel-stack product-list">
+        <view class="product-item flex-hbox cross-center" bindtap="toggleChange">
+          <view class="hg-checkbox {{isChecked ? 'hg-checkbox__checked' : ''}}">
+            <mp-icon icon="done" size="14" color="#fff" />
+          </view>
+          <image class="product-image" src="/images/PH1.png"></image>
+          <view class="product-info flex-vbox flex-spread">
+            <view class="flex-hbox flex-spread">
+              <text class="flex-spread text-ellipis-2 font-30">维他奶 茶饮料 250ml*24盒柠檬茶</text>
+              <text class="iconfont icon-hgshanchu color-888"></text>
+            </view>
+            <view class="flex-hbox">
+              <text class="price font-36 font-bold flex-spread">¥4.20</text>
+              <view class="number-plus flex-hbox cross-center">
+                <text data-role="decrease" class="btn" bindtap="decrease">-</text>
+                <input data-role="input" bindinput="onCountChange" class="input" value="{{count}}" type="number"></input>
+                <text data-role="increase" class="btn" bindtap="increase">+</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- <view class="product-item flex-hbox cross-center">
+          <view class="checkbox">
+            <checkbox />
+          </view>
+          <image class="product-image" src="../../../assets/product-01.png"></image>
+          <view class="product-info flex-vbox flex-spread">
+            <view class="flex-hbox flex-spread">
+              <text class="flex-spread text-ellipis-2 font-30">可口可乐1箱24瓶 给你生活更多快乐</text>
+              <text class="iconfont icon-hgshanchu color-888"></text>
+            </view>
+            <view class="flex-hbox">
+              <text class="price font-36 font-bold flex-spread">¥300.00</text>
+              <view class="number-plus flex-hbox cross-center"><text class="btn">-</text><input class="input"
+                  type="number"></input><text class="btn">+</text></view>
+            </view>
+          </view>
+        </view> -->
+      </view>
+    </view>
+    <!-- <view class="merchant-panel">
+      <view class="merchant-name font-30 font-bold">
+        <checkbox />红星美凯龙
+      </view>
+      <view class="panel panel-stack product-list">
+        <view class="product-item flex-hbox cross-center">
+          <view class="checkbox">
+            <checkbox />
+          </view>
+          <image class="product-image" src="../../../assets/product-01.png"></image>
+          <view class="product-info flex-vbox flex-spread">
+            <view class="flex-hbox flex-spread">
+              <text class="flex-spread text-ellipis-2 font-30">可口可乐1箱24瓶</text>
+              <text class="iconfont icon-hgshanchu color-888"></text>
+            </view>
+            <view class="flex-hbox">
+              <text class="price font-36 font-bold flex-spread">¥2000.00</text>
+              <view class="number-plus flex-hbox cross-center"><text class="btn">-</text><input class="input"
+                  type="number"></input><text class="btn">+</text></view>
+            </view>
+          </view>
+        </view>
+        <view class="product-item flex-hbox cross-center">
+          <view class="checkbox">
+            <checkbox />
+          </view>
+          <image class="product-image" src="../../../assets/product-01.png"></image>
+          <view class="product-info flex-vbox flex-spread">
+            <view class="flex-hbox flex-spread">
+              <text class="flex-spread text-ellipis-2 font-30">可口可乐1箱24瓶 给你生活更多快乐</text>
+              <text class="iconfont icon-hgshanchu color-888"></text>
+            </view>
+            <view class="flex-hbox">
+              <text class="price font-36 font-bold flex-spread">¥300.00</text>
+              <view class="number-plus flex-hbox cross-center"><text class="btn">-</text><input class="input"
+                  type="number"></input><text class="btn">+</text></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view> -->
+  </scroll-view>
+  <view class="fix-btn flex-hbox cross-center">
+    <view class="checkbox font-30 color-999" bindtap="toggleChange">
+      <view class="hg-checkbox {{isChecked ? 'hg-checkbox__checked' : ''}}">
+        <mp-icon icon="done" size="14" color="#fff" />
+      </view>全选
+    </view>
+    <text class="flex-spread font-32">合计: <text class="total-price font-bold">¥{{total}}</text></text>
+    <view class="submit-btn" bindtap="onClickSubmit">结算</view>
+  </view>
+</view>

@@ -1,0 +1,77 @@
+<!--index.wxml-->
+<!--导航条-->
+<view class="navbar">
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+</view>
+
+<!--内容-->
+<swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+  <!--待入账-->
+  <swiper-item>
+        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
+            <view class="itemBox">
+                <view class="fl left">
+                    <text class="t1">入账标题</text>
+                    <text class="t2">2020-06-19 23:48:03</text>
+                </view>
+                <view class="fr right">5.00 元</view>
+            </view>
+            <view class="itemBox">
+                <view class="fl left">
+                    <text class="t1">入账标题</text>
+                    <text class="t2">2020-06-19 23:48:03</text>
+                </view>
+                <view class="fr right">5.00 元</view>
+            </view>
+            <view class="itemBox">
+                <view class="fl left">
+                    <text class="t1">入账标题</text>
+                    <text class="t2">2020-06-19 23:48:03</text>
+                </view>
+                <view class="fr right">5.00 元</view>
+            </view>
+        </scroll-view>
+    </swiper-item>
+
+    <!--余额-->
+    <swiper-item>
+        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
+            <view class="yuE bg-W">
+                <image src="/images/DDxq.png"></image>
+                <text class="t1">我的余额</text>
+                <text class="t2">￥3000.00</text>
+            </view>
+            <button class="tixian" bindtap='tiXian'>提现</button>
+        </scroll-view>
+    </swiper-item>
+
+    <!--提现明细-->
+    <swiper-item>
+        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
+            <view class="itemBox">
+                <view class="fl left">
+                    <text class="t1">微信余额</text>
+                    <text class="t2">2020-06-19 23:48:03</text>
+                </view>
+                <view class="fr right">5.00 元</view>
+            </view>
+            <view class="itemBox">
+                <view class="fl left">
+                    <text class="t1">微信余额</text>
+                    <text class="t2">2020-06-19 23:48:03</text>
+                </view>
+                <view class="fr right">5.00 元</view>
+            </view>
+            <view class="itemBox">
+                <view class="fl left">
+                    <text class="t1">微信余额</text>
+                    <text class="t2">2020-06-19 23:48:03</text>
+                </view>
+                <view class="fr right">5.00 元</view>
+            </view>
+        </scroll-view>
+    </swiper-item>
+
+</swiper>
+
+

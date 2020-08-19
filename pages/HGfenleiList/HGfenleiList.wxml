@@ -1,0 +1,74 @@
+<view class="nav_right_items">
+    <view class="box">
+        <image class="box_titpic" src="/images/PH1.png"></image>
+        <view class="box_txt">
+            <view class="t1">欧舒丹甜蜜樱花沐浴啫喱/身体乳套装沐浴啫喱</view>
+            <view class="t2">
+                <text class="t2_1">¥420</text>
+                <text class="t2_2">￥560</text>
+            </view>
+            <view class="t3">
+                <text class="t3_1">商家名称</text>
+                <view class="t3_2">
+                    <image src="/images/gengduo.png"></image>
+                    <view class="arr"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="box">
+        <image class="box_titpic" src="/images/PH1.png"></image>
+        <view class="box_txt">
+            <view class="t1">欧舒丹甜蜜樱花沐浴啫喱/身体乳套装沐浴啫喱</view>
+            <view class="t2">
+                <text class="t2_1">¥420</text>
+                <text class="t2_2">￥560</text>
+            </view>
+            <view class="t3">
+                <text class="t3_1">商家名称</text>
+                <view class="t3_2">
+                    <image src="/images/gengduo.png"></image>
+                    <view class="arr"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="box">
+        <image class="box_titpic" src="/images/PH1.png"></image>
+        <view class="box_txt">
+            <view class="t1">欧舒丹甜蜜樱花沐浴啫喱/身体乳套装沐浴啫喱</view>
+            <view class="t2">
+                <text class="t2_1">¥420</text>
+                <text class="t2_2">￥560</text>
+            </view>
+            <view class="t3">
+                <text class="t3_1">商家名称</text>
+                <view class="t3_2">
+                    <image src="/images/gengduo.png"></image>
+                    <view class="arr"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="box">
+        <image class="box_titpic" src="/images/PH1.png"></image>
+        <view class="box_txt">
+            <view class="t1">欧舒丹甜蜜樱花沐浴啫喱/身体乳套装沐浴啫喱</view>
+            <view class="t2">
+                <text class="t2_1">¥420</text>
+                <text class="t2_2">￥560</text>
+            </view>
+            <view class="t3">
+                <text class="t3_1">商家名称</text>
+                <view class="t3_2">
+                    <image src="/images/gengduo.png"></image>
+                    <view class="arr"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+</view>

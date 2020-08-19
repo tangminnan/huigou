@@ -1,0 +1,50 @@
+
+<view class="DZlist p-30">
+    <view class="box" bindtap="onChooseAddressItem">
+        <view class="left">
+            <p><text>张先生</text>15688889999</p>
+            <p>北京市大兴区XXXXXXXXXXXXX</p>
+        </view>
+        <view class="right" bindtap='xiugaiDZ'>
+            <image src="/images/gongju-12.png"></image>
+            修改
+        </view>
+    </view>
+
+    <!--设为默认加上class=“on”-->
+    <view class="box on" bindtap="onChooseAddressItem">
+        <view class="left">
+            <p><text>张先生</text>15688889999</p>
+            <p>北京市大兴区XXXXXXXXXXXXX</p>
+        </view>
+        <view class="right" bindtap='xiugaiDZ'>
+            <image src="/images/gongju-12.png"></image>
+            修改
+        </view>
+    </view>
+
+    <view class="box" bindtap="onChooseAddressItem">
+        <view class="left">
+            <p><text>张先生</text>15688889999</p>
+            <p>北京市大兴区XXXXXXXXXXXXX</p>
+        </view>
+        <view class="right" bindtap='xiugaiDZ'>
+            <image src="/images/gongju-12.png"></image>
+            修改
+        </view>
+    </view>
+
+    <view class="box" bindtap="onChooseAddressItem">
+        <view class="left">
+            <p><text>张先生</text>15688889999</p>
+            <p>北京市大兴区XXXXXXXXXXXXX</p>
+        </view>
+        <view class="right" bindtap='xiugaiDZ'>
+            <image src="/images/gongju-12.png"></image>
+            修改
+        </view>
+    </view>
+</view>
+<view class="addDZ" bindtap='addNewdz'>
+    <button plain="true">新增收货地址</button>
+</view>

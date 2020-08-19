@@ -1,0 +1,11 @@
+.panel-merchant-type-card {
+  display: block;
+  height: 166rpx;
+  margin: 24rpx;
+  /* border: 1px dashed #333; */
+}
+
+.panel-merchant-type-card image {
+  width: 100%;
+  height: 100%;
+}

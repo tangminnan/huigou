@@ -1,0 +1,101 @@
+<!--头部-->
+<view class="top">
+    <view class="DW"><image src="/images/icon-1.png"></image><text>北京</text></view>
+    <view class='page_row' bindtap="suo">  
+      <view class="search">  
+        <view class="df search_arr">  
+          <icon class="searchcion" size='15' color="#fff" type='search'></icon>  
+          <input placeholder-class="holderClass" placeholder="请输入关键字" value="{{searchValue}}"/>  
+        </view>  
+      </view>  
+    </view>  
+</view>
+<!--列表导航-->
+<view class='giftList bg-W mb-24'>
+  <image class="boshilun" src="/images/boshilun.png" mode='aspectFit'></image>
+  <view class='iconImage'>
+    <image src="/images/huiG1.png" mode='aspectFit'></image>
+    <text>生鲜</text>
+  </view>
+  <view class='iconImage'>
+    <image src="/images/huiG2.png" mode='aspectFit'></image>
+    <text>服装</text>
+  </view>
+  <view class='iconImage'>
+    <image src="/images/huiG3.png" mode='aspectFit'></image>
+    <text>数码</text>
+  </view>
+  <view class='iconImage' bindtap='hufu'>
+    <image src="/images/huiG4.png" mode='aspectFit'></image>
+    <text>护肤</text>
+  </view>
+  <view class='iconImage' bindtap='gengduo'>
+    <image src="/images/huiG5.png" mode='aspectFit'></image>
+    <text>更多</text>
+  </view>
+</view>
+
+<!--top排行-->
+<view class="topPH bg-W bdr-15">
+    <view class="Phtxt">TOP排行 <text>多.快.好.省</text></view>
+    <view class="boxPH">
+        <view class="rank" bindtap='more'>
+            <image src="/images/PH1.png" mode='aspectFit'></image>
+            <view class="txt1">维他奶 茶饮料 250ml*24盒柠檬茶</view>
+            <view class="txt2">￥4.20 <text>￥4.20</text></view>
+        </view>
+
+        <view class="rank" bindtap='more'>
+            <image src="/images/PH2.png" mode='aspectFit'></image>
+            <view class="txt1">维他奶 茶饮料 250ml*24盒柠檬茶</view>
+            <view class="txt2">￥85.00 <text>￥4.20</text></view>
+        </view>
+
+    </view>
+</view>
+
+<!--商品推荐-->
+<view class="tuijian">
+    <view class="TJtit">商品推荐</view>
+    <view class="boxPH">
+        <view class="rank" bindtap='more'>
+            <image src="/images/PH3.png" mode='aspectFit'></image>
+            <view class="txt1">维他奶 茶饮料 250ml*24盒柠檬茶</view>
+            <view class="txt2">￥4.20 <text>￥4.20</text></view>
+        </view>
+
+        <view class="rank" bindtap='more'>
+            <image src="/images/PH4.png" mode='aspectFit'></image>
+            <view class="txt1">维他奶 茶饮料 250ml*24盒柠檬茶</view>
+            <view class="txt2">￥85.00 <text>￥4.20</text></view>
+        </view>
+
+        <view class="rank" bindtap='more'>
+            <image src="/images/PH5.png" mode='aspectFit'></image>
+            <view class="txt1">维他奶 茶饮料 250ml*24盒柠檬茶</view>
+            <view class="txt2">￥85.00 <text>￥4.20</text></view>
+        </view>
+
+        <view class="rank" bindtap='more'>
+            <image src="/images/PH6.png" mode='aspectFit'></image>
+            <view class="txt1">维他奶 茶饮料 250ml*24盒柠檬茶</view>
+            <view class="txt2">￥85.00 <text>￥4.20</text></view>
+        </view>
+
+        <view class="rank" bindtap='more'>
+            <image src="/images/PH7.png" mode='aspectFit'></image>
+            <view class="txt1">维他奶 茶饮料 250ml*24盒柠檬茶</view>
+            <view class="txt2">￥85.00 <text>￥4.20</text></view>
+        </view>
+
+        <view class="rank" bindtap='more'>
+            <image src="/images/PH8.png" mode='aspectFit'></image>
+            <view class="txt1">维他奶 茶饮料 250ml*24盒柠檬茶</view>
+            <view class="txt2">￥85.00 <text>￥4.20</text></view>
+        </view>
+
+    </view>
+</view>
+
+
+

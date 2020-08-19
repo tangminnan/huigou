@@ -1,0 +1,42 @@
+<view class="order-item flex-vbox">
+  <block wx:if="{{mode !== 'order'}}">
+    <view class="flex-hbox cross-center row">
+      <view class="color-888 font-28 flex-spread">买家姓名: 187013345677</view>
+      <view class="status-normal font-26">已确认收货</view>
+    </view>
+    <view class="flex-hbox cross-center row">
+      <view class="color-888 font-28 flex-spread">快递单号: df123435d342347</view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="flex-hbox cross-center row">
+      <view class="color-888 font-28 flex-spread">订单号: 8347892947572348</view>
+      <view class="status-normal font-26">已确认收货</view>
+    </view>
+  </block>
+  <view class="flex-hbox product-info">
+    <image class="product-img" src="{{order.productImg || '/images/PH1.png'}}"></image>
+    <view class="flex-vbox flex-spread">
+      <view class="title">维他奶 茶饮料 250ml*24盒柠檬茶</view>
+    </view>
+    <view class="count">x {{count || 1}}</view>
+  </view>
+  <view class="detail flex-hbox">
+    <view class="color-999 font-28 flex-spread">2020-05-28 14:29:52</view>
+    <view>
+      <text class="text-del origin-price">¥{{originTotal || 620.00}}</text>
+      <text>¥{{total || 420.00}}</text>
+    </view>
+  </view>
+  <view wx:if="{{mode !== 'info'}}" class="extra flex-hbox cross-center">
+    <view wx:if="{{order.status === 0}}" class="desc flex-spread mg-r-16"></view>
+    <view wx:if="{{order.status === 1}}" class="desc flex-spread mg-r-16">该用户申请退款</view>
+    <view wx:if="{{order.status === 2}}" class="desc flex-spread mg-r-16">该用户换货</view>
+    <view wx:if="{{order.status === 3}}" class="desc flex-spread mg-r-16">该用户退款退货</view>
+
+    <view wx:if="{{order.status === 0}}" class="action-btn">填写快递单号</view>
+    <view wx:if="{{order.status === 1}}" class="action-btn" bindtap="onOperateOrderDetail">确认退款</view>
+    <view wx:if="{{order.status === 2}}" class="action-btn" bindtap="onOperateOrderDetail">进入详情</view>
+    <view wx:if="{{order.status === 3}}" class="action-btn" bindtap="onOperateOrderDetail">进入详情</view>
+  </view>
+</view>

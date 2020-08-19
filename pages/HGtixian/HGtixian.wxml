@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="commons bg-W">
+    <view class="txd">
+        <view class="fl">提现到</view>
+        <view class="fr">
+            <text>微信零钱</text>
+            <image src="/images/weixin.png"></image>
+        </view>
+    </view>
+
+    <view class="money">
+        <text>¥</text>
+        <input placeholder-style="color:#ccc;" placeholder="请输入提现额度"></input>
+    </view>
+    <view class="allTX">
+        <view class="fl">可提现余额￥560</view>
+        <view class="fr">全部提现</view>
+    </view>
+</view>
+<button class="daozBtn">2小时到账，确认提现</button>

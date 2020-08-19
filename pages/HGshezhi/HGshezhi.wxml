@@ -1,0 +1,19 @@
+<!--列表-->
+<view class="wodelist mb-24">
+    <view class="Hlist" bindtap='aboutUs'>
+        <image src="/images/gongju-9.png" mode='aspectFit'></image>
+        <text>关于我们</text>
+        <view class="arrow"></view>
+    </view>
+    <view class="Hlist" bindtap='xieyiTK'>
+        <image src="/images/gongju-10.png" mode='aspectFit'></image>
+        <text>协议条款</text>
+        <view class="arrow"></view>
+    </view>
+    <view class="Hlist">
+        <image src="/images/gongju-11.png" mode='aspectFit'></image>
+        <text>清除缓存</text>
+        <view class="arrow"></view>
+    </view>
+</view>
+<button class="Tchu">退出登陆</button>

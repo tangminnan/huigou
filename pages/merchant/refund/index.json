@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "OrderItem": "../../components/order-item"
+  },
+  "navigationBarTitleText": "退款退换"
+}

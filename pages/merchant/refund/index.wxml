@@ -1,0 +1,45 @@
+<view class="container">
+  <OrderItem mode="info" order="{{order}}" class="order-profile" />
+  <view class="panel panel-square panel-action mg-t-24 flex-hbox cross-center">
+    <view class="address flex-spread">
+      <view class="address-province">广东 广州 越秀区</view>
+      <view class="address-detail">东风路中路268号 1301</view>
+      <view class="address-user">买家姓名：18701345677</view>
+    </view>
+    <view wx:if="{{order.status === 1 || order.status === 3}}" class="action">
+      <view class="action-btn">同意退货退款</view>
+      <view class="action-btn">确认收货</view>
+    </view>
+    <view wx:if="{{order.status === 2}}" class="action">
+      <view class="action-btn">同意退货</view>
+      <view class="action-btn">确认收货</view>
+    </view>
+  </view>
+  <view class="next-btn">
+    <button class="weui-btn" type="primary" bindtap="submitForm">填写换货快递单号</button>
+  </view>
+  <view wx:if="{{order.status === 1 || order.status === 3}}" class="steps">
+    <view class="step-track"></view>
+    <view class="step-dot step-dot__open">
+      <text class="step-label">买家已发货</text>
+    </view>
+    <view class="step-dot">
+      <text class="step-label">待确认收货</text>
+    </view>
+  </view>
+  <view wx:if="{{order.status === 2}}" class="steps steps-4">
+    <view class="step-track"></view>
+    <view class="step-dot step-dot__open">
+      <text class="step-label">买家已发货</text>
+    </view>
+    <view class="step-dot">
+      <text class="step-label">待确认收货</text>
+    </view>
+    <view class="step-dot">
+      <text class="step-label">商家已发货</text>
+    </view>
+    <view class="step-dot">
+      <text class="step-label">买家已收货</text>
+    </view>
+  </view>
+</view>

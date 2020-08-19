@@ -1,0 +1,33 @@
+.shequ{background: #fff;margin-top:30rpx;}
+.shequ label{
+  display: block;
+  height:100rpx;
+  line-height: 100rpx;
+  border-bottom: 1px solid #F6F6F6;
+  padding:0 30rpx;
+  font-size: 34rpx;
+}
+text{  float: left;}
+radio{  float: right;}
+/*radio未选中时样式 */
+radio .wx-radio-input{
+  border:none;
+  background: none;
+  }
+  
+  
+  /* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+  radio .wx-radio-input.wx-radio-input-checked {
+  background: #fff !important;
+  border-color:#fff !important;
+  }
+
+  /* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+  radio .wx-radio-input.wx-radio-input-checked::before {
+  font-size: 40rpx;
+  color: #108EE9;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  }
+

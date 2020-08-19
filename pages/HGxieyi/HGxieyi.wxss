@@ -1,0 +1,5 @@
+/**index.wxss**/
+.commons{margin-top: 5rpx;padding: 30rpx;}
+.tit{font-size: 30rpx;margin:50rpx 0 35rpx;}
+.box p{display: block;margin-bottom:30rpx;}
+

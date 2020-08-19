@@ -1,0 +1,66 @@
+<!--index.wxml-->
+<view class="container">
+	<view class="header">
+		<view class="avatar">
+			<view class="image">
+				<open-data type="userAvatarUrl"></open-data>
+			</view>
+			<view class="name font-36">
+				<open-data type="userNickName" lang="zh_CN"></open-data>
+			</view>
+		</view>
+		<view class="profile-btn"><text class="iconfont icon-hgbianji font-24 mg-r-6"></text>编辑资料</view>
+	</view>
+	<view class="panel order-panel">
+		<view class="order-panel-title">全部订单</view>
+		<view class="order-panel-body">
+			<view class="order-panel-item" data-type="notRecorded" bindtap="onClickOrder">
+				<text class="iconfont icon-hgdaizhifu"></text>
+				<text>待确认</text>
+			</view>
+			<view class="order-panel-item" data-type="notShipped" bindtap="onClickOrder">
+				<text class="iconfont icon-hgdaishouhuo"></text>
+				<text>待发货</text>
+			</view>
+			<view class="order-panel-item" data-type="shipped" bindtap="onClickOrder">
+				<text class="iconfont icon-hgyiwancheng"></text>
+				<text>已发货</text>
+			</view>
+			<view class="order-panel-item" data-type="inAfterSale" bindtap="onClickOrder">
+				<text class="iconfont icon-hgshouhou"></text>
+				<text>退换/售后</text>
+			</view>
+			<view class="order-panel-item" data-type="all" bindtap="onClickOrder">
+				<text class="iconfont icon-hgquanbudingdan"></text>
+				<text>全部</text>
+			</view>
+		</view>
+	</view>
+	<view class="panel panel-square search-panel">
+		<mp-searchbar ext-class="search-bar" placerholder="搜索商品吧"></mp-searchbar>
+	</view>
+	<view class="panel product-list-panel">
+		<view class="product-item">
+			<image class="spu-image" mode="aspectFill" src="../../../assets/product-01.png"></image>
+			<view class="info">
+				<text class="title">欧舒丹甜蜜樱花沐浴啫喱/身体乳套装沐浴啫装沐浴啫装沐浴啫身体乳套装沐浴啫装沐浴啫装沐浴啫</text>
+				<text class="price">¥420</text>
+			</view>
+			<view class="detail-btn">
+				<text class="iconfont icon-hgsearch"></text>
+				<text>查看订单</text>
+			</view>
+		</view>
+		<view class="product-item">
+			<image class="spu-image" mode="aspectFill" src="../../../assets/product-01.png"></image>
+			<view class="info">
+				<text class="title">欧舒丹甜蜜樱花沐浴啫喱/身体乳套装沐浴啫装沐浴啫装沐浴啫身体乳套装沐浴啫装沐浴啫装沐浴啫</text>
+				<text class="price">¥560</text>
+			</view>
+			<view class="detail-btn">
+				<text class="iconfont icon-hgsearch"></text>
+				<text>查看订单</text>
+			</view>
+		</view>
+	</view>
+</view>

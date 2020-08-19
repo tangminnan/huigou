@@ -1,0 +1,53 @@
+<view class="container">
+  <scroll-view class="scoll-list">
+    <view class="panel panel-stack address-panel flex-hbox cross-center" bindtap="onClickChooseAddress">
+      <view class="flex-vbox flex-spread">
+        <view class="font-28">北京市顺义区</view>
+        <view class="font-30 font-bold">宏远航城广场M座5层</view>
+        <view class="font-28">张三 187013650779</view>
+      </view>
+      <mp-icon icon="arrow" color="#ccc" size="12"></mp-icon>
+    </view>
+    <view class="panel panel-stack paymentway-panel flex-hbox cross-center">
+      <text class="flex-spread font-34">支付方式</text>
+      <text class="font-30"><text class="iconfont icon-hgweixin color-green mg-r-6"></text>微信支付</text>
+    </view>
+    <view class="panel panel-stack merchant-panel">
+      <view class="title font-28 font-bold">商家名称</view>
+      <view class="product-item flex-hbox cross-center">
+        <image class="product-image" src="/images/PH1.png"></image>
+        <view class="product-info flex-vbox flex-spread">
+          <view class="flex-hbox flex-spread">
+            <text class="flex-spread text-ellipis-2 font-30">维他奶 茶饮料 250ml*24盒柠檬茶</text>
+          </view>
+          <view class="flex-hbox">
+            <text class="price font-36 font-bold flex-spread">¥4.20</text>
+            <view class="number-plus flex-hbox cross-center">
+              <text class="btn" bindtap="decrease">-</text>
+              <input class="input" value="{{count}}" type="number" bindinput="onCountChange"></input>
+              <text class="btn" bindtap="increase">+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="remark-container">
+        <text class="font-28 font-bold mg-l-16">订单备注</text>
+        <textarea class="order-remark" placeholder="请填写您的备注（30字以内）"></textarea>
+      </view>
+    </view>
+    <view class="panel panel-stack express-panel flex-vbox">
+      <view class="flex-hbox">
+        <text class="flex-spread">配送方式</text>
+        <text>快递</text>
+      </view>
+      <view class="flex-hbox mg-t-16">
+        <text class="flex-spread">运费</text>
+        <text>￥0.00</text>
+      </view>
+    </view>
+    <view class="fix-btn flex-hbox cross-center">
+      <text class="flex-spread font-32">合计: <text class="total-price font-bold">¥{{total}}</text></text>
+      <view class="submit-btn" bindtap="onClickSubmit">提交订单</view>
+    </view>
+  </scroll-view>
+</view>

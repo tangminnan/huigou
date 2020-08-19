@@ -1,0 +1,31 @@
+.BQ{padding:30rpx;text-align: center;}
+
+ .checkbox-con{margin-bottom:40rpx;overflow:hidden;}
+ .checkbox{
+  width: 30%;
+  height: 72rpx;
+  line-height: 72rpx;
+  font-size: 30rpx;
+  border-radius: 5rpx;
+  float: left;
+  margin:15rpx 1.5%;
+  background: #F5F5F5;
+ }
+ .checked{
+  color: #FF141E;
+  background:#FFEBEC;
+ }
+ .checkbox checkbox{
+  display: none
+ }
+ .BQbtn button{
+   display: inline-block;
+   width: 46%;
+   margin:20rpx 2%;
+   height: 98rpx;
+   line-height: 98rpx;
+   font-size: 36rpx;
+   background: #F6F6F6;
+  }
+.BQbtn .sure{background: #FF2328;color: #fff;}
+ 

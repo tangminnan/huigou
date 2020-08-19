@@ -1,0 +1,47 @@
+.fl{float:left;}
+.fr{float:right;}
+.c-red{color: #FF3B23;}
+page{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.navbar{
+  flex: none;
+  display: flex;
+  background: #fff;
+  font-size: 34rpx;
+  color: #7D7D7D;
+  margin-bottom: 20rpx;
+}
+.navbar .item{
+  position: relative;
+  flex: auto;
+  text-align: center;
+  line-height: 90rpx;
+}
+.navbar .item.active{
+  color: #FF2328;
+}
+.navbar .item.active:after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: #FF2328;
+}
+.swiper{
+  height: 100%
+}
+.itemBox{background: #fff;padding:30rpx 40rpx; margin-bottom: 1px;overflow: hidden;}
+.itemBox .left .t1{font-size: 32rpx;display: block;margin-bottom:14rpx;}
+.itemBox .left .t2{color:#999;}
+.itemBox .right{font-size: 32rpx;color: #FF2328;line-height: 85rpx;}
+.yuE{text-align: center;padding:40rpx 0;}
+.yuE image{width: 80rpx;height: 80rpx;}
+.yuE .t1{display: block;font-size: 32rpx;color: #666;margin:20rpx 0 30rpx;}
+.yuE .t2{font-size: 42rpx;color: #FF2328;}
+.tixian{font-size: 34rpx;height: 80rpx;line-height: 80rpx;background:#FF2328;color: #fff;border-radius:60rpx;margin:30rpx;}

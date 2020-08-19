@@ -1,0 +1,52 @@
+<view class="shangjia" bindtap='sjxiangqing'>
+        <image src="/images/PH1.png"></image>
+        <text>蒙牛惠购旗舰店</text>
+        <view class="arr"></view>
+</view>
+
+<view class="nav_right_items" bindtap='spXQ'>
+    <view class="box">
+        <image class="box_titpic" src="/images/PH1.png"></image>
+        <view class="box_txt">
+            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+            <view class="t2">
+                <text class="t2_1">¥420</text>
+                <text class="t2_2">￥560</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="box" bindtap='spXQ'>
+        <image class="box_titpic" src="/images/PH1.png"></image>
+        <view class="box_txt">
+            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+            <view class="t2">
+                <text class="t2_1">¥420</text>
+                <text class="t2_2">￥560</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="box" bindtap='spXQ'>
+        <image class="box_titpic" src="/images/PH1.png"></image>
+        <view class="box_txt">
+            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+            <view class="t2">
+                <text class="t2_1">¥420</text>
+                <text class="t2_2">￥560</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="box" bindtap='spXQ'>
+        <image class="box_titpic" src="/images/PH1.png"></image>
+        <view class="box_txt">
+            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+            <view class="t2">
+                <text class="t2_1">¥420</text>
+                <text class="t2_2">￥560</text>
+            </view>
+        </view>
+    </view>
+
+</view>

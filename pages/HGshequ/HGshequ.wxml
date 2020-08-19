@@ -1,0 +1,14 @@
+<radio-group class="shequ">
+	<label>
+		<text>北京八里庄社区</text><radio value="1" :checked="true" />
+	</label>
+	<label>
+		<text>北京汇创青年社区</text><radio value="0" :checked="false" />
+	</label>
+  <label>
+		<text>北京八里庄社区</text><radio value="0" :checked="false" />
+	</label>
+  <label>
+		<text>北京汇创青年社区</text><radio value="0" :checked="false" />
+	</label>
+</radio-group>

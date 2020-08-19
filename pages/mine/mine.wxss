@@ -1,0 +1,93 @@
+/**mine.wxss**/
+.top{
+  background: -webkit-linear-gradient(left,#E42D2E,#FA6400);
+  overflow:hidden;
+  padding:60rpx 40rpx;
+  color: #fff;
+}
+.top .mine_pic{
+  float: left;
+  width: 130rpx;
+  height: 130rpx;
+  border-radius:50%;
+}
+.top .mine_xx{
+  float: left;
+  width: 250rpx;
+  margin-left:30rpx;
+}
+.top .mine_xx .t1{
+  font-size: 36rpx;
+  margin-bottom:15rpx;
+}
+.top .mine_xx .t2{
+  line-height: 60rpx;
+  border:1rpx solid #f7de91a1;
+  border-radius:30rpx;
+  text-align: center;
+}
+.top .mine_xx .t2 image{
+  width: 34rpx;
+  height: 34rpx;
+  vertical-align: middle;
+  margin-top:-9rpx;
+}
+.top .mine_edit{
+  float:right;
+  font-size: 30rpx;
+}
+.top .mine_edit image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.wode{padding:30rpx 24rpx;border-radius:10rpx;margin-bottom:30rpx;}
+.mine_dd{overflow: hidden;margin-bottom: 45rpx;}
+.mine_dd .left{font-size: 30rpx;font-weight:bold;float: left;}
+.mine_dd .right{font-size:26rpx;float: right;color: #666;line-height: 34rpx;}
+.mine_dd .right image{width: 30rpx;height: 30rpx;vertical-align: middle;margin-top:-5rpx;margin-right:10rpx;}
+.mine_DDlist{border-bottom: 1rpx solid #eee;margin-bottom: 30rpx;overflow: hidden;padding-bottom: 60rpx;}
+.mine_DDlist image{width:50rpx;height:50rpx;display: block;margin:0 auto;}
+.mine_DDlist view{float:left;width:20%;text-align:center;}
+.mine_DDlist text{display:block;margin-top:15rpx;}
+.mine_DDlist view p{font-size: 32rpx;color:#FA6400;height:50rpx;line-height: 50rpx;}
+.mine_DDlist .line{border-left:1rpx solid #eee;width:1rpx;height:100rpx;margin:0 9%;}
+.bdn{border-bottom:none;margin-bottom:0;padding-bottom:34rpx;}
+
+.wodelist{border-radius:10rpx;padding:24rpx 0 24rpx 24rpx;}
+.Hlist{line-height:96rpx;position:relative;border-bottom: 1rpx solid #eee;}
+.Hlist image{width:44rpx;height:44rpx;vertical-align:middle;margin-right:20rpx;}
+.Hlist .arrow{width:20rpx;height:20rpx;border-top:2rpx solid #666;border-right:2rpx solid #666;transform:rotate(45deg);position: absolute;right:40rpx;top:40rpx;}
+
+/*== 公众号弹框样式 ==*/
+.van-modal{
+  -moz-opacity: 0.7;
+  opacity: 0.70;
+  filter: alpha(opacity=70);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.7);
+  z-index: 200;
+  }
+  .selectedGoodMsg{
+    position: fixed;
+    top: 50%;
+    left:50%;
+    transform: translate(-50% ,-50%);
+    right: auto;
+    background: #fff;
+    z-index: 201;
+   width: 80%;
+    height: 60%;
+    padding: 8rpx;
+    border-radius: 6rpx;
+    text-align: center;
+  }
+.erweima, .erweima_YY{padding:30rpx 50rpx;}
+.erweima view, .erweima_YY view{font-size: 36rpx;border-bottom:1px solid #EBEBEB;padding-bottom:30rpx;}
+.erweima image{width: 480rpx;height: 480rpx;}
+.erweima_YY image{width: 240rpx;height: 240rpx;margin:50rpx 0;}
+.erweima_YY text{display: block;font-size: 38rpx;}

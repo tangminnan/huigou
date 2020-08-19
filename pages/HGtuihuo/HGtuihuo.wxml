@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="bg-W ddTxt">
+    <image src="/images/PH1.png"></image>
+    <text>蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装1</text>
+</view>
+
+<view class="wodelist bg-W">
+    <view class="Hlist">
+        <image src="/images/tuihuo.png" mode='aspectFit'></image>
+        <view class="txt">
+            <text class="t1">退货退款</text>
+            <text class="t2">已收到货，需要退换收到的货物</text>
+        </view>
+        <view class="arrow"></view>
+    </view>
+    <view class="Hlist">
+        <image src="/images/tuihuo.png" mode='aspectFit'></image>
+        <view class="txt">
+            <text class="t1">换货</text>
+            <text class="t2">已收到货，需要更换收到的货物</text>
+        </view>
+        <view class="arrow"></view>
+    </view>
+    <view class="Hlist">
+        <image src="/images/tuihuo.png" mode='aspectFit'></image>
+        <view class="txt">
+            <text class="t1">退款</text>
+            <text class="t2">未收到货，需要退款</text>
+        </view>
+        <view class="arrow"></view>
+    </view>
+</view>

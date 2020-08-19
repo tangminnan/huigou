@@ -1,0 +1,135 @@
+.address-panel.address-panel {
+  padding: 32rpx;
+  margin-top: 32rpx;
+}
+
+.scoll-list {
+  height: 100vh;
+  overflow: hidden;
+  padding-bottom: 150rpx;
+}
+
+.paymentway-panel.paymentway-panel {
+  margin-top: 32rpx;
+  padding: 0 32rpx;
+  height: 96rpx;
+}
+
+.merchant-panel.merchant-panel {
+  margin-top: 32rpx;
+  padding: 0 32rpx;
+}
+
+.merchant-panel.merchant-panel .title {
+  padding: 24rpx 0 0 24rpx;
+}
+
+/* 商品卡片 */
+
+.product-item {
+  padding: 32rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+}
+
+.product-item .product-image {
+  width: 138rpx;
+  height: 138rpx;
+}
+
+.product-item .product-info {
+  align-self: stretch;
+  margin-left: 32rpx;
+}
+
+.product-item .product-info .price {
+  color: #FF3B30;
+}
+
+.product-item .product-info .icon-hgshanchu {
+  width: 80rpx;
+  text-align: right;
+}
+
+.product-item .product-info .number-plus {
+  border: 1px solid #e5e5e5;
+  width: 152rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+}
+
+.number-plus .btn {
+  flex: 0 0 44rpx;
+  color: #333;
+  display: line-block;
+  width: 44rpx;
+  text-align: center;
+}
+
+.number-plus .btn:first-child {
+  border-right: 1px solid #e5e5e5;
+}
+
+.number-plus .btn:last-child {
+  border-left: 1px solid #e5e5e5;
+}
+
+.number-plus .input {
+  text-align: center;
+}
+
+/*  */
+
+.fix-btn {
+  position: fixed;
+  bottom: 0;
+  height: 124rpx;
+  width: 750rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-top: 1px solid #EEEEEE;
+  padding: 0 32rpx;
+}
+
+.fix-btn .checkbox {
+  margin: 0 32rpx;
+
+}
+
+.fix-btn .total-price {
+  color: #FF3B30;
+}
+
+.fix-btn .submit-btn {
+  width: 229rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(270deg, rgba(255, 109, 94, 1) 0%, rgba(255, 59, 48, 1) 100%);
+  border-radius: 44rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.remark-container {
+  padding-bottom: 36rpx;
+}
+
+.order-remark {
+  width: 637rpx;
+  height: 150rpx;
+  margin: 0 auto;
+  background-color: #fafafa;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  margin-top: 12rpx;
+}
+
+.express-panel.express-panel {
+  margin-top: 24rpx;
+  padding: 0 24rpx;
+  height: 193rpx;
+  justify-content: center;
+  font-size: 28rpx;
+}

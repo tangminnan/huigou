@@ -1,0 +1,213 @@
+
+<view class="weui-search-bar__form">
+<!-- 搜索框 -->
+    <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="请输入搜索内容"/>
+    </view>
+</view>
+
+<!--主盒子-->
+<view class="container">
+    <!-- 左侧栏 -->
+    <view class='nav_left'>
+        <view class="nav_left_items {{curNav == 1 ? 'active' : ''}}"
+        bindtap="switchRightTab" data-id="1">
+        分类一
+        </view>
+
+        <view class="nav_left_items {{curNav == 2 ? 'active' : ''}}"
+        bindtap="switchRightTab" data-id="2">
+        分类二
+        </view>
+
+        <view class="nav_left_items {{curNav == 3 ? 'active' : ''}}"
+        bindtap="switchRightTab" data-id="3">
+        分类三
+        </view>
+
+        <view class="nav_left_items {{curNav == 4 ? 'active' : ''}}"
+        bindtap="switchRightTab" data-id="4">
+        分类四
+        </view>
+
+        <view class="nav_left_items {{curNav == 5 ? 'active' : ''}}"
+        bindtap="switchRightTab" data-id="5">
+        分类五
+        </view>
+
+        <view class="nav_left_items {{curNav == 6 ? 'active' : ''}}"
+        bindtap="switchRightTab" data-id="6">
+        分类六
+        </view>
+    </view>
+    <!-- 右侧栏 -->
+    <view class="nav_right">
+        <view wx:if="{{curNav==1}}">
+            <view class="nav_right_items">
+                <image class="toppic" src="/images/boshilun.png"></image>
+                <view class="box">
+                    <view bindtap='spxqing'>
+                        <image class="box_titpic" src="/images/PH5.png"></image>
+                        <view class="box_txt">
+                            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+                            <view class="t2">
+                                <text class="t1">¥420</text> 
+                                <text class="t2">￥560</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="t2_R" bindtap='sjZY'>
+                        <image src="/images/gengduo.png"></image>
+                        <view class="arr"></view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="nav_right_items">
+                <view class="box">
+                    <view bindtap='spxqing'>
+                        <image class="box_titpic" src="/images/PH6.png"></image>
+                        <view class="box_txt">
+                            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+                            <view class="t2">
+                                <text class="t1">¥420</text> 
+                                <text class="t2">￥560</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="t2_R" bindtap='sjZY'>
+                        <image src="/images/gengduo.png"></image>
+                        <view class="arr"></view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="nav_right_items">
+                <view class="box">
+                    <view bindtap='spxqing'>
+                        <image class="box_titpic" src="/images/PH7.png"></image>
+                        <view class="box_txt">
+                            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+                            <view class="t2">
+                                <text class="t1">¥420</text> 
+                                <text class="t2">￥560</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="t2_R" bindtap='sjZY'>
+                        <image src="/images/gengduo.png"></image>
+                        <view class="arr"></view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+        <view wx:if="{{curNav==2}}">
+            <view class="nav_right_items">
+                <view class="box">
+                    <view bindtap='spxqing'>
+                        <image class="box_titpic" src="/images/PH1.png"></image>
+                        <view class="box_txt">
+                            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+                            <view class="t2">
+                                <text class="t1">¥420</text> 
+                                <text class="t2">￥560</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="t2_R" bindtap='sjZY'>
+                        <image src="/images/gengduo.png"></image>
+                        <view class="arr"></view>
+                    </view>
+                </view>
+            </view>
+            
+        </view>
+        <view wx:if="{{curNav==3}}">
+            <view class="nav_right_items">
+                <view class="box">
+                    <view bindtap='spxqing'>
+                        <image class="box_titpic" src="/images/PH2.png"></image>
+                        <view class="box_txt">
+                            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+                            <view class="t2">
+                                <text class="t1">¥420</text> 
+                                <text class="t2">￥560</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="t2_R" bindtap='sjZY'>
+                        <image src="/images/gengduo.png"></image>
+                        <view class="arr"></view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+        <view wx:if="{{curNav==4}}">
+            <view class="nav_right_items">
+                <view class="box">
+                    <view bindtap='spxqing'>
+                        <image class="box_titpic" src="/images/PH3.png"></image>
+                        <view class="box_txt">
+                            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+                            <view class="t2">
+                                <text class="t1">¥420</text> 
+                                <text class="t2">￥560</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="t2_R" bindtap='sjZY'>
+                        <image src="/images/gengduo.png"></image>
+                        <view class="arr"></view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+        <view wx:if="{{curNav==5}}">
+            <view class="nav_right_items">
+                <view class="box">
+                    <view bindtap='spxqing'>
+                        <image class="box_titpic" src="/images/PH4.png"></image>
+                        <view class="box_txt">
+                            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+                            <view class="t2">
+                                <text class="t1">¥420</text> 
+                                <text class="t2">￥560</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="t2_R" bindtap='sjZY'>
+                        <image src="/images/gengduo.png"></image>
+                        <view class="arr"></view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+        <view wx:if="{{curNav==6}}">
+            <view class="nav_right_items">
+                <view class="box">
+                    <view bindtap='spxqing'>
+                        <image class="box_titpic" src="/images/PH5.png"></image>
+                        <view class="box_txt">
+                            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+                            <view class="t2">
+                                <text class="t1">¥420</text> 
+                                <text class="t2">￥560</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="t2_R" bindtap='sjZY'>
+                        <image src="/images/gengduo.png"></image>
+                        <view class="arr"></view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+
+    </view>
+</view>

@@ -1,0 +1,37 @@
+  <!--index.wxml-->
+<view class="newDZ">
+    <view class="DZ">
+        <text>收货人</text>
+        <input placeholder="张三"></input>
+    </view>
+    <view class="DZ">
+        <text>手机号</text>
+        <input placeholder="12938989857"></input>
+    </view>
+    <view class="Hlist">
+      <text>所在城市</text>
+      <view class="right">
+          <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+            <view class="picker">
+              {{region[0]}}，{{region[1]}}，{{region[2]}}
+            </view>
+          </picker>
+          <view class="arrow"></view>
+      </view>
+    </view>
+    <view class="DZ">
+        <text>详细地址</text>
+        <input placeholder="M坐5层"></input>
+    </view>
+</view>
+
+<view class="moren bg-W">
+    <text class="fl">设为默认地址</text>
+    <switch class="fr wx-switch-input" bindchange="switchChange"/>
+</view>
+
+<view class="button-sp-area">
+    <button class="shanchu" plain="true">删除</button>
+    <button plain="true">保存</button>
+</view>
+

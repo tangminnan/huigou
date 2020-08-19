@@ -1,0 +1,247 @@
+<!--index.wxml-->
+<!--导航条-->
+<view class="navbar">
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+</view>
+
+<!--内容-->
+<swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+  <!--全部-->
+  <swiper-item>
+  <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
+        <view class="itemBox">
+            <view class="ddHao">
+                <text class="fl">订单号：8347892947572348</text>
+                <text class="fr c-red">待发货</text>
+            </view>
+            <view class="ddTxt">
+                <image src="/images/PH1.png"></image>
+                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装1</text>
+                <text class="t2">x1</text>
+            </view>
+            <view class="ddtime">
+                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fr">
+                    <text class="t1">¥620.00</text>
+                    <text class="t2">¥420.00</text>
+                </text>
+            </view>
+            <view class="ddBtn">取消订单</view>
+        </view>
+
+        <view class="itemBox">
+            <view class="ddHao">
+                <text class="fl">订单号：8347892947572348</text>
+                <text class="fr c-red">待发货</text>
+            </view>
+            <view class="ddTxt">
+                <image src="/images/PH1.png"></image>
+                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装2</text>
+                <text class="t2">x1</text>
+            </view>
+            <view class="ddtime">
+                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fr">
+                    <text class="t1">¥620.00</text>
+                    <text class="t2">¥420.00</text>
+                </text>
+            </view>
+            <view class="ddBtn">取消订单</view>
+        </view>
+
+        <view class="itemBox">
+            <view class="ddHao">
+                <text class="fl">订单号：8347892947572348</text>
+                <text class="fr">已完成</text>
+            </view>
+            <view class="ddTxt">
+                <image src="/images/PH1.png"></image>
+                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装3</text>
+                <text class="t2">x1</text>
+            </view>
+            <view class="ddtime">
+                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fr">
+                    <text class="t1">¥620.00</text>
+                    <text class="t2">¥420.00</text>
+                </text>
+            </view>
+            <view class="ddBtn" bindtap='tuiHuan'>退换货</view>
+        </view>
+    </scroll-view>
+    </swiper-item>
+
+    <!--待付款-->
+    <swiper-item>
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
+        <!--有相关订单-->
+        <view class="itemBox">
+            <view class="ddHao">
+                <text class="fl">订单号：8347892947572348</text>
+                <text class="fr c-red">待付款</text>
+            </view>
+            <view class="ddTxt">
+                <image src="/images/PH1.png"></image>
+                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装4</text>
+                <text class="t2">x1</text>
+            </view>
+            <view class="ddtime">
+                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fr">
+                    <text class="t1">¥620.00</text>
+                    <text class="t2">¥420.00</text>
+                </text>
+            </view>
+            <view class="ddBtn">
+              <text>取消订单</text>
+              <view bindtap='goPay'>去支付</view>
+            </view>
+        </view>
+        <!--无相关订单-->
+        <view class="wuXG" style="display:none;">
+            <image src="/images/daifukuan.png"></image>
+        </view>
+    </scroll-view>
+    </swiper-item>
+
+    <!--待收货-->
+    <swiper-item>
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
+        <view class="itemBox">
+            <view class="ddHao">
+                <text class="fl">订单号：8347892947572348</text>
+                <text class="fr">待收货</text>
+            </view>
+            <view class="huanhuo">
+                <view>快递单号：df123435d342347878</view>
+            </view>
+            <view class="ddTxt">
+                <image src="/images/PH1.png"></image>
+                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</text>
+                <text class="t2">x1</text>
+            </view>
+            <view class="ddtime">
+                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fr">
+                    <text class="t1">¥620.00</text>
+                    <text class="t2">¥420.00</text>
+                </text>
+            </view>
+            <view class="ddBtn">
+              <text>取消订单</text>
+              <view>确认收货</view>
+            </view>
+        </view>
+    </scroll-view>
+    </swiper-item>
+
+    <!--已完成-->
+    <swiper-item>
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
+        <view class="itemBox">
+            <view class="ddHao">
+                <text class="fl">订单号：8347892947572348</text>
+                <text class="fr">已完成</text>
+            </view>
+            <view class="ddTxt">
+                <image src="/images/PH1.png"></image>
+                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</text>
+                <text class="t2">x1</text>
+            </view>
+            <view class="ddtime">
+                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fr">
+                    <text class="t1">¥620.00</text>
+                    <text class="t2">¥420.00</text>
+                </text>
+            </view>
+            <view class="ddBtn" bindtap='tuiHuan'>退换货</view>
+        </view>
+    </scroll-view>
+    </swiper-item>
+
+    <!--退换货-->
+    <swiper-item>
+    <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
+        <view class="itemBox">
+            <view class="ddHao">
+                <text class="fl">这里有个商家名称</text>
+                <text class="fr c-red">退款待确认</text>
+            </view>
+            <view class="ddTxt">
+                <image src="/images/PH1.png"></image>
+                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</text>
+                <text class="t2">x1</text>
+            </view>
+            <view class="ddtime" style="border-bottom:none;">
+                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fr">
+                    <text class="t1">¥620.00</text>
+                    <text class="t2">¥420.00</text>
+                </text>
+            </view>
+        </view>
+
+        <view class="itemBox">
+            <view class="ddHao">
+                <text class="fl">这里有个商家名称</text>
+                <text class="fr c-red">换货已确认</text>
+            </view>
+            <view class="huanhuo">
+                <view>商家换货快递单号：12238789374343095234</view>
+                <view>商家快递单号：yg38492346h345</view>
+            </view>
+            <view class="ddTxt">
+                <image src="/images/PH1.png"></image>
+                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</text>
+                <text class="t2">x1</text>
+            </view>
+            <view class="ddtime">
+                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fr">
+                    <text class="t1">¥620.00</text>
+                    <text class="t2">¥420.00</text>
+                </text>
+            </view>
+            <view class="ddBtn">
+                <view>我已发货</view>
+                <view bindtap='showview'>再次确认收货</view>
+            </view>
+        </view>
+
+        <view class="itemBox">
+            <view class="ddHao">
+                <text class="fl">这里有个商家名称</text>
+                <text class="fr c-red">换货已确认</text>
+            </view>
+            
+            <view class="ddTxt">
+                <image src="/images/PH1.png"></image>
+                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</text>
+                <text class="t2">x1</text>
+            </view>
+            <view class="ddtime">
+                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fr">
+                    <text class="t1">¥620.00</text>
+                    <text class="t2">¥420.00</text>
+                </text>
+            </view>
+            <view class="ddBtn">
+                <view>我已发货</view>
+            </view>
+        </view>
+    </scroll-view>
+    </swiper-item>
+
+</swiper>
+
+<!-- 运单号弹框-->
+<view class='showModel' wx:if="{{model == 1}}" catchtouchmove="return">
+  <view class='van-modal van-modalA' style='height:{{windowHeight}}px;width: {{windowWidth}}px' bindtap='model1'></view>
+  <view class='selectedGoodMsg'>
+      <view class="t1">填写快递单号</view>
+      <input placeholder="请输入快递单号"></input>
+      <button bindtap="showok">确认</button>
+  </view>
+</view>

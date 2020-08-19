@@ -1,0 +1,12 @@
+/**成为教练.wxss**/
+.wodelist{margin-top:20rpx;}
+.Hlist{background:#fff;margin-bottom:1px;padding:0 30rpx;line-height:120rpx;position:relative;font-size: 34rpx;}
+.Hlist image{width:120rpx;height:120rpx;vertical-align:middle;margin-right:20rpx;}
+.Hlist .right{position: absolute;right:40rpx;top:0;}
+.Hlist .arrow{width:20rpx;height:20rpx;border-top:2rpx solid #666;border-right:2rpx solid #666;transform:rotate(45deg);display:inline-block;}
+.Hlist .right input{height: 120rpx;text-align:right;}
+radio{margin-left:40rpx;transform:scale(0.7);}
+picker{display: inline-block;}
+
+.tijiao{margin:30rpx;}
+.tijiao button{background: #FF5E4D;color: #fff;font-size: 34rpx;height: 120rpx;line-height: 120rpx;border-radius:60rpx;}

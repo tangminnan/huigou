@@ -1,0 +1,36 @@
+.tabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40rpx;
+}
+
+.tabs .tab-item {
+  flex: 0 1 110rpx;
+  font-size: 34rpx;
+  color: #888;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.tabs .tab-item__selected {
+  color: #FF141E;
+  position: relative;
+}
+
+.tabs .tab-item__selected::after {
+  display: block;
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  height: 4rpx;
+  background-color: #FF2328;
+  border-radius: 2rpx;
+  width: 100%;
+}
+
+.order-list {
+  margin-top: 20rpx;
+}

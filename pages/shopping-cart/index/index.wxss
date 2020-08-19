@@ -1,0 +1,127 @@
+.container {
+  padding-top: 40rpx;
+}
+
+.scoll-list {
+  height: 100vh;
+  overflow: hidden;
+  padding-bottom: 150rpx;
+}
+
+.merchant-panel {
+
+  margin-top: 40rpx;
+}
+
+.merchant-panel .merchant-name {
+  padding-left: 32rpx;
+}
+
+.panel.product-list {
+  margin-top: 24rpx;
+  background-color: #f2f2f2;
+}
+
+.product-item {
+  padding: 32rpx;
+  margin-top: 24rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+}
+
+.product-item .product-image {
+  width: 138rpx;
+  height: 138rpx;
+}
+
+.product-item .product-info {
+  align-self: stretch;
+  margin-left: 32rpx;
+}
+
+.product-item .product-info .price {
+  color: #FF3B30;
+}
+
+.product-item .product-info .icon-hgshanchu {
+  width: 80rpx;
+  text-align: right;
+}
+
+.product-item .product-info .number-plus {
+  border: 1px solid #e5e5e5;
+  width: 152rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+}
+
+.number-plus .btn {
+  flex: 0 0 44rpx;
+  color: #333;
+  display: line-block;
+  width: 44rpx;
+  text-align: center;
+}
+
+.number-plus .btn:first-child {
+  border-right: 1px solid #e5e5e5;
+}
+
+.number-plus .btn:last-child {
+  border-left: 1px solid #e5e5e5;
+}
+
+.number-plus .input {
+  text-align: center;
+}
+
+.fix-btn {
+  position: fixed;
+  bottom: 0;
+  height: 124rpx;
+  width: 750rpx;
+  background-color: #fff;
+  border-top: 1px solid #EEEEEE;
+}
+
+.fix-btn .checkbox {
+  margin: 0 32rpx;
+
+}
+
+.fix-btn .total-price {
+  color: #FF3B30;
+}
+
+.fix-btn .submit-btn {
+  width: 229rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(270deg, rgba(255, 109, 94, 1) 0%, rgba(255, 59, 48, 1) 100%);
+  border-radius: 44rpx;
+  text-align: center;
+  color: #fff;
+  margin-right: 20rpx;
+}
+
+/* 假checkbox */
+
+.hg-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 38rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  border: 1px solid #ccc;
+  display: inline-block;
+  margin-right: 6rpx;
+}
+
+.hg-checkbox .iconfont {
+  display: none;
+}
+
+.hg-checkbox.hg-checkbox__checked {
+  background-color: #ff3b30;
+  border: 1px solid #ff3b30;
+}
