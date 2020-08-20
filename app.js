@@ -1,9 +1,11 @@
+import userApi from '/api/user';
 //app.js
 App({
   onLaunch: async function () {
-    // 登录
-    const res = await wx.login();
-    console.log('res.code', res.code);
+    console.log('userApi', userApi);
+    const res = await userApi.getOpenId();
+    console.log('res', res);
+
   },
   onHide: function () {
     // 测试，每次启动都重置状态
