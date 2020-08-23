@@ -4,19 +4,19 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
-		"enhance": true,
 		"postcss": true,
-		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": false,
-		"coverView": true,
 		"nodeModules": true,
+		"uglifyFileName": false,
+		"enhance": true,
+		"preloadBackgroundData": false,
+		"coverView": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
-		"uglifyFileName": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -34,7 +34,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.12.1",
-	"appid": "wx00efb5eb6739072f",
+	"appid": "wx7212f8ccf9ad1cee",
 	"projectname": "huigou",
 	"debugOptions": {
 		"hidedInDevtools": []

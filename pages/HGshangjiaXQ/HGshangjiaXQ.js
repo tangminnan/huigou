@@ -6,13 +6,55 @@ Page({
    */
   data: {
 
+    shangjia:{},
+    pinlei:[]
+
+  },
+
+  getshangjia: function (options){
+    var id = options.id
+    wx.request({
+      url: 'http://182.92.118.35:8098/api/business/selectMyBusiness',
+      data: { id: id },
+      header: { 'content-type': 'application/json' },
+      success: res => {
+        if (res.data.code == 0) {
+          this.setData({
+            shangjia: res.data.data.business
+          })
+
+        }
+      }
+
+    })
+  },
+
+  getpinlei: function (options) {
+    
+      wx.request({
+        url: 'http://182.92.118.35:8098/api/label/selectLabelByUserId',
+        data: { id: options.id },
+        header: { 'content-type': 'application/json' },
+        success: res => {
+          if (res.data.code == 0) {
+            this.setData({
+              pinlei: res.data.data
+            })
+
+          }
+        }
+
+      })
+    
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getshangjia(options);
+    this.getpinlei(options);
   },
 
   /**

@@ -49,6 +49,14 @@ use: [{
 },
 ],
 state: '',
+shangpin:{},
+sptupian:[],
+spguige:[],
+address:{},
+shangjia:{},
+jiage:{},
+merchantsId:0,
+
 
 //=========================生成图片分享
 model: 0,//弹框状态
@@ -117,8 +125,48 @@ bindManual: function(e) {
     });  
 }  ,
 
+getspid:function(options){
+  var id = options.id;
+  wx.request({
+    url: 'http://182.92.118.35:8098/api/home/searchGoodsDetail',
+    data: { goodsId : id},
+    header: { 'content-type': 'application/json'},
+    success:res=>{
+      
+      if(res.data.code == 0){
+          this.setData({
+            shangpin: res.data.data.hgGoods,
+            sptupian: res.data.data.hgGoodsFiles,
+            spguige: res.data.data.hgSpecifications,
+            jiage: res.data.data.hgSpecifications[0],
+            merchantsId: res.data.data.hgGoods.merchantsId,
+        })
+      }
+    }
+
+  })
+},
+  getshangjia: function () {
+    wx.request({
+      url: 'http://182.92.118.35:8098/api/business/selectMyBusiness',
+      data: { id: this.data.merchantsId },
+      header: { 'content-type': 'application/json' },
+      success: res => {
+        if (res.data.code == 0) {
+          this.setData({
+            shangjia: res.data.data.business
+          })
+          
+        }
+      }
+
+    })
+  },
 ////========================购买底部弹出框===========
   onLoad: function (options) {
+    //console.info(options);
+    this.getspid(options);
+    this.getshangjia();
   },
   //点击我显示底部弹出框
   clickme: function () {
@@ -210,10 +258,12 @@ model1: function () {//弹框消失
   })
 },
 
+
+
 //跳转
-shouhuoDZ: function () { wx.navigateTo({url: '../HGshouhuoDZ/HGshouhuoDZ',})},
-sjXQ: function () { wx.navigateTo({url: '../HGshangjiaXQ/HGshangjiaXQ',})},
-dianpu: function () { wx.navigateTo({url: '../HGshangjiaZY/HGshangjiaZY',})},
+  shouhuoDZ: function () { wx.navigateTo({ url: '../shouhuodizhi/shouhuodizhi',})},
+  sjXQ: function () { wx.navigateTo({ url: '../HGshangjiaXQ/HGshangjiaXQ?id=' + this.data.shangpin.merchantsId})},
+  dianpu:  function  ()  {  wx.navigateTo({ url:  '../HGshangjiaZY/HGshangjiaZY?id=' + this.data.shangpin.merchantsId,})},
 onGoToShoppingCart: function() {
   wx.switchTab({
     url: '/pages/shopping-cart/index/index',

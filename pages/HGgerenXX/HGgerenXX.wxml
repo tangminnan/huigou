@@ -5,7 +5,7 @@
   <view class="Hlist">
     <text>姓名</text>
     <view class="right">
-        <input class="input" name="userName" placeholder="未填写" 
+        <input class="input" name="userName" value='{{userName}}' placeholder="未填写" 
     bindinput="userNameInput"/>
     </view>
   </view>
@@ -14,8 +14,11 @@
     <text>性别</text>
     <view class="right">
       <radio-group bindchange="radiochange">
-        <p><radio value='Mr'></radio>男</p>
-        <p><radio value='Mis'></radio>女</p>
+        <!--<p><radio value='0'></radio>男</p>
+        <p><radio value='1'></radio>女</p>-->
+        <p><radio wx:for-items="{{sexs}}" wx:key="num" value="{{item.num}}" checked="{{item.checked}}">
+        <text style='font-size: 26px'>{{item.value}}</text>
+        </radio></p>
       </radio-group>
     </view>
   </view>
@@ -23,15 +26,15 @@
    <view class="Hlist">
       <text>联系方式</text>
       <view class="right">
-          <input class="input" name="userName" placeholder="请填写联系方式" 
-      bindinput="userNameInput"/>
+          <input class="input" name="phone" value='{{phone}}' placeholder="请填写联系方式" 
+      bindinput="phoneInput"/>
       </view>
     </view>
 
   <view class="Hlist" bindtap='biaoqian'>
     <text>我的标签</text>
     <view class="right">
-        <text>辣妈</text>
+        <text>{{checkboxText}}</text>
         <view class="arrow"></view>
     </view>
    </view>
@@ -39,7 +42,7 @@
    <view class="Hlist" bindtap='shequ'>
     <text>我的社区</text>
     <view class="right">
-        <text>北京汇创青年社区</text>
+        <text>{{shequ}}</text>
         <view class="arrow"></view>
     </view>
    </view> 
@@ -47,7 +50,7 @@
 </view> 
 
 <view class="tijiao">
-    <button>保存并返回</button>
+    <button formType="button"  bindtap="baocun">保存并返回</button>
 </view>
 
 

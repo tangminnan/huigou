@@ -1,0 +1,17 @@
+.DZlist{margin:24rpx 0 100rpx;}
+.DZlist .box{background: #fff;margin-bottom: 5rpx;padding: 30rpx;overflow: hidden;border-radius:5rpx;}
+.DZlist .box .left{width: 80%;float: left;position: relative;}
+.DZlist .box .left p{display: block;margin-bottom: 10rpx;}
+.DZlist .box .left text{font-size: 34rpx;padding-right: 30rpx;}
+.DZlist .box .right{width:20%;float: right;border:1rpx solid #ccc;box-sizing:border-box;text-align: center;line-height:54rpx;border-radius:8rpx;font-size: 26rpx;}
+.DZlist .box .right image{width: 26rpx;height: 26rpx;}
+.DZlist .on .left::after{background: #FF6010;position:absolute;right:180rpx;top:0;content:"默认";padding:5rpx 10rpx;font-size: 22rpx;color: #fff;border-radius:8rpx;}
+.addDZ{position: fixed;width: 100%;background: #fff;bottom: 0;padding:15rpx 0;}
+.addDZ button{margin:0 5%;font-size: 34rpx;color: #fff;border-radius:60rpx;background: #FF6010;border:none;}
+
+
+
+
+
+
+

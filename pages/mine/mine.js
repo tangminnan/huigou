@@ -1,8 +1,38 @@
 // pages/mine/mine.js
+//获取应用实例
+const app = getApp()
 Page({
   data: {
     model: 0, //弹框状态
+    motto: 'Hello World',
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+
+    hgUserInfo:{},
+    hgExtensionAccount:{},
+
   },
+
+  getUserxx:function(){
+    wx.request({
+      method:'Get',
+      url: 'http://182.92.118.35:8098/api/info/selectMyUser',
+      data: { id: this.data.userInfo.id},
+      header: { 'content-type': 'application/json' },
+      success:res=>{
+        console.info(res.data);
+        if (res.data.code==0){
+          this.setData({
+            hgUserInfo:res.data.data.hgUserInfo,
+            hgExtensionAccount:res.data.data.hgExtensionAccount
+          })
+        }
+      }
+    })
+  },
+
+
   showview: function () { //弹框显示
     this.setData({
       model: 1
@@ -75,5 +105,44 @@ Page({
       })
     }
 
+  },
+
+ onLoad: function (options) {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+   this.getUserxx();
+  },
+  getUserInfo: function (e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
   }
+
 })

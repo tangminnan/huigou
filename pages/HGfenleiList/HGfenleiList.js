@@ -5,6 +5,27 @@ Page({
    * 页面的初始数据
    */
   data: {
+    changpin:[],
+
+  },
+
+  getfenleiList: function (options){
+   var id =  options.id;
+    wx.request({
+      url: 'http://182.92.118.35:8098/api/classify/searchAllGoodsByClassifyId',
+      data: { id: id },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: (res) => {
+        console.info(res.data);
+        if (res.data.code == 0) {
+          this.setData({
+            changpin: res.data.data
+          })
+        }
+      }
+    })
 
   },
 
@@ -12,7 +33,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getfenleiList(options);
   },
 
   /**
@@ -62,5 +83,20 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+//跳转
+spxqing:  function  (e)  {
+    let id = e.target.dataset.id;
+    wx.navigateTo({
+      url:  '../HGspXQ/HGspXQ?id=' + id,
+    })
+  },
+  sjZY:  function  (e)  {
+    let id = e.target.dataset.id;
+    wx.navigateTo({
+      url:  '../HGshangjiaZY/HGshangjiaZY?id' + id,
+    })
+  },
+
 })

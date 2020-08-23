@@ -10,11 +10,11 @@
 
     <view class="money">
         <text>¥</text>
-        <input placeholder-style="color:#ccc;" placeholder="请输入提现额度"></input>
+        <input placeholder-style="color:#ccc;" value='{{jine}}' bindinput='txjine' placeholder="请输入提现额度"></input>
     </view>
     <view class="allTX">
-        <view class="fl">可提现余额￥560</view>
-        <view class="fr">全部提现</view>
+        <view class="fl">可提现余额￥{{yue}}</view>
+        <view class="fr" bindtap='quanbu'>全部提现</view>
     </view>
 </view>
-<button class="daozBtn">2小时到账，确认提现</button>
+<button class="daozBtn" bindtap='tixian'>2小时到账，确认提现</button>

@@ -5,14 +5,32 @@ Page({
    * 页面的初始数据
    */
   data: {
+      shangjia:[],
+      shangpin:{},
+  },
 
+  getshangjia: function (options){
+    var id = options.id;
+    wx.request({
+      url: 'http://182.92.118.35:8098/api/business/selectMyBusiness',
+      data: { id: id },
+      header: { 'content-type': 'application/json' },
+      success: res => {
+        if (res.data.code == 0) {
+          this.setData({
+            shangjia: res.data.data.business,
+            shangpin: res.data.data.goods
+          })
+        }
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getshangjia(options);
   },
 
   /**

@@ -7,8 +7,34 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+
+    addressList:[],
   },
+
+
+  getUserAddress:function(){
+    wx.request({
+      method: 'GET',
+      url: 'http://182.92.118.35:8098/api/address/selectHgAddressByUserId',
+      data: { userId: this.data.userInfo.id},
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: (res) => {
+        //console.info(res.data);
+        if (res.data.code == 0) {
+          this.setData({
+            addressList: res.data.data
+          })
+        }
+
+      }
+    })
+  },
+
+
+
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
@@ -16,6 +42,7 @@ Page({
     })
   },
   onLoad: function () {
+   
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -42,6 +69,7 @@ Page({
         }
       })
     }
+    this.getUserAddress();
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -63,16 +91,19 @@ Page({
     })
   },
   // 选中地址回调
+  // onChooseAddressItem: function (e) {
+  //   const channler = this.getOpenerEventChannel();
+  //   if (channler) {
+  //     channler.emit('choosed_address', {
+  //       userName: '张三',
+  //       telPhone: '18701360779',
+  //       province: '北京市顺义区',
+  //       detailInfo: '宏远航程广场M座5层'
+  //     });
+  //     wx.navigateBack();
+  //   }
+  // }
   onChooseAddressItem: function (e) {
-    const channler = this.getOpenerEventChannel();
-    if (channler) {
-      channler.emit('choosed_address', {
-        userName: '张三',
-        telPhone: '18701360779',
-        province: '北京市顺义区',
-        detailInfo: '宏远航程广场M座5层'
-      });
-      wx.navigateBack();
-    }
+    console.log(e);
   }
 })

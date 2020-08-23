@@ -50,7 +50,8 @@
   "tabBar": {
     "color": "#A3A3A3",
     "selectedColor": "#E42D2E",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/index/index",
         "iconPath": "/images/homeM.png",
         "selectedIconPath": "/images/home.png",

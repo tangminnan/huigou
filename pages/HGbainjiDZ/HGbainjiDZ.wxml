@@ -2,11 +2,11 @@
 <view class="newDZ">
     <view class="DZ">
         <text>收货人</text>
-        <input placeholder="张三"></input>
+        <input placeholder="收货人" value='{{recipient}}' bindtap='userNameInput'></input>
     </view>
     <view class="DZ">
         <text>手机号</text>
-        <input placeholder="12938989857"></input>
+        <input placeholder="手机号" value='{{phone}}'bindtap='phoneInput'></input>
     </view>
     <view class="Hlist">
       <text>所在城市</text>
@@ -21,17 +21,17 @@
     </view>
     <view class="DZ">
         <text>详细地址</text>
-        <input placeholder="M坐5层"></input>
+        <input placeholder="详细地址" value='{{detailAddress}}'bindtap='addressdesInput'></input>
     </view>
 </view>
 
 <view class="moren bg-W">
     <text class="fl">设为默认地址</text>
-    <switch class="fr wx-switch-input" bindchange="switchChange"/>
+    <switch class="fr wx-switch-input" checked="{{isDefault}}" bindchange="switchChange"/>
 </view>
 
 <view class="button-sp-area">
-    <button class="shanchu" plain="true">删除</button>
-    <button plain="true">保存</button>
+    <button class="shanchu" plain="true" bindtap='removeadd'>删除</button>
+    <button plain="true" bindtap='save'>保存</button>
 </view>
 

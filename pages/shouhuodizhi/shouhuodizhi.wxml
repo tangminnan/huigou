@@ -2,12 +2,12 @@
 <view class="DZlist p-30">
     <!-- <view wx:for="{{addressList}}" class="{{item.isDefault==1?'box on':'box'}}" bindtap="onChooseAddressItem"> -->
     <view wx:for="{{addressList}}" class="{{item.isDefault==1?'box on':'box'}}">
-        <view class="left">
+        <view class="left"  bindtap="onChooseAddressItem" >
             <p><text>{{item.recipient}}</text>{{item.phone}}</p>
             <p>{{item.region}}{{item.detailAddress}}</p>
         </view>
-        <view class="right" >
-          <navigator url="../HGbainjiDZ/HGbainjiDZ?id={{item.id}}" >
+        <view class="right">
+          <navigator url="../HGbainjiDZ/HGbainjiDZ?id={{item.id}}">
               <image src="/images/gongju-12.png"></image>
               修改
           </navigator>

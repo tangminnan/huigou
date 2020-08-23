@@ -11,11 +11,11 @@
 <view class="container">
     <!-- 左侧栏 -->
     <view class='nav_left'>
-        <view class="nav_left_items {{curNav == 1 ? 'active' : ''}}"
-        bindtap="switchRightTab" data-id="1">
-        分类一
+        <view wx:for-items="{{fenlei}}" wx:key="item.id" class="nav_left_items {{curNav == index ? 'active' : ''}}"
+        bindtap="switchRightTab" data-id="{{index}}" data-fenid="{{item.id}}">
+        {{item.name}}
         </view>
-
+<!-- 
         <view class="nav_left_items {{curNav == 2 ? 'active' : ''}}"
         bindtap="switchRightTab" data-id="2">
         分类二
@@ -39,32 +39,32 @@
         <view class="nav_left_items {{curNav == 6 ? 'active' : ''}}"
         bindtap="switchRightTab" data-id="6">
         分类六
-        </view>
+        </view> -->
     </view>
     <!-- 右侧栏 -->
     <view class="nav_right">
-        <view wx:if="{{curNav==1}}">
-            <view class="nav_right_items">
-                <image class="toppic" src="/images/boshilun.png"></image>
+        <view  wx:for="{{fenlei}}" wx:if="{{curNav==index}}">
+            <view class="nav_right_items" wx:for-items="{{changpin}}" wx:key="item.id">
+                <!-- <image class="toppic" src="/images/boshilun.png"></image> -->
                 <view class="box">
-                    <view bindtap='spxqing'>
+                    <view bindtap='spxqing' data-id='{{item.id}}'>
                         <image class="box_titpic" src="/images/PH5.png"></image>
                         <view class="box_txt">
-                            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+                            <view class="t1">{{item.title}}</view>
                             <view class="t2">
                                 <text class="t1">¥420</text> 
                                 <text class="t2">￥560</text>
                             </view>
                         </view>
                     </view>
-                    <view class="t2_R" bindtap='sjZY'>
+                    <view class="t2_R" bindtap='sjZY' data-id='{{item.merchantsId}}'>
                         <image src="/images/gengduo.png"></image>
                         <view class="arr"></view>
                     </view>
                 </view>
             </view>
 
-            <view class="nav_right_items">
+            <!-- <view class="nav_right_items">
                 <view class="box">
                     <view bindtap='spxqing'>
                         <image class="box_titpic" src="/images/PH6.png"></image>
@@ -100,10 +100,10 @@
                         <view class="arr"></view>
                     </view>
                 </view>
-            </view>
+            </view> -->
 
         </view>
-        <view wx:if="{{curNav==2}}">
+        <!-- <view wx:if="{{curNav==2}}">
             <view class="nav_right_items">
                 <view class="box">
                     <view bindtap='spxqing'>
@@ -207,7 +207,7 @@
                 </view>
             </view>
 
-        </view>
+        </view> -->
 
     </view>
 </view>

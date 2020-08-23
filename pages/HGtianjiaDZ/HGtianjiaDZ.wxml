@@ -2,11 +2,11 @@
 <view class="newDZ">
     <view class="addBox">
         <text>收货人</text>
-        <input placeholder="请输入收货人"></input>
+        <input placeholder="请输入收货人" bindinput="userNameInput" ></input>
     </view>
     <view class="addBox">
         <text>手机号</text>
-        <input placeholder="请输入11位手机号"></input>
+        <input placeholder="请输入11位手机号" bindinput="phoneInput"></input>
     </view>
     <view class="Hlist">
       <text>所在城市</text>
@@ -21,16 +21,16 @@
     </view>
     <view class="addBox">
         <text>详细地址</text>
-        <input placeholder="请输入详细地址"></input>
+        <input placeholder="请输入详细地址" bindinput="addressdesInput"></input>
     </view>
 </view>
 
 <view class="moren bg-W">
     <text class="fl">设为默认地址</text>
-    <switch class="fr wx-switch-input" bindchange="switchChange"/>
+    <switch class="fr wx-switch-input" checked="{{isDefault}}" bindchange="switchChange"/>
 </view>
 
 <view class="button-sp-area">
-    <button plain="true">保存</button>
+    <button plain="true" bindtap='baocun' >保存</button>
 </view>
 

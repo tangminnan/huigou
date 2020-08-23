@@ -1,4 +1,10 @@
-<radio-group class="shequ">
+<radio-group class="shequ" bindchange="radioChange">
+  <label wx:for-items="{{checkboxArr}}" wx:key="item.id"  data-text='{{item.community}}' bindtap='radiobox'>
+      <text>{{item.community}}</text>
+      <radio value="{{item.community}},{{item.id}}" checked="{{item.checked}}">
+      </radio>
+  </label>
+  <!--
 	<label>
 		<text>北京八里庄社区</text><radio value="1" :checked="true" />
 	</label>
@@ -11,4 +17,5 @@
   <label>
 		<text>北京汇创青年社区</text><radio value="0" :checked="false" />
 	</label>
+  -->
 </radio-group>

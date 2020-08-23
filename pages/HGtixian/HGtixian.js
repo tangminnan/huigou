@@ -7,7 +7,46 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+
+    yue:0,
+    jine:'',
+  },
+
+
+  quanbu:function (){
+    this.setData({
+      jine: this.data.yue
+    })
+  },
+
+  txjine: function (e) {
+    this.setData({
+      jine: e.detail.value
+    })
+  },
+  tixian:function(){
+    var tixianed =  parseInt(this.data.jine);
+    var shengyued =   this.data.yue;
+    //console.info(tixianed+"=="+shengyued);
+    if (tixianed > shengyued){
+      wx.showToast({
+        title: '不得大于余额',
+        icon: 'none',
+        duration: 3000
+      })
+      return false;
+    }
+
+    //提现
+
+
+  },
+
+  optionsyue:function (options){
+    this.setData({
+      yue:options.yue
+    })
   },
   //事件处理函数
   bindViewTap: function() {
@@ -15,7 +54,8 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    this.optionsyue(options);
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
