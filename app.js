@@ -1,6 +1,8 @@
+import userApi from '/api/user';
 //app.js
 App({
   onLaunch: async function () {
+
     // 登录
    // const res = await 
     wx.login({
@@ -23,6 +25,10 @@ App({
           }
         }
     });    
+    // console.log('userApi', userApi);
+    // const res = await userApi.getOpenId();
+    // console.log('res', res);
+
   },
   /*
   onHide: function () {

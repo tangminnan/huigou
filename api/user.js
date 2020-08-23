@@ -1,14 +1,14 @@
 // 获取当前推广员信息
-async function getUserInfo() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve({
+import api from './request';
 
-      })
-    }, 300)
-  })
+async function getOpenId() {
+  const res = await wx.login();
+  console.log('res', res);
+  return api.getData('/api/login/getOpenId', {
+    code: res.code
+  });
 }
 
 module.exports = {
-  getUserInfo
+  getOpenId
 }
