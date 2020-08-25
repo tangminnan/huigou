@@ -134,6 +134,14 @@
 					"id": -1,
 					"name": "pages/mine/mine",
 					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 10,
+					"name": "pages/merchant/merchant-info/index",
+					"pathName": "pages/merchant/merchant-info/index",
+					"query": "businessType=0",
 					"scene": null
 				}
 			]

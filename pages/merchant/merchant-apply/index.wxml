@@ -1,8 +1,8 @@
 <view class="container">
-	<view class="panel panel-merchant-type-card" data-type="enterprise" bindtap="onClickApplyEnterprise">
+	<view class="panel panel-merchant-type-card" data-type="0" bindtap="onClickApplyEnterprise">
 		<image src="../../../assets/merchant-type-enterprise.png"></image>
 	</view>
-	<view class="panel panel-merchant-type-card" data-type="personal" bindtap="onClickApplyEnterprise">
+	<view class="panel panel-merchant-type-card" data-type="1" bindtap="onClickApplyEnterprise">
 		<image src="../../../assets/merchant-type-personal.png"></image>
 	</view>
 </view>

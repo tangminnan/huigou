@@ -1,9 +1,7 @@
-// pages/merchant-enterprise/index.js
-Page({
+const requestApi = require('../../../api/request');
+const userApi = require('../../../api/user');
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
     sexList: [{
       key: 1,
@@ -14,76 +12,24 @@ Page({
     }],
     info: {}
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    console.log('options.type', options.type);
-    const type = options.type || 'personal';
+    console.log('options.businessType', options.businessType);
+    const businessType = options.businessType || 1;
     this.setData({
-      type
+      businessType
     });
     wx.setNavigationBarTitle({
-      title: type === 'personal' ? '个人经营' : '品牌商家'
+      title: businessType === 1 ? '个人经营' : '品牌商家'
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  onSexChange: function (e) {
-    console.log('e.detail.value', e.detail);
-    const value = +e.detail.value;
+  onFormChage: function (e) {
+    console.log('e', e);
+    const fieldName = e.currentTarget.dataset.field;
+    const value = e.detail.value;
     this.setData({
       info: {
         ...this.data.info,
-        selectedSexIndex: value
+        [fieldName]: value
       }
     })
   },
@@ -98,7 +44,7 @@ Page({
     })
   },
   onUploadImage: async function (e) {
-    const type = e.currentTarget.dataset.type;
+    const type = e.currentTarget.dataset.field;
     let count = e.currentTarget.dataset.count;
     count = isNaN(count) ? 1 : +count;
     console.log(type, count);
@@ -107,7 +53,16 @@ Page({
       sizeType: ["compressed"],
       sourceType: ['album', 'camera']
     })
-    console.log('images', images);
+
+    const userInfo = await userApi.getOpenId();
+    const res = await requestApi.uploadFile({
+      userId: userInfo.userId,
+      filePath: images.tempFilePaths[0],
+      type: 3,
+      businessOrExtension: 0
+    })
+    console.log('res', res);
+
     this.setData({
       info: {
         ...this.data.info,
@@ -125,7 +80,6 @@ Page({
   },
   submitForm: function () {
     this.selectComponent('#form').validate((valid, errors) => {
-      console.log(valid, errors);
       if (!valid) {
         const firstError = Object.keys(errors)
         if (firstError.length) {
