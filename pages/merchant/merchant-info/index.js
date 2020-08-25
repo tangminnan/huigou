@@ -1,5 +1,7 @@
 const requestApi = require('../../../api/request');
 const userApi = require('../../../api/user');
+const merchantApi = require('../../../api/merchant');
+const ensureAuth = require('../../../api/auth');
 
 Page({
   data: {
@@ -10,7 +12,9 @@ Page({
       key: 0,
       label: "女"
     }],
-    info: {}
+    info: {
+      selectedSexIndex: 0
+    }
   },
   onLoad: function (options) {
     console.log('options.businessType', options.businessType);
@@ -34,6 +38,10 @@ Page({
     })
   },
   onChooseAddress: async function (e) {
+    // 待确认这里的选择地址是跳转到哪里
+    // 和用户收获地址含义明显不同，暂时同
+    console.log('scope address');
+    await ensureAuth('scope.address');
     const response = await wx.chooseAddress();
     console.log('response', response);
     this.setData({
@@ -44,10 +52,11 @@ Page({
     })
   },
   onUploadImage: async function (e) {
-    const type = e.currentTarget.dataset.field;
+    const field = e.currentTarget.dataset.field;
+    const type = e.currentTarget.dataset.type;
     let count = e.currentTarget.dataset.count;
     count = isNaN(count) ? 1 : +count;
-    console.log(type, count);
+    console.log(field, type, count);
     const images = await wx.chooseImage({
       count,
       sizeType: ["compressed"],
@@ -55,18 +64,19 @@ Page({
     })
 
     const userInfo = await userApi.getOpenId();
-    const res = await requestApi.uploadFile({
-      userId: userInfo.userId,
-      filePath: images.tempFilePaths[0],
-      type: 3,
-      businessOrExtension: 0
-    })
+    const uploadedImages = [];
+    for (let i = 0, len = images.tempFilePaths.length; i < len; i++) {
+      const target = images.tempFilePaths[i];
+      await requestApi.saveImage(target, userInfo.userId, type, 0)
+      uploadedImages.push(target);
+    }
+
     console.log('res', res);
 
     this.setData({
       info: {
         ...this.data.info,
-        [type]: images.tempFilePaths
+        [field]: uploadedImages
       }
     })
   },
@@ -78,31 +88,42 @@ Page({
       }
     })
   },
-  submitForm: function () {
-    this.selectComponent('#form').validate((valid, errors) => {
-      if (!valid) {
-        const firstError = Object.keys(errors)
-        if (firstError.length) {
-          this.setData({
-            error: errors[firstError[0]].message
-          })
-        }
-      } else {
-        wx.showToast({
-          title: '校验通过'
-        });
-        wx.showNavigationBarLoading();
-        setTimeout(() => {
-          wx.hideNavigationBarLoading();
-          getApp().globalData.isMerchant = true;
-          wx.redirectTo({
-            url: '/pages/merchant/audit-result/index?type=success'
-          })
-          wx.showToast({
-            title: '保存成功',
-          })
-        }, 2000)
-      }
-    })
+  submitForm: async function () {
+    console.log('info', this.data.info);
+
+    // validate
+
+    // submit
+    wx.showLoading({
+      title: '提交中',
+    });
+    try {
+      const {
+        address,
+        selectedSexIndex,
+        ...otherInfos
+      } = this.data.info;
+      await merchantApi.applyToBeBusiness({
+        ...otherInfos,
+        businessType: +this.data.businessType,
+        address: `${address.provinceName}${address.cityName}${address.countyName} ${address.detailInfo} ${address.postalCode}     ${address.userName} ${address.telNumber}`,
+        sex: this.data.sexList[selectedSexIndex].key
+      });
+      wx.hideLoading();
+      wx.showToast({
+        title: '提交成功',
+      })
+      setTimeout(() => {
+        wx.redirectTo({
+          url: '/pages/merchant/audit-result/index?type=success'
+        })
+      }, 2000)
+    } catch (e) {
+      console.log(e);
+      wx.hideLoading();
+      wx.showToast({
+        title: e && e.messasge || '出错了，请稍后再试',
+      })
+    }
   }
 })

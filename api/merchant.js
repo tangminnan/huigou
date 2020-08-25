@@ -9,6 +9,16 @@ async function getMerchantInfo() {
   });
 }
 
+async function applyToBeBusiness(applyInfo) {
+  const info = await userApi.getOpenId();
+  return api.postData('/api/business/UpdateUserInfoByBusiness', {
+    userId: info.userId,
+    ...applyInfo,
+  })
+}
+
+
 module.exports = {
-  getMerchantInfo
+  getMerchantInfo,
+  applyToBeBusiness
 }

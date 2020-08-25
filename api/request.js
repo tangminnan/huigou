@@ -37,7 +37,7 @@ async function request(url, params, options) {
   })
 }
 
-async function uploadFile({
+async function uploadImage({
   filePath
 }) {
   return new Promise((resolve, reject) => {
@@ -64,6 +64,20 @@ async function uploadFile({
     })
   })
 }
+// businessOrExtension: 0商家 1推广
+// type: 0营业执照或许可证 1物业图 2商品图 3品牌授权 4其他
+async function saveImage(filePath, userId, type, businessOrExtension) {
+  const fileUrl = await uploadImage({
+    filePath
+  });
+  console.log('fileUrl', fileUrl);
+  return api.getData('/api/business/saveHgFileByBusiness', {
+    userId,
+    picture: fileUrl,
+    type,
+    businessOrExtension
+  });
+}
 
 async function getData(url, params, options) {
   // 拼接url 和 params
@@ -75,7 +89,7 @@ async function getData(url, params, options) {
 
 async function postData(url, data, options) {
   // 拼接url 和 params
-  return request(url, params, {
+  return request(url, data, {
     method: 'POST',
     ...options
   })
@@ -85,5 +99,6 @@ module.exports = {
   api,
   getData,
   postData,
-  uploadFile
+  uploadImage,
+  saveImage
 }

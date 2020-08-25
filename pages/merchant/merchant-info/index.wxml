@@ -54,7 +54,7 @@
     <block wx:if="{{businessType == 0}}">
     <view class="img-uploader">
       <view class="img-uploader-title">品牌授权</view>
-      <view class="img-uploader-btn" data-field="certification" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="3" data-field="certification" bindtap="onUploadImage">
         <block wx:if="{{info.auth && info.auth.length}}">
           <image wx:for="{{info.auth}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -66,7 +66,7 @@
     </view>
     <view class="img-uploader">
       <view class="img-uploader-title">营业执照上传</view>
-      <view class="img-uploader-btn" data-field="license" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="0" data-field="license" bindtap="onUploadImage">
         <block wx:if="{{info.license && info.license.length}}">
           <image wx:for="{{info.license}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -78,7 +78,7 @@
     </view>
     <view class="img-uploader">
       <view class="img-uploader-title">其他执照上传</view>
-      <view class="img-uploader-btn" data-count="10" data-field="others" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="4" data-count="10" data-field="others" bindtap="onUploadImage">
         <block wx:if="{{info.others && info.others.length}}">
           <image wx:for="{{info.others}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -92,7 +92,7 @@
   <block wx:else>
     <view class="img-uploader">
       <view class="img-uploader-title">营业执照上传</view>
-      <view class="img-uploader-btn" data-type="license" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="0" data-field="license" bindtap="onUploadImage">
         <block wx:if="{{info.license && info.license.length}}">
           <image wx:for="{{info.license}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -104,7 +104,7 @@
     </view>
     <view class="img-uploader">
       <view class="img-uploader-title">相关证书上传(例: 食品安全证、其他证件)</view>
-      <view class="img-uploader-btn" data-type="otherAuth" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="0" data-field="otherAuth" bindtap="onUploadImage">
         <block wx:if="{{info.otherAuth && info.otherAuth.length}}">
           <image wx:for="{{info.otherAuth}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -116,7 +116,7 @@
     </view>
     <view class="img-uploader">
       <view class="img-uploader-title">其他执照上传</view>
-      <view class="img-uploader-btn" data-count="10" data-type="others" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="4" data-count="10" data-field="others" bindtap="onUploadImage">
         <block wx:if="{{info.others && info.others.length}}">
           <image wx:for="{{info.others}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
