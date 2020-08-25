@@ -38,6 +38,7 @@
     "pages/merchant/audit-result/index",
     "pages/merchant/merchant-agreement/index",
     "pages/merchant/merchant-info/index",
+    "pages/merchant/merchant-class/index",
     "pages/merchant/merchant-apply/index",
     "pages/merchant/index/index"
   ],

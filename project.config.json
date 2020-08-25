@@ -150,6 +150,12 @@
 					"pathName": "pages/HGshouhuoDZ/HGshouhuoDZ",
 					"query": "businessType=0",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/merchant/merchant-class/index",
+					"pathName": "pages/merchant/merchant-class/index",
+					"scene": null
 				}
 			]
 		}
