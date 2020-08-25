@@ -34,7 +34,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.12.1",
-	"appid": "wxf979f39e96310b4d",
+	"appid": "wx994e417401bba0ec",
 	"projectname": "huigou",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -127,6 +127,13 @@
 					"id": -1,
 					"name": "pages/HGspXQ/HGspXQ",
 					"pathName": "pages/HGspXQ/HGspXQ",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
 					"scene": null
 				}
 			]

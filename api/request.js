@@ -1,4 +1,4 @@
-const API_PREFIX = 'http://182.92.118.35:8098';
+const API_PREFIX = 'https://testh5.server012.com';
 
 function api(path) {
   if (/^http/.test(path)) {

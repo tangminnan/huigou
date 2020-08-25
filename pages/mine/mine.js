@@ -1,5 +1,9 @@
 // pages/mine/mine.js
 //获取应用实例
+import {
+  getMerchantInfo
+} from '../../api/merchant';
+
 const app = getApp()
 Page({
   data: {
@@ -9,23 +13,27 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
 
-    hgUserInfo:{},
-    hgExtensionAccount:{},
+    hgUserInfo: {},
+    hgExtensionAccount: {},
 
   },
 
-  getUserxx:function(){
+  getUserxx: function () {
     wx.request({
-      method:'Get',
+      method: 'Get',
       url: 'http://182.92.118.35:8098/api/info/selectMyUser',
-      data: { id: this.data.userInfo.id},
-      header: { 'content-type': 'application/json' },
-      success:res=>{
+      data: {
+        id: this.data.userInfo.id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: res => {
         console.info(res.data);
-        if (res.data.code==0){
+        if (res.data.code == 0) {
           this.setData({
-            hgUserInfo:res.data.data.hgUserInfo,
-            hgExtensionAccount:res.data.data.hgExtensionAccount
+            hgUserInfo: res.data.data.hgUserInfo,
+            hgExtensionAccount: res.data.data.hgExtensionAccount
           })
         }
       }
@@ -81,9 +89,9 @@ Page({
       url: '/pages/promote/sign/index',
     })
   },
-  onApplyMerchant: function () {
-    const app = getApp()
-    if (!app.globalData.isMerchant) {
+  onApplyMerchant: async function () {
+
+    if (this.data.hgUserInfo.isBusiness) {
       wx.navigateTo({
         url: '/pages/merchant/merchant-apply/index',
       })
@@ -94,8 +102,7 @@ Page({
     }
   },
   onApplyPromote: function () {
-    const app = getApp()
-    if (!app.globalData.isPromote) {
+    if (this.data.hgUserInfo.isExtension) {
       wx.navigateTo({
         url: '/pages/promote/apply/index',
       })
@@ -104,10 +111,9 @@ Page({
         url: '/pages/promote/index/index',
       })
     }
-
   },
 
- onLoad: function (options) {
+  onLoad: function (options) {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -134,7 +140,7 @@ Page({
         }
       })
     }
-   this.getUserxx();
+    this.getUserxx();
   },
   getUserInfo: function (e) {
     console.log(e)
