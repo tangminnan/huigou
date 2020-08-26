@@ -1,4 +1,5 @@
 const API_PREFIX = 'https://testh5.server012.com';
+// const API_PREFIX = 'http://192.168.1.30';
 
 function api(path) {
   if (/^http/.test(path)) {
@@ -71,7 +72,7 @@ async function saveImage(filePath, userId, type, businessOrExtension) {
     filePath
   });
   console.log('fileUrl', fileUrl);
-  return api.getData('/api/business/saveHgFileByBusiness', {
+  return postData('/api/business/saveHgFileByBusiness', {
     userId,
     picture: fileUrl,
     type,
