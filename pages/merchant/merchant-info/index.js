@@ -1,6 +1,8 @@
 const requestApi = require('../../../api/request');
 const userApi = require('../../../api/user');
 const ensureAuth = require('../../../api/auth');
+const merchantApi = require('../../../api/merchant');
+
 
 Page({
   data: {
@@ -105,11 +107,28 @@ Page({
       address: `${address.provinceName}${address.cityName}${address.countyName} ${address.detailInfo} ${address.postalCode}     ${address.userName} ${address.telNumber}`,
       sex: this.data.sexList[selectedSexIndex].key
     }
-    wx.navigateTo({
-      url: '/pages/merchant/merchant-class/index',
-      success(res) {
-        res.eventChannel.emit('merchantInfo', submitData);
-      }
-    })
+    wx.showLoading({
+      title: '提交中',
+    });
+
+    try {
+      await merchantApi.applyToBeBusiness(submitData);
+      wx.hideLoading();
+      wx.showToast({
+        title: '提交成功',
+      });
+    } catch (e) {
+      console.log(e);
+      wx.hideLoading();
+      wx.showToast({
+        title: e && e.messasge || '出错了，请稍后再试',
+      });
+      return;
+    }
+    setTimeout(() => {
+      wx.navigateTo({
+        url: '/pages/merchant/merchant-class/index'
+      })
+    }, 2000);
   }
 })

@@ -1,6 +1,6 @@
 <view class="container container-white">
 	<view class="class-list">
-		<view class="class-item {{item.key == merchantInfo.classKey ? 'class-item__selected': ''}}" wx:for="{{classList}}" wx:key="name" data-key="{{item.key}}" bindtap="onSelectMerchantClass">{{item.name}}</view>
+		<view class="class-item {{item.id == classifyId ? 'class-item__selected': ''}}" wx:for="{{classList}}" wx:key="name" data-key="{{item.id}}" bindtap="onSelectMerchantClass">{{item.name}}</view>
 	</view>
 	<view class="next-btn" bindtap="onSubmitApplyInfo">确定</view>
 </view>

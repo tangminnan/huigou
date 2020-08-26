@@ -6,61 +6,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classList: [{
-      key: 0,
-      name: '服装类',
-    }, {
-      key: 1,
-      name: '选项一',
-    }, {
-      key: 2,
-      name: '选项二',
-    }, {
-      key: 3,
-      name: '选项三',
-    }, {
-      key: 4,
-      name: '选项四',
-    }, {
-      key: 5,
-      name: '选项五',
-    }, {
-      key: 6,
-      name: '选项六',
-    }, {
-      key: 7,
-      name: '选项七',
-    }, {
-      key: 8,
-      name: '选项八',
-    }],
-    merchantInfo: {
-      classKey: 0
-    }
+    classList: [],
+    classifyId: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    const channel = this.getOpenerEventChannel();
-    channel.on('merchantInfo', (info) => {
-      console.log('receive merchant info', info);
-      this.setData({
-        merchantInfo: {
-          ...this.data.merchantInfo,
-          ...info
-        }
-      })
+  onLoad: async function (options) {
+    const data = await merchantApi.searchAllClassify();
+    console.log('data', data);
+    this.setData({
+      classList: data.data,
+      classifyId: data.data[0].id
     })
   },
   onSelectMerchantClass: function (e) {
     console.log('e', e.currentTarget.dataset.key);
     this.setData({
-      merchantInfo: {
-        ...this.data.merchantInfo,
-        classKey: e.currentTarget.dataset.key
-      }
+      classifyId: e.currentTarget.dataset.key
     })
   },
   onSubmitApplyInfo: async function () {
@@ -70,7 +34,7 @@ Page({
     });
 
     try {
-      await merchantApi.applyToBeBusiness(this.data.merchantInfo);
+      await merchantApi.setMerchantClass(this.data.classifyId);
       wx.hideLoading();
       wx.showToast({
         title: '提交成功',
@@ -84,7 +48,16 @@ Page({
       return;
     }
     // 根据返回审核结果来决定跳转
-    const res = await merchantApi.getMerchantInfo();
+    let res;
+    try {
+      res = await merchantApi.getMerchantInfo();
+    } catch (e) {
+      // 返回500 还不是商家，等待商家注册走通再说
+      wx.navigateTo({
+        url: '/pages/merchant/audit-result/index?type=processing',
+      });
+      return;
+    }
     switch (res.auditState) {
       case 0:
         wx.navigateTo({

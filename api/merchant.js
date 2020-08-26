@@ -18,7 +18,18 @@ async function applyToBeBusiness(applyInfo) {
 }
 
 
+function searchAllClassify() {
+  return api.getData('/api/classify/searchAllClassify');
+}
+
+async function setMerchantClass(classifyId) {
+  const userInfo = await userApi.getOpenId();
+  return api.postData(`/api/business/classifyMerchantsMapping?userId=${userInfo.userId}&classifyIds=${classifyId}`)
+}
+
 module.exports = {
   getMerchantInfo,
-  applyToBeBusiness
+  applyToBeBusiness,
+  searchAllClassify,
+  setMerchantClass
 }
