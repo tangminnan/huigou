@@ -125,3 +125,13 @@
   background-color: #ff3b30;
   border: 1px solid #ff3b30;
 }
+
+.empty {
+  text-align: center;
+  margin-top: 165rpx;
+}
+.empty image {
+  width: 188rpx;
+  height: 186rpx;
+  margin-bottom: 30rpx;
+}

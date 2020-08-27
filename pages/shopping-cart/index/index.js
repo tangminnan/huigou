@@ -4,15 +4,41 @@ Page({
 
   /**
    * 页面的初始数据
+   * 0: {
+   *  checked: false,
+   *  skus: {
+   *      0: {
+   *        checked: false,
+   *        count: 1
+   *      }
+   *  }
+   * }
    */
   data: {
-    count: 1,
-    total: 4.2,
-    isChecked: true
+    list: [],
+    selectedList: {},
+    isAllChecked: false
   },
   onLoad: async function (options) {
     const res = await shoppingApi.getShoppingCartList();
-    console.log('res', res);
+    const list = res.data;
+    const selectedList = {};
+    list.forEach((item) => {
+      const skus = item.hgGoodsDetailEntity.hgSpecifications;
+      const skuInfo = {};
+      skus.forEach(sku => {
+        skuInfo.checked = false;
+        skuInfo.count = 1;
+      })
+      selectedList[item.hgGoodsDetailEntity.hgGoods.id] = {
+        checked: false,
+        skus: skuInfo
+      }
+    })
+    this.setData({
+      list: res.data,
+      selectedList
+    })
   },
   onClickSubmit: function (e) {
     wx.navigateTo({
@@ -46,13 +72,21 @@ Page({
       total
     })
   },
-  toggleChange: function (e) {
+  toggleMerchantChange: function (e) {
     const shouldIgnore = e.target.dataset.role === 'input' || e.target.dataset.role === 'decrease' || e.target.dataset.role === 'increase'
     if (!shouldIgnore) {
-
+      const id = e.currentTarget.dataset.id;
+      const sl = this.data.selectedList;
+      sl[id].checked = true;
       this.setData({
-        isChecked: !this.data.isChecked
+        selectedList: sl
       })
     }
+  },
+  toggleSkuChange: function (e) {
+
+  },
+  toggleAllChange: function (e) {
+
   }
 })
