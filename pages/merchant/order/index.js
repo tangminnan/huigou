@@ -49,5 +49,28 @@ Page({
   getOrderList: async function () {
     const orderList = await merchantApi.getOrderList(this.data.activeTab);
     console.log('orderList', orderList)
+    const list = [];
+    orderList.data.forEach(porder => {
+      porder.orderTables.forEach(order => {
+        list.push({
+          shopId: order.hgGoods.merchantsId,
+          pOrderId: porder.orderId,
+          orderId: order.id,
+          goodsId: order.goodsId,
+          img: order.hgGoods.hgGoodsFile.picture,
+          title: order.hgGoods.title,
+          goodsNum: order.goodsNum,
+          goodsPrices: order.goodsPrices,
+          createTime: order.createTime,
+          expressFee: order.expressFee,
+          distributionStatus: order.distributionStatus,
+          remark: order.remarks,
+        })
+      })
+    })
+
+    this.setData({
+      orderList: list
+    })
   }
 })
