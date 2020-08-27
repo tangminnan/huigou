@@ -10,17 +10,18 @@ Page({
     pinlei:[]
 
   },
-
+//商家信息
   getshangjia: function (options){
     var id = options.id
     wx.request({
-      url: 'http://182.92.118.35:8098/api/business/selectMyBusiness',
+      url: 'https://testh5.server012.com/api/business/selectMyBusiness',
       data: { id: id },
       header: { 'content-type': 'application/json' },
       success: res => {
+        //console.info(res.data);
         if (res.data.code == 0) {
           this.setData({
-            shangjia: res.data.data.business
+            shangjia: res.data.data[0]
           })
 
         }
@@ -28,14 +29,15 @@ Page({
 
     })
   },
-
+//品类
   getpinlei: function (options) {
     
       wx.request({
-        url: 'http://182.92.118.35:8098/api/label/selectLabelByUserId',
+        url: 'https://testh5.server012.com/api/label/selectLabelByUserId',
         data: { id: options.id },
         header: { 'content-type': 'application/json' },
         success: res => {
+          //console.info(res.data);
           if (res.data.code == 0) {
             this.setData({
               pinlei: res.data.data

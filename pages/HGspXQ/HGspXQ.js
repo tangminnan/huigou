@@ -1,5 +1,11 @@
+//获取应用实例
+const app = getApp()
 Page({
   data: { 
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+
     //==================数量加减
     // input默认是1  
     num: 1,  
@@ -54,8 +60,15 @@ sptupian:[],
 spguige:[],
 address:{},
 shangjia:{},
-jiage:{},
+jiage:'',
 merchantsId:0,
+
+dizhiId:0,
+dizhish:'',
+dizhiif:false,
+goodId:0,
+guigeId : 0,
+gwcnum:0,
 
 
 //=========================生成图片分享
@@ -124,37 +137,47 @@ bindManual: function(e) {
         num: num  
     });  
 }  ,
-
+//商品详情
 getspid:function(options){
   var id = options.id;
+this.setData({
+  goodId:id
+})
   wx.request({
-    url: 'http://182.92.118.35:8098/api/home/searchGoodsDetail',
+    url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
     data: { goodsId : id},
     header: { 'content-type': 'application/json'},
     success:res=>{
-      
+      //console.info(res.data);
       if(res.data.code == 0){
+        var shangjiaId = res.data.data.hgGoods.merchantsId;
+        res.data.data.hgGoods.goodsContent = res.data.data.hgGoods.goodsContent.replace(/\<img/gi, '<img style="max-width:100%;height:auto" ')
           this.setData({
             shangpin: res.data.data.hgGoods,
             sptupian: res.data.data.hgGoodsFiles,
             spguige: res.data.data.hgSpecifications,
-            jiage: res.data.data.hgSpecifications[0],
+            jiage: res.data.data.hgSpecifications.length>0?res.data.data.hgSpecifications[0].goodsPresentPrice:"",
+            guigeId:res.data.data.hgSpecifications.length>0?res.data.data.hgSpecifications[0].id:0,
             merchantsId: res.data.data.hgGoods.merchantsId,
         })
+        this.getshangjia(shangjiaId);
       }
     }
 
   })
 },
-  getshangjia: function () {
+//商家
+  getshangjia: function (shangjiaId) {
+    //console.info(shangjiaId);
     wx.request({
-      url: 'http://182.92.118.35:8098/api/business/selectMyBusiness',
-      data: { id: this.data.merchantsId },
+      url: 'https://testh5.server012.com/api/business/selectMyBusiness',
+      data: { id: shangjiaId },
       header: { 'content-type': 'application/json' },
       success: res => {
+        console.info(res.data);
         if (res.data.code == 0) {
           this.setData({
-            shangjia: res.data.data.business
+            shangjia: res.data.data[0]
           })
           
         }
@@ -165,9 +188,47 @@ getspid:function(options){
 ////========================购买底部弹出框===========
   onLoad: function (options) {
     //console.info(options);
+
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+
     this.getspid(options);
-    this.getshangjia();
+    this.getgwcnum();
+    //this.getshangjia();
   },
+  getUserInfo: function (e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  },
+
   //点击我显示底部弹出框
   clickme: function () {
     this.showModal();
@@ -218,19 +279,85 @@ getspid:function(options){
 ////========================选择套餐=======================
 //选择用途后加样式
 select_use: function(e) {
+  var gjine = e.currentTarget.dataset.jine
+  var id = e.currentTarget.dataset.id
   this.setData({
     state: e.currentTarget.dataset.key,
+    jiage:String(gjine),
+    guigeId:id,
   });
+
 },
 onReady: function() {},
+//购物车数量
+getgwcnum:function(){
+  if(this.data.userInfo.id != ''){
+    wx.request({
+      url: 'https://testh5.server012.com/api/cart/getCartCounts',
+      data:{
+        userId:this.data.userInfo.id,
+      },
+      header:{'content-type': 'application/json'},
+      success:res=>{
+        //console.info(res.data);
+        if(res.data.code == 0){
+          this.setData({
+            gwcnum:res.data.data
+          })
+        }
+      }
+    })
+  }
+},
 
 //加入成功提示
 showok:function() {
-  wx.showToast({
-      title: '已加入购物车',
-      icon: 'success',
-      duration: 2000
+  wx.getSetting({
+    success: function (res) {
+      if (!res.authSetting['scope.userInfo']) {
+        //未登录,跳转到登录页
+        wx.redirectTo({
+          url: '/pages/login/index',
+        })
+      }
+    }
   })
+  var businessId = this.data.merchantsId;
+  var userId = this.data.userInfo.id;
+  var goodsId = this.data.goodId;
+  var specificationId = this.data.guigeId;
+  var count = this.data.num;
+  console.info(businessId+"=="+userId+"=="+goodsId+"=="+specificationId+"=="+count)
+  wx.request({
+    method:"POST",
+    url: 'https://testh5.server012.com/api/cart/addMyCart',
+    data:{
+      businessId:businessId,
+      userId:userId,
+      goodsId:goodsId,
+      specificationId:specificationId,
+      count:count
+    },
+    header:{"Content-Type": "application/x-www-form-urlencoded"},
+    success:res=>{
+      console.info(res.data);
+      if(res.data.code == 0){
+        wx.showToast({
+          title: '已加入购物车',
+          icon: 'none',
+          duration: 2000
+        })
+        this.getgwcnum();
+      }else{
+        wx.showToast({
+          title: '加入失败，请稍后重试',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    }
+  })
+
 },
 
 //========================分享弹框=============
@@ -261,12 +388,36 @@ model1: function () {//弹框消失
 
 
 //跳转
-  shouhuoDZ: function () { wx.navigateTo({ url: '../shouhuodizhi/shouhuodizhi',})},
+  shouhuoDZ: function () { 
+    wx.getSetting({
+      success: function (res) {
+        if (!res.authSetting['scope.userInfo']) {
+          //未登录,跳转到登录页
+          wx.redirectTo({
+            url: '/pages/login/index',
+          })
+        }
+      }
+    })
+    wx.navigateTo({ 
+      url: '../shouhuodizhi/shouhuodizhi',
+    })
+  },
   sjXQ: function () { wx.navigateTo({ url: '../HGshangjiaXQ/HGshangjiaXQ?id=' + this.data.shangpin.merchantsId})},
   dianpu:  function  ()  {  wx.navigateTo({ url:  '../HGshangjiaZY/HGshangjiaZY?id=' + this.data.shangpin.merchantsId,})},
-onGoToShoppingCart: function() {
-  wx.switchTab({
-    url: '/pages/shopping-cart/index/index',
-  })
-}
+  onGoToShoppingCart: function() {
+    wx.getSetting({
+      success: function (res) {
+        if (!res.authSetting['scope.userInfo']) {
+          //未登录,跳转到登录页
+          wx.redirectTo({
+            url: '/pages/login/index',
+          })
+        }
+      }
+    })
+    wx.switchTab({
+      url: '/pages/shopping-cart/index/index',
+    })
+  }
 })

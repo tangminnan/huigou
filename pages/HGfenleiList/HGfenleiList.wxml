@@ -1,15 +1,15 @@
 <view class="nav_right_items">
-    <view class="box" wx:for-items="{{changpin}}" bindtap='spxqing' data-id='{{item.id}}'>
-        <image class="box_titpic" src="/images/PH1.png"></image>
+    <view class="box" wx:for-items="{{changpin}}" bindtap='spxqing' data-id='{{item.hgGoods.id}}'>
+        <image class="box_titpic" src="{{item.hgGoodsFiles[0].picture}}"></image>
         <view class="box_txt">
-            <view class="t1">{{item.title}}</view>
+            <view class="t1">{{item.hgGoods.title}}</view>
             <view class="t2">
-                <text class="t2_1">¥420</text>
-                <text class="t2_2">￥560</text>
+                <text class="t2_1">¥{{item.hgSpecifications[0].goodsPresentPrice}}</text>
+                <text class="t2_2">￥{{item.hgSpecifications[0].goodsOriginalPrice}}</text>
             </view>
             <view class="t3">
                 <text class="t3_1">商家名称</text>
-                <view class="t3_2" bindtap='sjZY' data-id='{{item.merchantsId}}'>
+                <view class="t3_2" bindtap='sjZY' data-id='{{item.hgGoods.merchantsId}}'>
                     <image src="/images/gengduo.png"></image>
                     <view class="arr"></view>
                 </view>
@@ -72,3 +72,6 @@
     </view> -->
 
 </view>
+
+<view class="loading" style="text-align:center;" hidden="{{!searchLoading}}">正在载入更多...</view>  
+<view class="loading" style="text-align:center;" hidden="{{!searchLoadingComplete}}">已加载全部</view>

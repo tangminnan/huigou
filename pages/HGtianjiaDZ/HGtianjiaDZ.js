@@ -70,7 +70,7 @@ Page({
       isDefault: choose
     })
   },
-
+//保存
   baocun:function(e){
     let that = this
     let val = e.detail.value
@@ -112,19 +112,20 @@ Page({
     //console.info(this.data.region);
     //console.info(this.data.detailAddress);
     //console.info(this.data.isDefault);
+    var region1 = String(this.data.region[0]+","+this.data.region[1]+","+this.data.region[2])
     wx.request({
       method: 'POST',
-      url: 'http://182.92.118.35:8098/api/address/addAddress',
+      url: 'https://testh5.server012.com/api/address/addAddress',
       data: { 
         userId: this.data.userInfo.id,
-        recipient: JSON.parse(this.data.recipient) ,
+        recipient: this.data.recipient ,
         phone: this.data.phone,
-        region: this.data.region,
+        region: region1,
         detailAddress: this.data.detailAddress,
         isDefault: this.data.isDefault
       },
       header: {
-        'content-type': 'application/json' // 默认值
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       success: (res) => {
         //console.info(res.data);
@@ -134,9 +135,15 @@ Page({
             icon: 'none',
             duration: 2000
           })
-          wx.navigateTo({
-            url: '../HGshouhuoDZ/HGshouhuoDZ'
+          var pages = getCurrentPages();
+          var beforePage = pages[pages.length - 2];
+          beforePage.getUserAddress();
+          wx.navigateBack({
+            delta: 1,
           })
+          // wx.navigateTo({
+          //   url: '../HGshouhuoDZ/HGshouhuoDZ'
+          // })
         }
 
       }

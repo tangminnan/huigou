@@ -1,4 +1,5 @@
-
+//获取应用实例
+const app = getApp()
 Page({
   data: {
   /* 
@@ -38,14 +39,18 @@ Page({
     shequ: '',
     shequid:'',
     checkboxText: [],
-  },
 
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+  },
+//全部标签
   biaoqian: function (e){
     wx.request({
       method: 'GET',
-      url: 'http://182.92.118.35:8098/api/label/searchAllLabel',
+      url: 'https://testh5.server012.com/api/label/searchAllLabel',
       header: {
-        'content-type': 'application/json' // 默认值
+        "Content-Type": "application/x-www-form-urlencoded" // 默认值
       },
       success: (res) => {
         //console.info(res.data);
@@ -68,7 +73,45 @@ Page({
       shequ: options.shequ,
       shequid: options.shequid,
     })
+
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse){
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+
   },
+
+  getUserInfo: function(e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  },
+
   checkbox: function (e) {
   var index = e.currentTarget.dataset.index;//获取当前点击的下标
   var checkboxArr = this.data.checkboxArr;//选项集合
@@ -83,17 +126,18 @@ Page({
    checkValue: checkValue
   });
   },
-
+//保存
   savebiaoqian:function(){
+    
     wx.request({
       method: 'POST',
-      url: 'http://182.92.118.35:8098/api/info/updateHgUserLabel',
+      url: 'https://testh5.server012.com/api/info/updateHgUserLabel',
       data: {
         id: this.data.userInfo.id,
-        labels: JSON.stringify(this.data.checkValue)
+        labels: this.data.checkValue.join(",")
       },
       header: {
-        'content-type': 'application/json' // 默认值
+        "Content-Type": "application/x-www-form-urlencoded" // 默认值
       },
       success: (res) => {
         //console.info(res.data);
@@ -128,9 +172,9 @@ Page({
       checkboxText: checkboxText,
     });
     this.savebiaoqian();
-    wx.navigateTo({
-      url: '../HGgerenXX/HGgerenXX?checkValue=' + JSON.stringify(this.data.checkValue) + '&checkboxText=' + JSON.stringify(this.data.checkboxText) + '&userName=' + this.data.userName + '&phone=' + this.data.phone + '&sex=' + this.data.sex + '&shequ=' + this.data.shequ + '&shequid=' + this.data.shequid,
-    })
+     wx.navigateTo({
+       url: '../HGgerenXX/HGgerenXX?checkValue=' + JSON.stringify(this.data.checkValue) + '&checkboxText=' + JSON.stringify(this.data.checkboxText) + '&userName=' + this.data.userName + '&phone=' + this.data.phone + '&sex=' + this.data.sex + '&shequ=' + this.data.shequ + '&shequid=' + this.data.shequid,
+     })
   },
   chongzhi: function (e) {// 重置
     this.biaoqian();

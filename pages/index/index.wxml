@@ -30,7 +30,7 @@
     <image src="/images/huiG4.png" mode='aspectFit'></image>
     <text>护肤</text>
   </view> -->
-  <view class='iconImage' wx:for-items='{{fenleiList}}' data-id='{{item.id}}' bindtap='hufu'>
+  <view class='iconImage' wx:for-items='{{fenleiList}}' data-id='{{item.id}}' data-flname="{{item.name}}" bindtap='hufu'>
     <image src="{{item.picture}}" mode='aspectFit'></image>
     <text>{{item.name}}</text>
   </view>
@@ -44,17 +44,17 @@
 <view class="topPH bg-W bdr-15">
     <view class="Phtxt">TOP排行 <text>多.快.好.省</text></view>
     <view class="boxPH">
-        <view class="rank" wx:for-items="{{shangpintop}}" data-id='{{item.id}}' bindtap='shangpinxq' >
-            <image src="/images/PH1.png" mode='aspectFit'></image>
-            <view class="txt1">{{item.title}}</view>
-            <view class="txt2">￥4.20 <text>￥4.20</text></view>
+        <view class="rank" wx:for-items="{{shangpintop}}" data-id='{{item.hgGoods.id}}' bindtap='shangpinxq' >
+            <image src="{{item.hgGoodsFiles[0].picture}}" mode='aspectFit'></image>
+            <view class="txt1">{{item.hgGoods.title}}</view>
+            <view class="txt2">￥{{item.hgSpecifications[0].goodsPresentPrice}} <text>￥{{item.hgSpecifications[0].goodsOriginalPrice}}</text></view>
         </view>
 
-        <view class="rank" data-id='1' bindtap='shangpinxq'>
+        <!-- <view class="rank" data-id='2' bindtap='shangpinxq'>
             <image src="/images/PH2.png" mode='aspectFit'></image>
             <view class="txt1">维他奶 茶饮料 250ml*24盒柠檬茶</view>
             <view class="txt2">￥85.00 <text>￥4.20</text></view>
-        </view>
+        </view> -->
 
     </view>
 </view>
@@ -63,10 +63,10 @@
 <view class="tuijian">
     <view class="TJtit">商品推荐</view>
     <view class="boxPH">
-        <view class="rank" wx:for-items="{{shangpintuijian}}" data-id='{{item.id}}' bindtap='shangpinxq' >
-            <image src="/images/PH3.png" mode='aspectFit'></image>
-            <view class="txt1">{{item.title}}</view>
-            <view class="txt2">￥4.20 <text>￥4.20</text></view>
+        <view class="rank" wx:for-items="{{shangpintuijian}}" data-id='{{item.hgGoods.id}}' bindtap='shangpinxq' >
+            <image src="{{item.hgGoodsFiles[0].picture}}" mode='aspectFit'></image>
+            <view class="txt1">{{item.hgGoods.title}}</view>
+            <view class="txt2">￥{{item.hgSpecifications[0].goodsPresentPrice}}  <text>￥{{item.hgSpecifications[0].goodsOriginalPrice}}</text></view>
         </view>
 
         <!-- <view class="rank" bindtap='more'>
@@ -100,7 +100,9 @@
         </view> -->
 
     </view>
+    <view class="loading" style="text-align:center;" hidden="{{!searchLoadingComplete}}">已加载全部</view>
 </view>
 
+<view class="loading" style="text-align:center;" hidden="{{!searchLoading}}">正在载入更多...</view>  
 
 

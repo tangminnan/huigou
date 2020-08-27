@@ -7,21 +7,36 @@ Page({
   data: {
     changpin:[],
 
-  },
+    pageNo: 0, 
+    pageSize: 10, 
+    searchLoading: false, 
+    searchLoadingComplete: false ,
 
+  },
+//获取分类
   getfenleiList: function (options){
    var id =  options.id;
     wx.request({
-      url: 'http://182.92.118.35:8098/api/classify/searchAllGoodsByClassifyId',
-      data: { id: id },
+      url: 'https://testh5.server012.com/api/classify/searchAllGoodsByClassifyId',
+      data: { 
+        id: id ,
+        pageNum: this.data.pageNo,
+        pageSize:this.data.pageSize
+      },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        console.info(res.data);
+        //console.info(res.data);
         if (res.data.code == 0) {
+          if(res.data.data.list.length<this.data.pageSize){
+            this.setData({
+              searchLoading: false,
+              searchLoadingComplete :true
+            })
+          }
           this.setData({
-            changpin: res.data.data
+            changpin: this.data.changpin.concat(res.data.data.list)
           })
         }
       }
@@ -34,6 +49,13 @@ Page({
    */
   onLoad: function (options) {
     this.getfenleiList(options);
+    
+
+    wx.setNavigationBarTitle({
+      title: options.flname
+    })
+
+
   },
 
   /**
@@ -74,8 +96,14 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
+  onReachBottom: function() {
+    if (!this.data.searchLoadingComplete){
+      var currentPageNo = this.data.pageNo;
+      this.setData({
+        pageNo: currentPageNo + 1,
+      })
+      this.getshangpin();
+    }
   },
 
   /**
@@ -87,15 +115,15 @@ Page({
 
 //跳转
 spxqing:  function  (e)  {
-    let id = e.target.dataset.id;
+    let id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url:  '../HGspXQ/HGspXQ?id=' + id,
     })
   },
   sjZY:  function  (e)  {
-    let id = e.target.dataset.id;
+    let id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url:  '../HGshangjiaZY/HGshangjiaZY?id' + id,
+      url:  '../HGshangjiaZY/HGshangjiaZY?id=' + id,
     })
   },
 

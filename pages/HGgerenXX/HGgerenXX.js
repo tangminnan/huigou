@@ -100,6 +100,7 @@ Page({
 
   getshuju: function (options){
     //console.info(options);
+    if(!this.objectIsNullOrNot(options)){
     if (options.checkValue == "undefined"){
       var checkV = [];
     }else{
@@ -129,12 +130,13 @@ Page({
         shequ: options.shequ,
         shequid: options.shequid,
       })
+    }
   },
-
+//获取信息
 getUserxx:function(){
   wx.request({
     method: 'GET',
-    url: 'http://182.92.118.35:8098/api/info/selectHgUserInfoByUserId',
+    url: 'https://testh5.server012.com/api/info/selectHgUserInfoByUserId',
     data: {
       id: this.data.userInfo.id,
     },
@@ -163,6 +165,7 @@ getUserxx:function(){
           community = res.data.data.hgCommunity.community
         }
         this.setData({
+          phonetrue: true,
           checkValue: res.data.data.userInfo.labelId,
           userName: res.data.data.userInfo.userName,
           phone: res.data.data.userInfo.phone,
@@ -257,7 +260,7 @@ getUserxx:function(){
 
     wx.request({
       method: 'POST',
-      url: 'http://182.92.118.35:8098/api/info/updateHgUserInfo',
+      url: 'https://testh5.server012.com/api/info/updateHgUserInfo',
       data: { 
         id: this.data.userInfo.id ,
         name: this.data.userName,
@@ -265,7 +268,7 @@ getUserxx:function(){
         phone: this.data.phone
       },
       header: {
-        'content-type': 'application/json' // 默认值
+        "Content-Type": "application/x-www-form-urlencoded" // 默认值
       },
       success: (res) => {
         //console.info(res.data);
@@ -274,6 +277,9 @@ getUserxx:function(){
             title: '操作成功',
             icon: 'none',
             duration: 2000
+          })
+          wx.switchTab({
+            url: '../mine/mine'
           })
         }
 
@@ -314,7 +320,9 @@ getUserxx:function(){
     region: e.detail.value
   })
 },
-
+objectIsNullOrNot:function(param){
+  return JSON.stringify(param)==="{}"?true:false;
+},
 //跳转
 biaoqian: function () { 
   wx.navigateTo({

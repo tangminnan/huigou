@@ -11,7 +11,7 @@
 <view class="container">
     <!-- 左侧栏 -->
     <view class='nav_left'>
-        <view wx:for-items="{{fenlei}}" wx:key="item.id" class="nav_left_items {{curNav == index ? 'active' : ''}}"
+        <view wx:for-items="{{fenlei}}" class="nav_left_items {{curNav == index ? 'active' : ''}}"
         bindtap="switchRightTab" data-id="{{index}}" data-fenid="{{item.id}}">
         {{item.name}}
         </view>
@@ -44,20 +44,20 @@
     <!-- 右侧栏 -->
     <view class="nav_right">
         <view  wx:for="{{fenlei}}" wx:if="{{curNav==index}}">
-            <view class="nav_right_items" wx:for-items="{{changpin}}" wx:key="item.id">
+            <view class="nav_right_items" wx:for-items="{{changpin}}" >
                 <!-- <image class="toppic" src="/images/boshilun.png"></image> -->
-                <view class="box">
-                    <view bindtap='spxqing' data-id='{{item.id}}'>
-                        <image class="box_titpic" src="/images/PH5.png"></image>
+                <view class="box"  >
+                    <view data-id='{{item.hgGoods.id}}' bindtap='spxqing'>
+                        <image class="box_titpic" src="{{item.hgGoodsFiles[0].picture}}"></image>
                         <view class="box_txt">
-                            <view class="t1">{{item.title}}</view>
-                            <view class="t2">
-                                <text class="t1">¥420</text> 
-                                <text class="t2">￥560</text>
+                            <view class="t1">{{item.hgGoods.title}}</view>
+                            <view class="t1">
+                                <text class="t2">¥{{item.hgSpecifications[0].goodsPresentPrice}}</text> 
+                                <text class="t1" style="font-size: 26rpx;color: #999;text-decoration: line-through;">￥{{item.hgSpecifications[0].goodsOriginalPrice}}</text>
                             </view>
                         </view>
                     </view>
-                    <view class="t2_R" bindtap='sjZY' data-id='{{item.merchantsId}}'>
+                    <view class="t2_R" bindtap='sjZY' data-id='{{item.hgGoods.merchantsId}}'>
                         <image src="/images/gengduo.png"></image>
                         <view class="arr"></view>
                     </view>
@@ -211,3 +211,6 @@
 
     </view>
 </view>
+
+<!-- <view class="loading" style="text-align:center;" hidden="{{!searchLoading}}">正在载入更多...</view>  
+<view class="loading" style="text-align:center;" hidden="{{!searchLoadingComplete}}">已加载全部</view> -->

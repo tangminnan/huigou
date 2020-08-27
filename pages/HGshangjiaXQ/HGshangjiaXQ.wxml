@@ -6,7 +6,7 @@
 <view class="Plei">
     <view class="tit">商家品类</view>
     <view class="Pleies">
-        <text wx:for-item="{{pinlei.labelName}}"></text>
+        <text wx:for-items="{{pinlei}}">{{item.labelName}}</text>
         <!-- <text>酸奶</text>
         <text>儿童成长奶</text>
         <text>纯牛奶</text>

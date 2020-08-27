@@ -7,7 +7,7 @@
 <view class="wodelist bg-W">
     <view class="Hlist">
         <image src="/images/tuihuo.png" mode='aspectFit'></image>
-        <view class="txt">
+        <view class="txt" bindtap="huokuan" data-type="1">
             <text class="t1">退货退款</text>
             <text class="t2">已收到货，需要退换收到的货物</text>
         </view>
@@ -15,7 +15,7 @@
     </view>
     <view class="Hlist">
         <image src="/images/tuihuo.png" mode='aspectFit'></image>
-        <view class="txt">
+        <view class="txt" bindtap="huokuan" data-type="2">
             <text class="t1">换货</text>
             <text class="t2">已收到货，需要更换收到的货物</text>
         </view>
@@ -23,7 +23,7 @@
     </view>
     <view class="Hlist">
         <image src="/images/tuihuo.png" mode='aspectFit'></image>
-        <view class="txt">
+        <view class="txt" bindtap="huokuan" data-type="3">
             <text class="t1">退款</text>
             <text class="t2">未收到货，需要退款</text>
         </view>

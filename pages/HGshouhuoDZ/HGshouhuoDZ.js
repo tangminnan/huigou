@@ -12,11 +12,11 @@ Page({
     addressList:[],
   },
 
-
+//地址列表
   getUserAddress:function(){
     wx.request({
       method: 'GET',
-      url: 'http://182.92.118.35:8098/api/address/selectHgAddressByUserId',
+      url: 'https://testh5.server012.com/api/address/selectHgAddressByUserId',
       data: { userId: this.data.userInfo.id},
       header: {
         'content-type': 'application/json' // 默认值

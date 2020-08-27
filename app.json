@@ -39,7 +39,8 @@
     "pages/merchant/merchant-agreement/index",
     "pages/merchant/merchant-info/index",
     "pages/merchant/merchant-apply/index",
-    "pages/merchant/index/index"
+    "pages/merchant/index/index",
+    "pages/login/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

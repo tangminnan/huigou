@@ -9,7 +9,7 @@
   <!--待入账-->
   <swiper-item>
         <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
-            <view class="itemBox" wx:for-items="{{dairuzd}}">
+            <view class="itemBox" wx:for-items="{{dairuzd}}" wx:key="{{item.id}}">
                 <view class="fl left">
                     <text class="t1">{{item.remarks}}</text>
                     <text class="t2">{{item.createTime}}</text>
@@ -48,7 +48,7 @@
     <!--提现明细-->
     <swiper-item>
         <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
-            <view class="itemBox" wx:for-items="{{tixianmx}}">
+            <view class="itemBox" wx:for-items="{{tixianmx}}" wx:key="{{item.id}}">
                 <view class="fl left">
                     <text class="t1">{{item.remarks}}</text>
                     <text class="t2">{{item.createTime}}</text>

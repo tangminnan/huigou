@@ -13,11 +13,12 @@ Page({
     hgExtensionAccount:{},
 
   },
-
+//获取用户信息
   getUserxx:function(){
+    //console.info(this.data.userInfo.id)
     wx.request({
       method:'Get',
-      url: 'http://182.92.118.35:8098/api/info/selectMyUser',
+      url: 'https://testh5.server012.com/api/info/selectMyUser',
       data: { id: this.data.userInfo.id},
       header: { 'content-type': 'application/json' },
       success:res=>{
@@ -108,6 +109,17 @@ Page({
   },
 
  onLoad: function (options) {
+  wx.getSetting({
+    success: function (res) {
+      if (!res.authSetting['scope.userInfo']) {
+        //未登录,跳转到登录页
+        wx.redirectTo({
+          url: '/pages/login/index',
+        })
+      }
+    }
+  })
+  
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

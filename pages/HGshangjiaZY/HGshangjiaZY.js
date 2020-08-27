@@ -8,19 +8,27 @@ Page({
       shangjia:[],
       shangpin:{},
   },
-
+//商家
   getshangjia: function (options){
     var id = options.id;
     wx.request({
-      url: 'http://182.92.118.35:8098/api/business/selectMyBusiness',
+      url: 'https://testh5.server012.com/api/business/selectMyBusiness',
       data: { id: id },
       header: { 'content-type': 'application/json' },
       success: res => {
+        console.info(res.data);
         if (res.data.code == 0) {
           this.setData({
-            shangjia: res.data.data.business,
-            shangpin: res.data.data.goods
+            shangjia: res.data.data[0],
+            shangpin: res.data.data[1]
           })
+        }else{
+          wx.showToast({
+            title: '商家不存在',
+            icon: 'none',
+            duration: 3000
+          })
+          
         }
       }
     })
@@ -82,6 +90,16 @@ Page({
 
   },
   //跳转
-  sjxiangqing: function () { wx.navigateTo({url: '../HGshangjiaXQ/HGshangjiaXQ',})},
-  spXQ: function () { wx.navigateTo({url: '../HGspXQ/HGspXQ',})},
+  sjxiangqing: function (e) { 
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../HGshangjiaXQ/HGshangjiaXQ?id='+id,
+    })
+  },
+  spXQ: function (e) { 
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../HGspXQ/HGspXQ?id='+id,
+    })
+  },
 })
