@@ -46,7 +46,7 @@
 				<text class="title">{{item.title}}</text>
 				<text class="price">¥{{item.price}}</text>
 			</view>
-			<view class="detail-btn" data-type="all" bindtap="onClickOrder">
+			<view class="detail-btn" data-type="all" data-goodsId="{{item.id}}" bindtap="onClickOrder">
 				<text class="iconfont icon-hgsearch"></text>
 				<text>查看订单</text>
 			</view>

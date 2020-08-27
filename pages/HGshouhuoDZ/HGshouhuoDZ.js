@@ -17,7 +17,7 @@ Page({
     wx.request({
       method: 'GET',
       url: 'https://testh5.server012.com/api/address/selectHgAddressByUserId',
-      data: { userId: this.data.userInfo.id},
+      data: { userId: this.data.userInfo.id || 45},
       header: {
         'content-type': 'application/json' // 默认值
       },

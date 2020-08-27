@@ -12,21 +12,19 @@
       <text class="flex-spread font-34">支付方式</text>
       <text class="font-30"><text class="iconfont icon-hgweixin color-green mg-r-6"></text>微信支付</text>
     </view>
-    <view class="panel panel-stack merchant-panel">
-      <view class="title font-28 font-bold">商家名称</view>
-      <view class="product-item flex-hbox cross-center">
-        <image class="product-image" src="/images/PH1.png"></image>
+    <view class="panel panel-stack merchant-panel" wx:for="{{shoppingList}}" wx:key="{{item.shopId}}">
+      <view class="title font-28 font-bold">{{item.shopName}}</view>
+      <view class="product-item flex-hbox cross-center" wx:for="{{item.skuList}}" wx:for-item="sku"
+        wx:key="{{sku.skuId}}">
+        <image class=" product-image" src="{{sku.img}}">
+        </image>
         <view class="product-info flex-vbox flex-spread">
           <view class="flex-hbox flex-spread">
-            <text class="flex-spread text-ellipis-2 font-30">维他奶 茶饮料 250ml*24盒柠檬茶</text>
+            <text class="flex-spread text-ellipis-2 font-30">{{sku.title}}</text>
           </view>
           <view class="flex-hbox">
-            <text class="price font-36 font-bold flex-spread">¥4.20</text>
-            <view class="number-plus flex-hbox cross-center">
-              <text class="btn" bindtap="decrease">-</text>
-              <input class="input" value="{{count}}" type="number" bindinput="onCountChange"></input>
-              <text class="btn" bindtap="increase">+</text>
-            </view>
+            <text class="price font-36 font-bold flex-spread">¥{{sku.price}}</text>
+            <view class="flex-hbox">x {{sku.count}}</view>
           </view>
         </view>
       </view>

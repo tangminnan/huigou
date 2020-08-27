@@ -4,7 +4,7 @@
 }
 
 .scoll-list {
-  height: 100vh;
+  flex: 1;
   overflow: hidden;
   padding-bottom: 150rpx;
 }

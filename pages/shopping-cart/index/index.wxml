@@ -1,31 +1,33 @@
-<view wx:if="{{list && list.length}}" class="container">
+<view wx:if="{{shoppingList && shoppingList.length}}" class="container">
   <scroll-view class="scoll-list">
-    <view wx:for="{{list}}" wx:key="{{item.hgGoodsDetailEntity.hgGoods.id}}" class="merchant-panel">
-      <view class="merchant-name font-30 font-bold" data-id="{{item.hgGoodsDetailEntity.hgGoods.id}}" bindtap="toggleMerchantChange">
-        <view class="hg-checkbox {{selectedList[item.hgGoodsDetailEntity.hgGoods.id].checked ? 'hg-checkbox__checked' : ''}}">
+    <view wx:for="{{shoppingList}}" wx:key="{{item.shopId}}" class="merchant-panel">
+      <view class="merchant-name font-30 font-bold" data-id="{{item.shopId}}" bindtap="toggleMerchantChange">
+        <view class="hg-checkbox {{item.checked ? 'hg-checkbox__checked' : ''}}">
           <mp-icon icon="done" size="14" color="#fff" />
-        </view>{{item.hgUserInfo.shopName}}
+        </view>{{item.shopName}}
       </view>
       <view class="panel panel-stack product-list">
-        <view wx:for="{{item.hgGoodsDetailEntity.hgSpecifications}}" wx:for-index="skuIdx" wx:for-item="sku"
-          wx:key="{{sku.id}}" data-index="{{skuIdx}}" class="product-item flex-hbox cross-center"
+        <view wx:for="{{item.skuList}}" wx:for-index="skuIdx" wx:for-item="sku" wx:key="{{sku.skuId}}"
+          data-shop-id="{{item.shopId}}" data-sku-id="{{sku.skuId}}" class="product-item flex-hbox cross-center"
           bindtap="toggleSkuChange">
           <view class="hg-checkbox {{sku.checked ? 'hg-checkbox__checked' : ''}}">
             <mp-icon icon="done" size="14" color="#fff" />
           </view>
-          <image class="product-image" src="{{item.hgGoodsDetailEntity.hgGoodsFiles[0].picture}}"></image>
+          <image class="product-image" src="{{sku.img}}"></image>
           <view class="product-info flex-vbox flex-spread">
             <view class="flex-hbox flex-spread">
-              <text class="flex-spread text-ellipis-2 font-30">{{sku.name}}</text>
+              <text class="flex-spread text-ellipis-2 font-30">{{sku.title}}</text>
               <text class="iconfont icon-hgshanchu color-888"></text>
             </view>
             <view class="flex-hbox">
-              <text class="price font-36 font-bold flex-spread">{{sku.goodsPresentPrice}}</text>
+              <text class="price font-36 font-bold flex-spread">{{sku.price}}</text>
               <view class="number-plus flex-hbox cross-center">
-                <text data-role="decrease" class="btn" data-index="{{skuIdx}}" bindtap="decrease">-</text>
-                <input data-role="input" bindinput="onCountChange" class="input" value="{{sku.count}}"
-                  type="number"></input>
-                <text data-role="increase" class="btn" data-index="{{skuIdx}}" bindtap="increase">+</text>
+                <text data-role="decrease" class="btn" data-shop-id="{{item.shopId}}" data-sku-id="{{sku.skuId}}"
+                  bindtap="decrease">-</text>
+                <input data-role="input" data-shop-id="{{item.shopId}}" data-sku-id="{{sku.skuId}}"
+                  bindinput="onCountChange" class="input" value="{{sku.count}}" type="number"></input>
+                <text data-role="increase" class="btn" data-shop-id="{{item.shopId}}" data-sku-id="{{sku.skuId}}"
+                  bindtap="increase">+</text>
               </view>
             </view>
           </view>

@@ -22,8 +22,9 @@ Page({
   },
   onClickOrder: function (e) {
     const type = e.currentTarget.dataset.type;
+    const goodsId = e.currentTarget.dataset.goodsId;
     wx.navigateTo({
-      url: `/pages/merchant/order/index?type=${type}`,
+      url: `/pages/merchant/order/index?type=${type}&goodsId=${goodsId||''}`,
     })
   }
 })
