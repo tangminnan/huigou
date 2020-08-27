@@ -1,5 +1,5 @@
 const API_PREFIX = 'https://testh5.server012.com';
-// const API_PREFIX = 'http://192.168.1.30';
+// const API_PREFIX = 'http://111.197.17.193:8098';
 
 function api(path) {
   if (/^http/.test(path)) {
@@ -25,11 +25,13 @@ async function request(url, params, options) {
           statusCode,
           data
         } = res;
-        if (isSuccess(statusCode) && data && data.code === 0) {
-          return resolve(data);
+        const hasOwnCode = data && Object.prototype.hasOwnProperty('code') && !isNaN(code);
+        if (isSuccess(statusCode)) {
+          if ((hasOwnCode && data.code === 0) || !hasOwnCode) {
+            return resolve(data);
+          }
         }
         reject(res);
-
       },
       fail(error) {
         reject(error);

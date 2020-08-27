@@ -88,7 +88,7 @@ Page({
   },
   onApplyMerchant: async function () {
 
-    if (this.data.hgUserInfo.isBusiness) {
+    if (this.data.hgUserInfo.isBusiness !== 0) {
       wx.navigateTo({
         url: '/pages/merchant/merchant-apply/index',
       })
@@ -99,7 +99,7 @@ Page({
     }
   },
   onApplyPromote: function () {
-    if (this.data.hgUserInfo.isExtension) {
+    if (this.data.hgUserInfo.isExtension !== 0) {
       wx.navigateTo({
         url: '/pages/promote/apply/index',
       })
