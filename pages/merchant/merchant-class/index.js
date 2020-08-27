@@ -48,17 +48,14 @@ Page({
       return;
     }
     // 根据返回审核结果来决定跳转
-    let res;
+    let merchantApplyStatus;
     try {
-      res = await merchantApi.getMerchantInfo();
+      const data = await merchantApi.queryApplyStatus();
+      merchantApplyStatus = data.data;
     } catch (e) {
-      // 返回500 还不是商家，等待商家注册走通再说
-      wx.navigateTo({
-        url: '/pages/merchant/audit-result/index?type=processing',
-      });
-      return;
+      merchantApplyStatus = -1;
     }
-    switch (res.auditState) {
+    switch (merchantApplyStatus) {
       case 0:
         wx.navigateTo({
           url: '/pages/merchant/audit-result/index?type=fail',

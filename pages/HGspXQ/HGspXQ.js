@@ -295,7 +295,7 @@ getgwcnum:function(){
     wx.request({
       url: 'https://testh5.server012.com/api/cart/getCartCounts',
       data:{
-        userId:this.data.userInfo.id,
+        userId:this.data.userInfo.id || 45,
       },
       header:{'content-type': 'application/json'},
       success:res=>{
@@ -323,7 +323,7 @@ showok:function() {
     }
   })
   var businessId = this.data.merchantsId;
-  var userId = this.data.userInfo.id;
+  var userId = this.data.userInfo.id || 45;
   var goodsId = this.data.goodId;
   var specificationId = this.data.guigeId;
   var count = this.data.num;

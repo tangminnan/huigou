@@ -11,8 +11,8 @@ async function getMerchantInfo() {
 
 async function applyToBeBusiness(applyInfo) {
   const info = await userApi.getOpenId();
-  return api.postData('/api/business/UpdateUserInfoByBusiness', {
-    userId: info.userId,
+  return api.postJson('/api/business/UpdateUserInfoByBusiness', {
+    id: info.userId,
     ...applyInfo,
   })
 }
@@ -26,10 +26,16 @@ async function setMerchantClass(classifyId) {
   const userInfo = await userApi.getOpenId();
   return api.postData(`/api/business/classifyMerchantsMapping?userId=${userInfo.userId}&classifyIds=${classifyId}`)
 }
+// 0是未通过 1是审核中 2是审核通过
+async function queryApplyStatus() {
+  const userInfo = await userApi.getOpenId();
+  return api.getData(`/api/business/selectBusinessStatus?id=${userInfo.userId}`);
+}
 
 module.exports = {
   getMerchantInfo,
   applyToBeBusiness,
   searchAllClassify,
-  setMerchantClass
+  setMerchantClass,
+  queryApplyStatus
 }

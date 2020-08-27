@@ -6,31 +6,42 @@ App({
   },
   globalData: {
     openid: '',
-    userInfo: null
+    openId: '',
+    sessionKey: '',
+    userInfo: null,
+    user: null
   },
   getUserInfo: async function () {
-    if (this.globalData.userInfo) {
-      return Promise.resolve(this.globalData.userInfo);
-    }
     const app = this;
+    if (app.globalData.openid) {
+      return Promise.resolve({
+        openid: app.globalData.openid,
+        openId: app.globalData.openid,
+        sessionKey: app.globalData.sessionKey,
+        user: app.globalData.user
+      });
+    }
     return new Promise((resolve, reject) => {
       wx.login({
         success: async function (res) {
           const data = await api.getData('/api/info/saveOpenId', {
             code: res.code
           })
-          const info = await api.getData('/api/login/getOpenId', {
-            code: res.code
-          });
           app.globalData.openid = data.openId;
-          app.globalData.userInfo = info;
-          app.globalData.userInfo.openId = data.openId
-          resolve(app.globalData.userInfo);
+          app.globalData.openId = data.openId;
+          app.globalData.sessionKey = data.sessionKey;
+          app.globalData.user = data.user;
+          resolve({
+            openid: app.globalData.openid,
+            openId: app.globalData.openid,
+            sessionKey: app.globalData.sessionKey,
+            user: app.globalData.user
+          })
         },
         fail(e) {
           reject(e);
         }
       })
     })
-  }
+  },
 })

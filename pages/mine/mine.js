@@ -1,6 +1,7 @@
 // pages/mine/mine.js
 //获取应用实例
 import userApi from '../../api/user';
+import merchantApi from '../../api/merchant';
 
 const app = getApp()
 Page({
@@ -14,18 +15,23 @@ Page({
     hgUserInfo: {},
     hgExtensionAccount: {},
 
+    merchantApplyStatus: 0
   },
 
-//获取用户信息
-  getUserxx: async function(){
+  //获取用户信息
+  getUserxx: async function () {
     //console.info(this.data.userInfo.id)
     const userInfo = await userApi.getOpenId();
     wx.request({
-      method:'Get',
+      method: 'Get',
       url: 'https://testh5.server012.com/api/info/selectMyUser',
-      data: { id: userInfo.userId},
-      header: { 'content-type': 'application/json' },
-      success:res=>{
+      data: {
+        id: userInfo.userId
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: res => {
         //console.info(res.data);
         if (res.data.code == 0) {
           this.setData({
@@ -37,6 +43,18 @@ Page({
     })
   },
 
+  getMerchantApplyStatus: async function () {
+    try {
+      const data = await merchantApi.queryApplyStatus();
+      this.setData({
+        merchantApplyStatus: data.data
+      })
+    } catch (e) {
+      this.setData({
+        merchantApplyStatus: -1
+      })
+    }
+  },
 
   showview: function () { //弹框显示
     this.setData({
@@ -87,15 +105,27 @@ Page({
     })
   },
   onApplyMerchant: async function () {
-
-    if (this.data.hgUserInfo.isBusiness !== 0) {
-      wx.navigateTo({
-        url: '/pages/merchant/merchant-apply/index',
-      })
-    } else {
-      wx.navigateTo({
-        url: '/pages/merchant/index/index',
-      })
+    await this.getMerchantApplyStatus();
+    switch (this.data.merchantApplyStatus) {
+      case 0:
+        wx.navigateTo({
+          url: '/pages/merchant/audit-result/index?type=fail',
+        })
+        break;
+      case 1:
+        wx.navigateTo({
+          url: '/pages/merchant/audit-result/index?type=processing',
+        })
+        break;
+      case 2:
+        wx.navigateTo({
+          url: '/pages/merchant/index/index',
+        })
+        break;
+      default:
+        wx.navigateTo({
+          url: '/pages/merchant/merchant-apply/index',
+        })
     }
   },
   onApplyPromote: function () {
@@ -110,18 +140,18 @@ Page({
     }
   },
 
- onLoad: function (options) {
-  wx.getSetting({
-    success: function (res) {
-      if (!res.authSetting['scope.userInfo']) {
-        //未登录,跳转到登录页
-        wx.redirectTo({
-          url: '/pages/login/index',
-        })
+  onLoad: function (options) {
+    wx.getSetting({
+      success: function (res) {
+        if (!res.authSetting['scope.userInfo']) {
+          //未登录,跳转到登录页
+          wx.redirectTo({
+            url: '/pages/login/index',
+          })
+        }
       }
-    }
-  })
-  
+    })
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

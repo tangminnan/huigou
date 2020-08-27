@@ -14,11 +14,18 @@ function isSuccess(statusCode) {
 
 async function request(url, params, options) {
   // 拼接url 和 params
+  let newUrl = api(url);
+  if (params && options.useQuery !== false) {
+    const query = Object.keys(params).map(key => {
+      return `${key}=${encodeURIComponent(params[key])}`
+    }).join('&');
+    newUrl = `${newUrl}?${query}`
+  }
+
   return new Promise((resolve, reject) => {
-    const res = wx.request({
-      url: api(url),
+    wx.request({
+      url: newUrl,
       method: 'GET',
-      data: params,
       ...options,
       success(res) {
         const {
@@ -91,12 +98,17 @@ async function getData(url, params, options) {
 }
 
 async function postData(url, data, options) {
-  // 拼接url 和 params
   return request(url, data, {
     method: 'POST',
-    header: {
-      'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-    },
+    ...options
+  })
+}
+
+async function postJson(url, data, options) {
+  return request(url, data, {
+    method: 'POST',
+    useQuery: false,
+    data,
     ...options
   })
 }
@@ -105,6 +117,7 @@ module.exports = {
   api,
   getData,
   postData,
+  postJson,
   uploadImage,
   saveImage
 }
