@@ -1,24 +1,26 @@
 <view class="container">
   <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
-  <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+  <mp-form>
     <mp-cells>
-      <mp-cell prop="name" title="填写姓名">
-        <input data-field="name" class="weui-input" type="text" placeholder="姓名"></input>
+      <mp-cell title="填写姓名">
+        <input data-field="name" bindinput="onFormChage" value="{{info.name}}" class="weui-input" type="text"
+          placeholder="姓名"></input>
       </mp-cell>
       <view class="weui-cell weui-cell_select">
         <view class="weui-cell__hd weui-cell__hd_in-select-after">
           <view class="weui-label mg-l-16">性别</view>
         </view>
         <view class="weui-cell__bd">
-          <picker value="{{info.selectedSexIndex}}" range="{{sexList}}" range-key="label" bindchange="onSexChange">
+          <picker data-field="selectedSexIndex" value="{{info.selectedSexIndex}}" range="{{sexList}}" range-key="label"
+            bindchange="onFormChage">
             <view class="weui-select">
               {{sexList[info.selectedSexIndex || 0].label || '请选择性别'}}
             </view>
           </picker>
         </view>
       </view>
-      <mp-cell prop="mobile" title="联系方式">
-        <input data-field="mobile" class="weui-input" type="text" placeholder="联系电话"></input>
+      <mp-cell title="联系方式">
+        <input data-field="phone" bindinput="onFormChage" class="weui-input" type="text" placeholder="联系电话"></input>
       </mp-cell>
       <view class="weui-cell weui-cell_select" bindtap="onChooseAddress">
         <view class="weui-cell__hd weui-cell__hd_in-select-after">
@@ -36,22 +38,23 @@
           </view>
         </view>
       </view>
-      <mp-cell prop="shopName" title="商铺名称">
-        <input data-field="shopName" class="weui-input" type="text" placeholder="请输入商铺名称"></input>
+      <mp-cell title="商铺名称">
+        <input data-field="shopName" bindinput="onFormChage" class="weui-input" type="text"
+          placeholder="请输入商铺名称"></input>
       </mp-cell>
       <view class="weui-cell weui-cell__textarea">
         <view class="weui-cell__hd">
           <view class="weui-label">商品说明</view>
         </view>
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="请输入文本" />
+          <textarea data-field="introduction" bindinput="onFormChage" class="weui-textarea" placeholder="请输入商品说明" />
           </view>
       </view>
     </mp-cells>
-    <block wx:if="{{type === 'enterprise'}}">
+    <block wx:if="{{businessType == 0}}">
     <view class="img-uploader">
       <view class="img-uploader-title">品牌授权</view>
-      <view class="img-uploader-btn" data-type="auth" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="3" data-field="certification" bindtap="onUploadImage">
         <block wx:if="{{info.auth && info.auth.length}}">
           <image wx:for="{{info.auth}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -63,7 +66,7 @@
     </view>
     <view class="img-uploader">
       <view class="img-uploader-title">营业执照上传</view>
-      <view class="img-uploader-btn" data-type="license" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="0" data-field="license" bindtap="onUploadImage">
         <block wx:if="{{info.license && info.license.length}}">
           <image wx:for="{{info.license}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -75,7 +78,7 @@
     </view>
     <view class="img-uploader">
       <view class="img-uploader-title">其他执照上传</view>
-      <view class="img-uploader-btn" count="10" data-type="others" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="4" data-count="10" data-field="others" bindtap="onUploadImage">
         <block wx:if="{{info.others && info.others.length}}">
           <image wx:for="{{info.others}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -89,7 +92,7 @@
   <block wx:else>
     <view class="img-uploader">
       <view class="img-uploader-title">营业执照上传</view>
-      <view class="img-uploader-btn" data-type="license" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="0" data-field="license" bindtap="onUploadImage">
         <block wx:if="{{info.license && info.license.length}}">
           <image wx:for="{{info.license}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -101,7 +104,7 @@
     </view>
     <view class="img-uploader">
       <view class="img-uploader-title">相关证书上传(例: 食品安全证、其他证件)</view>
-      <view class="img-uploader-btn" data-type="otherAuth" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="0" data-field="otherAuth" bindtap="onUploadImage">
         <block wx:if="{{info.otherAuth && info.otherAuth.length}}">
           <image wx:for="{{info.otherAuth}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
@@ -113,7 +116,7 @@
     </view>
     <view class="img-uploader">
       <view class="img-uploader-title">其他执照上传</view>
-      <view class="img-uploader-btn" data-count="10" data-type="others" bindtap="onUploadImage">
+      <view class="img-uploader-btn" data-type="4" data-count="10" data-field="others" bindtap="onUploadImage">
         <block wx:if="{{info.others && info.others.length}}">
           <image wx:for="{{info.others}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>

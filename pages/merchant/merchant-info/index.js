@@ -1,9 +1,10 @@
-// pages/merchant-enterprise/index.js
-Page({
+const requestApi = require('../../../api/request');
+const userApi = require('../../../api/user');
+const ensureAuth = require('../../../api/auth');
+const merchantApi = require('../../../api/merchant');
 
-  /**
-   * 页面的初始数据
-   */
+
+Page({
   data: {
     sexList: [{
       key: 1,
@@ -12,82 +13,36 @@ Page({
       key: 0,
       label: "女"
     }],
-    info: {}
+    info: {
+      selectedSexIndex: 0
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    console.log('options.type', options.type);
-    const type = options.type || 'personal';
+    console.log('options.businessType', options.businessType);
+    const businessType = options.businessType || 1;
     this.setData({
-      type
+      businessType
     });
     wx.setNavigationBarTitle({
-      title: type === 'personal' ? '个人经营' : '品牌商家'
+      title: businessType === 1 ? '个人经营' : '品牌商家'
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  onSexChange: function (e) {
-    console.log('e.detail.value', e.detail);
-    const value = +e.detail.value;
+  onFormChage: function (e) {
+    console.log('e', e);
+    const fieldName = e.currentTarget.dataset.field;
+    const value = e.detail.value;
     this.setData({
       info: {
         ...this.data.info,
-        selectedSexIndex: value
+        [fieldName]: value
       }
     })
   },
   onChooseAddress: async function (e) {
+    // 待确认这里的选择地址是跳转到哪里
+    // 和用户收获地址含义明显不同，暂时同
+    console.log('scope address');
+    await ensureAuth('scope.address');
     const response = await wx.chooseAddress();
     console.log('response', response);
     this.setData({
@@ -98,20 +53,31 @@ Page({
     })
   },
   onUploadImage: async function (e) {
+    const field = e.currentTarget.dataset.field;
     const type = e.currentTarget.dataset.type;
     let count = e.currentTarget.dataset.count;
     count = isNaN(count) ? 1 : +count;
-    console.log(type, count);
+    console.log(field, type, count);
     const images = await wx.chooseImage({
       count,
       sizeType: ["compressed"],
       sourceType: ['album', 'camera']
     })
-    console.log('images', images);
+
+    const userInfo = await userApi.getOpenId();
+    const uploadedImages = [];
+    for (let i = 0, len = images.tempFilePaths.length; i < len; i++) {
+      const target = images.tempFilePaths[i];
+      await requestApi.saveImage(target, userInfo.userId, type, 0)
+      uploadedImages.push(target);
+    }
+
+    console.log('res', res);
+
     this.setData({
       info: {
         ...this.data.info,
-        [type]: images.tempFilePaths
+        [field]: uploadedImages
       }
     })
   },
@@ -123,32 +89,46 @@ Page({
       }
     })
   },
-  submitForm: function () {
-    this.selectComponent('#form').validate((valid, errors) => {
-      console.log(valid, errors);
-      if (!valid) {
-        const firstError = Object.keys(errors)
-        if (firstError.length) {
-          this.setData({
-            error: errors[firstError[0]].message
-          })
-        }
-      } else {
-        wx.showToast({
-          title: '校验通过'
-        });
-        wx.showNavigationBarLoading();
-        setTimeout(() => {
-          wx.hideNavigationBarLoading();
-          getApp().globalData.isMerchant = true;
-          wx.redirectTo({
-            url: '/pages/merchant/audit-result/index?type=success'
-          })
-          wx.showToast({
-            title: '保存成功',
-          })
-        }, 2000)
-      }
-    })
+  submitForm: async function () {
+    console.log('info', this.data.info);
+
+    // validate
+
+
+    const {
+      address,
+      selectedSexIndex,
+      ...otherInfos
+    } = this.data.info;
+
+    const submitData = {
+      ...otherInfos,
+      businessType: +this.data.businessType,
+      address: `${address.provinceName}${address.cityName}${address.countyName} ${address.detailInfo} ${address.postalCode}     ${address.userName} ${address.telNumber}`,
+      sex: this.data.sexList[selectedSexIndex].key
+    }
+    wx.showLoading({
+      title: '提交中',
+    });
+
+    try {
+      await merchantApi.applyToBeBusiness(submitData);
+      wx.hideLoading();
+      wx.showToast({
+        title: '提交成功',
+      });
+    } catch (e) {
+      console.log(e);
+      wx.hideLoading();
+      wx.showToast({
+        title: e && e.messasge || '出错了，请稍后再试',
+      });
+      return;
+    }
+    setTimeout(() => {
+      wx.navigateTo({
+        url: '/pages/merchant/merchant-class/index'
+      })
+    }, 2000);
   }
 })

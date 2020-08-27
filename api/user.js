@@ -1,14 +1,17 @@
 // 获取当前推广员信息
-import api from './request';
+const api = require('./request');
 
-async function getOpenId() {
+let cacheInfo;
+
+export async function getOpenId() {
+  if (cacheInfo) {
+    return Promise.resolve(cacheInfo);
+  }
   const res = await wx.login();
   console.log('res', res);
-  return api.getData('/api/login/getOpenId', {
+  const info = await api.getData('/api/login/getOpenId', {
     code: res.code
   });
-}
-
-module.exports = {
-  getOpenId
+  cacheInfo = info;
+  return cacheInfo;
 }

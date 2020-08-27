@@ -1,84 +1,79 @@
-// pages/merchant-class/index.js
+const merchantApi = require('../../../api/merchant');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    classList: [{
-      name: '服装类',
-    }, {
-      name: '选项一',
-    }, {
-      name: '选项二',
-    }, {
-      name: '选项三',
-    }, {
-      name: '选项四',
-    }, {
-      name: '选项五',
-    }, {
-      name: '选项六',
-    }, {
-      name: '选项七',
-    }, {
-      name: '选项八',
-    }]
+    classList: [],
+    classifyId: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: async function (options) {
+    const data = await merchantApi.searchAllClassify();
+    console.log('data', data);
+    this.setData({
+      classList: data.data,
+      classifyId: data.data[0].id
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onSelectMerchantClass: function (e) {
+    console.log('e', e.currentTarget.dataset.key);
+    this.setData({
+      classifyId: e.currentTarget.dataset.key
+    })
   },
+  onSubmitApplyInfo: async function () {
+    // submit
+    wx.showLoading({
+      title: '提交中',
+    });
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+    try {
+      await merchantApi.setMerchantClass(this.data.classifyId);
+      wx.hideLoading();
+      wx.showToast({
+        title: '提交成功',
+      });
+    } catch (e) {
+      console.log(e);
+      wx.hideLoading();
+      wx.showToast({
+        title: e && e.messasge || '出错了，请稍后再试',
+      });
+      return;
+    }
+    // 根据返回审核结果来决定跳转
+    let res;
+    try {
+      res = await merchantApi.getMerchantInfo();
+    } catch (e) {
+      // 返回500 还不是商家，等待商家注册走通再说
+      wx.navigateTo({
+        url: '/pages/merchant/audit-result/index?type=processing',
+      });
+      return;
+    }
+    switch (res.auditState) {
+      case 0:
+        wx.navigateTo({
+          url: '/pages/merchant/audit-result/index?type=fail',
+        });
+        break;
+      case 2:
+        wx.navigateTo({
+          url: '/pages/merchant/audit-result/index?type=success',
+        });
+        break;
+      case 1:
+      default:
+        wx.navigateTo({
+          url: '/pages/merchant/audit-result/index?type=processing',
+        });
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
