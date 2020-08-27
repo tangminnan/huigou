@@ -6,7 +6,7 @@
 				<open-data type="userAvatarUrl"></open-data>
 			</view>
 			<view class="name font-36">
-				<open-data type="userNickName" lang="zh_CN"></open-data>
+				{{shopName}}
 			</view>
 		</view>
 		<view class="profile-btn"><text class="iconfont icon-hgbianji font-24 mg-r-6"></text>编辑资料</view>
@@ -40,24 +40,13 @@
 		<mp-searchbar ext-class="search-bar" placerholder="搜索商品吧"></mp-searchbar>
 	</view>
 	<view class="panel product-list-panel">
-		<view class="product-item">
-			<image class="spu-image" mode="aspectFill" src="../../../assets/product-01.png"></image>
+		<view class="product-item" wx:for="{{productList}}" wx:key="{{item.id}}">
+			<image class="spu-image" mode="aspectFill" src="{{item.img}}"></image>
 			<view class="info">
-				<text class="title">欧舒丹甜蜜樱花沐浴啫喱/身体乳套装沐浴啫装沐浴啫装沐浴啫身体乳套装沐浴啫装沐浴啫装沐浴啫</text>
-				<text class="price">¥420</text>
+				<text class="title">{{item.title}}</text>
+				<text class="price">¥{{item.price}}</text>
 			</view>
-			<view class="detail-btn">
-				<text class="iconfont icon-hgsearch"></text>
-				<text>查看订单</text>
-			</view>
-		</view>
-		<view class="product-item">
-			<image class="spu-image" mode="aspectFill" src="../../../assets/product-01.png"></image>
-			<view class="info">
-				<text class="title">欧舒丹甜蜜樱花沐浴啫喱/身体乳套装沐浴啫装沐浴啫装沐浴啫身体乳套装沐浴啫装沐浴啫装沐浴啫</text>
-				<text class="price">¥560</text>
-			</view>
-			<view class="detail-btn">
+			<view class="detail-btn" data-type="all" bindtap="onClickOrder">
 				<text class="iconfont icon-hgsearch"></text>
 				<text>查看订单</text>
 			</view>
