@@ -12,11 +12,11 @@ Page({
     addressList: [],
   },
 
-
+//地址列表
   getUserAddress: function () {
     wx.request({
       method: 'GET',
-      url: 'http://182.92.118.35:8098/api/address/selectHgAddressByUserId',
+      url: 'https://testh5.server012.com/api/address/selectHgAddressByUserId',
       data: { userId: this.data.userInfo.id },
       header: {
         'content-type': 'application/json' // 默认值
@@ -79,6 +79,8 @@ Page({
       hasUserInfo: true
     })
   },
+  
+
   //跳转
   xiugaiDZ: function () {
     wx.navigateTo({
@@ -92,15 +94,28 @@ Page({
   },
   // 选中地址回调
   onChooseAddressItem: function (e) {
-    const channler = this.getOpenerEventChannel();
-    if (channler) {
-      channler.emit('choosed_address', {
-        userName: '张三',
-        telPhone: '18701360779',
-        province: '北京市顺义区',
-        detailInfo: '宏远航程广场M座5层'
-      });
-      wx.navigateBack({delta: 1});
-    }
+    
+  var addId = e.currentTarget.dataset.id
+  var shdizhi = e.currentTarget.dataset.dizhi
+  let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+  let prevPage = pages[ pages.length - 2 ];  
+  prevPage.setData({ 
+    dizhiId:addId,
+    dizhish:shdizhi,
+    dizhiif:true,
+  })
+  wx.navigateBack({
+    delta: 1  
+  })
+    // const channler = this.getOpenerEventChannel();
+    // if (channler) {
+    //   channler.emit('choosed_address', {
+    //     userName: '张三',
+    //     telPhone: '18701360779',
+    //     province: '北京市顺义区',
+    //     detailInfo: '宏远航程广场M座5层'
+    //   });
+    //   wx.navigateBack({delta: 1});
+    // }
   }
 })

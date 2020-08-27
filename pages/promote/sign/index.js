@@ -16,19 +16,38 @@ Page({
     lingqu:[],
     suoyou:[],
     qiandaozt: 0,
+    qiandaojd:0,
    
   },
 
-  getqdzhuangtai:function(){
+   //签到进度
+   getqdzhuangtai:function(){
     wx.request({
-      url: 'http://182.92.118.35:8098/api/home/searchSingTask',
+      url: 'https://testh5.server012.com/api/home/searchSingSchedule',
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
-        console.info(res.data);
+        //console.info(res.data);
         if(res.data.code == 0){
             this.setData({
-              qiandao:res.data.data,
+              qiandaojd: res.data.data
+            })
+        }
+      }
+    })
+
+  },
+
+  //签到状态
+  getqdzhuangtai:function(){
+    wx.request({
+      url: 'https://testh5.server012.com/api/home/searchSingTask',
+      data: { userId: this.data.userInfo.id },
+      header: { 'content-type': 'application/json' },
+      success: res => {
+        //console.info(res.data);
+        if(res.data.code == 0){
+            this.setData({
               qiandaozt: res.data.type
             })
         }
@@ -37,28 +56,28 @@ Page({
 
   },
 
+  //领取记录
   getlingqu:function(){
     wx.request({
-      url: 'http://182.92.118.35:8098/api/home/taskRecord',
+      url: 'https://testh5.server012.com/api/home/taskRecord',
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
-        console.info(res.data);
-        if (res.data.code == 0) {
+        console.info(res.data.data);
           this.setData({
             lingqu: res.data.data
           })
-        }
       }
     })
   },
+  //所有任务
   getsuoyou: function () {
     wx.request({
-      url: 'http://182.92.118.35:8098/api/home/searchAllTask',
+      url: 'https://testh5.server012.com/api/home/searchAllTask',
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
-        console.info(res.data);
+        //console.info(res.data);
         if (res.data.code == 0) {
           this.setData({
             suoyou: res.data.data
@@ -68,7 +87,38 @@ Page({
     })
   },
 
- 
+ //领取任务
+ ling:function(e){
+  var taskId = e.currentTarget.dataset.taskId
+  wx.request({
+    method:"POST",
+    url: 'https://testh5.server012.com/api/home/pickUpTask',
+    data: { 
+      userId: this.data.userInfo.id ,
+      taskId:taskId
+    },
+    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    success: res => {
+      //console.info(res.data);
+      if (res.data.code == 0) {
+        wx.showToast({
+          title: '操作成功',
+          icon: 'none',
+          duration: 2000
+        })
+        this.getsuoyou();
+        this.getlingqu();
+      }else{
+        wx.showToast({
+          title: '操作失败，请稍后重试',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    }
+  })
+
+ },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -155,9 +205,10 @@ Page({
   },
   sign: function () {
     wx.request({
-      url: 'http://182.92.118.35:8098/api/home/singEverydayTaskByUserId',
+      method:"POST",
+      url: 'https://testh5.server012.com/api/home/singEverydayTaskByUserId',
       data: { userId: this.data.userInfo.id },
-      header: { 'content-type': 'application/json' },
+      header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: res => {
         if (res.data.code == 0) {
           wx.showToast({

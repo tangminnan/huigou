@@ -11,11 +11,11 @@ Page({
       orderId: e.detail.value
     })
   },
-
+//查询订单
   showview:function(){
     wx.request({
       method:'Get',
-      url: 'http://182.92.118.35:8098/api/order/selectOrderByOrderId',
+      url: 'https://testh5.server012.com/api/order/selectOrderByOrderId',
       data: { orderId:this.data.orderId},
       success:res=>{
         console.info(res.data);

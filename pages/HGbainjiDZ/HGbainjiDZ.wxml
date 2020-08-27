@@ -2,11 +2,11 @@
 <view class="newDZ">
     <view class="DZ">
         <text>收货人</text>
-        <input placeholder="收货人" value='{{recipient}}' bindtap='userNameInput'></input>
+        <input placeholder="收货人" value='{{recipient}}' bindinput='userNameInput'></input>
     </view>
     <view class="DZ">
         <text>手机号</text>
-        <input placeholder="手机号" value='{{phone}}'bindtap='phoneInput'></input>
+        <input placeholder="手机号" value='{{phone}}' bindinput='phoneInput'></input>
     </view>
     <view class="Hlist">
       <text>所在城市</text>
@@ -21,7 +21,7 @@
     </view>
     <view class="DZ">
         <text>详细地址</text>
-        <input placeholder="详细地址" value='{{detailAddress}}'bindtap='addressdesInput'></input>
+        <input placeholder="详细地址" value='{{detailAddress}}' bindinput='addressdesInput'></input>
     </view>
 </view>
 

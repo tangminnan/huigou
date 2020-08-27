@@ -7,15 +7,68 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+
+    orderId:0,
+
   },
+
+
+  //退货款
+  huokuan:function(e){
+    var type = e.currentTarget.dataset.type;
+    var status;
+    if(type=='1'){status == 7}
+    if (type=='2'){status == 8}
+    if (type=='3'){status == 9}
+    wx.request({
+      method:"POST",
+      url: 'https://testh5.server012.com/api/home/returnGoods',
+      data:{
+        orderId:this.data.orderId,
+        status:status
+      },
+      header:{"Content-Type": "application/x-www-form-urlencoded"},
+      success:res=>{
+        if(res.data.code== 0){
+            wx.showToast({
+              title: '操作成功',
+              icon:'none',
+              duration:200
+            })
+            let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+            let prevPage = pages[ pages.length - 2 ];  
+            prevPage.jiazai();
+            wx.navigateBack({
+              delta: 1  
+            })
+        }else{
+          wx.showToast({
+            title: '操作失败，请稍后重试',
+            icon:'none',
+            duration:200
+          })
+          let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+          let prevPage = pages[ pages.length - 2 ];  
+          wx.navigateBack({
+            delta: 1  
+          })
+        }
+      }
+    })
+  },
+
+
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    this.setData({
+      orderId:options.orderId
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

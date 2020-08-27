@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "惠购小程序",
+  "navigationBarTitleText": "国瑞熙墅",
   "navigationBarBackgroundColor": "#E42D2E",
-  "navigationBarTextStyle": "white"
+  "navigationBarTextStyle": "white",
+  "onReachBottomDistance":100
 }

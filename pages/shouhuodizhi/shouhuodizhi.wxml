@@ -1,8 +1,8 @@
 
 <view class="DZlist p-30">
     <!-- <view wx:for="{{addressList}}" class="{{item.isDefault==1?'box on':'box'}}" bindtap="onChooseAddressItem"> -->
-    <view wx:for="{{addressList}}" class="{{item.isDefault==1?'box on':'box'}}">
-        <view class="left"  bindtap="onChooseAddressItem" >
+    <view wx:for="{{addressList}}" wx:key="{{item.id}}" class="{{item.isDefault==1?'box on':'box'}}">
+        <view class="left"  bindtap="onChooseAddressItem"  data-id="{{item.id}}" data-dizhi="{{item.region}}{{item.detailAddress}}" >
             <p><text>{{item.recipient}}</text>{{item.phone}}</p>
             <p>{{item.region}}{{item.detailAddress}}</p>
         </view>

@@ -1,17 +1,17 @@
-<view class="shangjia" bindtap='sjxiangqing'>
+<view class="shangjia" bindtap='sjxiangqing' data-id="{{shangjia.id}}">
         <image src="{{shangjia.userLogo}}"></image>
         <text>{{shangjia.shopName}}</text>
         <view class="arr"></view>
 </view>
 
 <view class="nav_right_items">
-    <view class="box" bindtap='spXQ'>
-        <image class="box_titpic" src="/images/PH1.png"></image>
+    <view class="box" bindtap='spXQ' wx:for="{{shangpin}}" wx:key="{{item.id}}" data-id="{{item.id}}">
+        <image class="box_titpic" src="{{item.hgGoodsFiles[0].picture}}"></image>
         <view class="box_txt">
-            <view class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</view>
+            <view class="t1">{{item.title}}</view>
             <view class="t2">
-                <text class="t2_1">¥420</text>
-                <text class="t2_2">￥560</text>
+                <text class="t2_1">¥{{item.hgSpecifications[0].goodsPresentPrice}}</text>
+                <text class="t2_2">￥{{item.hgSpecifications[0].goodsOriginalPrice}}</text>
             </view>
         </view>
     </view>

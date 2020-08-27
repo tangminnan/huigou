@@ -11,7 +11,7 @@
 <view class="share" bindtap='shareBox'><image src="/images/share.png" mode='aspectFit'></image></view>
 
 <view class="spTxt bg-W mb-10">
-    <view class="T1 mb-10"><text class="redC">￥{{jiage.goodsOriginalPrice}}</text><text class="lineT">￥{{jiage.goodsPresentPrice}}</text></view>
+    <view class="T1 mb-10"><text class="redC">￥{{spguige[0].goodsPresentPrice}}</text><text class="lineT">￥{{spguige[0].goodsOriginalPrice}}</text></view>
     <view class="T2">{{shangpin.title}}</view>
 </view>
 
@@ -26,7 +26,8 @@
     <view class="Hlist" bindtap='shouhuoDZ'>
         <text>送至</text>
         <view class="right">
-            <text>选择地址</text>
+            <text wx:if="{{!dizhiif}}">选择地址</text>
+            <text wx:if="{{dizhiif}}">{{dizhish}}</text>
             <view class="arrow"></view>
         </view>
     </view>
@@ -43,8 +44,8 @@
     <text>{{shangjia.shopName}}</text>
     <view class="arr"></view>
 </view>
-<view class="biaoQ">商品详情</view>
-<view class="">{{shangpin.goodsContent}}</view>
+<view style="margin-bottom:10rpx;" class="biaoQ">商品详情</view>
+<view style="padding:30rpx;" class=""><rich-text nodes="{{shangpin.goodsContent}}"></rich-text></view>
 
 <view class="botFix">
     <view class="fix1" bindtap='dianpu'>
@@ -53,7 +54,7 @@
     </view>
     <view class="fix1" bindtap="onGoToShoppingCart">
         <image src="/images/che.png"></image>
-        <view>购物车 <!--<text>1</text>--></view>
+        <view>购物车 <text>{{gwcnum}}</text></view>
     </view>
     <view class="fix2">
         <button bindtap="clickme">加入购物车</button>
@@ -69,15 +70,15 @@
         <view class="V1">
             <image src="{{sptupian[0].picture}}"></image>
             <view>
-                <text class="t1">¥{{jiage.goodsOriginalPrice}}</text>
+                <text class="t1">¥{{jiage}}</text>
                 <text class="t2">重量：{{shangpin.goodsWeight}}kg</text>
-                <text class="t2">重量：{{shangpin.goodsWeight}}kg</text>
+                <!-- <text class="t2">重量：{{shangpin.goodsWeight}}kg</text> -->
             </view>
         </view>
         <view class="V2">
             <text class="t1">选择套餐</text>
             <view class="color">
-                <view class="iconusecont-div {{state==index?'active-tag':''}}" bindtap="select_use" wx:for="{{spguige}}" data-key='{{index}}'>
+                <view class="iconusecont-div {{state==index?'active-tag':''}}" bindtap="select_use" wx:for-items="{{spguige}}" data-key='{{index}}' data-jine="{{item.goodsPresentPrice}}" data-id="{{item.id}}">
                     <view class="flex-item">
                         <rich-text class='use_name'>{{item.name}}</rich-text>
                     </view>

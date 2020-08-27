@@ -11,7 +11,7 @@ Page({
      //=========城市选择=========================
      objectIndex: 0,//默认显示位置
      //省市区选择器：
-     region: ['省', '市', '区'],
+     region: ['', '', ''],
      customItem: '请选择',//为每一列的顶部添加一个自定义的项
 
     addressId:0,
@@ -19,7 +19,7 @@ Page({
     recipient: '',
     phone: '',
     phonetrue: false,
-    regionif: 0,
+    regionif: 1,
     detailAddress: '',
     isDefault: 0
 
@@ -34,6 +34,7 @@ Page({
 
   phoneInput: function (e) {
     var phone = e.detail.value;
+    //console.info(phone);
     let that = this
     if (!(/^1[34578]\d{9}$/.test(phone))) {
 
@@ -72,11 +73,11 @@ Page({
       isDefault: choose
     })
   },
-
+//地址详情
   editAddress:function(id){
     wx.request({
       method: 'GET',
-      url: 'http://182.92.118.35:8098/api/address/detailAddress',
+      url: 'https://testh5.server012.com/api/address/detailAddress',
       data: { id: id },
       header: {
         'content-type': 'application/json' // 默认值
@@ -84,23 +85,24 @@ Page({
       success: (res) => {
         //console.info(res.data.data);
           this.setData({
+            phonetrue: true,
             recipient: res.data.data.recipient,
             phone:res.data.data.phone,
             detailAddress: res.data.data.detailAddress,
             isDefault: res.data.data.isDefault,
-            region: res.data.data.region
+            region: res.data.data.region.split(",")
           })
       }
     })
   },
-
+//删除地址
   removeadd:function(){
     wx.request({
-      method: 'GET',
-      url: 'http://182.92.118.35:8098/api/address/deleteAddressById',
-      data: { id: addressId },
+      method: 'POST',
+      url: 'https://testh5.server012.com/api/address/deleteAddressById',
+      data: { id: this.data.addressId },
       header: {
-        'content-type': 'application/json' // 默认值
+        "Content-Type": "application/x-www-form-urlencoded" // 默认值
       },
       success: (res) => {
         //console.info(res.data.data);
@@ -110,14 +112,20 @@ Page({
             icon: 'none',
             duration: 2000
           })
-          wx.navigateTo({
-            url: '../HGshouhuoDZ/HGshouhuoDZ'
+          var pages = getCurrentPages();
+          var beforePage = pages[pages.length - 2];
+          beforePage.getUserAddress();
+          wx.navigateBack({
+            delta: 1,
           })
+          // wx.navigateTo({
+          //   url: '../HGshouhuoDZ/HGshouhuoDZ'
+          // })
         }
       }
     })
   },
-
+//保存
   save: function (e) {
     let that = this
     let val = e.detail.value
@@ -154,36 +162,51 @@ Page({
       })
       return false;
     }
+    //console.info(this.data.userInfo.id);
+    //console.info(this.data.addressId);
     //console.info(this.data.recipient);
     //console.info(this.data.phone);
-    //console.info(this.data.region);
     //console.info(this.data.detailAddress);
     //console.info(this.data.isDefault);
+    var region1 = String(this.data.region[0]+","+this.data.region[1]+","+this.data.region[2])
+    //console.info(region1);
     wx.request({
       method: 'POST',
-      url: 'http://182.92.118.35:8098/',
+      url: 'https://testh5.server012.com/api/info/updateAddressByUserId',
       data: {
         userId: this.data.userInfo.id,
         id: this.data.addressId,
-        recipient: JSON.parse(this.data.recipient),
+        recipient: this.data.recipient,
         phone: this.data.phone,
-        region: this.data.region,
+        region: region1,
         detailAddress: this.data.detailAddress,
         isDefault: this.data.isDefault
       },
       header: {
-        'content-type': 'application/json' // 默认值
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       success: (res) => {
-        //console.info(res.data);
+        console.info(res.data);
         if (res.data.code == 0) {
           wx.showToast({
             title: '操作成功',
             icon: 'none',
             duration: 2000
           })
-          wx.navigateTo({
-            url: '../HGshouhuoDZ/HGshouhuoDZ'
+          var pages = getCurrentPages();
+          var beforePage = pages[pages.length - 2];
+          beforePage.getUserAddress();
+          wx.navigateBack({
+            delta: 1,
+          })
+          // wx.navigateTo({
+          //   url: '../HGshouhuoDZ/HGshouhuoDZ'
+          // })
+        }else{
+          wx.showToast({
+            title: '操作失败，请稍后重试',
+            icon: 'none',
+            duration: 2000
           })
         }
 
@@ -239,6 +262,7 @@ Page({
  bindRegionChange: function (e) {
   console.log('picker发送选择改变，携带值为', e.detail.value)
   this.setData({
+    regionif: 1,
     region: e.detail.value
   })
 }

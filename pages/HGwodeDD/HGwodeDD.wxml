@@ -9,27 +9,48 @@
   <!--全部-->
   <swiper-item>
   <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
-        <view class="itemBox">
+        <view class="itemBox" wx:for-items="{{orderList}}">
             <view class="ddHao">
-                <text class="fl">订单号：8347892947572348</text>
-                <text class="fr c-red">待发货</text>
+                <text class="fl">订单号：{{item.order.orderId}}</text>
+                <text wx:if="{{item.order.payStatus==0}}" class="fr c-red">待付款</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==1}}" class="fr c-red">待发货</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==0}}" class="fr c-red">待收货</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==3}}" class="fr c-red">已取消</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==4}}" class="fr c-red">已完成</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==5}}" class="fr c-red">换货中</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==6}}" class="fr c-red">退货中</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==7}}" class="fr c-red">退货退款</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==8}}" class="fr c-red">退货中</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==9}}" class="fr c-red">退款中</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==10}}" class="fr c-red">退货完成</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==11}}" class="fr c-red">退款完成</text>
+                <text wx:if="{{item.order.orderTables[0].distributionStatus==12}}" class="fr c-red">退货退款完成</text>
             </view>
             <view class="ddTxt">
-                <image src="/images/PH1.png"></image>
-                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装1</text>
-                <text class="t2">x1</text>
+                <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
+                <text class="t1">{{item.goods.hgGoods.title}}</text>
+                <text class="t2">x{{item.order.orderTables[0].goodsNum}}</text>
             </view>
             <view class="ddtime">
-                <text class="fl">2020-05-28 14:29:52</text>
+                <text class="fl">{{item.order.createTime}}</text>
                 <text class="fr">
-                    <text class="t1">¥620.00</text>
-                    <text class="t2">¥420.00</text>
+                    <!-- <text class="t1">¥</text> -->
+                    <text class="t2">¥{{item.order.orderTables[0].goodsPrices}}</text>
                 </text>
             </view>
-            <view class="ddBtn">取消订单</view>
+            <view wx:if="{{item.order.orderTables[0].distributionStatus==1}}" bindtap="quxiao" data-orderId="{{item.order.orderId}}" class="ddBtn">取消订单</view>
+            <view wx:if="{{item.order.orderTables[0].distributionStatus==4}}" class="ddBtn"  bindtap='tuiHuan' data-orderId="{{item.order.orderId}}" >退换货</view>
+            <view wx:if="{{item.order.orderTables[0].distributionStatus==0}}" class="ddBtn">
+                <view data-orderId="{{item.order.orderId}}" bindtap="shouhuo" >确认收货</view>
+            </view>
+            <view wx:if="{{item.order.payStatus==0}}"  class="ddBtn">
+              <text bindtap="quxiao" data-orderId="{{item.order.orderId}}">取消订单</text>
+              <view bindtap='goPay' data-orderId="{{item.order.orderId}}" >去支付</view>
+            </view>
+
         </view>
 
-        <view class="itemBox">
+        <!-- <view class="itemBox">
             <view class="ddHao">
                 <text class="fl">订单号：8347892947572348</text>
                 <text class="fr c-red">待发货</text>
@@ -67,7 +88,7 @@
                 </text>
             </view>
             <view class="ddBtn" bindtap='tuiHuan'>退换货</view>
-        </view>
+        </view> -->
     </scroll-view>
     </swiper-item>
 
@@ -77,24 +98,24 @@
         <!--有相关订单-->
         <view class="itemBox" wx:if="{{ifnull==1}}" wx:for-items="{{orderList}}">
             <view class="ddHao">
-                <text class="fl">订单号：{{item.orderId}}</text>
+                <text class="fl">订单号：{{item.order.orderId}}</text>
                 <text class="fr c-red">待付款</text>
             </view>
             <view class="ddTxt">
-                <image src="/images/PH1.png"></image>
-                <text class="t1">{{}}</text>
-                <text class="t2">x{{}}</text>
+                <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
+                <text class="t1">{{item.goods.hgGoods.title}}</text>
+                <text class="t2">x{{item.order.orderTables[0].goodsNum}}</text>
             </view>
             <view class="ddtime">
-                <text class="fl">{{item.createTime}}</text>
+                <text class="fl">{{item.order.createTime}}</text>
                 <text class="fr">
-                    <text class="t1">¥{{}}</text> 
-                    <text class="t2">¥{{item.account}}</text>
+                    <!-- <text class="t1">¥{{}}</text>  -->
+                    <text class="t2">¥{{item.order.orderTables[0].goodsPrices}}</text>
                 </text>
             </view>
             <view class="ddBtn">
-              <text>取消订单</text>
-              <view bindtap='goPay'>去支付</view>
+              <text bindtap="quxiao" data-orderId="{{item.order.orderId}}">取消订单</text>
+              <view bindtap='goPay' data-orderId="{{item.order.orderId}}" >去支付</view>
             </view>
         </view>
         <!--无相关订单-->
@@ -109,27 +130,27 @@
     <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
         <view class="itemBox" wx:if="{{ifnull==1}}" wx:for-items="{{orderList}}">
             <view class="ddHao">
-                <text class="fl">订单号：{{item.orderId}}</text>
+                <text class="fl">订单号：{{item.order.orderId}}</text>
                 <text class="fr">待收货</text>
             </view>
             <view class="huanhuo">
-                <view>快递单号：df123435d342347878</view>
+                <view>快递单号：{{item.order.orderTables[0].courierNumber}}</view>
             </view>
             <view class="ddTxt">
-                <image src="/images/PH1.png"></image>
-                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</text>
-                <text class="t2">x1</text>
+                <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
+                <text class="t1">{{item.goods.hgGoods.title}}</text>
+                <text class="t2">x{{item.order.orderTables[0].goodsNum}}</text>
             </view>
             <view class="ddtime">
-                <text class="fl">{{item.createTime}}</text>
+                <text class="fl">{{item.order.createTime}}</text>
                 <text class="fr">
-                    <text class="t1">¥620.00</text>
-                    <text class="t2">¥420.00</text>
+                    <!-- <text class="t1">¥620.00</text> -->
+                    <text class="t2">¥{{item.order.orderTables[0].goodsPrices}}</text>
                 </text>
             </view>
             <view class="ddBtn">
-              <text>取消订单</text>
-              <view>确认收货</view>
+              <!-- <text>取消订单</text> -->
+              <view data-orderId="{{item.order.orderId}}" bindtap="shouhuo" >确认收货</view>
             </view>
         </view>
         <view class="wuXG" wx:if="{{ifnull==0}}" >
@@ -143,22 +164,22 @@
     <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
         <view class="itemBox" wx:if="{{ifnull==1}}"  wx:for-items="{{orderList}}">
             <view class="ddHao">
-                <text class="fl">订单号：{{item.orderId}}</text>
+                <text class="fl">订单号：{{item.order.orderId}}</text>
                 <text class="fr">已完成</text>
             </view>
             <view class="ddTxt">
-                <image src="/images/PH1.png"></image>
-                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</text>
-                <text class="t2">x1</text>
+                <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
+                <text class="t1">{{item.goods.hgGoods.title}}</text>
+                <text class="t2">x{{item.order.orderTables[0].goodsNum}}</text>
             </view>
             <view class="ddtime">
-                <text class="fl">{{item.createTime}}</text>
+                <text class="fl">{{item.order.createTime}}</text>
                 <text class="fr">
-                    <text class="t1">¥620.00</text>
-                    <text class="t2">¥420.00</text>
+                    <!-- <text class="t1">¥620.00</text> -->
+                    <text class="t2">¥{{item.order.orderTables[0].goodsPrices}}</text>
                 </text>
             </view>
-            <view class="ddBtn" bindtap='tuiHuan'>退换货</view>
+            <view class="ddBtn" bindtap='tuiHuan' data-orderId="{{item.order.orderId}}" >退换货</view>
         </view>
         <view class="wuXG" wx:if="{{ifnull==0}}" >
             <image src="/images/daifukuan.png"></image>
@@ -171,20 +192,24 @@
     <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
         <view class="itemBox" wx:if="{{ifnull==1}}"  wx:for-items="{{orderList}}">
             <view class="ddHao">
-                <text class="fl">这里有个商家名称</text>
+                <text class="fl">{{item.order.orderId}}</text>
                 <text class="fr c-red">退款待确认</text>
             </view>
             <view class="ddTxt">
-                <image src="/images/PH1.png"></image>
-                <text class="t1">蒙牛纯甄 常温风味酸牛奶 200g*24 礼盒装</text>
-                <text class="t2">x1</text>
+                <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
+                <text class="t1">{{item.goods.hgGoods.title}}</text>
+                <text class="t2">x{{item.order.orderTables[0].goodsNum}}</text>
             </view>
             <view class="ddtime" style="border-bottom:none;">
-                <text class="fl">{{item.createTime}}</text>
+                <text class="fl">{{item.order.createTime}}</text>
                 <text class="fr">
-                    <text class="t1">¥620.00</text>
-                    <text class="t2">¥420.00</text>
+                    <!-- <text class="t1">¥620.00</text> -->
+                    <text class="t2">¥{{item.order.orderTables[0].goodsPrices}}</text>
                 </text>
+            </view>
+            <view class="ddBtn">
+                <view wx:if="{{item.order.orderTables[0].courierNumber==null}}" bindtap='showview' data-orderId="{{item.order.orderId}}" >我已发货</view>
+                <view data-orderId="{{item.order.orderId}}" bindtap="shouhuo" >确认收货</view>
             </view>
         </view>
         <!--无相关订单-->

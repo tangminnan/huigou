@@ -14,35 +14,45 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
 
     orderList:[],
-    ifnull:0
+    ifnull:0,
+    dian:0,
   },
   //切换bar
   navbarTap: function (e) {
+
+    if(e.currentTarget.dataset.idx == this.data.currentTab){
+        return false;
+    }
     this.setData({
+      orderList: [],
       currentTab: e.currentTarget.dataset.idx
     })
-    this.getOrderzt(e.currentTarget.dataset.idx);
     //全局变量
     app.globalData.currentTab = e.currentTarget.dataset.idx;
+    
   },
   onShow() {
     this.setData({
       currentTab: app.globalData.currentTab
     })
+    
   },
 
   swiperChange: function (e) {
     this.setData({
+      orderList: [],
       currentTab: e.detail.current,
     })
     //全局变量
     app.globalData.currentTab = e.detail.current;
+
+    this.getOrderzt(e.detail.current);
   },
 
   getOrderzt: function (orderFlag){
-    
+    //console.info(orderFlag);
     if (orderFlag == 0) {
-      this.getUserOrder(-1); 
+      this.getUserAllOrder(); 
     } else if (orderFlag == 1) {
       this.getUserOrder(0); //未支付 
     } else if (orderFlag == 2) {
@@ -54,12 +64,62 @@ Page({
     }
     
   },
-
-  getUserOrder: function (condition){
-    console.info(condition);
+//获取全部订单
+  getUserAllOrder:function(){
     wx.request({
       method: 'GET',
-      url: 'http://182.92.118.35:8098/api/home/searchOrderByCondition',
+      url: 'https://testh5.server012.com/api/home/searchAllOrder',
+      data:{
+        userId: this.data.userInfo.id,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: (res) => {
+        //console.info(res.data.data);
+        
+        var ordergood = [];
+        if (res.data.code == 0 && res.data.data != undefined) {
+          for(var i = 0;i<res.data.data.length;i++){
+            var goodsId = res.data.data[i].orderTables[0].goodsId;
+            var order = res.data.data[i];
+            wx.request({
+              url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
+              data: { goodsId : goodsId},
+              header: { 'content-type': 'application/json'},
+              success:res=>{
+                //console.info(res.data.data);
+                if(res.data.code == 0){
+                  this.setData({
+                    orderList: this.data.orderList.concat({goods:res.data.data,order:order}),
+                    ifnull: 1
+                  })
+                  //console.info(this.data.orderList);
+                  //ordergood.concat({goods:res.data.data,order:order})
+                }
+              }
+            })
+            
+          }
+          
+          // this.setData({
+          //   orderList: ordergood,
+          //   ifnull: 1
+          // })
+        }else{
+          this.setData({
+            ifnull: 0
+          })
+        }
+      }
+    })
+  },
+//获取用户订单
+  getUserOrder: function (condition){
+    //console.info(condition);
+    wx.request({
+      method: 'GET',
+      url: 'https://testh5.server012.com/api/home/searchOrderByCondition',
       data:{
         userId: this.data.userInfo.id,
         condition: condition
@@ -68,12 +128,33 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        console.info(res.data.data);
+        //console.info(res.data.data);
         if (res.data.code == 0 && res.data.data != undefined) {
-          this.setData({
-            orderList: res.data.data,
-            ifnull: 1
-          })
+          for(var i = 0;i<res.data.data.length;i++){
+            var goodsId = res.data.data[i].orderTables[0].goodsId;
+            var order = res.data.data[i];
+            wx.request({
+              url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
+              data: { goodsId : goodsId},
+              header: { 'content-type': 'application/json'},
+              success:res=>{
+                //console.info(res.data.data);
+                if(res.data.code == 0){
+                  this.setData({
+                    orderList: this.data.orderList.concat({goods:res.data.data,order:order}),
+                    ifnull: 1
+                  })
+                  //console.info(this.data.orderList);
+                  //ordergood.concat({goods:res.data.data,order:order})
+                }
+              }
+            })
+            
+          }
+          // this.setData({
+          //   orderList: res.data.data,
+          //   ifnull: 1
+          // })
         }else{
           this.setData({
             ifnull: 0
@@ -83,7 +164,41 @@ Page({
     })
 
   },
+//取消订单
+  quxiao:function(e){
+    var orderId = e.currentTarget.dataset.orderId;
+    wx.request({
+      method:'POST',
+      url: 'https://testh5.server012.com/api/home/deleteOrderById',
+      data:{orderId:orderId},
+      header:{"Content-Type": "application/x-www-form-urlencoded"},
+      success:res=>{
+        if(res.data.code == 0){
+          wx.showToast({
+            title: '操作成功',
+            icon:'none',
+            duration:2000
+          })
+          this.jiazai();
+        }else{
+          wx.showToast({
+            title: '操作失败,请稍后重试',
+            icon:'none',
+            duration:2000
+          })
+        }
+      }
+    })
 
+  },
+
+  jiazai:function(){
+    if(this.data.currentTab==0){
+      this.getUserAllOrder(); 
+    }else{
+      this.getUserOrder(this.data.currentTab);
+    }
+  },
 
   //高度
   onLoad: function () {
@@ -122,7 +237,9 @@ Page({
         }
       })
     }
-
+    this.getUserAllOrder(); 
+    //this.getUserOrder(0)
+    
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -155,7 +272,17 @@ Page({
   },
 
   //跳转
-  tuiHuan: function () { wx.navigateTo({url: '../HGtuihuo/HGtuihuo',})},
-  goPay: function () { wx.navigateTo({url: '../HGdingdanXQ/HGdingdanXQ',})},
+  tuiHuan: function (e) { 
+    var orderId = e.currentTarget.dataset.orderId;
+    wx.navigateTo({
+      url: '../HGtuihuo/HGtuihuo?orderId='+orderId,
+    })
+  },
+  goPay: function (e) { 
+    var orderId = e.currentTarget.dataset.orderId;
+    wx.navigateTo({
+      url: '../HGdingdanXQ/HGdingdanXQ?orderId='+orderId,
+    })
+  },
 
 })

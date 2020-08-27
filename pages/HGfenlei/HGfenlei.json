@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "更多分类",
-  "usingComponents": {}
+  "usingComponents": {},
+  "onReachBottomDistance":100
 }

@@ -42,9 +42,10 @@ getindex:function(ind){
     this.gettixianmx();
   }
 },
+//待入账
   getdairuzd:function(){
       wx.request({
-        url: 'http://182.92.118.35:8098/api/info/selectBillByUserId',
+        url: 'https://testh5.server012.com/api/info/selectBillByUserId',
         data: { id: this.data.userInfo.id},
         success:res=>{
           //console.info(res.data);
@@ -59,9 +60,10 @@ getindex:function(ind){
 
       })
   },
+  //余额
   getyue: function () {
     wx.request({
-      url: 'http://182.92.118.35:8098/api/info/selectBlanceByUserId',
+      url: 'https://testh5.server012.com/api/info/selectBlanceByUserId',
       data: { id: this.data.userInfo.id },
       success: res => {
         //console.info(res);
@@ -75,9 +77,10 @@ getindex:function(ind){
     })
 
   },
+  //提现明细
   gettixianmx: function () {
     wx.request({
-      url: 'http://182.92.118.35:8098/api/info/selectCashByUserId',
+      url: 'https://testh5.server012.com/api/info/selectCashByUserId',
       data: { id: this.data.userInfo.id },
       success: res => {
         //console.info(res.data);
@@ -102,6 +105,7 @@ getindex:function(ind){
   },
   //高度
   onLoad: function () {
+    
     var that = this
     wx.getSystemInfo({
       success: function (res) {
@@ -137,9 +141,9 @@ getindex:function(ind){
           }
         })
       }
-      this.getdairuzd();
-      this.getyue();
-      this.gettixianmx();
+    this.getdairuzd();
+    this.getyue();
+    this.gettixianmx();
     },
     getUserInfo: function (e) {
       console.log(e)
