@@ -15,10 +15,10 @@ Page({
   onLoad: function (options) {
     const channel = this.getOpenerEventChannel();
     if (channel) {
-      channel.on('orderList', orderList => {
-        console.log('orderList', orderList)
+      channel.on('orderList', data => {
+        console.log('orderList', data)
         this.setData({
-          orderList
+          ...data
         });
       })
     }

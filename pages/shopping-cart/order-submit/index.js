@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    expressFee: 0,
+    total: 0,
+    shoppingList: []
   },
 
   /**
@@ -21,6 +23,11 @@ Page({
         console.log('shoppingList', shoppingList);
         this.setData({
           shoppingList
+        }, () => {
+          this.setData({
+            total: this.getTotal(),
+            expressFee: this.getTotalExpressFee()
+          })
         })
       })
     }
@@ -30,10 +37,10 @@ Page({
     await Promise.all(this.data.shoppingList.map(async shop => {
       const data = await payApi.saveOrder({
         hgOrder: {
-          addressId: 14,
+          addressId: this.data.address.id,
           payType: 1,
           userId: userInfo.userId,
-          account: 200
+          account: this.getTotal()
         },
         hgOrderTables: shop.skuList.map(sku => {
           return {
@@ -45,25 +52,49 @@ Page({
           }
         })
       })
-      console.log('order data', data)
       shop.orderId = data.data.orderId;
     }))
 
     wx.navigateTo({
       url: `/pages/shopping-cart/order-confirm/index`,
       success: (res) => {
-        res.eventChannel.emit('orderList', this.data.shoppingList);
+        res.eventChannel.emit('orderList', {
+          shoppingList: this.data.shoppingList,
+          address: this.data.address,
+          total: this.data.total,
+          expressFee: this.data.expressFee
+        });
       }
     })
   },
   onClickChooseAddress: function () {
     wx.navigateTo({
       url: '/pages/HGshouhuoDZ/HGshouhuoDZ',
-      success: function (res) {
+      success: (res) => {
         res.eventChannel.on('choosed_address', address => {
-          console.log('address', address);
+          this.setData({
+            address
+          })
         })
       }
     })
   },
+  getTotalExpressFee() {
+    return this.data.shoppingList.reduce((sum, item) => {
+      sum += item.skuList.filter(sku => sku.checked).reduce((s, sku) => {
+        s += sku.expressFee
+        return s;
+      }, 0)
+      return sum;
+    }, 0);
+  },
+  getTotal() {
+    return this.data.shoppingList.reduce((sum, item) => {
+      sum += item.skuList.filter(sku => sku.checked).reduce((s, sku) => {
+        s += Math.floor(sku.price * sku.count * 100 + 0.5) / 100
+        return s;
+      }, 0)
+      return sum;
+    }, 0);
+  }
 })

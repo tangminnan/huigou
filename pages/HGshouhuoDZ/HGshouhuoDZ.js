@@ -91,19 +91,16 @@ Page({
     })
   },
   // 选中地址回调
-  // onChooseAddressItem: function (e) {
-  //   const channler = this.getOpenerEventChannel();
-  //   if (channler) {
-  //     channler.emit('choosed_address', {
-  //       userName: '张三',
-  //       telPhone: '18701360779',
-  //       province: '北京市顺义区',
-  //       detailInfo: '宏远航程广场M座5层'
-  //     });
-  //     wx.navigateBack();
-  //   }
-  // }
   onChooseAddressItem: function (e) {
-    console.log(e);
-  }
+    const channler = this.getOpenerEventChannel();
+    if (channler) {
+      const id = e.currentTarget.dataset.id;
+      const address = this.data.addressList.find(address => address.id == id);
+      channler.emit('choosed_address', address);
+      wx.navigateBack();
+    }
+  },
+  // onChooseAddressItem: function (e) {
+  //   console.log(e);
+  // }
 })

@@ -2,9 +2,9 @@
   <scroll-view class="scoll-list">
     <view class="panel panel-stack address-panel flex-hbox cross-center" bindtap="onClickChooseAddress">
       <view class="flex-vbox flex-spread">
-        <view class="font-28">北京市顺义区</view>
-        <view class="font-30 font-bold">宏远航城广场M座5层</view>
-        <view class="font-28">张三 187013650779</view>
+        <view class="font-28">{{address.region}}</view>
+        <view class="font-30 font-bold">{{address.detailAddress}}</view>
+        <view class="font-28">{{address.recipient}} {{address.phone}}</view>
       </view>
       <mp-icon icon="arrow" color="#ccc" size="12"></mp-icon>
     </view>
@@ -40,11 +40,11 @@
       </view>
       <view class="flex-hbox mg-t-16">
         <text class="flex-spread">运费</text>
-        <text>￥0.00</text>
+        <text>￥{{expressFee}}</text>
       </view>
     </view>
     <view class="fix-btn flex-hbox cross-center">
-      <text class="flex-spread font-32">合计: <text class="total-price font-bold">¥{{total}}</text></text>
+      <text class="flex-spread font-32">合计: <text class="total-price font-bold">¥{{total + expressFee}}</text></text>
       <view class="submit-btn" bindtap="onClickSubmit">提交订单</view>
     </view>
   </scroll-view>

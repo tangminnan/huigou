@@ -35,7 +35,7 @@ Page({
           skuId: it.hgSpecifications.id,
           goodsId: it.hgSpecifications.goodsId,
           count: 1,
-          expressFee: it.hgSpecifications.expressFee,
+          expressFee: it.expressFee,
         }
       })
 
