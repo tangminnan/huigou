@@ -1,8 +1,6 @@
 // pages/mine/mine.js
 //获取应用实例
-import {
-  getMerchantInfo
-} from '../../api/merchant';
+import userApi from '../../api/user';
 
 const app = getApp()
 Page({
@@ -19,12 +17,13 @@ Page({
   },
 
 //获取用户信息
-  getUserxx:function(){
+  getUserxx: async function(){
     //console.info(this.data.userInfo.id)
+    const userInfo = await userApi.getOpenId();
     wx.request({
       method:'Get',
       url: 'https://testh5.server012.com/api/info/selectMyUser',
-      data: { id: this.data.userInfo.id},
+      data: { id: userInfo.userId},
       header: { 'content-type': 'application/json' },
       success:res=>{
         //console.info(res.data);

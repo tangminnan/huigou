@@ -92,6 +92,9 @@ async function postData(url, data, options) {
   // 拼接url 和 params
   return request(url, data, {
     method: 'POST',
+    header: {
+      'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+    },
     ...options
   })
 }

@@ -19,7 +19,7 @@ Page({
     selectedList: {},
     isAllChecked: false
   },
-  onLoad: async function (options) {
+  onShow: async function (options) {
     const res = await shoppingApi.getShoppingCartList();
     const list = res.data;
     const selectedList = {};
