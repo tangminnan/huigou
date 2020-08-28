@@ -13,7 +13,8 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
 
     qiandao:{},
-    lingqu:[],
+    lingqusing:[],
+    lingqutask:[],
     suoyou:[],
     qiandaozt: 0,
     qiandaojd:0,
@@ -21,7 +22,7 @@ Page({
   },
 
    //签到进度
-   getqdzhuangtai:function(){
+   getqdjindu:function(){
     wx.request({
       url: 'https://testh5.server012.com/api/home/searchSingSchedule',
       data: { userId: this.data.userInfo.id },
@@ -50,6 +51,7 @@ Page({
             this.setData({
               qiandaozt: res.data.type
             })
+            
         }
       }
     })
@@ -63,9 +65,27 @@ Page({
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
-        console.info(res.data.data);
+        //console.info(res.data.data);
+        if(res.data.data.task.length>0){
+          for(var i=0;i<res.data.data.task.length;i++){
+            var taskId = res.data.data.task[i].taskId
+            wx.request({
+              url: 'https://testh5.server012.com/api/home/searchTask',
+              data: { taskId: taskId },
+              header: { 'content-type': 'application/json' },
+              success: res => {
+                //console.info(res.data.data);
+                if(res.data.code==0){
+                  this.setData({
+                    lingqutask:this.data.lingqutask.concat(res.data.data)
+                  })
+                }
+              }
+            })
+          }
+        }
           this.setData({
-            lingqu: res.data.data
+            lingqusing: res.data.data.sing
           })
       }
     })
@@ -172,6 +192,7 @@ Page({
       })
     }
     this.getqdzhuangtai();
+    this.getqdjindu();
     this.getlingqu();
     this.getsuoyou();
   },
@@ -214,6 +235,8 @@ Page({
           wx.showToast({
             title: '签到成功',
           })
+          this.getqdzhuangtai();
+          this.getqdjindu();
         }else{
           wx.showToast({
             title: '今日已签到',

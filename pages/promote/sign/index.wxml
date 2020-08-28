@@ -44,17 +44,20 @@
     </view>
     <view class="panel panel-history">
       <view class="title">领取记录</view>
-      <view class="history-item flex-hbox">
-        <view class="info flex-spread">
-          连续签到获得更多奖励
+      <view class="history-item flex-hbox" wx:for-items="{{lingqusing}}">
+        <view class="info flex-spread" wx:if="{{item.type==0}}">
+          每日签到
         </view>
-        <view class="award">￥28元</view>
+        <view class="info flex-spread" wx:if="{{item.type==1}}">
+          签到一周
+        </view>
+        <!-- <view class="award">￥元</view> -->
       </view>
-      <view class="history-item flex-hbox">
+      <view class="history-item flex-hbox" wx:for-items="{{lingqutask}}">
         <view class="info flex-spread">
-          连续签到一周
+          {{item.taskName}}
         </view>
-        <view class="award">￥6元</view>
+        <view class="award">￥{{item.rewardMoney}}元</view>
       </view>
     </view>
   </view>

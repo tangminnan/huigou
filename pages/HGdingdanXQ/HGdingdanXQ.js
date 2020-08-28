@@ -7,7 +7,26 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+
+    orderId:'',
+
+    dingdan:{},
+  },
+
+  getdingdanxx:function(){
+    wx.request({
+      url: 'https://testh5.server012.com/api/home/searchOrderTable',
+      data:{orderId:this.data.orderId},
+      header:{'content-type': 'application/json'},
+      success:res=>{
+        console.info(res.data);
+        if(res.data.code==0){
+          
+        }
+      }
+    })
+
   },
 
   onTapDayWeather() {
@@ -26,7 +45,10 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    this.setData({
+      orderId:options.orderId
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

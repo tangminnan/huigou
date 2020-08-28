@@ -16,6 +16,9 @@ Page({
     orderList:[],
     ifnull:0,
     dian:0,
+
+    orderId:'',
+    retCourierNumber:''
   },
   //切换bar
   navbarTap: function (e) {
@@ -76,12 +79,12 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        //console.info(res.data.data);
+        console.info(res.data);
         
         var ordergood = [];
-        if (res.data.code == 0 && res.data.data != undefined) {
+        if (res.data.code == 0 && res.data.data.length>0) {
           for(var i = 0;i<res.data.data.length;i++){
-            var goodsId = res.data.data[i].orderTables[0].goodsId;
+            var goodsId = res.data.data[i].goodsId;
             var order = res.data.data[i];
             wx.request({
               url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
@@ -128,10 +131,10 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        //console.info(res.data.data);
-        if (res.data.code == 0 && res.data.data != undefined) {
+        console.info(res.data);
+        if (res.data.code == 0 && res.data.data.length>0) {
           for(var i = 0;i<res.data.data.length;i++){
-            var goodsId = res.data.data[i].orderTables[0].goodsId;
+            var goodsId = res.data.data[i].goodsId;
             var order = res.data.data[i];
             wx.request({
               url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
@@ -200,6 +203,34 @@ Page({
     }
   },
 
+  shouhuo:function(e){
+    var orderId = e.currentTarget.dataset.orderId
+    wx.request({
+      method:"POST",
+      url: 'https://testh5.server012.com/api/home/completeOrderById',
+      data:{
+        orderId:orderId
+      },
+      header:{"Content-Type": "application/x-www-form-urlencoded"},
+      success:res=>{
+        if(res.data.code==0){
+          wx.showToast({
+            title: '操作成功',
+            icon: 'success',
+            duration: 2000
+          })
+          this.jiazai();
+        }else{
+          wx.showToast({
+            title: '请稍后重试',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
+
   //高度
   onLoad: function () {
     var that = this
@@ -249,10 +280,18 @@ Page({
       hasUserInfo: true
     })
   },
-  //填写运单号弹框
-  showview: function () {//弹框显示
+
+  danhao:function(e){
     this.setData({
-      model: 1
+      retCourierNumber: e.detail.value
+    })
+  },
+  
+  //填写运单号弹框
+  showview: function (e) {//弹框显示
+    this.setData({
+      model: 1,
+      orderId:e.currentTarget.dataset.orderId
     })
     console.log("111")
   },
@@ -263,12 +302,41 @@ Page({
   },
 
   //============填写运单号成功提示
-  showok:function() {
-    wx.showToast({
-        title: '已完成',
-        icon: 'success',
+  showok:function(e) {
+    if(this.data.retCourierNumber==''){
+      wx.showToast({
+        title: '请输入单号',
+        icon: 'none',
         duration: 2000
+      })
+      return false;
+    }
+    wx.request({
+      method:"POST",
+      url: 'https://testh5.server012.com/api/home/updateOrderTableRetCourierNumber',
+      data:{
+        orderId:this.data.orderId,
+        retCourierNumber:this.data.retCourierNumber
+      },
+      header:{"Content-Type": "application/x-www-form-urlencoded"},
+      success:res=>{
+        if(res.data.code==0){
+          wx.showToast({
+            title: '已完成',
+            icon: 'success',
+            duration: 2000
+          })
+          this.jiazai();
+        }else{
+          wx.showToast({
+            title: '请稍后重试',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      }
     })
+   
   },
 
   //跳转
