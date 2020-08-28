@@ -79,13 +79,15 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        console.info(res.data);
+        //console.info(res.data);
         
         var ordergood = [];
-        if (res.data.code == 0 && res.data.data.length>0) {
+        if (res.data.code == 0 && res.data.data.length != null) {
           for(var i = 0;i<res.data.data.length;i++){
-            var goodsId = res.data.data[i].goodsId;
-            var order = res.data.data[i];
+            for(var j = 0;j<res.data.data[i].orderTables.length;j++){
+              var goodsId = res.data.data[i].orderTables[j].goodsId;
+              var order = res.data.data[i];
+              var orderTables = res.data.data[i].orderTables[j];
             wx.request({
               url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
               data: { goodsId : goodsId},
@@ -94,7 +96,7 @@ Page({
                 //console.info(res.data.data);
                 if(res.data.code == 0){
                   this.setData({
-                    orderList: this.data.orderList.concat({goods:res.data.data,order:order}),
+                    orderList: this.data.orderList.concat({goods:res.data.data,order:order,orderTables:orderTables}),
                     ifnull: 1
                   })
                   //console.info(this.data.orderList);
@@ -102,6 +104,7 @@ Page({
                 }
               }
             })
+            }
             
           }
           
@@ -131,28 +134,30 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        console.info(res.data);
-        if (res.data.code == 0 && res.data.data.length>0) {
+        //console.info(res.data);
+        if (res.data.code == 0 && res.data.data != null) {
           for(var i = 0;i<res.data.data.length;i++){
-            var goodsId = res.data.data[i].goodsId;
-            var order = res.data.data[i];
-            wx.request({
-              url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
-              data: { goodsId : goodsId},
-              header: { 'content-type': 'application/json'},
-              success:res=>{
-                //console.info(res.data.data);
-                if(res.data.code == 0){
-                  this.setData({
-                    orderList: this.data.orderList.concat({goods:res.data.data,order:order}),
-                    ifnull: 1
-                  })
-                  //console.info(this.data.orderList);
-                  //ordergood.concat({goods:res.data.data,order:order})
+            for(var j = 0;j<res.data.data[i].orderTables.length;j++){
+              var goodsId = res.data.data[i].orderTables[j].goodsId;
+              var order = res.data.data[i];
+              var orderTables = res.data.data[i].orderTables[j];
+              wx.request({
+                url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
+                data: { goodsId : goodsId},
+                header: { 'content-type': 'application/json'},
+                success:res=>{
+                  //console.info(res.data.data);
+                  if(res.data.code == 0){
+                    this.setData({
+                      orderList: this.data.orderList.concat({goods:res.data.data,order:order,orderTables:orderTables}),
+                      ifnull: 1
+                    })
+                    //console.info(this.data.orderList);
+                    //ordergood.concat({goods:res.data.data,order:order})
+                  }
                 }
-              }
-            })
-            
+              })
+            }           
           }
           // this.setData({
           //   orderList: res.data.data,
@@ -301,6 +306,14 @@ Page({
     })
   },
 
+  ddxiangq:function(e){
+    var orderId = e.currentTarget.dataset.id
+    var ddzt = e.currentTarget.dataset.ddzt
+    wx.navigateTo({
+      url: '../HGtuihuo/HGtuihuo?orderId='+orderId+'&ddzt='+ddzt,
+    })
+  },
+
   //============填写运单号成功提示
   showok:function(e) {
     if(this.data.retCourierNumber==''){
@@ -347,9 +360,11 @@ Page({
     })
   },
   goPay: function (e) { 
-    var orderId = e.currentTarget.dataset.orderId;
+    var orderId = e.currentTarget.dataset.id;
+    var ddzt = e.currentTarget.dataset.ddzt
+    var addid = e.currentTarget.dataset.addid
     wx.navigateTo({
-      url: '../HGdingdanXQ/HGdingdanXQ?orderId='+orderId,
+      url: '../HGdingdanXQ/HGdingdanXQ?orderId='+orderId+'&ddzt='+ddzt+'&addressId='+addid,
     })
   },
 

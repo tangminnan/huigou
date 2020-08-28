@@ -6,18 +6,24 @@ Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    login_pic:''
+    login_pic:'',
+    shareuId:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.userId!=null){
+      this.setData({
+        shareuId:options.userId
+      })
+    }
     var that = this;
     // 查看是否授权
     wx.getSetting({
       success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
+        if (getApp().globalData.userInfo != null) {//res.authSetting['scope.userInfo']
           wx.getUserInfo({
             success: function (res) {
               //从数据库获取用户信息
@@ -52,21 +58,38 @@ Page({
       var that = this;
       //插入登录的用户的相关信息到数据库
       var openid = getApp().globalData.openid; 
-      wx.request({
-        url: 'https://testh5.server012.com/api/info/addHgUserInfo', 
-        data: {
+      var data={}
+      if(this.data.shareuId==0){
+        data = {
           userName: e.detail.userInfo.nickName,
           sex: e.detail.userInfo.gender,
           userLogo: e.detail.userInfo.avatarUrl,
           phone:'18711111111',
-          invitationNum:1,
           isUser:0,
           labelId:1,
           communityId:1,
           name: e.detail.userInfo.nickName,
           userType:0,
           openId: openid
-        },
+        }
+      }else{
+        data = {
+          userName: e.detail.userInfo.nickName,
+          sex: e.detail.userInfo.gender,
+          userLogo: e.detail.userInfo.avatarUrl,
+          phone:'18711111111',
+          invitationNum:this.data.shareuId,
+          isUser:0,
+          labelId:1,
+          communityId:1,
+          name: e.detail.userInfo.nickName,
+          userType:0,
+          openId: openid
+        }
+      }
+      wx.request({
+        url: 'https://testh5.server012.com/api/info/addHgUserInfo', 
+        data: data,
         header: {
           'content-type': 'application/x-www-form-urlencoded' // 默认值
         },
@@ -79,7 +102,16 @@ Page({
               url: '/pages/mine/mine'
             })
           }else{
-            console.log("写入失败")
+            //console.log("写入失败")
+            getApp().globalData.userInfo == null
+            wx.showToast({
+              title: '请稍后重试',
+              icon:'none',
+              duration:2000
+            })
+            wx.switchTab({
+              url: '/pages/index/index'
+            })
           }
         }
       })

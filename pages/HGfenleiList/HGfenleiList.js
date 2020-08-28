@@ -7,7 +7,7 @@ Page({
   data: {
     changpin:[],
 
-    pageNo: 0, 
+    pageNo: 1, 
     pageSize: 10, 
     searchLoading: false, 
     searchLoadingComplete: false ,
@@ -44,13 +44,47 @@ Page({
 
   },
 
+  searchjieguo:function(options){
+      var searchValue = options.searchValue
+      wx.request({
+        url: 'https://testh5.server012.com/api/home/searchGoodsByName',
+        data: { 
+          name: searchValue ,
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: (res) => {
+          //console.info(res.data);
+          if (res.data.code == 0) {
+            this.setData({
+              changpin: this.data.changpin.concat(res.data.data.list)
+            })
+          }else{
+            wx.switchTab({
+              url: '/pages/index/index'
+            })
+            wx.showToast({
+              title: '没有搜索到东西',
+              icon:'none',
+              duration:2000
+            })
+            
+          }
+        }
+      })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getfenleiList(options);
+    if(options.flag!=null){
+      this.searchjieguo(options);
+    }else{
+      this.getfenleiList(options);
+    }
     
-
     wx.setNavigationBarTitle({
       title: options.flname
     })

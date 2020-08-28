@@ -5,15 +5,15 @@
       <view class="search">  
         <view class="df search_arr">  
           <icon class="searchcion" size='15' color="#fff" type='search'></icon>  
-          <input placeholder-class="holderClass" placeholder="请输入关键字" value="{{searchValue}}"/>  
+          <input placeholder-class="holderClass" placeholder="请输入关键字"  confirm-type="search" bindconfirm="bindconfirm"  focus='{{focus}}' bindinput='searchValue' value="{{searchValue}}"/>  
         </view>  
       </view>  
     </view>  
 </view>
 <!--列表导航-->
 <view class='giftList bg-W mb-24'>
-  <!-- <image class="boshilun" src="/images/boshilun.png" mode='aspectFit'></image> -->
-  <image class="boshilun" src="{{banner}}" mode='aspectFit'></image>
+  <image class="boshilun" src="/images/boshilun.png" mode='aspectFit'></image>
+  <!-- <image class="boshilun" src="{{banner.banner}}" mode='aspectFit' data-id='{{banner.goodsId}}' bindtap='shangpinxq'></image> -->
   <!-- <view class='iconImage'>
     <image src="/images/huiG1.png" mode='aspectFit'></image>
     <text>生鲜</text>

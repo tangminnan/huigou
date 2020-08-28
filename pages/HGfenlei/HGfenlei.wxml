@@ -10,7 +10,7 @@
 <!--主盒子-->
 <view class="container">
     <!-- 左侧栏 -->
-    <view class='nav_left'>
+    <view class='nav_left' style="top: 20rpx;">
         <view wx:for-items="{{fenlei}}" class="nav_left_items {{curNav == index ? 'active' : ''}}"
         bindtap="switchRightTab" data-id="{{index}}" data-fenid="{{item.id}}">
         {{item.name}}
@@ -42,11 +42,13 @@
         </view> -->
     </view>
     <!-- 右侧栏 -->
-    <view class="nav_right">
+    <view class="nav_right" style="top: 20rpx;">
+        <!-- <image class="toppic" style="margin-left: 55rpx;" src="/images/boshilun.png"></image> -->
+        <!-- <image class="boshilun" style="margin-left: 55rpx;" src="{{banner.banner}}" mode='aspectFit' data-id='{{banner.goodsId}}' bindtap='spxqing'></image> -->
         <view  wx:for="{{fenlei}}" wx:if="{{curNav==index}}">
             <view class="nav_right_items" wx:for-items="{{changpin}}" >
                 <!-- <image class="toppic" src="/images/boshilun.png"></image> -->
-                <view class="box"  >
+                <view class="box" style="right: -40rpx;" >
                     <view data-id='{{item.hgGoods.id}}' bindtap='spxqing'>
                         <image class="box_titpic" src="{{item.hgGoodsFiles[0].picture}}"></image>
                         <view class="box_txt">

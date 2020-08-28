@@ -52,6 +52,12 @@ Page({
     })
   },
 
+  tuichu:function(){
+    app.globalData.userInfo==null;
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
+  },
   //跳转
   aboutUs: function () { wx.navigateTo({url: '../HGabout/HGabout',})},
   xieyiTK: function () { wx.navigateTo({url: '../HGxieyi/HGxieyi',})},

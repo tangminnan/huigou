@@ -7,13 +7,34 @@ Page({
   fenlei:[],
   changpin:[],
     fenleiId:0,
+    banner:{},
 
-    pageNo: 0, 
+    pageNo: 1, 
     pageSize: 10, 
     searchLoading: false, 
     searchLoadingComplete: false ,
 
   },
+  //轮播图
+getbanner:function(){
+
+  wx.request({
+    method:'GET',
+    url: 'https://testh5.server012.com/api/home/searchHomeBanner',
+    header: {
+      'content-type': 'application/json' // 默认值
+    },
+    success: (res) => {
+      //console.info(res.data);
+      if(res.data.code==0){
+        this.setData({
+          banner: res.data.data[0]
+        })
+      }
+    }
+  })
+
+},
 //获取分类
 getfenlei:function(){
   wx.request({
@@ -35,6 +56,7 @@ getfenlei:function(){
 },
   onLoad: function (options) {
     this.getfenlei();
+    this.getbanner();
   },
   /* 把点击到的某一项 设为当前curNav */
   switchRightTab:function(e){
@@ -44,7 +66,7 @@ getfenlei:function(){
   this.setData({
     curNav: id,
     changpin:[],
-    pageNum: 0,
+    pageNum: 1,
     pageSize:10
   })
     this.getshangpin(fenid);

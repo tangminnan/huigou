@@ -5,7 +5,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-
+    openSettingBtnHidden: true,//是否授权
     //==================数量加减
     // input默认是1  
     num: 1,  
@@ -74,6 +74,8 @@ gwcnum:0,
 //=========================生成图片分享
 model: 0,//弹框状态
 modelA: 0,//弹框状态
+
+shareuId:0
 
 },  
 
@@ -188,7 +190,12 @@ this.setData({
 ////========================购买底部弹出框===========
   onLoad: function (options) {
     //console.info(options);
-
+    if(options.userId!=null){
+      this.setData({
+        shareuId:options.userId
+      })
+    }
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -295,7 +302,7 @@ getgwcnum:function(){
     wx.request({
       url: 'https://testh5.server012.com/api/cart/getCartCounts',
       data:{
-        userId:this.data.userInfo.id || 45,
+        userId:this.data.userInfo.id,
       },
       header:{'content-type': 'application/json'},
       success:res=>{
@@ -323,7 +330,7 @@ showok:function() {
     }
   })
   var businessId = this.data.merchantsId;
-  var userId = this.data.userInfo.id || 45;
+  var userId = this.data.userInfo.id;
   var goodsId = this.data.goodId;
   var specificationId = this.data.guigeId;
   var count = this.data.num;
@@ -385,6 +392,89 @@ model1: function () {//弹框消失
   })
 },
 
+onShareAppMessage: function (e) {
+  var type = e.target.dataset.type;
+  if(type==1){
+    return {
+      title: this.data.shangpin.title,
+      path: 'pages/HGspXQ/HGspXQ?id=' + this.data.goodId+'&userId='+this.data.userInfo.id,
+      imageUrl: this.data.sptupian[0].picture,
+      success: (res) => {
+        
+      }
+    }
+  }
+  if(type==2){
+    return {
+      title: '惠购',
+      path: 'pages/mine/mine?userId='+this.data.userInfo.id,
+      imageUrl: '',
+      success: (res) => {
+        
+      }
+    }
+  }
+  
+},
+onShareTimeline: function(ops) {
+  return {
+    title: this.data.shangpin.title,
+    path: 'pages/HGspXQ/HGspXQ?id=' + this.data.goodId+'&userId='+this.data.userInfo.id,
+    imageUrl: this.data.sptupian[0].picture,
+  }
+},
+
+
+// 保存图片
+saveImg:function(e){
+  let that = this;
+
+  //获取相册授权
+  wx.getSetting({
+    success(res) {
+      if (!res.authSetting['scope.writePhotosAlbum']) {
+        wx.authorize({
+          scope: 'scope.writePhotosAlbum',
+          success() {
+            //这里是用户同意授权后的回调
+            that.saveImgToLocal();
+          },
+          fail() {//这里是用户拒绝授权后的回调
+            that.setData({
+              openSettingBtnHidden: false
+            })
+          }
+        })
+      } else {//用户已经授权过了
+        that.saveImgToLocal();
+      }
+    }
+  })
+
+},
+saveImgToLocal: function (e) {
+  let that = this;
+
+  let imgSrc = that.data.sptupian.picture[0];
+  wx.downloadFile({
+    url: imgSrc,
+    success: function (res) {
+      console.log(res);
+      //图片保存到本地
+      wx.saveImageToPhotosAlbum({
+        filePath: res.tempFilePath,
+        success: function (data) {
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000
+          })
+        },
+      })
+    }
+  })
+
+},
 
 
 //跳转

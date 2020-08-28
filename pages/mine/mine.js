@@ -15,7 +15,9 @@ Page({
     hgUserInfo: {},
     hgExtensionAccount: {},
 
-    merchantApplyStatus: 0
+    merchantApplyStatus: 0,
+
+    shareuId:0
   },
 
   //获取用户信息
@@ -141,13 +143,27 @@ Page({
   },
 
   onLoad: function (options) {
+    //console.info(app.globalData.userInfo);
+    if(options.userId!=null){
+      this.setData({
+        shareuId:options.userId
+      })
+    }
+    var shareuId = this.data.shareuId;
     wx.getSetting({
       success: function (res) {
-        if (!res.authSetting['scope.userInfo']) {
+        if (app.globalData.userInfo == null || !res.authSetting['scope.userInfo']) {//
           //未登录,跳转到登录页
-          wx.redirectTo({
-            url: '/pages/login/index',
-          })
+          if(shareuId==0){
+            wx.redirectTo({
+              url: '/pages/login/index',
+            })
+          }else{
+            wx.redirectTo({
+              url: '/pages/login/index?shareuId='+shareuId,
+            })
+          }
+          
         }
       }
     })

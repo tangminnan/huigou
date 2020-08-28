@@ -5,17 +5,41 @@ Page({
   data: {
     focus: false,
     inputValue: '',
-    banner:'/images/boshilun.png',
+    banner:{},
     fenleiList:[],
     shangpintop:[],
     shangpintuijian:[],
+    searchValue:'',
 
-    pageNo: 0, 
+    pageNo: 1, 
     pageSize: 10, 
     searchLoading: false, 
     searchLoadingComplete: false ,
 
   },
+
+  searchValue: function (e) {
+    this.setData({
+      searchValue: e.detail.value
+    })
+    //console.log(e.detail.value)
+  },
+
+  // 点击键盘上的搜索
+  bindconfirm:function(e){
+    var that=this;
+    var searchName=e.detail.value['search - input'] ?e.detail.value['search - input'] : e.detail.value 
+    if(searchName==''){
+      wx.showToast({
+        title: '不能为空',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+    wx.navigateTo({ url: '../HGfenleiList/HGfenleiList?searchValue='+searchName+'&flag='+'SS'+'&flname='+'搜索' })
+  },
+
 //轮播图
 getbanner:function(){
 
@@ -29,7 +53,7 @@ getbanner:function(){
       //console.info(res.data);
       if(res.data.code==0){
         this.setData({
-          //banner: res.data.data[0].banner
+          banner: res.data.data[0]
         })
       }
     }
@@ -64,7 +88,7 @@ gettopph: function () {
       'content-type': 'application/json' // 默认值
     },
     data:{
-      pageNum: 0,
+      pageNum: 1,
       pageSize:5
     },
     success: res => {
@@ -123,6 +147,7 @@ gettopph: function () {
       })
       this.getshangpin();
     }
+    //console.info(this.data.pageNo);
   },
 
   shangpinxq:function(e){

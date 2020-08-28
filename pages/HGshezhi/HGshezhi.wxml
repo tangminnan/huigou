@@ -16,4 +16,4 @@
         <view class="arrow"></view>
     </view>
 </view>
-<button class="Tchu">退出登陆</button>
+<button class="Tchu" bindtap="tuichu">退出登陆</button>

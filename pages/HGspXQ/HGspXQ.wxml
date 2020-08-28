@@ -98,7 +98,7 @@
             </view>
         </view>
         <!-- 关闭按钮 -->
-        <view class="close"><image src="/images/close.png"></image></view> 
+        <view class="close" bindtap="hideModal"><image src="/images/close.png"></image></view> 
         <!-- 确定按钮 -->
         <button class="sure" bindtap="showok">确定</button>
   </view>
@@ -109,7 +109,9 @@
   <view class='van-modal' style='height:{{windowHeight}}px;width: {{windowWidth}}px' bindtap='model1A'></view>
   <view class='shareMsg'>
       <view class='share-btn'>
-            <image class='share-icon' src='/images/share-3.png'></image>
+            <button open-type="share" data-type="2" style="width: 96rpx;height: 96rpx;border-radius: 50%;padding: 0;">
+                <image class='share-icon' src='/images/share-3.png'></image>
+            </button>
             <text>分享小程序</text>
       </view>
 
@@ -118,7 +120,7 @@
         <text>分享商品图</text>
     </view>
 
-    <view class="quxiao"><button>取消</button></view>
+    <view class="quxiao" bindtap="model1A"><button>取消</button></view>
   </view>
 </view>
 
@@ -127,16 +129,16 @@
   <view class='van-modal van-modalA' style='height:{{windowHeight}}px;width: {{windowWidth}}px' bindtap='model1'></view>
   <view class='selectedGoodMsg'>
       <view class="sharePic">
-            <view class="name"><image src="/images/touxiang.jpg"></image><text>最靓的仔</text></view>
-            <view class="p1"><image src="/images/PH6.png"></image></view>
+            <view class="name"><image src="{{hasUserInfo.userLogo}}"></image><text>{{hasUserInfo.name}}</text></view>
+            <view class="p1"><image src="{{sptupian[0].picture}}"></image></view>
             <view class="t1">{{shangpin.title}}</view>
-            <view class="t2">￥</view>
+            <view class="t2">￥{{spguige[0].goodsPresentPrice}}</view>
             <view class="p2"><image src="/images/yaoqm.jpg"></image></view>
       </view>
       <view class="shareBtn">
-            <view><image src="/images/share-1.png"></image>保存手机</view>
-            <view><image src="/images/share-2.png"></image>保存手机</view>
-            <view><image src="/images/share-3.png"></image>保存手机</view>
+            <view bindtap="saveImg"><image src="/images/share-1.png"></image>保存手机</view>
+            <view space="ensp"><button open-type="share" data-type="1" style="width: 96rpx;height: 96rpx;border-radius: 50%;padding: 0;"><image src="/images/share-2.png"></image></button>  微信</view>
+            <view space="ensp"><button open-type="share" style="width: 96rpx;height: 96rpx;border-radius: 50%;padding: 0;"><image src="/images/share-3.png"></image></button> 朋友圈</view>
       </view>
   </view>
 </view>

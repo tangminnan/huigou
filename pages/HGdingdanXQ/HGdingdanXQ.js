@@ -1,3 +1,4 @@
+const payApi = require('../../api/pay');
 //index.js
 //获取应用实例
 const app = getApp()
@@ -10,23 +11,62 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
 
     orderId:'',
+    ddzt:0,
+    addressId:0,
 
     dingdan:{},
+    address:{},
+
+    countdown:''
   },
 
-  getdingdanxx:function(){
+  getdingdanxx:function(orderId){
     wx.request({
       url: 'https://testh5.server012.com/api/home/searchOrderTable',
-      data:{orderId:this.data.orderId},
+      data:{orderId:orderId},
       header:{'content-type': 'application/json'},
       success:res=>{
-        console.info(res.data);
+        //console.info(res.data);
         if(res.data.code==0){
-          
+          var createTime = res.data.data.createTime;
+          var ddxq = res.data.data
+          var goodsId = res.data.data.goodsId
+          wx.request({
+            url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
+            data: { goodsId : goodsId},
+            header: { 'content-type': 'application/json'},
+            success:res=>{
+              //console.info(res.data.data);
+              if(res.data.code == 0){
+                this.setData({
+                  dingdan: {goods:res.data.data,ddxq:ddxq},
+                })
+                
+              }
+            }
+          })
+          this.countDown(createTime);
         }
       }
     })
 
+  },
+
+  getaddress:function(addressId){
+    wx.request({
+      url: 'https://testh5.server012.com/api/address/detailAddress',
+      data: { id : addressId},
+      header: { 'content-type': 'application/json'},
+      success:res=>{
+        //console.info(res.data.data);
+        if(res.data.code == 0){
+          this.setData({
+            address: res.data.data,
+          })
+          
+        }
+      }
+    })
   },
 
   onTapDayWeather() {
@@ -47,8 +87,12 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      orderId:options.orderId
+      orderId:options.orderId,
+      ddzt:options.ddzt,
+      addressId:options.addressId
     })
+    this.getdingdanxx(options.orderId);
+    this.getaddress(options.addressId);
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -75,6 +119,17 @@ Page({
         }
       })
     }
+
+    const channel = this.getOpenerEventChannel();
+    if (channel) {
+      channel.on('orderList', data => {
+        console.log('orderList', data)
+        this.setData({
+          ...data
+        });
+      })
+    }
+
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -83,7 +138,141 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+
+
+  
+  shouhuo:function(e){
+    var orderId = this.data.orderId;
+    wx.request({
+      method:"POST",
+      url: 'https://testh5.server012.com/api/home/completeOrderById',
+      data:{
+        orderId:orderId
+      },
+      header:{"Content-Type": "application/x-www-form-urlencoded"},
+      success:res=>{
+        if(res.data.code==0){
+          wx.showToast({
+            title: '操作成功',
+            icon: 'success',
+            duration: 2000
+          })
+          wx.switchTab({
+            url: '../mine/mine'
+          })
+        }else{
+          wx.showToast({
+            title: '请稍后重试',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
+
+  //取消订单
+  quxiao:function(e){
+    var orderId = this.data.orderId;
+    wx.request({
+      method:'POST',
+      url: 'https://testh5.server012.com/api/home/deleteOrderById',
+      data:{orderId:orderId},
+      header:{"Content-Type": "application/x-www-form-urlencoded"},
+      success:res=>{
+        if(res.data.code == 0){
+          wx.showToast({
+            title: '操作成功',
+            icon:'none',
+            duration:2000
+          })
+          wx.switchTab({
+            url: '../mine/mine'
+          })
+        }else{
+          wx.showToast({
+            title: '操作失败,请稍后重试',
+            icon:'none',
+            duration:2000
+          })
+        }
+      }
+    })
+
+  },
+
+    //跳转
+    tuiHuan: function (e) { 
+      var orderId = this.data.orderId;
+      wx.navigateTo({
+        url: '../HGtuihuo/HGtuihuo?orderId='+orderId,
+      })
+    },
+
+    zhifu: async function () {
+      await getApp().getUserInfo();
+      try {
+        await Promise.all(
+          this.data.orderList.map(async order => {
+            await payApi.wxPay({
+              orderNo: order.orderId,
+              type: 1,
+              openId: getApp().globalData.openId,
+            });
+          }))
+  
+        wx.navigateTo({
+          url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}`,
+        })
+      } catch (e) {
+        wx.navigateTo({
+          url: `/pages/shopping-cart/result/index?type=fail`,
+        })
+      }
+    },
+
+  countDown(createTime) {
+    var that = this
+
+    var starttime = createTime
+
+    var start = new Date(starttime.replace(/-/g, "/")).getTime()
+    var endTime = start + 30 * 60000
+
+    var date = new Date(); //现在时间
+    var now = date.getTime(); //现在时间戳
+
+    var allTime = endTime - now
+    var m, s;
+    if (allTime > 0) {
+      m = Math.floor(allTime / 1000 / 60 % 60);
+      s = Math.floor(allTime / 1000 % 60);
+      that.setData({
+        countdown: m + "：" + s,
+      })
+      setTimeout(that.countDown, 1000);
+    } else {
+      console.log('已截止')
+
+    var orderId = this.data.orderId;
+    wx.request({
+      method:'POST',
+      url: 'https://testh5.server012.com/api/home/deleteOrderById',
+      data:{orderId:orderId},
+      header:{"Content-Type": "application/x-www-form-urlencoded"},
+      success:res=>{
+        if(res.data.code == 0){
+            this.getdingdanxx(this.data.orderId);
+        }
+      }
+    })
+      that.setData({
+        countdown: '00:00'
+      })
+    }
+  },
+
 })
 
 
