@@ -1,114 +1,100 @@
-// pages/shopping-cart/order-confirm/index.js
+const payApi = require('../../../api/pay')
+const userApi = require('../../../api/user')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    expressFee: 0,
+    total: 0,
+    shoppingList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const count = options.count || 1;
-    const total = Math.floor(count * 4.2 * 100 + 0.5) / 100
-    this.setData({
-      count,
-      total
-    })
+    const channel = this.getOpenerEventChannel();
+    if (channel) {
+      console.log('shoppingList', channel);
+      channel.on('shoppingList', shoppingList => {
+        console.log('shoppingList', shoppingList);
+        this.setData({
+          shoppingList
+        }, () => {
+          this.setData({
+            total: this.getTotal(),
+            expressFee: this.getTotalExpressFee()
+          })
+        })
+      })
+    }
   },
+  onClickSubmit: async function () {
+    const userInfo = await userApi.getOpenId();
+    await Promise.all(this.data.shoppingList.map(async shop => {
+      const data = await payApi.saveOrder({
+        hgOrder: {
+          addressId: this.data.address.id,
+          payType: 1,
+          userId: userInfo.userId,
+          account: this.getTotal()
+        },
+        hgOrderTables: shop.skuList.map(sku => {
+          return {
+            goodsId: sku.goodsId,
+            merchantsId: shop.shopId,
+            userId: userInfo.userId,
+            goodsNum: sku.count,
+            goodsPrices: sku.price
+          }
+        })
+      })
+      shop.orderId = data.data.orderId;
+    }))
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  onClickSubmit: function () {
     wx.navigateTo({
-      url: `/pages/shopping-cart/order-confirm/index?count=${this.data.count}`,
+      url: `/pages/shopping-cart/order-confirm/index`,
+      success: (res) => {
+        res.eventChannel.emit('orderList', {
+          shoppingList: this.data.shoppingList,
+          address: this.data.address,
+          total: this.data.total,
+          expressFee: this.data.expressFee
+        });
+      }
     })
   },
   onClickChooseAddress: function () {
     wx.navigateTo({
       url: '/pages/HGshouhuoDZ/HGshouhuoDZ',
-      success: function (res) {
+      success: (res) => {
         res.eventChannel.on('choosed_address', address => {
-          console.log('address', address);
+          this.setData({
+            address
+          })
         })
       }
     })
   },
-  onCountChange: function (e) {
-    console.log('e', e);
-    let count = e.detail.value;
-    count = Math.floor(count);
-    count = count < 1 ? 1 : count;
-    count = count > 99 ? 99 : count;
-    const total = Math.floor(count * 4.2 * 100 + 0.5) / 100
-    this.setData({
-      count,
-      total
-    })
+  getTotalExpressFee() {
+    return this.data.shoppingList.reduce((sum, item) => {
+      sum += item.skuList.filter(sku => sku.checked).reduce((s, sku) => {
+        s += sku.expressFee
+        return s;
+      }, 0)
+      return sum;
+    }, 0);
   },
-  decrease: function (e) {
-    const count = this.data.count - 1 < 1 ? 1 : this.data.count - 1;
-    const total = Math.floor(count * 4.2 * 100 + 0.5) / 100
-    this.setData({
-      count,
-      total
-    })
-  },
-  increase: function (e) {
-    const count = this.data.count + 1 > 99 ? this.data.count : this.data.count + 1;
-    const total = Math.floor(count * 4.2 * 100 + 0.5) / 100
-    this.setData({
-      count,
-      total
-    })
-  },
+  getTotal() {
+    return this.data.shoppingList.reduce((sum, item) => {
+      sum += item.skuList.filter(sku => sku.checked).reduce((s, sku) => {
+        s += Math.floor(sku.price * sku.count * 100 + 0.5) / 100
+        return s;
+      }, 0)
+      return sum;
+    }, 0);
+  }
 })

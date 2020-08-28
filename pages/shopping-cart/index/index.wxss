@@ -3,7 +3,7 @@
 }
 
 .scoll-list {
-  height: 100vh;
+  flex: 1;
   overflow: hidden;
   padding-bottom: 150rpx;
 }
@@ -124,4 +124,14 @@
 .hg-checkbox.hg-checkbox__checked {
   background-color: #ff3b30;
   border: 1px solid #ff3b30;
+}
+
+.empty {
+  text-align: center;
+  margin-top: 165rpx;
+}
+.empty image {
+  width: 188rpx;
+  height: 186rpx;
+  margin-bottom: 30rpx;
 }

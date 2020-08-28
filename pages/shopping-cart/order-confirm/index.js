@@ -1,4 +1,5 @@
-// pages/shopping-cart/order-submit/index.js
+const payApi = require('../../../api/pay');
+
 Page({
 
   /**
@@ -12,65 +13,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const count = options.count || 1;
-    const total = Math.floor(count * 4.2 * 100 + 0.5) / 100
-    this.setData({
-      count,
-      total
-    })
+    const channel = this.getOpenerEventChannel();
+    if (channel) {
+      channel.on('orderList', data => {
+        console.log('orderList', data)
+        this.setData({
+          ...data
+        });
+      })
+    }
   },
+  onClickSubmit: async function () {
+    await getApp().getUserInfo();
+    try {
+      await Promise.all(
+        this.data.orderList.map(async order => {
+          await payApi.wxPay({
+            orderNo: order.orderId,
+            type: 1,
+            openId: getApp().globalData.openId,
+          });
+        }))
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  onClickSubmit: function () {
-    wx.navigateTo({
-      url: `/pages/shopping-cart/result/index?count=${this.data.count}`,
-    })
+      wx.navigateTo({
+        url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}`,
+      })
+    } catch (e) {
+      wx.navigateTo({
+        url: `/pages/shopping-cart/result/index?type=fail`,
+      })
+    }
   }
 })

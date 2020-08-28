@@ -72,8 +72,6 @@ Page({
       uploadedImages.push(target);
     }
 
-    console.log('res', res);
-
     this.setData({
       info: {
         ...this.data.info,
@@ -98,6 +96,9 @@ Page({
     const {
       address,
       selectedSexIndex,
+      certification,
+      license,
+      others,
       ...otherInfos
     } = this.data.info;
 

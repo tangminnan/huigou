@@ -10,7 +10,23 @@ Component({
   options: {
     styleIsolation: "apply-shared",
   },
-  data: {},
+  data: {
+    StatusMap: {
+      0: '待商家确认',
+      1: '未出库',
+      2: '配送中',
+      3: '已取消',
+      4: '已完成',
+      5: '换货',
+      6: '退货',
+      7: '退货退款',
+      8: '退货中',
+      9: '退款中',
+      10: '退货完成',
+      11: '退款完成',
+      12: '退货退款完成'
+    }
+  },
   properties: {
     order: {
       type: Object
@@ -25,6 +41,9 @@ Component({
       type: Number
     },
     originTotal: {
+      type: Number
+    },
+    condtion: {
       type: Number
     }
   },

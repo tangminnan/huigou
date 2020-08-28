@@ -11,8 +11,8 @@ async function getMerchantInfo() {
 
 async function applyToBeBusiness(applyInfo) {
   const info = await userApi.getOpenId();
-  return api.postData('/api/business/UpdateUserInfoByBusiness', {
-    userId: info.userId,
+  return api.postJson('/api/business/UpdateUserInfoByBusiness', {
+    id: info.userId,
     ...applyInfo,
   })
 }
@@ -26,10 +26,51 @@ async function setMerchantClass(classifyId) {
   const userInfo = await userApi.getOpenId();
   return api.postData(`/api/business/classifyMerchantsMapping?userId=${userInfo.userId}&classifyIds=${classifyId}`)
 }
+// 0是未通过 1是审核中 2是审核通过
+async function queryApplyStatus() {
+  const userInfo = await userApi.getOpenId();
+  return api.getData(`/api/business/selectBusinessStatus?id=${userInfo.userId}`);
+}
+
+async function getOrderListToBeConfirmed() {
+  const userInfo = await userApi.getOpenId();
+  return api.getData(`/api/business/toBeConfirmed`, {
+    id: userInfo.userId,
+    condition: 0
+  });
+}
+
+async function getOrderList(condition) {
+  const urlMap = {
+    0: '/api/business/toBeConfirmed',
+    1: '/api/business/toBeDelivered',
+    2: '/api/business/delivered',
+    3: '/api/business/returnAndExchangeOfGoods',
+    4: '/api/business/confirmed'
+  }
+  const userInfo = await userApi.getOpenId();
+  return api.getData(urlMap[condition], {
+    id: userInfo.userId,
+    condition
+  });
+}
+
+async function getOrderListByGoodsId() {}
+
+async function getProductListByName() {}
+
+async function getOrderDetail(orderId) {
+  return api.getData('/api/business/checkOrderTable', {
+    id: orderId
+  })
+}
 
 module.exports = {
   getMerchantInfo,
   applyToBeBusiness,
   searchAllClassify,
-  setMerchantClass
+  setMerchantClass,
+  queryApplyStatus,
+  getOrderList,
+  getOrderDetail
 }

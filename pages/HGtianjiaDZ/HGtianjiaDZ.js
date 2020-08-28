@@ -117,7 +117,7 @@ Page({
       method: 'POST',
       url: 'https://testh5.server012.com/api/address/addAddress',
       data: { 
-        userId: this.data.userInfo.id,
+        userId: this.data.userInfo.id || 45,
         recipient: this.data.recipient ,
         phone: this.data.phone,
         region: region1,
