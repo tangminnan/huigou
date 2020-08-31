@@ -20,6 +20,9 @@ Page({
     total: 0
   },
   onShow: async function (options) {
+    this.getCartList()
+  },
+  getCartList: async function () {
     const res = await shoppingApi.getShoppingCartList();
     const list = res.data;
 
@@ -36,6 +39,7 @@ Page({
           goodsId: it.hgSpecifications.goodsId,
           count: 1,
           expressFee: it.expressFee,
+          hgCartId: it.hgCartId
         }
       })
 
@@ -117,7 +121,8 @@ Page({
     }
   },
   toggleSkuChange: function (e) {
-    const shouldIgnore = e.target.dataset.role === 'input' || e.target.dataset.role === 'decrease' || e.target.dataset.role === 'increase';
+    const targetRole = e.target.dataset.role;
+    const shouldIgnore = ['input', 'increase', 'decrease', 'del'].includes(targetRole)
 
     console.log('shouldIgnore', shouldIgnore);
     if (!shouldIgnore) {
@@ -198,5 +203,17 @@ Page({
       }, 0)
       return sum;
     }, 0);
+  },
+  delCartItem: async function (e) {
+    console.log('删除', e.currentTarget.dataset.cartId)
+    try {
+      await shoppingApi.removeShoppingCartItem(e.currentTarget.dataset.cartId)
+      this.getCartList();
+    } catch (e) {
+      wx.showToast({
+        title: '删除失败，请稍后重试',
+        icon: 'none'
+      })
+    }
   }
 })

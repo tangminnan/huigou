@@ -17,7 +17,7 @@
           <view class="product-info flex-vbox flex-spread">
             <view class="flex-hbox flex-spread">
               <text class="flex-spread text-ellipis-2 font-30">{{sku.title}}</text>
-              <text class="iconfont icon-hgshanchu color-888"></text>
+              <text class="iconfont icon-hgshanchu color-888" data-role="del"  data-cart-id="{{sku.hgCartId}}" bindtap="delCartItem"></text>
             </view>
             <view class="flex-hbox">
               <text class="price font-36 font-bold flex-spread">{{sku.price}}</text>

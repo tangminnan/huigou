@@ -12,6 +12,13 @@ async function getShoppingCartList() {
 }
 
 
+async function removeShoppingCartItem(id) {
+  const res = await request.postData('/api/cart/deleteOneMyCart', {
+    id
+  });
+}
+
 module.exports = {
-  getShoppingCartList
+  getShoppingCartList,
+  removeShoppingCartItem
 }

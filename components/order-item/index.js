@@ -34,7 +34,7 @@ Component({
       6: "用户申请退货",
       7: "用户申请退货退款"
     },
-    showPromptModal: true,
+    showPromptModal: false,
     expressNo: ''
   },
   properties: {
@@ -81,7 +81,8 @@ Component({
 
       // const expressNo = "12345678";
       this.setData({
-        showPromptModal: true
+        showPromptModal: true,
+        expressNo: ''
       })
 
     },
