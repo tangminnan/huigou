@@ -14,6 +14,10 @@ Page({
    */
   onLoad: function (options) {
     const channel = this.getOpenerEventChannel();
+    const orderId = options.orderId;
+    this.setData({
+      orderId
+    })
     if (channel) {
       channel.on('orderList', data => {
         console.log('orderList', data)
@@ -26,15 +30,11 @@ Page({
   onClickSubmit: async function () {
     await getApp().getUserInfo();
     try {
-      await Promise.all(
-        this.data.orderList.map(async order => {
-          await payApi.wxPay({
-            orderNo: order.orderId,
-            type: 1,
-            openId: getApp().globalData.openId,
-          });
-        }))
-
+      await payApi.wxPay({
+        orderNo: this.data.orderId,
+        type: 1,
+        openId: getApp().globalData.openId,
+      });
       wx.navigateTo({
         url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}`,
       })

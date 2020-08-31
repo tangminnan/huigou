@@ -1,3 +1,9 @@
+.scoll-list {
+  flex: 1;
+  overflow: hidden;
+  padding-bottom: 150rpx;
+}
+
 .address-panel.address-panel {
   padding: 32rpx;
   margin-top: 32rpx;

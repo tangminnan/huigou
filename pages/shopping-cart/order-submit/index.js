@@ -34,29 +34,38 @@ Page({
   },
   onClickSubmit: async function () {
     const userInfo = await userApi.getOpenId();
-    await Promise.all(this.data.shoppingList.map(async shop => {
-      const data = await payApi.saveOrder({
-        hgOrder: {
-          addressId: this.data.address.id,
-          payType: 1,
+
+    const orderInfo = {
+      hgOrder: {
+        addressId: this.data.address.id,
+        payType: 1,
+        userId: userInfo.userId,
+        account: this.getTotal()
+      },
+      hgOrderTables: []
+    };
+
+    this.data.shoppingList.forEach(shop => {
+      shop.skuList.forEach(sku => {
+        orderInfo.hgOrderTables.push({
+          goodsId: sku.goodsId,
+          merchantsId: shop.shopId,
           userId: userInfo.userId,
-          account: this.getTotal()
-        },
-        hgOrderTables: shop.skuList.map(sku => {
-          return {
-            goodsId: sku.goodsId,
-            merchantsId: shop.shopId,
-            userId: userInfo.userId,
-            goodsNum: sku.count,
-            goodsPrices: sku.price
-          }
+          goodsNum: sku.count,
+          goodsPrices: sku.price
         })
       })
-      shop.orderId = data.data.orderId;
-    }))
+    })
+
+    console.log('待提交订单数据', orderInfo);
+
+    const data = await payApi.saveOrder(orderInfo);
+    
+    console.log('data', data);
+    const orderId = data.data.orderId;
 
     wx.navigateTo({
-      url: `/pages/shopping-cart/order-confirm/index`,
+      url: `/pages/shopping-cart/order-confirm/index?orderId=${orderId}`,
       success: (res) => {
         res.eventChannel.emit('orderList', {
           shoppingList: this.data.shoppingList,

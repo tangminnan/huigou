@@ -1,48 +1,50 @@
 <view class="container">
-  <view class="panel panel-stack address-panel flex-hbox cross-center">
-    <view class="flex-vbox flex-spread">
-      <view class="font-28">{{address.region}}</view>
-      <view class="font-30 font-bold">{{address.detailAddress}}</view>
-      <view class="font-28">{{address.recipient}} {{address.phone}}</view>
+  <scroll-view class="scoll-list">
+    <view class="panel panel-stack address-panel flex-hbox cross-center">
+      <view class="flex-vbox flex-spread">
+        <view class="font-28">{{address.region}}</view>
+        <view class="font-30 font-bold">{{address.detailAddress}}</view>
+        <view class="font-28">{{address.recipient}} {{address.phone}}</view>
+      </view>
     </view>
-  </view>
-  <view class="panel panel-stack merchant-panel" wx:for="{{shoppingList}}" wx:key="{{item.shopId}}">
-    <view class="title font-28 font-bold">{{item.shopName}}</view>
-    <view class="product-item flex-hbox cross-center" wx:for="{{item.skuList}}" wx:for-item="sku"
-      wx:key="{{sku.skuId}}">
-      <image class="product-image" src="{{sku.img}}"></image>
-      <view class="product-info flex-vbox flex-spread">
-        <view class="flex-hbox flex-spread">
-          <text class="flex-spread text-ellipis-2 font-30">{{sku.title}}</text>
+    <view class="panel panel-stack merchant-panel" wx:for="{{shoppingList}}" wx:key="{{item.shopId}}">
+      <view class="title font-28 font-bold">{{item.shopName}}</view>
+      <view class="product-item flex-hbox cross-center" wx:for="{{item.skuList}}" wx:for-item="sku"
+        wx:key="{{sku.skuId}}">
+        <image class="product-image" src="{{sku.img}}"></image>
+        <view class="product-info flex-vbox flex-spread">
+          <view class="flex-hbox flex-spread">
+            <text class="flex-spread text-ellipis-2 font-30">{{sku.title}}</text>
+          </view>
+          <view class="flex-hbox">
+            <text class="price font-36 font-bold flex-spread">¥{{sku.price}}</text>
+            <view class="flex-hbox">x {{sku.count}}</view>
+          </view>
         </view>
-        <view class="flex-hbox">
-          <text class="price font-36 font-bold flex-spread">¥{{sku.price}}</text>
-          <view class="flex-hbox">x {{sku.count}}</view>
+      </view>
+      <view class="order-remark">
+        <view class="title font-28 font-bold">订单备注</view>
+        <view class="content">
+          <text class="font-30 color-999">无</text>
         </view>
       </view>
     </view>
-    <view class="order-remark">
-      <view class="title font-28 font-bold">订单备注</view>
-      <view class="content">
-        <text class="font-30 color-999">无</text>
+    <view class="panel panel-stack express-panel flex-vbox">
+      <view class="flex-hbox">
+        <text class="flex-spread">配送方式</text>
+        <text>快递</text>
+      </view>
+      <view class="flex-hbox mg-t-16">
+        <text class="flex-spread">商品金额</text>
+        <text class="font-28 color-r2328">￥{{total}}</text>
+      </view>
+      <view class="flex-hbox mg-t-16">
+        <text class="flex-spread">运费</text>
+        <text>￥{{expressFee}}</text>
       </view>
     </view>
-  </view>
-  <view class="panel panel-stack express-panel flex-vbox">
-    <view class="flex-hbox">
-      <text class="flex-spread">配送方式</text>
-      <text>快递</text>
+    <view class="fix-btn flex-hbox cross-center">
+      <view class="submit-btn" bindtap="onClickSubmit">立即支付</view>
     </view>
-    <view class="flex-hbox mg-t-16">
-      <text class="flex-spread">商品金额</text>
-      <text class="font-28 color-r2328">￥{{total}}</text>
-    </view>
-    <view class="flex-hbox mg-t-16">
-      <text class="flex-spread">运费</text>
-      <text>￥{{expressFee}}</text>
-    </view>
-  </view>
-  <view class="fix-btn flex-hbox cross-center">
-    <view class="submit-btn" bindtap="onClickSubmit">立即支付</view>
-  </view>
+  </scroll-view>
 </view>
