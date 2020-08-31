@@ -16,6 +16,7 @@ Page({
     lingqusing:[],
     lingqutask:[],
     suoyou:[],
+    syqiandao:[],
     qiandaozt: 1,
     qiandaojd:0,
    
@@ -110,7 +111,21 @@ Page({
       }
     })
   },
-
+  //签到列表
+  getsyqiandao: function () {
+    wx.request({
+      url: 'https://testh5.server012.com/api/home/searchSigns',
+      header: { 'content-type': 'application/json' },
+      success: res => {
+        //console.info(res.data);
+        if (res.data.code == 0) {
+          this.setData({
+            syqiandao: res.data.data
+          })
+        }
+      }
+    })
+  },
  //领取任务
  ling:function(e){
   var taskId = e.currentTarget.dataset.taskId
@@ -201,6 +216,7 @@ Page({
     this.getqdjindu();
     this.getlingqu();
     this.getsuoyou();
+    this.getsyqiandao();
   },
   getUserInfo: function (e) {
     console.log(e)
