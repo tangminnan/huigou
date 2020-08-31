@@ -32,11 +32,12 @@
     <view class="Hlist">
         <image src="/images/gengduo.png" mode='aspectFit'></image>
         <text>店铺简介</text>
-        <view class="DPjj">{{shangjia.introduction}}</view>
+        <view >{{shangjia.introduction}}</view>
+        <!-- class="DPjj" -->
     </view>
     <view class="Hlist bdn">
         <image src="/images/gongju-8.png" mode='aspectFit'></image>
         <text>店铺地址</text>
-        <view class="DPjj">{{shangjia.address}}</view>
+        <view >{{shangjia.address}}</view>
     </view>
 </view>

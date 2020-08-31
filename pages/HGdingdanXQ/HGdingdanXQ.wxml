@@ -73,3 +73,6 @@
 <view wx:if="{{ddzt==4}}" class="fixBtn">
     <button bindtap='tuiHuan'>退换货</button>
 </view>
+<view wx:if="{{ddzt==5}}" class="fixBtn">
+    <button>已取消</button>
+</view>

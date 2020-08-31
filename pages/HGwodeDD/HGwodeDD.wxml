@@ -11,7 +11,7 @@
   <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
         <view class="itemBox" wx:for-items="{{orderList}}">
             <view class="ddHao">
-                <text class="fl">订单号：{{item.order.id}}</text>
+                <text class="fl">订单号：{{item.orderTables.id}}</text>
                 <text wx:if="{{item.order.payStatus==0}}" class="fr c-red">待付款</text>
                 <text wx:elif="{{item.orderTables.distributionStatus==1}}" class="fr c-red">待发货</text>
                 <text wx:elif="{{item.orderTables.distributionStatus==0}}" class="fr c-red">待收货</text>
@@ -26,7 +26,7 @@
                 <text wx:elif="{{item.orderTables.distributionStatus==11}}" class="fr c-red">退款完成</text>
                 <text wx:elif="{{item.orderTables.distributionStatus==12}}" class="fr c-red">退货退款完成</text>
             </view>
-            <view class="ddTxt" bindtap="goPay"  data-id="{{item.order.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
+            <view class="ddTxt" bindtap="goPay"  data-id="{{item.orderTables.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
                 <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
                 <text class="t1">{{item.goods.hgGoods.title}}</text>
                 <text class="t2">x{{item.orderTables.goodsNum}}</text>
@@ -39,13 +39,13 @@
                 </text>
             </view>
             <view wx:if="{{item.order.payStatus==0}}"  class="ddBtn">
-              <text bindtap="quxiao" data-id="{{item.order.id}}">取消订单</text>
-              <view bindtap='goPay' data-id="{{item.order.id}}" data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">去支付</view>
+              <text bindtap="quxiao" data-id="{{item.orderTables.id}}">取消订单</text>
+              <view bindtap='goPay' data-id="{{item.orderTables.id}}" data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">去支付</view>
             </view>
-            <view wx:elif="{{item.orderTables.distributionStatus==1}}" bindtap="quxiao" data-id="{{item.order.id}}" class="ddBtn">取消订单</view>
-            <view wx:elif="{{item.orderTables.distributionStatus==4}}" class="ddBtn"  bindtap='tuiHuan' data-id="{{item.order.id}}" >退换货</view>
+            <view wx:elif="{{item.orderTables.distributionStatus==1}}" bindtap="quxiao" data-id="{{item.orderTables.id}}" class="ddBtn">取消订单</view>
+            <view wx:elif="{{item.orderTables.distributionStatus==4}}" class="ddBtn"  bindtap='tuiHuan' data-id="{{item.orderTables.id}}" >退换货</view>
             <view wx:elif="{{item.orderTables.distributionStatus==0}}" class="ddBtn">
-                <view data-id="{{item.order.id}}" bindtap="shouhuo" >确认收货</view>
+                <view data-id="{{item.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
             </view>
             
 
@@ -105,10 +105,10 @@
         <!--有相关订单-->
         <view class="itemBox" wx:if="{{ifnull==1}}" wx:for-items="{{orderList}}">
             <view class="ddHao">
-                <text class="fl">订单号：{{item.order.id}}</text>
+                <text class="fl">订单号：{{item.orderTables.id}}</text>
                 <text class="fr c-red">待付款</text>
             </view>
-            <view class="ddTxt" bindtap="goPay"  data-id="{{item.order.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
+            <view class="ddTxt" bindtap="goPay"  data-id="{{item.orderTables.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
                 <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
                 <text class="t1">{{item.goods.hgGoods.title}}</text>
                 <text class="t2">x{{item.orderTables.goodsNum}}</text>
@@ -121,8 +121,8 @@
                 </text>
             </view>
             <view class="ddBtn">
-              <text bindtap="quxiao" data-id="{{item.order.id}}">取消订单</text>
-              <view bindtap='goPay' data-id="{{item.order.id}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">去支付</view>
+              <text bindtap="quxiao" data-id="{{item.orderTables.id}}">取消订单</text>
+              <view bindtap='goPay' data-id="{{item.orderTables.id}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">去支付</view>
             </view>
         </view>
         <!--无相关订单-->
@@ -137,13 +137,13 @@
     <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
         <view class="itemBox" wx:if="{{ifnull==1}}" wx:for-items="{{orderList}}">
             <view class="ddHao">
-                <text class="fl">订单号：{{item.order.id}}</text>
+                <text class="fl">订单号：{{item.orderTables.id}}</text>
                 <text class="fr">待收货</text>
             </view>
             <view class="huanhuo">
                 <view>快递单号：{{item.order.courierNumber}}</view>
             </view>
-            <view class="ddTxt"  bindtap="goPay"  data-id="{{item.order.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
+            <view class="ddTxt"  bindtap="goPay"  data-id="{{item.orderTables.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
                 <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
                 <text class="t1">{{item.goods.hgGoods.title}}</text>
                 <text class="t2">x{{item.orderTables.goodsNum}}</text>
@@ -157,7 +157,7 @@
             </view>
             <view class="ddBtn">
               <!-- <text>取消订单</text> -->
-              <view data-id="{{item.order.id}}" bindtap="shouhuo" >确认收货</view>
+              <view data-id="{{item.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
             </view>
         </view>
         <view class="wuXG" wx:if="{{ifnull==0}}" >
@@ -171,10 +171,10 @@
     <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
         <view class="itemBox" wx:if="{{ifnull==1}}"  wx:for-items="{{orderList}}">
             <view class="ddHao">
-                <text class="fl">订单号：{{item.order.id}}</text>
+                <text class="fl">订单号：{{item.orderTables.id}}</text>
                 <text class="fr">已完成</text>
             </view>
-            <view class="ddTxt"  bindtap="goPay"  data-id="{{item.order.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
+            <view class="ddTxt"  bindtap="goPay"  data-id="{{item.orderTables.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
                 <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
                 <text class="t1">{{item.goods.hgGoods.title}}</text>
                 <text class="t2">x{{item.orderTables.goodsNum}}</text>
@@ -186,7 +186,7 @@
                     <text class="t2">¥{{item.orderTables.goodsPrices}}</text>
                 </text>
             </view>
-            <view class="ddBtn" bindtap='tuiHuan' data-id="{{item.order.id}}" >退换货</view>
+            <view class="ddBtn" bindtap='tuiHuan' data-id="{{item.orderTables.id}}" >退换货</view>
         </view>
         <view class="wuXG" wx:if="{{ifnull==0}}" >
             <image src="/images/daifukuan.png"></image>
@@ -202,7 +202,7 @@
                 <text class="fl">{{item.order.id}}</text>
                 <text class="fr c-red">退款待确认</text>
             </view>
-            <view class="ddTxt"  bindtap="goPay"  data-id="{{item.order.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
+            <view class="ddTxt"  bindtap="goPay"  data-id="{{item.orderTables.id}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">
                 <image src="{{item.goods.hgGoodsFiles[0].picture}}"></image>
                 <text class="t1">{{item.goods.hgGoods.title}}</text>
                 <text class="t2">x{{item.orderTables.goodsNum}}</text>
@@ -215,8 +215,8 @@
                 </text>
             </view>
             <view class="ddBtn">
-                <view wx:if="{{item.order.courierNumber==null}}" bindtap='showview' data-id="{{item.order.id}}" >我已发货</view>
-                <view data-id="{{item.order.id}}" bindtap="shouhuo" >确认收货</view>
+                <view wx:if="{{item.order.courierNumber==null}}" bindtap='showview' data-id="{{item.orderTables.id}}" >我已发货</view>
+                <view data-id="{{item.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
             </view>
         </view>
         <!--无相关订单-->

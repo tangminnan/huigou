@@ -61,6 +61,7 @@ Page({
       var data={}
       if(this.data.shareuId==0){
         data = {
+          id:getApp().globalData.userInfo.id,
           userName: e.detail.userInfo.nickName,
           sex: e.detail.userInfo.gender,
           userLogo: e.detail.userInfo.avatarUrl,
@@ -74,6 +75,7 @@ Page({
         }
       }else{
         data = {
+          id:getApp().globalData.userInfo.id,
           userName: e.detail.userInfo.nickName,
           sex: e.detail.userInfo.gender,
           userLogo: e.detail.userInfo.avatarUrl,

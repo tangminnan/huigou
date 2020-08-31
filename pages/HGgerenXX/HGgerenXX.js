@@ -144,7 +144,7 @@ getUserxx:function(){
       'content-type': 'application/json' // 默认值
     },
     success: (res) => {
-      //console.info(res.data);
+      console.info(res.data);
       if (res.data.code == 0) {
         if (res.data.data.userInfo.sex == 0) {
           this.data.sexs[0].checked = true

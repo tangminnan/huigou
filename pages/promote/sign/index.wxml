@@ -15,8 +15,8 @@
       <view class="sign-progress-item">6</view>
       <view class="sign-progress-item">7</view>
     </view>
-    <view wx:if="{{qiandaozt==0}}" class="sign-btn" bindtap="sign">立即签到</view>
-    <view wx:if="{{qiandaozt==1}}" class="sign-btn">已签到</view>
+    <view wx:if="{{qiandaozt==1}}" class="sign-btn" bindtap="sign">立即签到</view>
+    <view wx:if="{{qiandaozt==0}}" class="sign-btn">已签到</view>
   </view>
   <view class="v-body">
     <view class="panel panel-task">

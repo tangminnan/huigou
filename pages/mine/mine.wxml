@@ -49,11 +49,11 @@
   </view>
   <view class="mine_DDlist bdn">
       <view>
-        <p>￥{{hgExtensionAccount.arn}}</p>
+        <p>￥{{hgExtensionAccount.arn==null?0:0}}</p>
         <text>待入账</text>
       </view>
       <view>
-         <p>￥{{hgExtensionAccount.balance}}</p>
+         <p>￥{{hgExtensionAccount.balance==null?0:0}}</p>
         <text>余额</text>
       </view>
       <view class="line"></view>

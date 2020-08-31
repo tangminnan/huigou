@@ -17,7 +17,8 @@ Page({
     dingdan:{},
     address:{},
 
-    countdown:''
+    countdown:'',
+    createTimeif:0
   },
 
   getdingdanxx:function(orderId){
@@ -26,7 +27,7 @@ Page({
       data:{orderId:orderId},
       header:{'content-type': 'application/json'},
       success:res=>{
-        //console.info(res.data);
+        console.info(res.data);
         if(res.data.code==0){
           var createTime = res.data.data.createTime;
           var ddxq = res.data.data
@@ -45,7 +46,9 @@ Page({
               }
             }
           })
-          this.countDown(createTime);
+          if(this.data.createTimeif==0){
+            this.countDown(createTime);
+          }
         }
       }
     })
@@ -254,7 +257,10 @@ Page({
       setTimeout(that.countDown, 1000);
     } else {
       console.log('已截止')
-
+      this.setData({
+        createTimeif: 1,
+        ddzt:5,
+      })
     var orderId = this.data.orderId;
     wx.request({
       method:'POST',

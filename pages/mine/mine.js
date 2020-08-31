@@ -152,7 +152,7 @@ Page({
     var shareuId = this.data.shareuId;
     wx.getSetting({
       success: function (res) {
-        if (app.globalData.userInfo == null || !res.authSetting['scope.userInfo']) {//
+        if (!res.authSetting['scope.userInfo']) {//
           //未登录,跳转到登录页
           if(shareuId==0){
             wx.redirectTo({

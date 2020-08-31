@@ -16,7 +16,7 @@ Page({
     lingqusing:[],
     lingqutask:[],
     suoyou:[],
-    qiandaozt: 0,
+    qiandaozt: 1,
     qiandaojd:0,
    
   },
@@ -49,9 +49,8 @@ Page({
         //console.info(res.data);
         if(res.data.code == 0){
             this.setData({
-              qiandaozt: res.data.type
+              qiandaozt: res.data.data.status
             })
-            
         }
       }
     })
@@ -66,27 +65,32 @@ Page({
       header: { 'content-type': 'application/json' },
       success: res => {
         //console.info(res.data.data);
-        if(res.data.data.task.length>0){
-          for(var i=0;i<res.data.data.task.length;i++){
-            var taskId = res.data.data.task[i].taskId
-            wx.request({
-              url: 'https://testh5.server012.com/api/home/searchTask',
-              data: { taskId: taskId },
-              header: { 'content-type': 'application/json' },
-              success: res => {
-                //console.info(res.data.data);
-                if(res.data.code==0){
-                  this.setData({
-                    lingqutask:this.data.lingqutask.concat(res.data.data)
-                  })
+        if(this.objectIsNullOrNot(res.data.data)){
+          if(res.data.data.hasOwnProperty("task")){
+            for(var i=0;i<res.data.data.task.length;i++){
+              var taskId = res.data.data.task[i].taskId
+              wx.request({
+                url: 'https://testh5.server012.com/api/home/searchTask',
+                data: { taskId: taskId },
+                header: { 'content-type': 'application/json' },
+                success: res => {
+                  //console.info(res.data.data);
+                  if(res.data.code==0){
+                    this.setData({
+                      lingqutask:this.data.lingqutask.concat(res.data.data)
+                    })
+                  }
                 }
-              }
+              })
+            }
+          }
+          if(res.data.data.hasOwnProperty("sing")){
+            this.setData({
+              lingqusing: res.data.data.sing
             })
           }
         }
-          this.setData({
-            lingqusing: res.data.data.sing
-          })
+          
       }
     })
   },
@@ -139,7 +143,9 @@ Page({
   })
 
  },
-
+ objectIsNullOrNot:function(param){
+  return Object.keys(param).length===0? false:true
+},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

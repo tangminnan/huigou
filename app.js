@@ -19,7 +19,8 @@ App({
         openid: app.globalData.openid,
         openId: app.globalData.openid,
         sessionKey: app.globalData.sessionKey,
-        user: app.globalData.user
+        user: app.globalData.user,
+        userInfo: app.globalData.user,
       });
     }
     return new Promise((resolve, reject) => {
@@ -33,11 +34,13 @@ App({
           app.globalData.openId = data.openId;
           app.globalData.sessionKey = data.sessionKey;
           app.globalData.user = data.user;
+          app.globalData.userInfo = data.user;
           resolve({
             openid: app.globalData.openid,
             openId: app.globalData.openid,
             sessionKey: app.globalData.sessionKey,
             user: app.globalData.user,
+            userInfo: app.globalData.user,
           })
         },
         fail(e) {

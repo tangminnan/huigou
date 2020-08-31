@@ -334,7 +334,7 @@ showok:function() {
   var goodsId = this.data.goodId;
   var specificationId = this.data.guigeId;
   var count = this.data.num;
-  console.info(businessId+"=="+userId+"=="+goodsId+"=="+specificationId+"=="+count)
+  //console.info(businessId+"=="+userId+"=="+goodsId+"=="+specificationId+"=="+count)
   wx.request({
     method:"POST",
     url: 'https://testh5.server012.com/api/cart/addMyCart',

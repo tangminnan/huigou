@@ -79,10 +79,10 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        //console.info(res.data);
+        console.info(res.data);
         
         var ordergood = [];
-        if (res.data.code == 0 && res.data.data.length != null) {
+        if (res.data.code == 0 && res.data.data.length >0) {
           for(var i = 0;i<res.data.data.length;i++){
             for(var j = 0;j<res.data.data[i].orderTables.length;j++){
               var goodsId = res.data.data[i].orderTables[j].goodsId;
