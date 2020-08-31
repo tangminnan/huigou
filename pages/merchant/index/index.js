@@ -26,5 +26,10 @@ Page({
     wx.navigateTo({
       url: `/pages/merchant/order/index?type=${type}&goodsId=${goodsId||''}`,
     })
+  },
+  goEditProfile: function(e) {
+    wx.navigateTo({
+      url: '/pages/HGgerenXX/HGgerenXX',
+    })
   }
 })

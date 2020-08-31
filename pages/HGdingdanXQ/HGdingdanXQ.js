@@ -1,4 +1,4 @@
-const payApi = require('../../api/pay');
+const payApi = require('../../api/order');
 //index.js
 //获取应用实例
 const app = getApp()

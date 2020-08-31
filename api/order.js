@@ -25,7 +25,29 @@ async function wxPay(orderInfo) {
 
 }
 
+async function cancelOrder(orderId) {
+  return api.postData('/api/home/deleteOrderById', {
+    orderId
+  })
+}
+
+async function confirmOrder(orderId) {
+  return api.postData('/api/home/confirmOrder', {
+    orderId
+  })
+}
+
+async function updateExpressNo(orderId, expressNo) {
+  return api.postData('/api/home/updateOrderTableCourierNumber', {
+    orderId,
+    courierNumber: expressNo
+  })
+}
+
 module.exports = {
   saveOrder,
-  wxPay
+  wxPay,
+  cancelOrder,
+  confirmOrder,
+  updateExpressNo
 }

@@ -1,3 +1,5 @@
+const orderApi = require('../../api/order')
+
 const statusDescMap = {
   0: '等待发货',
   1: '待确认收货',
@@ -25,7 +27,14 @@ Component({
       10: '退货完成',
       11: '退款完成',
       12: '退货退款完成'
-    }
+    },
+    DistributionStatusDescMap: {
+      5: "用户申请换货",
+      6: "用户申请退货",
+      7: "用户申请退货退款"
+    },
+    showPromptModal: false,
+    expressNo: ''
   },
   properties: {
     order: {
@@ -56,6 +65,22 @@ Component({
           res.eventChannel.emit('order-data', this.data.order);
         }
       })
+    },
+    cancelOrder: async function (e) {
+      const orderId = e.currentTarget.dataset.orderId;
+      const response = await orderApi.cancelOrder(orderId);
+      console.log('response', response);
+    },
+    confirmOrder: async function (e) {
+      const orderId = e.currentTarget.dataset.orderId;
+      const response = await orderApi.confirmOrder(orderId);
+      console.log('response', response);
+    },
+    replyExpressNo: async function (e) {
+      const orderId = e.currentTarget.dataset.orderId;
+      const expressNo = "12345678";
+      const response = await orderApi.updateExpressNo(orderId, expressNo);
+      console.log('response', response);
     }
   }
 })

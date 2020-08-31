@@ -29,15 +29,20 @@
     </view>
   </view>
   <view wx:if="{{mode !== 'info'}}" class="extra flex-hbox cross-center">
-    <view wx:if="{{order.distributionStatus === 5}}" class="desc flex-spread mg-r-16">用户申请换货</view>
-    <view wx:if="{{order.distributionStatus === 6}}" class="desc flex-spread mg-r-16">用户申请退货</view>
-    <view wx:if="{{order.distributionStatus === 7}}" class="desc flex-spread mg-r-16">用户申请退货退款</view>
-
-    <view wx:if="{{order.distributionStatus === 0}}" class="action-btn">取消定案</view>
-    <view wx:if="{{order.distributionStatus === 0}}" class="action-btn">确认订单</view>
-    <view wx:if="{{order.distributionStatus === 1}}" class="action-btn">填写快递单号</view>
-    <view wx:if="{{order.distributionStatus === 5||order.distributionStatus === 6||order.distributionStatus === 7 || distributionStatus === 8}}"
+    <view class="desc flex-spread mg-r-16">
+      {{DistributionStatusDescMap[order.distributionStatus] || ""}}
+    </view>
+    <view wx:if="{{order.distributionStatus === 0}}" class="action-btn" data-order-id="{{order.orderId}}"
+      bindtap="cancelOrder">取消订单</view>
+    <view wx:if="{{order.distributionStatus === 0}}" class="action-btn" data-order-id="{{order.orderId}}"
+      bindtap="confirmOrder">确认订单</view>
+    <view wx:if="{{order.distributionStatus === 1}}" class="action-btn" data-order-id="{{order.orderId}}" bindtap="replyExpressNo">填写快递单号</view>
+    <view
+      wx:if="{{order.distributionStatus === 5||order.distributionStatus === 6||order.distributionStatus === 7 || distributionStatus === 8}}"
       class="action-btn">进入详情</view>
     <view wx:if="{{order.distributionStatus === 9}}" class="action-btn">确认退款</view>
+  </view>
+  <view wx:if="{{showPromptModal}}">
+    
   </view>
 </view>

@@ -1,4 +1,4 @@
-const payApi = require('../../../api/pay');
+const payApi = require('../../../api/order');
 
 Page({
 

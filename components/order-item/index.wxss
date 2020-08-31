@@ -77,4 +77,5 @@
   color: #FF3B2B;
   border-radius: 32rpx;
   padding: 0 32rpx;
+  margin-left: 20rpx;
 }
