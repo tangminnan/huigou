@@ -36,13 +36,18 @@
       bindtap="cancelOrder">取消订单</view>
     <view wx:if="{{order.distributionStatus === 0}}" class="action-btn" data-order-id="{{order.orderId}}"
       bindtap="confirmOrder">确认订单</view>
-    <view wx:if="{{order.distributionStatus === 1}}" class="action-btn" data-order-id="{{order.orderId}}" bindtap="replyExpressNo">填写快递单号</view>
+    <view wx:if="{{order.distributionStatus === 1}}" class="action-btn" bindtap="onShowModal">填写快递单号</view>
     <view
       wx:if="{{order.distributionStatus === 5||order.distributionStatus === 6||order.distributionStatus === 7 || distributionStatus === 8}}"
       class="action-btn">进入详情</view>
     <view wx:if="{{order.distributionStatus === 9}}" class="action-btn">确认退款</view>
   </view>
-  <view wx:if="{{showPromptModal}}">
-    
+  <view wx:if="{{showPromptModal}}" class="modal-container">
+    <view class="modal-mask"></view>
+    <view class="modal-win">
+      <view class="font-28 font-bold">请输入快递单号:</view>
+      <input type="text" value="{{expressNo}}" bindinput="onExpressNoChange" />
+      <view class="btn" data-order-id="{{order.orderId}}" bindtap="onUpdateOrderExpressNo">确定</view>
+    </view>
   </view>
 </view>

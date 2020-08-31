@@ -1,4 +1,5 @@
-const orderApi = require('../../api/order')
+const orderApi = require('../../api/order');
+const order = require('../../api/order');
 
 const statusDescMap = {
   0: '等待发货',
@@ -33,7 +34,7 @@ Component({
       6: "用户申请退货",
       7: "用户申请退货退款"
     },
-    showPromptModal: false,
+    showPromptModal: true,
     expressNo: ''
   },
   properties: {
@@ -76,11 +77,36 @@ Component({
       const response = await orderApi.confirmOrder(orderId);
       console.log('response', response);
     },
-    replyExpressNo: async function (e) {
+    onShowModal: async function (e) {
+
+      // const expressNo = "12345678";
+      this.setData({
+        showPromptModal: true
+      })
+
+    },
+    onExpressNoChange: function (e) {
+      this.setData({
+        expressNo: e.detail.value
+      })
+    },
+    onUpdateOrderExpressNo: async function (e) {
       const orderId = e.currentTarget.dataset.orderId;
-      const expressNo = "12345678";
-      const response = await orderApi.updateExpressNo(orderId, expressNo);
-      console.log('response', response);
+      console.log('orderId', orderId);
+      console.log('expressNo', this.data.expressNo);
+      try {
+        await orderApi.updateExpressNo(orderId, expressNo);
+        wx.showToast({
+          title: '发货成功',
+          icon: 'none'
+        })
+      } catch (e) {
+        wx.showToast({
+          title: '出错了，请稍后再试',
+          icon: 'none'
+        })
+      }
+
     }
   }
 })
