@@ -36,7 +36,8 @@ Page({
   },
   onShow() {
     this.setData({
-      currentTab: app.globalData.currentTab
+      //currentTab: app.globalData.currentTab
+      currentTab: 0
     })
     
   },
@@ -201,6 +202,9 @@ Page({
   },
 
   jiazai:function(){
+    this.setData({
+      orderList: [],
+    })
     if(this.data.currentTab==0){
       this.getUserAllOrder(); 
     }else{
@@ -246,7 +250,7 @@ Page({
         });
       }
     })
-
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

@@ -18,6 +18,7 @@ Page({
     address:{},
 
     countdown:'',
+    createTime:'',
     createTimeif:0
   },
 
@@ -29,6 +30,9 @@ Page({
       success:res=>{
         console.info(res.data);
         if(res.data.code==0){
+          this.setData({
+            createTime: res.data.data.createTime,
+          })
           var createTime = res.data.data.createTime;
           var ddxq = res.data.data
           var goodsId = res.data.data.goodsId
@@ -47,7 +51,7 @@ Page({
             }
           })
           if(this.data.createTimeif==0){
-            this.countDown(createTime);
+            this.countDown();
           }
         }
       }
@@ -235,10 +239,10 @@ Page({
       }
     },
 
-  countDown(createTime) {
+  countDown() {
     var that = this
 
-    var starttime = createTime
+    var starttime = this.data.createTime
 
     var start = new Date(starttime.replace(/-/g, "/")).getTime()
     var endTime = start + 30 * 60000

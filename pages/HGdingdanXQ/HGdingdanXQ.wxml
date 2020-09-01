@@ -6,6 +6,7 @@
         <text wx:if="{{ddzt==1}}">待发货</text>
         <text wx:if="{{ddzt==0}}">待收货</text>
         <text wx:if="{{ddzt==4}}">已完成</text>
+        <text wx:if="{{ddzt==5}}">已取消</text>
     </view>
     <view class="tishi">30分钟内未付款，系统自动取消订单</view>
     <view class="tishi">{{countdown}}</view>
