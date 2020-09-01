@@ -44,10 +44,16 @@
             </view>
             <view wx:elif="{{item.orderTables.distributionStatus==1}}" bindtap="quxiao" data-id="{{item.orderTables.id}}" class="ddBtn">取消订单</view>
             <view wx:elif="{{item.orderTables.distributionStatus==4}}" class="ddBtn"  bindtap='tuiHuan' data-id="{{item.orderTables.id}}" >退换货</view>
-            <view wx:elif="{{item.orderTables.distributionStatus==0}}" class="ddBtn">
+            <view wx:elif="{{item.orderTables.distributionStatus==0 || item.orderTables.distributionStatus==12}}" class="ddBtn">
                 <view data-id="{{item.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
             </view>
-            
+            <view wx:elif="{{item.orderTables.distributionStatus==3}}" class="ddBtn"  data-id="{{item.orderTables.id}}" >已取消</view>
+            <view wx:elif="{{item.orderTables.distributionStatus==5 || item.orderTables.distributionStatus==6 || item.orderTables.distributionStatus==7}}" class="ddBtn">
+                <view data-id="{{item.orderTables.id}}" bindtap="showview" >我已发货</view>
+            </view>
+            <view wx:elif="{{item.orderTables.distributionStatus==8 || item.orderTables.distributionStatus==9}}" class="ddBtn">
+                <view data-id="{{item.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
+            </view>
 
         </view>
 <!--  

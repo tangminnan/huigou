@@ -61,37 +61,16 @@ Page({
   //领取记录
   getlingqu:function(){
     wx.request({
-      url: 'https://testh5.server012.com/api/home/taskRecord',
+      url: 'https://testh5.server012.com/api/home/searchUserBill',
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
         //console.info(res.data.data);
-        if(this.objectIsNullOrNot(res.data.data)){
-          if(res.data.data.hasOwnProperty("task")){
-            for(var i=0;i<res.data.data.task.length;i++){
-              var taskId = res.data.data.task[i].taskId
-              wx.request({
-                url: 'https://testh5.server012.com/api/home/searchTask',
-                data: { taskId: taskId },
-                header: { 'content-type': 'application/json' },
-                success: res => {
-                  //console.info(res.data.data);
-                  if(res.data.code==0){
-                    this.setData({
-                      lingqutask:this.data.lingqutask.concat(res.data.data)
-                    })
-                  }
-                }
-              })
-            }
-          }
-          if(res.data.data.hasOwnProperty("sing")){
-            this.setData({
-              lingqusing: res.data.data.sing
-            })
-          }
-        }
-          
+        if(res.data.data.length>0){
+          this.setData({
+            lingqutask:res.data.data
+          })
+        }          
       }
     })
   },
