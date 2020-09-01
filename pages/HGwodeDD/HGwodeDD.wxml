@@ -9,11 +9,34 @@
   <!--全部-->
   <swiper-item>
   <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot"> 
-        <view class="itemBox" wx:for-items="{{orderList}}">
-            <view class="ddHao">
+        <view class="itemBox" wx:for-items="{{orderList}}" >
+            <view wx:if="{{item.order.payStatus==0}}">
+            <view class="ddHao" style="margin-bottom:0;"   bindtap="goPay"  data-id="{{item.order.orderId}}"  data-addid="{{item.order.addressId}}" data-ddzt="{{99}}">
+                <text class="fl">订单号：{{item.order.orderId}}</text>
+                <text class="fr c-red">待发货</text>
+            </view>
+            <view class="ddTxt" style="width: 100%;padding-top:20rpx;" wx:for-items="{{item.order.orderTables}}">
+                <image src="{{item.params.hgGoodsFiles[0].picture}}"></image>
+                <text class="t1">{{item.params.hgGoods.title}}</text>
+                <text class="t2">¥{{item.goodsPrices}}</text>
+                <text class="t1" style="float: right;width: 80rpx;">x{{item.goodsNum}}</text>
+            </view>
+            <view class="ddtime">
+                <text class="fl">{{item.order.createTime}}</text>
+                <text class="fr">
+                    <text class="t2">¥{{item.order.account}}</text>
+                </text>
+            </view>
+            <view class="ddBtn">
+              <text bindtap="quxiao" data-id="{{item.order.orderId}}">取消订单</text>
+              <view bindtap='goPay' data-id="{{item.order.orderId}}" data-addid="{{item.order.addressId}}" data-ddzt="{{99}}">去支付</view>
+            </view>
+            </view>
+            <view  wx:else>
+            <view class="ddHao" >
                 <text class="fl">订单号：{{item.orderTables.id}}</text>
-                <text wx:if="{{item.order.payStatus==0}}" class="fr c-red">待付款</text>
-                <text wx:elif="{{item.orderTables.distributionStatus==1}}" class="fr c-red">待发货</text>
+                <!-- <text wx:if="{{item.order.payStatus==0}}" class="fr c-red">待付款</text> -->
+                <text wx:if="{{item.orderTables.distributionStatus==1}}" class="fr c-red">待发货</text>
                 <text wx:elif="{{item.orderTables.distributionStatus==0}}" class="fr c-red">待收货</text>
                 <text wx:elif="{{item.orderTables.distributionStatus==3}}" class="fr c-red">已取消</text>
                 <text wx:elif="{{item.orderTables.distributionStatus==4}}" class="fr c-red">已完成</text>
@@ -38,11 +61,11 @@
                     <text class="t2">¥{{item.orderTables.goodsPrices}}</text>
                 </text>
             </view>
-            <view wx:if="{{item.order.payStatus==0}}"  class="ddBtn">
+            <!-- <view wx:if="{{item.order.payStatus==0}}"  class="ddBtn">
               <text bindtap="quxiao" data-id="{{item.orderTables.id}}">取消订单</text>
               <view bindtap='goPay' data-id="{{item.orderTables.id}}" data-addid="{{item.order.addressId}}" data-ddzt="{{item.order.payStatus==0?99:item.orderTables.distributionStatus}}">去支付</view>
-            </view>
-            <view wx:elif="{{item.orderTables.distributionStatus==1}}" bindtap="quxiao" data-id="{{item.orderTables.id}}" class="ddBtn">取消订单</view>
+            </view> -->
+            <view wx:if="{{item.orderTables.distributionStatus==1}}" bindtap="quxiao" data-id="{{item.orderTables.id}}" class="ddBtn">取消订单</view>
             <view wx:elif="{{item.orderTables.distributionStatus==4}}" class="ddBtn"  bindtap='tuiHuan' data-id="{{item.orderTables.id}}" >退换货</view>
             <view wx:elif="{{item.orderTables.distributionStatus==0 || item.orderTables.distributionStatus==12}}" class="ddBtn">
                 <view data-id="{{item.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
@@ -54,7 +77,7 @@
             <view wx:elif="{{item.orderTables.distributionStatus==8 || item.orderTables.distributionStatus==9}}" class="ddBtn">
                 <view data-id="{{item.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
             </view>
-
+        </view>
         </view>
 <!--  
         <view class="itemBox">

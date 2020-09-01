@@ -15,6 +15,7 @@ Page({
     addressId:0,
 
     dingdan:{},
+    goods:[],
     address:{},
 
     countdown:'',
@@ -28,7 +29,7 @@ Page({
       data:{orderId:orderId},
       header:{'content-type': 'application/json'},
       success:res=>{
-        console.info(res.data);
+        //console.info(res.data);
         if(res.data.code==0){
           this.setData({
             createTime: res.data.data.createTime,
@@ -44,12 +45,59 @@ Page({
               //console.info(res.data.data);
               if(res.data.code == 0){
                 this.setData({
-                  dingdan: {goods:res.data.data,ddxq:ddxq},
+                  goods: res.data.data,
+                  dingdan: ddxq
                 })
                 
               }
             }
           })
+          if(this.data.createTimeif==0){
+            this.countDown();
+          }
+        }
+      }
+    })
+
+  },
+
+  
+  getfudingdanxx:function(orderId){
+    wx.request({
+      url: 'https://testh5.server012.com/api/home/searchOrderById',
+      data:{orderId:orderId},
+      header:{'content-type': 'application/json'},
+      success:res=>{
+        //console.info(res.data);
+        if(res.data.code==0){
+          this.setData({
+            createTime: res.data.data.hgOrder.createTime,
+          })
+          let createTime = res.data.data.hgOrder.createTime;
+          let ddxq = res.data.data.hgOrder
+          for(let i = 0;i<res.data.data.tableList.length;i++){
+            let goods = res.data.data.tableList[i]
+            let goodsId = res.data.data.tableList[i].goodsId
+            wx.request({
+              url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
+              data: { goodsId : goodsId},
+              header: { 'content-type': 'application/json'},
+              success:res=>{
+                //console.info(res.data.data);
+                if(res.data.code == 0){
+                  goods.params=res.data.data
+                  this.setData({
+                    goods: this.data.goods.concat(goods),
+                    dingdan: ddxq
+                  })
+                  console.info(this.data.dingdan)
+                  console.info(this.data.goods)
+
+                }
+              }
+            })
+          }     
+          
           if(this.data.createTimeif==0){
             this.countDown();
           }
@@ -98,7 +146,11 @@ Page({
       ddzt:options.ddzt,
       addressId:options.addressId
     })
-    this.getdingdanxx(options.orderId);
+    if(options.ddzt==99){
+      this.getfudingdanxx(options.orderId);
+    }else{
+      this.getdingdanxx(options.orderId);
+    }
     this.getaddress(options.addressId);
     if (app.globalData.userInfo) {
       this.setData({

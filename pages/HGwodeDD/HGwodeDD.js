@@ -80,33 +80,43 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        console.info(res.data);
+        //console.info(res.data);
         
         var ordergood = [];
         if (res.data.code == 0 && res.data.data.length >0) {
-          for(var i = 0;i<res.data.data.length;i++){
-            for(var j = 0;j<res.data.data[i].orderTables.length;j++){
-              var goodsId = res.data.data[i].orderTables[j].goodsId;
-              var order = res.data.data[i];
-              var orderTables = res.data.data[i].orderTables[j];
+          for(let i = 0;i<res.data.data.length;i++){
+            let order;
+            for(let j = 0;j<res.data.data[i].orderTables.length;j++){
+              let goodsId = res.data.data[i].orderTables[j].goodsId;
+              order = res.data.data[i];
+              let orderTables = res.data.data[i].orderTables[j];
             wx.request({
               url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
               data: { goodsId : goodsId},
               header: { 'content-type': 'application/json'},
-              success:res=>{
+              success:ress=>{
                 //console.info(res.data.data);
-                if(res.data.code == 0){
-                  this.setData({
-                    orderList: this.data.orderList.concat({goods:res.data.data,order:order,orderTables:orderTables}),
-                    ifnull: 1
-                  })
+                if(ress.data.code == 0){
+                  if(order.payStatus==0){
+                    order.orderTables[j].params = ress.data.data
+                  }else{
+                    this.setData({
+                      orderList: this.data.orderList.concat({goods:ress.data.data,order:order,orderTables:orderTables}),
+                      ifnull: 1
+                    })
+                  }
+                  
                   //console.info(this.data.orderList);
                   //ordergood.concat({goods:res.data.data,order:order})
                 }
               }
             })
             }
-            
+            this.setData({
+              orderList: this.data.orderList.concat({order:order}),
+              ifnull: 1
+            })
+            //console.info(this.data.orderList);
           }
           
           // this.setData({
@@ -137,11 +147,12 @@ Page({
       success: (res) => {
         //console.info(res.data);
         if (res.data.code == 0 && res.data.data != null) {
-          for(var i = 0;i<res.data.data.length;i++){
-            for(var j = 0;j<res.data.data[i].orderTables.length;j++){
-              var goodsId = res.data.data[i].orderTables[j].goodsId;
-              var order = res.data.data[i];
-              var orderTables = res.data.data[i].orderTables[j];
+          for(let i = 0;i<res.data.data.length;i++){
+            let order;
+            for(let j = 0;j<res.data.data[i].orderTables.length;j++){
+              let goodsId = res.data.data[i].orderTables[j].goodsId;
+              order = res.data.data[i];
+              let orderTables = res.data.data[i].orderTables[j];
               wx.request({
                 url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
                 data: { goodsId : goodsId},
@@ -149,16 +160,25 @@ Page({
                 success:res=>{
                   //console.info(res.data.data);
                   if(res.data.code == 0){
+                  if(condition==0){
+                    order.orderTables[j].params = ress.data.data
+                  }else{
                     this.setData({
                       orderList: this.data.orderList.concat({goods:res.data.data,order:order,orderTables:orderTables}),
                       ifnull: 1
                     })
+                  }
+                   
                     //console.info(this.data.orderList);
                     //ordergood.concat({goods:res.data.data,order:order})
                   }
                 }
               })
-            }           
+            }      
+            this.setData({
+              orderList: this.data.orderList.concat({order:order}),
+              ifnull: 1
+            })     
           }
           // this.setData({
           //   orderList: res.data.data,
@@ -222,6 +242,7 @@ Page({
       },
       header:{"Content-Type": "application/x-www-form-urlencoded"},
       success:res=>{
+        console.info(res.data)
         if(res.data.code==0){
           wx.showToast({
             title: '操作成功',
