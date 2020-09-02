@@ -1,5 +1,6 @@
 const payApi = require('../../../api/order')
 const userApi = require('../../../api/user')
+const addressApi = require('../../../api/address');
 
 Page({
 
@@ -29,6 +30,24 @@ Page({
             expressFee: this.getTotalExpressFee()
           })
         })
+      })
+    }
+    this.setDefaultAddress();
+  },
+  setDefaultAddress: async function () {
+    let data;
+    try {
+      data = await addressApi.getAddressList();
+      console.log('data', data);
+    } catch (e) {
+      console.log('ignore error')
+      return;
+    }
+    if (!this.data.address && data.data && data.data.length) {
+      let defaultAddress = data.data.find(item => item.isDefault);
+      defaultAddress = defaultAddress || data.data[0];
+      this.setData({
+        address: defaultAddress
       })
     }
   },
@@ -73,7 +92,7 @@ Page({
     let data;
     try {
       data = await payApi.saveOrder(orderInfo);
-    } catch(e) {
+    } catch (e) {
       console.log(e)
       wx.showToast({
         title: e && e.msg || '出错了，请稍后再试',
@@ -81,7 +100,7 @@ Page({
       });
       return;
     }
-    
+
     console.log('data', data);
     const orderId = data.data.orderId;
 
