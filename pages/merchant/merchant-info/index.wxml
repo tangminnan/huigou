@@ -58,10 +58,10 @@
         <block wx:if="{{info.certification && info.certification.length}}">
           <image wx:for="{{info.auth}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
-        <block wx:else>
-          <mp-icon icon="add" size="48" color="#999"></mp-icon>
-          <text>只支持.jpg格式</text>
-        </block>
+        <view class="addbtn" wx:else>
+            <mp-icon icon="add" size="48" color="#999"></mp-icon>
+            <text>只支持.jpg格式</text>
+          </view>
       </view>
     </view>
     <view class="img-uploader">
@@ -70,10 +70,10 @@
         <block wx:if="{{info.license && info.license.length}}">
           <image wx:for="{{info.license}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
-        <block wx:else>
+        <view class="addbtn" wx:else>
           <mp-icon icon="add" size="48" color="#999"></mp-icon>
           <text>只支持.jpg格式</text>
-        </block>
+        </view>
       </view>
     </view>
     <view class="img-uploader">
@@ -82,10 +82,10 @@
         <block wx:if="{{info.others && info.others.length}}">
           <image wx:for="{{info.others}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
-        <block wx:else>
+        <view class="addbtn" wx:if="{{!info.others || info.others.length < 10}}">
           <mp-icon icon="add" size="48" color="#999"></mp-icon>
           <text>只支持.jpg格式</text>
-        </block>
+        </view>
       </view>
     </view>
   </block>
@@ -94,12 +94,12 @@
       <view class="img-uploader-title">营业执照上传</view>
       <view class="img-uploader-btn" data-type="0" data-field="license" bindtap="onUploadImage">
         <block wx:if="{{info.license && info.license.length}}">
-          <image wx:for="{{info.license}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
+          <image mode="aspectFill" wx:for="{{info.license}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
-        <block wx:else>
+        <view class="addbtn" wx:else>
           <mp-icon icon="add" size="48" color="#999"></mp-icon>
           <text>只支持.jpg格式</text>
-        </block>
+        </view>
       </view>
     </view>
     <view class="img-uploader">
@@ -108,10 +108,10 @@
         <block wx:if="{{info.otherAuth && info.otherAuth.length}}">
           <image wx:for="{{info.otherAuth}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
-        <block wx:else>
+        <view class="addbtn" wx:else>
           <mp-icon icon="add" size="48" color="#999"></mp-icon>
           <text>只支持.jpg格式</text>
-        </block>
+        </view>
       </view>
     </view>
     <view class="img-uploader">
@@ -120,10 +120,10 @@
         <block wx:if="{{info.others && info.others.length}}">
           <image wx:for="{{info.others}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
-        <block wx:else>
+        <view class="addbtn" wx:if="{{!info.others || info.others.length < 10}}">
           <mp-icon icon="add" size="48" color="#999"></mp-icon>
           <text>只支持.jpg格式</text>
-        </block>
+        </view>
       </view>
     </view>
   </block>
@@ -146,6 +146,6 @@
     </checkbox-group>
 	</mp-form>
   <view class="next-btn">
-      <button class="weui-btn" type="primary" bindtap="submitForm">下一步</button>
+      <button disabled="{{!info.isAgree}}" class="weui-btn" type="primary" bindtap="submitForm">下一步</button>
   </view>
 </view>

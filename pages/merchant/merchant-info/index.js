@@ -19,7 +19,7 @@ Page({
   },
   onLoad: function (options) {
     console.log('options.businessType', options.businessType);
-    const businessType = options.businessType || 1;
+    const businessType = options.businessType === undefined ? 1 : options.businessType;
     this.setData({
       businessType
     });
@@ -57,7 +57,7 @@ Page({
     const type = e.currentTarget.dataset.type;
     let count = e.currentTarget.dataset.count;
     count = isNaN(count) ? 1 : +count;
-    console.log(field, type, count);
+
     const images = await wx.chooseImage({
       count,
       sizeType: ["compressed"],
@@ -68,10 +68,22 @@ Page({
     const uploadedImages = [];
     for (let i = 0, len = images.tempFilePaths.length; i < len; i++) {
       const target = images.tempFilePaths[i];
-      await requestApi.saveImage(target, userInfo.userId, type, 0)
-      uploadedImages.push(target);
+      wx.showLoading({
+        title: '上传中',
+      })
+      try {
+        await requestApi.saveImage(target, userInfo.userId, type, 0)
+        uploadedImages.push(target);
+        wx.hideLoading()
+      } catch (e) {
+        wx.hideLoading()
+        wx.showToast({
+          title: '部分图片上传失败，请稍后重试',
+          icon: 'none'
+        })
+      }
     }
-
+    console.log(field, type, count, uploadedImages);
     this.setData({
       info: {
         ...this.data.info,
@@ -90,17 +102,59 @@ Page({
   submitForm: async function () {
     console.log('info', this.data.info);
 
-    // validate
-
-
     const {
       address,
       selectedSexIndex,
       certification,
       license,
+      otherAuth,
       others,
       ...otherInfos
     } = this.data.info;
+
+    if (!certification || !certification.length) {
+      return wx.showToast({
+        title: '请上传品牌授权',
+        icon: 'none'
+      })
+    }
+    if (!license || !license.length) {
+      return wx.showToast({
+        title: '请上传营业支招',
+        icon: 'none'
+      })
+    }
+    if (!otherAuth || !otherAuth.length) {
+      return wx.showToast({
+        title: '请上传相关证照',
+        icon: 'none'
+      })
+    }
+
+    if (!address) {
+      return wx.showToast({
+        title: '请选择地址',
+        icon: 'none'
+      })
+    }
+    if (!otherInfos.phone) {
+      return wx.showToast({
+        title: '请输入手机号码',
+        icon: 'none'
+      })
+    }
+    if (!otherInfos.shopName) {
+      return wx.showToast({
+        title: '请输入店铺名称',
+        icon: 'none'
+      })
+    }
+    if (!otherInfos.introduction) {
+      return wx.showToast({
+        title: '请输入店铺说明',
+        icon: 'none'
+      })
+    }
 
     const submitData = {
       ...otherInfos,

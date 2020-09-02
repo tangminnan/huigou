@@ -53,6 +53,10 @@
   background: linear-gradient(270deg, rgba(255, 94, 77, 1) 0%, rgba(255, 59, 48, 1) 100%);
 }
 
+.next-btn button.weui-btn[disabled] {
+  background: linear-gradient(270deg, rgba(255, 94, 77, .4) 0%, rgba(255, 59, 48, .4) 100%);
+}
+
 .img-uploader {
   margin-top: 24rpx;
   padding: 0 32rpx;
@@ -66,7 +70,7 @@
 .img-uploader .img-uploader-btn {
   background-color: #fff;
   border-radius: 8rpx;
-  height: 336rpx;
+  min-height: 336rpx;
   width: 686rpx;
   border: 1px dashed #ccc;
   display: flex;
@@ -74,13 +78,19 @@
   justify-content: center;
   align-items: center;
 }
-
 .img-uploader .img-uploader-btn image {
-  width: 96rpx;
-  height: 96rpx;
+  width: 400rpx;
+  height: 300rpx;
+  flex: 0 0 300rpx;
+  margin: 30rpx 0;
 }
-
-.img-uploader .img-uploader-btn text {
+.img-uploader .addbtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.img-uploader .addbtn text {
   color: #999;
   font-size: 24rpx;
   margin-top: 24rpx;

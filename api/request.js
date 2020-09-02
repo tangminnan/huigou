@@ -61,7 +61,14 @@ async function uploadImage({
           statusCode,
           data
         } = res;
-        const parsedData = JSON.parse(data);
+        let parsedData;
+        try {
+          parsedData = JSON.parse(data);
+        } catch (e) {
+          reject({
+            msg: '出错了，请稍后重试'
+          });
+        }
         if (isSuccess(statusCode) && parsedData && parsedData.code == 0) {
           return resolve(parsedData.fileUrl);
         }
