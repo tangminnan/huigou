@@ -32,13 +32,13 @@ async function request(url, params, options) {
           statusCode,
           data
         } = res;
-        const hasOwnCode = data && Object.prototype.hasOwnProperty('code') && !isNaN(code);
+        const hasOwnCode = data && Object.prototype.hasOwnProperty.call(data, 'code') && !isNaN(data.code);
         if (isSuccess(statusCode)) {
           if ((hasOwnCode && data.code === 0) || !hasOwnCode) {
             return resolve(data);
           }
         }
-        reject(res);
+        reject(data);
       },
       fail(error) {
         reject(error);

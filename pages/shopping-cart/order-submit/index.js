@@ -35,12 +35,23 @@ Page({
   onClickSubmit: async function () {
     const userInfo = await userApi.getOpenId();
 
+    const total = this.getTotal();
+    const expressFee = this.getTotalExpressFee();
+
+    if (!this.data.address) {
+      wx.showToast({
+        title: '请选择收货地址',
+        icon: 'none'
+      });
+      return;
+    }
+
     const orderInfo = {
       hgOrder: {
         addressId: this.data.address.id,
         payType: 1,
         userId: userInfo.userId,
-        account: this.getTotal()
+        account: total + expressFee
       },
       hgOrderTables: []
     };
@@ -59,7 +70,17 @@ Page({
 
     console.log('待提交订单数据', orderInfo);
 
-    const data = await payApi.saveOrder(orderInfo);
+    let data;
+    try {
+      data = await payApi.saveOrder(orderInfo);
+    } catch(e) {
+      console.log(e)
+      wx.showToast({
+        title: e && e.msg || '出错了，请稍后再试',
+        icon: 'none'
+      });
+      return;
+    }
     
     console.log('data', data);
     const orderId = data.data.orderId;
@@ -90,7 +111,7 @@ Page({
   },
   getTotalExpressFee() {
     return this.data.shoppingList.reduce((sum, item) => {
-      sum += item.skuList.filter(sku => sku.checked).reduce((s, sku) => {
+      sum += item.skuList.reduce((s, sku) => {
         s += sku.expressFee
         return s;
       }, 0)
@@ -99,7 +120,7 @@ Page({
   },
   getTotal() {
     return this.data.shoppingList.reduce((sum, item) => {
-      sum += item.skuList.filter(sku => sku.checked).reduce((s, sku) => {
+      sum += item.skuList.reduce((s, sku) => {
         s += Math.floor(sku.price * sku.count * 100 + 0.5) / 100
         return s;
       }, 0)
