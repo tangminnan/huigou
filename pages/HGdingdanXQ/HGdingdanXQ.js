@@ -15,7 +15,11 @@ Page({
     addressId:0,
 
     dingdan:{},
+    goods:[],
     address:{},
+    jine:0,
+    yunfei:0,
+    type:0,
 
     countdown:'',
     createTime:'',
@@ -32,6 +36,7 @@ Page({
         if(res.data.code==0){
           this.setData({
             createTime: res.data.data.createTime,
+            type:0
           })
           var createTime = res.data.data.createTime;
           var ddxq = res.data.data
@@ -50,6 +55,56 @@ Page({
               }
             }
           })
+          if(this.data.createTimeif==0){
+            this.countDown();
+          }
+        }
+      }
+    })
+
+  },
+
+  getfudingdanxx:function(orderId){
+    console.info(orderId);
+    wx.request({
+      url: 'https://testh5.server012.com/api/home/searchOrderById',
+      data:{orderId:orderId},
+      header:{'content-type': 'application/json'},
+      success:res=>{
+        console.info(res.data);
+        if(res.data.code==0){
+          this.setData({
+            createTime: res.data.data.hgOrder.createTime,
+            type:1
+          })
+          var createTime = res.data.data.hgOrder.createTime;
+          var ddxq = res.data.data.hgOrder
+          
+          for(let i =0;i<res.data.data.tableList.length;i++){
+            var goodsId = res.data.data.tableList[i].goodsId
+            var dd = res.data.data.tableList[i]
+            wx.request({
+              url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
+              data: { goodsId : goodsId},
+              header: { 'content-type': 'application/json'},
+              success:res=>{
+                //console.info(res.data.data);
+                if(res.data.code == 0){
+                  this.setData({
+                    goods:this.data.goods.concat({dd:dd,shangpin:res.data.data}),
+                    jine:this.data.jine+=(dd.goodsPrices+dd.expressFee),
+                    yunfei:this.data.yunfei+=dd.expressFee
+                  })
+                  
+                }
+              }
+            })
+          }
+          this.setData({
+            dingdan: ddxq,
+            
+          })
+          //console.info(this.data.goods)
           if(this.data.createTimeif==0){
             this.countDown();
           }
@@ -98,7 +153,11 @@ Page({
       ddzt:options.ddzt,
       addressId:options.addressId
     })
-    this.getdingdanxx(options.orderId);
+    if(options.ddzt==99){
+      this.getfudingdanxx(options.orderId);
+    }else{
+      this.getdingdanxx(options.orderId);
+    }
     this.getaddress(options.addressId);
     if (app.globalData.userInfo) {
       this.setData({
@@ -273,7 +332,12 @@ Page({
       header:{"Content-Type": "application/x-www-form-urlencoded"},
       success:res=>{
         if(res.data.code == 0){
+          if(this.data.type==1){
+            this.getfudingdanxx(this.data.orderId);
+          }else{
             this.getdingdanxx(this.data.orderId);
+          }
+            
         }
       }
     })

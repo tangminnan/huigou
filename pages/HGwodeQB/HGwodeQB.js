@@ -26,7 +26,8 @@ Page({
   },
   onShow() {
     this.setData({
-      currentTab: app.globalData.currentTab
+      //currentTab: app.globalData.currentTab
+      currentTab: 0
     })
   },
 

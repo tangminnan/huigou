@@ -50,6 +50,8 @@ Page({
         url: 'https://testh5.server012.com/api/home/searchGoodsByName',
         data: { 
           name: searchValue ,
+          pageNum: this.data.pageNo,
+          pageSize:this.data.pageSize
         },
         header: {
           'content-type': 'application/json' // 默认值
