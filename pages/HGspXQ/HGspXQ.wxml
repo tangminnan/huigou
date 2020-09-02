@@ -57,8 +57,8 @@
         <view>购物车 <text>{{gwcnum}}</text></view>
     </view>
     <view class="fix2">
-        <button bindtap="clickme">加入购物车</button>
-        <button bindtap="clickme" class="liji">立即购买</button>
+        <button bindtap="clickme" data-type="1">加入购物车</button>
+        <button bindtap="clickme" data-type="2" class="liji">立即购买</button>
     </view>
 </view>
 
@@ -100,7 +100,7 @@
         <!-- 关闭按钮 -->
         <view class="close" bindtap="hideModal"><image src="/images/close.png"></image></view> 
         <!-- 确定按钮 -->
-        <button class="sure" bindtap="showok">确定</button>
+        <button class="sure" bindtap="showok" data-type="{{tanshux}}">确定</button>
   </view>
 
 <!--==================点击分享的弹框==========================-->

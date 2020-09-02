@@ -60,7 +60,7 @@ sptupian:[],
 spguige:[],
 address:{},
 shangjia:{},
-jiage:'',
+jiage:0,
 merchantsId:0,
 
 dizhiId:0,
@@ -70,7 +70,7 @@ goodId:0,
 guigeId : 0,
 gwcnum:0,
 
-
+tanshux:1,
 //=========================生成图片分享
 model: 0,//弹框状态
 modelA: 0,//弹框状态
@@ -237,11 +237,14 @@ this.setData({
   },
 
   //点击我显示底部弹出框
-  clickme: function () {
-    this.showModal();
+  clickme: function (e) {
+    this.showModal(e);
   },
   //显示对话框
-  showModal: function () {
+  showModal: function (e) {
+    this.setData({
+      tanshux:e.currentTarget.dataset.type
+    })
     // 显示遮罩层
     var animation = wx.createAnimation({
       duration: 200,
@@ -290,7 +293,7 @@ select_use: function(e) {
   var id = e.currentTarget.dataset.id
   this.setData({
     state: e.currentTarget.dataset.key,
-    jiage:String(gjine),
+    jiage:parseInt(gjine),
     guigeId:id,
   });
 
@@ -317,8 +320,44 @@ getgwcnum:function(){
   }
 },
 
+showok:function(e){
+  let type = e.currentTarget.dataset.type
+  
+  if(type==1){
+    this.jiarugouwuche();
+  }else{
+    this.goumai();
+  }
+},
+
+goumai:function(){
+  const shoppingList = [{
+     shopId : this.data.shangjia.id,
+     shopName : this.data.shangjia.shopName,
+     skuList : [{
+      img: this.data.sptupian[0].picture,
+      title: this.data.shangpin.title,
+      price: (this.data.jiage)*(this.data.num),
+      skuId: this.data.guigeId,
+      goodsId: this.data.shangpin.id,
+      count: this.data.num,
+      expressFee: this.data.shangpin.expressFee,
+      hgCartId: ''
+    }]
+    
+  }]
+  console.info(shoppingList);
+  wx.navigateTo({
+    url: `/pages/shopping-cart/order-submit/index`,
+    success: (res) => {
+      res.eventChannel.emit('shoppingList', shoppingList);
+    }
+  })
+},
+
+
 //加入成功提示
-showok:function() {
+jiarugouwuche:function() {
   wx.getSetting({
     success: function (res) {
       if (!res.authSetting['scope.userInfo']) {

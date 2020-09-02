@@ -18,7 +18,50 @@
     <text class="dz">{{address.detailAddress}}</text>
     <text>{{address.recipient}}{{address.phone}}</text>
 </view>
+<view wx:if="{{ddzt==99}}">
+<view class="DD-box3">
+    <view class="upbox" wx:for-items="{{goods}}">
+        <image src="{{item.shangpin.hgGoodsFiles[0].picture}}"></image>
+        <view class="txt">
+            <text class="t1">{{item.shangpin.hgGoods.title}}</text>
+            <!-- <text class="t2">经典牛奶1箱</text> -->
+            <text class="t3">¥{{item.dd.goodsPrices}}</text>
+            <view class="shuL">x{{item.dd.goodsNum}}</view>
+        </view>
+    </view>
+    <view class="lodbox">
+        <text>订单备注</text>
+        <text class="t-txt">{{dingdan.remark}}</text>
+    </view>
+</view>
 
+<view class="DD-box4">
+    <view class="ddlist">
+        <text class="fl">订单编号</text>
+        <text class="fr">{{dingdan.id}}</text>
+    </view>
+    <view class="ddlist">
+        <text class="fl">下单时间</text>
+        <text class="fr">{{dingdan.createTime}}</text>
+    </view>
+</view>
+
+<view class="DD-box4 DD-box5">
+    <view class="ddlist">
+        <text class="fl">配送方式</text>
+        <text class="fr">快递</text>
+    </view>
+    <view class="ddlist">
+        <text class="fl">运费</text>
+        <text class="fr">￥{{yunfei}}</text>
+    </view>
+    <view class="ddlist">
+        <text class="fl">商品金额</text>
+        <text class="fr c-red">￥{{jine}}</text>
+    </view>
+</view>
+</view>
+<view wx:else>
 <view class="DD-box3">
     <view class="upbox">
         <image src="{{dingdan.goods.hgGoodsFiles[0].picture}}"></image>
@@ -60,7 +103,7 @@
         <text class="fr c-red">￥{{dingdan.ddxq.goodsPrices+dingdan.ddxq.expressFee}}</text>
     </view>
 </view>
-
+</view>
 <view wx:if="{{ddzt==99}}"  class="fixBtn">
     <button bindtap="quxiao" >取消订单</button>
     <button class="sure"  bindtap='zhifu'>立即支付</button>
