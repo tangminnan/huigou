@@ -65,6 +65,8 @@ Page({
           expressFee: order.expressFee,
           distributionStatus: order.distributionStatus,
           remark: order.remarks,
+          courierNumber: order.courierNumber,
+          retCourierNumber: order.retCourierNumber
         })
       })
     })

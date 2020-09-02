@@ -74,3 +74,50 @@
   margin-top: 8rpx;
   font-size: 24rpx;
 }
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.modal-container .modal-mask {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.modal-container .modal-win {
+  position: absolute;
+  height: 320rpx;
+  width: 600rpx;
+  z-index: 1;
+  background-color: #fff;
+  left: 50%;
+  top: 50%;
+  border-radius: 10rpx;
+  margin-top: -160rpx;
+  margin-left: -300rpx;
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+
+.modal-container .modal-win input {
+  border-bottom: 1px solid #999;
+  margin-bottom: 32rpx;
+  margin-top: 32rpx;
+}
+
+.modal-container .btn {
+  height: 64rpx;
+  line-height: 64rpx;
+  background-color: #07c160;
+  color: #FFF;
+  border-radius: 32rpx;
+  padding: 0 32rpx;
+  text-align: center;
+}

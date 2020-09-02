@@ -1,73 +1,114 @@
-// pages/refund-payment/index.js
+const orderApi = require('../../../api/order');
+const order = require('../../../api/order');
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    order: {}
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    const channel = this.getOpenerEventChannel();
-    console.log('channel', options)
-    channel.on('order-data', (data) => {
-      console.log('acceptDataFromOpenerPage', data)
-      this.setData({
-        order: data
+  onLoad: async function (options) {
+    this.orderId = options.orderId;
+    this.getOrderDetail();
+  },
+  getOrderDetail: async function () {
+    console.log('orderId', this.orderId);
+    let data;
+    try {
+      data = await orderApi.fetchOrderDetail(this.orderId);
+    } catch (e) {
+      wx.showToast({
+        title: e && e.msg || '出错了，请稍后再试',
+        icon: 'none'
       })
+      return;
+    }
+    const order = data.data;
+    console.log('order', data.data);
+    this.setData({
+      order: {
+        shopId: order.hgGoods.merchantsId,
+        pOrderId: order.parentId,
+        orderId: order.id,
+        goodsId: order.goodsId,
+        img: order.hgGoods.hgGoodsFile.picture,
+        title: order.hgGoods.title,
+        goodsNum: order.goodsNum,
+        goodsPrices: order.goodsPrices,
+        createTime: order.createTime,
+        expressFee: order.expressFee,
+        distributionStatus: order.distributionStatus,
+        remark: order.remarks,
+        courierNumber: order.courierNumber,
+        retCourierNumber: order.retCourierNumber
+      }
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onEditRetCourierNumber: function (e) {
+    this.setData({
+      showPromptModal: true
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onExpressNoChange: function (e) {
+    console.log('e', e);
+    this.setData({
+      expressNo: e.detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  onUpdateOrderExpressNo: async function (e) {
+    if (!this.data.expressNo) {
+      wx.showToast({
+        title: '请输入退/换货快递单号',
+        icon: 'none'
+      })
+      return;
+    }
+    try {
+      await orderApi.updateRetCourierNumber(this.orderId, this.data.expressNo);
+      this.setData({
+        showPromptModal: false,
+      });
+      wx.showToast({
+        title: '设置快递单号成功',
+        icon: 'none'
+      })
+      this.getOrderDetail();
+    } catch (e) {
+      wx.showToast({
+        title: e && e.msg || '出错了，请稍后再试',
+        icon: 'none'
+      })
+      return;
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  onRetreatGoods: async function (e) {
+    try {
+      await orderApi.retreatGoods(this.orderId);
+      wx.showToast({
+        title: '退货退款成功',
+        icon: 'none'
+      })
+      this.getOrderDetail();
+    } catch (e) {
+      wx.showToast({
+        title: e && e.msg || '出错了，请稍后再试',
+        icon: 'none'
+      })
+      return;
+    }
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onReturnGoods: async function (e) {
+    try {
+      await orderApi.returnGoods(this.orderId);
+      wx.showToast({
+        title: '退/换货成功',
+        icon: 'none'
+      })
+      this.getOrderDetail();
+    } catch (e) {
+      wx.showToast({
+        title: e && e.msg || '出错了，请稍后再试',
+        icon: 'none'
+      })
+      return;
+    }
   }
 })

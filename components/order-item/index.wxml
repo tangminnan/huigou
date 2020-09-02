@@ -5,7 +5,7 @@
       <view class="status-normal font-26">{{StatusMap[order.distributionStatus]}}</view>
     </view>
     <view class="flex-hbox cross-center row">
-      <view class="color-888 font-28 flex-spread">快递单号: {{order.expressNo}}</view>
+      <view class="color-888 font-28 flex-spread">快递单号: {{order.courierNumber}}</view>
     </view>
   </block>
   <block wx:else>
@@ -36,11 +36,12 @@
       bindtap="cancelOrder">取消订单</view>
     <view wx:if="{{order.distributionStatus === 0}}" class="action-btn" data-order-id="{{order.orderId}}"
       bindtap="confirmOrder">确认订单</view>
-    <view wx:if="{{order.distributionStatus === 1}}" class="action-btn" bindtap="onShowModal">填写快递单号</view>
-    <view
-      wx:if="{{order.distributionStatus === 5||order.distributionStatus === 6||order.distributionStatus === 7 || distributionStatus === 8}}"
-      class="action-btn">进入详情</view>
-    <view wx:if="{{order.distributionStatus === 9}}" class="action-btn">确认退款</view>
+    <view wx:if="{{order.distributionStatus === 1}}" class="action-btn" data-order-id="{{order.orderId}}"
+      bindtap="onShowModal">填写快递单号</view>
+    <view 
+      class="action-btn" bindtap="onViewDetail" data-order-id="{{order.orderId}}">进入详情</view>
+    <view wx:if="{{order.distributionStatus === 9}}" class="action-btn" data-order-id="{{order.orderId}}"
+      bindtap="onConfirmRefund">确认退款</view>
   </view>
   <view wx:if="{{showPromptModal}}" class="modal-container">
     <view class="modal-mask"></view>

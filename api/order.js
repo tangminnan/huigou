@@ -1,5 +1,7 @@
 const api = require('./request');
 
+// 商家端订单，支付相关操作
+
 async function saveOrder(orderInfo) {
   return api.postJson('/api/home/saveOrder', orderInfo);
 }
@@ -44,10 +46,46 @@ async function updateExpressNo(orderId, expressNo) {
   })
 }
 
+async function confirmRefund(orderId) {
+  return api.postData('/api/business/updateOrderRetreat', {
+    id: orderId
+  })
+}
+// 退换货订单详情
+async function fetchOrderDetail(orderId) {
+  return api.getData('/api/business/checkOrderTable', {
+    id: orderId
+  })
+}
+// 退换货快递单号
+async function updateRetCourierNumber(orderId, retCourierNumber) {
+  return api.postData('/api/home/updateOrderTableRetCourierNumber', {
+    orderId,
+    retCourierNumber
+  })
+}
+// 换货
+async function returnGoods(orderId) {
+  return api.postData('/api/business/returnGoods', {
+    id: orderId
+  })
+}
+// 退货退款
+async function retreatGoods(orderId) {
+  return api.postData('/api/business/updateOrderRetreat', {
+    id: orderId
+  })
+}
+
 module.exports = {
   saveOrder,
   wxPay,
   cancelOrder,
   confirmOrder,
-  updateExpressNo
+  updateExpressNo,
+  confirmRefund,
+  fetchOrderDetail,
+  updateRetCourierNumber,
+  returnGoods,
+  retreatGoods
 }

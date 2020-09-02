@@ -1,5 +1,4 @@
 const orderApi = require('../../api/order');
-const order = require('../../api/order');
 
 const statusDescMap = {
   0: '等待发货',
@@ -51,9 +50,6 @@ Component({
       type: Number
     },
     originTotal: {
-      type: Number
-    },
-    condtion: {
       type: Number
     }
   },
@@ -107,7 +103,30 @@ Component({
           icon: 'none'
         })
       }
-
+    },
+    onConfirmRefund: async function (e) {
+      // 确认退款
+      const orderId = e.currentTarget.dataset.orderId;
+      console.log('orderId', orderId);
+      try {
+        await orderApi.confirmRefund(orderId);
+        wx.showToast({
+          title: '确认退款退货成功',
+          icon: 'none'
+        })
+      } catch (e) {
+        wx.showToast({
+          title: e && e.msg || '出错了，请稍后再试',
+          icon: 'none'
+        })
+      }
+    },
+    onViewDetail: async function (e) {
+      const orderId = e.currentTarget.dataset.orderId;
+      console.log('orderId', orderId);
+      wx.navigateTo({
+        url: `/pages/merchant/refund/index?orderId=${orderId}`,
+      })
     }
   }
 })

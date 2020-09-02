@@ -7,27 +7,27 @@
 	</view>
 	<block wx:if="{{activeTab == 0}}">
 		<scroll-view class="order-list">
-			<OrderItem wx:for="{{orderList}}" condtion="{{activeTab}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
 		</scroll-view>
 	</block>
 	<block wx:if="{{activeTab == 1}}">
 		<scroll-view class="order-list">
-			<OrderItem wx:for="{{orderList}}" condtion="{{activeTab}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
 		</scroll-view>
 	</block>
 	<block wx:if="{{activeTab == 2}}">
 		<scroll-view class="order-list">
-			<OrderItem wx:for="{{orderList}}" condtion="{{activeTab}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
 		</scroll-view>
 	</block>
 	<block wx:if="{{activeTab == 3}}">
 		<scroll-view class="order-list">
-			<OrderItem wx:for="{{orderList}}" condtion="{{activeTab}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
 		</scroll-view>
 	</block>
 	<block wx:if="{{activeTab == 4}}">
 		<scroll-view class="order-list">
-			<OrderItem wx:for="{{orderList}}" condtion="{{activeTab}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
+			<OrderItem wx:for="{{orderList}}" order="{{item}}" wx:key="{{id}}"></OrderItem>
 		</scroll-view>
 	</block>
 </view>

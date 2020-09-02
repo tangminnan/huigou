@@ -150,6 +150,14 @@
 					"id": -1,
 					"name": "pages/merchant/order/index",
 					"pathName": "pages/merchant/order/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/merchant/refund/index",
+					"pathName": "pages/merchant/refund/index",
+					"query": "orderId=1599062026235159906202623531",
 					"scene": null
 				}
 			]
