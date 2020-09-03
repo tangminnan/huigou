@@ -32,7 +32,7 @@ Page({
       data:{orderId:orderId},
       header:{'content-type': 'application/json'},
       success:res=>{
-        console.info(res.data);
+        //console.info(res.data);
         if(res.data.code==0){
           this.setData({
             createTime: res.data.data.createTime,
@@ -49,7 +49,8 @@ Page({
               //console.info(res.data.data);
               if(res.data.code == 0){
                 this.setData({
-                  dingdan: {goods:res.data.data,ddxq:ddxq},
+                  goods: res.data.data,
+                  dingdan: ddxq
                 })
                 
               }
@@ -104,7 +105,6 @@ Page({
             dingdan: ddxq,
             
           })
-          //console.info(this.data.goods)
           if(this.data.createTimeif==0){
             this.countDown();
           }
@@ -305,6 +305,7 @@ Page({
 
     var start = new Date(starttime.replace(/-/g, "/")).getTime()
     var endTime = start + 30 * 60000
+    
 
     var date = new Date(); //现在时间
     var now = date.getTime(); //现在时间戳
@@ -332,12 +333,14 @@ Page({
       header:{"Content-Type": "application/x-www-form-urlencoded"},
       success:res=>{
         if(res.data.code == 0){
-          if(this.data.type==1){
-            this.getfudingdanxx(this.data.orderId);
-          }else{
-            this.getdingdanxx(this.data.orderId);
-          }
-            
+          wx.showToast({
+            title: '订单已取消',
+            icon: 'none',
+            duration: 2000
+          })
+          wx.navigateTo({
+            url: '../HGwodeDD/HGwodeDD'
+          })
         }
       }
     })

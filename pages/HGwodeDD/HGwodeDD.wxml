@@ -13,15 +13,16 @@
     <view class="itemBox"  wx:for="{{orderList}}" wx:for-index="index" wx:key="id" wx:if="{{item.order.payStatus==0}}">
             <view class="ddHao"  bindtap='goPay' data-id="{{item.order.id}}" data-addid="{{item.order.addressId}}" data-ddzt="{{99}}">
                 <text class="fl">订单号：{{item.order.id}}</text>
-                <text class="fr c-red">待发货</text>
+                <text class="fr c-red">待付款</text>
             </view>
-            <view class="ddTxt" wx:for-items="{{item.order.orderTables}}" wx:key="id">
-                <image src="{{item.hgGoods.hgGoodsFiles[0].picture}}"></image>
-                <text class="t1">{{item.hgGoods.hgGoods.title}}</text>
-                <text class="t2">¥{{item.goodsPrices}}</text>
-                <text class="t2" style="float: right;width: 30rpx;margin-top: 70rpx;margin-right: -40rpx;">x{{item.goodsNum}}</text>
+            <view class="ddTxt" wx:for="{{item.order.orderTables}}" wx:for-item="items" wx:key="id">
+                <image src="{{items.hgGoods.hgGoodsFile.picture}}"></image>
+                <text class="t1">{{items.hgGoods.title}}</text>
+                <text class="t2">¥{{items.goodsPrices}}</text>
+                <text class="t2" style="float: right;width: 30rpx;margin-top: 70rpx;margin-right: -40rpx;">x{{items.goodsNum}}</text>
             </view>
             
+
             <view class="ddtime">
                 <text class="fl">{{item.order.createTime}}</text>
                 <text class="fr">
@@ -37,6 +38,7 @@
         <view class="itemBox" wx:for-items="{{orderList}}" wx:if="{{item.order.payStatus!=0}}">
 
             <view class="ddHao">
+
                 <text class="fl">订单号：{{item.orderTables.id}}</text>
                 <!-- <text wx:if="{{item.order.payStatus==0}}" class="fr c-red">待付款</text> -->
                 <text wx:if="{{item.orderTables.distributionStatus==1}}" class="fr c-red">待发货</text>
@@ -80,8 +82,8 @@
             <view wx:elif="{{item.orderTables.distributionStatus==8 || item.orderTables.distributionStatus==9}}" class="ddBtn">
                 <view data-id="{{item.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
             </view>
-
         </view>
+        <!-- </view> -->
 <!--  
         <view class="itemBox">
             <view class="ddHao">
@@ -140,11 +142,11 @@
                 <text class="fl">订单号：{{item.order.id}}</text>
                 <text class="fr c-red">待付款</text>
             </view>
-            <view class="ddTxt" wx:for-items="{{item.order.orderTables}}" wx:key="id">
-                <image src="{{item.hgGoods.hgGoodsFiles[0].picture}}"></image>
-                <text class="t1">{{item.hgGoods.hgGoods.title}}</text>
-                <text class="t2">¥{{item.goodsPrices}}</text>
-                <text class="t2" style="float: right;width: 30rpx;margin-top: 70rpx;margin-right: -40rpx;">x{{item.goodsNum}}</text>
+            <view class="ddTxt" wx:for="{{item.order.orderTables}}" wx:for-item="items" wx:key="id">
+                <image src="{{items.hgGoods.hgGoodsFile.picture}}"></image>
+                <text class="t1">{{items.hgGoods.title}}</text>
+                <text class="t2">¥{{items.goodsPrices}}</text>
+                <text class="t2" style="float: right;width: 30rpx;margin-top: 70rpx;margin-right: -40rpx;">x{{items.goodsNum}}</text>
             </view>
             
             <view class="ddtime">
