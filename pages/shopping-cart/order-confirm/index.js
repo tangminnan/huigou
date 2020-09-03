@@ -29,16 +29,22 @@ Page({
   },
   onClickSubmit: async function () {
     await getApp().getUserInfo();
+    wx.showLoading({
+      title: '提交中',
+      mask: true
+    })
     try {
       await payApi.wxPay({
         orderNo: this.data.orderId,
         type: 1,
         openId: getApp().globalData.openId,
       });
+      wx.hideLoading()
       wx.navigateTo({
         url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}`,
       })
     } catch (e) {
+      wx.hideLoading()
       wx.navigateTo({
         url: `/pages/shopping-cart/result/index?type=fail`,
       })

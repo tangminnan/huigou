@@ -58,18 +58,25 @@ Page({
     })
   },
   onClickSubmit: function (e) {
+    const list = this.data.shoppingList.map(shop => {
+      const skuList = shop.skuList.filter(sku => sku.checked);
+      if (skuList.length) {
+        shop.skuList = skuList;
+        return shop;
+      }
+      return null
+    }).filter(shop => !!shop);
+    console.log('send list', list);
+    if (!list || !list.length) {
+      wx.showToast({
+        title: '请先勾选商品',
+        icon: 'none'
+      })
+      return;
+    }
     wx.navigateTo({
       url: `/pages/shopping-cart/order-submit/index`,
       success: (res) => {
-        const list = this.data.shoppingList.map(shop => {
-          const skuList = shop.skuList.filter(sku => sku.checked);
-          if (skuList.length) {
-            shop.skuList = skuList;
-            return shop;
-          }
-          return null
-        }).filter(shop => !!shop);
-        console.log('send list', list);
         res.eventChannel.emit('shoppingList', list);
       }
     })
