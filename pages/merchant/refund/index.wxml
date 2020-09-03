@@ -2,9 +2,9 @@
   <OrderItem mode="info" order="{{order}}" class="order-profile" />
   <view class="panel panel-square panel-action mg-t-24 flex-hbox cross-center">
     <view class="address flex-spread">
-      <view class="address-province">广东 广州 越秀区</view>
-      <view class="address-detail">东风路中路268号 1301</view>
-      <view class="address-user">买家姓名：18701345677</view>
+      <view class="address-province">{{order.address && order.address.region}}</view>
+      <view class="address-detail">{{order.address && order.address.detailAddress}}</view>
+      <view class="address-user">买家姓名：{{order.address && order.address.recipient}}</view>
     </view>
     <view wx:if="{{order.distributionStatus === 7}}" class="action">
       <view class="action-btn" data-order-id="{{order.orderId}}" bindtap="onRetreatGoods">同意退货退款</view>

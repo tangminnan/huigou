@@ -38,7 +38,8 @@ Page({
         distributionStatus: order.distributionStatus,
         remark: order.remarks,
         courierNumber: order.courierNumber,
-        retCourierNumber: order.retCourierNumber
+        retCourierNumber: order.retCourierNumber,
+        address: order.address,
       }
     })
   },
