@@ -65,13 +65,49 @@ Component({
     },
     cancelOrder: async function (e) {
       const orderId = e.currentTarget.dataset.orderId;
-      const response = await orderApi.cancelOrder(orderId);
-      console.log('response', response);
+      wx.showLoading({
+        title: '处理中',
+        mask: true
+      })
+      try {
+        const response = await orderApi.cancelOrder(orderId);
+        console.log('response', response);
+        wx.hideLoading();
+        wx.showToast({
+          title: '处理成功',
+          icon: 'none'
+        })
+        this.triggerEvent('stateChange')
+      } catch (e) {
+        wx.hideLoading();
+        wx.showToast({
+          title: e && e.msg || '出错了，请稍后再试',
+          icon: 'none'
+        })
+      }
     },
     confirmOrder: async function (e) {
       const orderId = e.currentTarget.dataset.orderId;
-      const response = await orderApi.confirmOrder(orderId);
-      console.log('response', response);
+      wx.showLoading({
+        title: '处理中',
+        mask: true
+      })
+      try {
+        const response = await orderApi.confirmOrder(orderId);
+        console.log('response', response);
+        wx.hideLoading();
+        wx.showToast({
+          title: '处理成功',
+          icon: 'none'
+        })
+        this.triggerEvent('stateChange')
+      } catch (e) {
+        wx.hideLoading();
+        wx.showToast({
+          title: e && e.msg || '出错了，请稍后再试',
+          icon: 'none'
+        })
+      }
     },
     onShowModal: async function (e) {
 
@@ -91,15 +127,26 @@ Component({
       const orderId = e.currentTarget.dataset.orderId;
       console.log('orderId', orderId);
       console.log('expressNo', this.data.expressNo);
+      wx.showLoading({
+        title: '处理中',
+        mask: true
+      })
       try {
-        await orderApi.updateExpressNo(orderId, expressNo);
+        await orderApi.updateExpressNo(orderId, this.data.expressNo);
+        wx.hideLoading();
         wx.showToast({
           title: '发货成功',
           icon: 'none'
         })
+        this.setData({
+          expressNo: '',
+          showPromptModal: false
+        })
+        this.triggerEvent('stateChange')
       } catch (e) {
+        wx.hideLoading();
         wx.showToast({
-          title: '出错了，请稍后再试',
+          title: e && e.msg || '出错了，请稍后再试',
           icon: 'none'
         })
       }
@@ -108,13 +155,20 @@ Component({
       // 确认退款
       const orderId = e.currentTarget.dataset.orderId;
       console.log('orderId', orderId);
+      wx.showLoading({
+        title: '处理中',
+        mask: true
+      })
       try {
         await orderApi.confirmRefund(orderId);
+        wx.hideLoading();
         wx.showToast({
           title: '确认退款退货成功',
           icon: 'none'
         })
+        this.triggerEvent('stateChange')
       } catch (e) {
+        wx.hideLoading();
         wx.showToast({
           title: e && e.msg || '出错了，请稍后再试',
           icon: 'none'

@@ -74,5 +74,8 @@ Page({
     this.setData({
       orderList: list
     })
+  },
+  onOrderStateChange: function(e) {
+    this.getOrderList()
   }
 })
