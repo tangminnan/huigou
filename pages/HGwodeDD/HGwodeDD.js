@@ -122,7 +122,11 @@ Page({
               })
             
             }
-            
+            this.setData({
+              orderList: this.data.orderList.concat({order:order}),
+              ifnull: 1
+            })
+            //console.info(this.data.orderList);
           }
         }else{
           this.setData({
@@ -168,7 +172,7 @@ Page({
               }) 
               console.info(this.data.orderList);
             }
-          
+         
           }
          
         }else{
@@ -229,6 +233,7 @@ Page({
       },
       header:{"Content-Type": "application/x-www-form-urlencoded"},
       success:res=>{
+        console.info(res.data)
         if(res.data.code==0){
           wx.showToast({
             title: '操作成功',

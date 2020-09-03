@@ -32,7 +32,7 @@ Page({
       data:{orderId:orderId},
       header:{'content-type': 'application/json'},
       success:res=>{
-        console.info(res.data);
+        //console.info(res.data);
         if(res.data.code==0){
           this.setData({
             createTime: res.data.data.createTime,
@@ -49,7 +49,8 @@ Page({
               //console.info(res.data.data);
               if(res.data.code == 0){
                 this.setData({
-                  dingdan: {goods:res.data.data,ddxq:ddxq},
+                  goods: res.data.data,
+                  dingdan: ddxq
                 })
                 
               }
@@ -104,7 +105,6 @@ Page({
             dingdan: ddxq,
             
           })
-          //console.info(this.data.goods)
           if(this.data.createTimeif==0){
             this.countDown();
           }

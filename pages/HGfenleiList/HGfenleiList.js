@@ -57,7 +57,7 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: (res) => {
-          //console.info(res.data);
+          console.info(res.data);
           if (res.data.code == 0) {
             this.setData({
               changpin: this.data.changpin.concat(res.data.data.list)
