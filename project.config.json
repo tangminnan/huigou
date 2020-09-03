@@ -1,173 +1,173 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"enhance": true,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": false,
-		"coverView": true,
-		"nodeModules": true,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"uglifyFileName": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useIsolateContext": true,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": true,
-		"packNpmManually": false,
-		"packNpmRelationList": [],
-		"useMultiFrameRuntime": false,
-		"useApiHook": true
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.12.1",
-	"appid": "wx994e417401bba0ec",
-	"projectname": "huigou",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"scripts": {},
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "pages/merchant/index/index",
-					"pathName": "pages/merchant/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/promote/index/index",
-					"pathName": "pages/promote/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/index/index",
-					"pathName": "pages/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/shopping-cart/index/index",
-					"pathName": "pages/shopping-cart/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/shopping-cart/order-submit/index",
-					"pathName": "pages/shopping-cart/order-submit/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/shopping-cart/order-confirm/index",
-					"pathName": "pages/shopping-cart/order-confirm/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/shopping-cart/result/index",
-					"pathName": "pages/shopping-cart/result/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/HGfenlei/HGfenlei",
-					"pathName": "pages/HGfenlei/HGfenlei",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/HGspXQ/HGspXQ",
-					"pathName": "pages/HGspXQ/HGspXQ",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/mine/mine",
-					"pathName": "pages/mine/mine",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/shopping-cart/index/index",
-					"pathName": "pages/shopping-cart/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/merchant/order/index",
-					"pathName": "pages/merchant/order/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/merchant/refund/index",
-					"pathName": "pages/merchant/refund/index",
-					"query": "orderId=1599062026235159906202623531",
-					"scene": null
-				},
-				{
-					"id": 13,
-					"name": "pages/merchant/merchant-info/index",
-					"pathName": "pages/merchant/merchant-info/index",
-					"query": "type=0",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": false,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": true,
+    "packNpmManually": false,
+    "packNpmRelationList": []
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.12.1",
+  "appid": "wx994e417401bba0ec",
+  "projectname": "huigou",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "scripts": {},
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "current": -1,
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": -1,
+          "name": "pages/merchant/index/index",
+          "pathName": "pages/merchant/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/promote/index/index",
+          "pathName": "pages/promote/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/shopping-cart/index/index",
+          "pathName": "pages/shopping-cart/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/shopping-cart/order-submit/index",
+          "pathName": "pages/shopping-cart/order-submit/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/shopping-cart/order-confirm/index",
+          "pathName": "pages/shopping-cart/order-confirm/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/shopping-cart/result/index",
+          "pathName": "pages/shopping-cart/result/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/HGfenlei/HGfenlei",
+          "pathName": "pages/HGfenlei/HGfenlei",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/HGspXQ/HGspXQ",
+          "pathName": "pages/HGspXQ/HGspXQ",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/shopping-cart/index/index",
+          "pathName": "pages/shopping-cart/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/merchant/order/index",
+          "pathName": "pages/merchant/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/merchant/refund/index",
+          "pathName": "pages/merchant/refund/index",
+          "query": "orderId=1599062026235159906202623531",
+          "scene": null
+        },
+        {
+          "id": 13,
+          "name": "pages/merchant/merchant-info/index",
+          "pathName": "pages/merchant/merchant-info/index",
+          "query": "type=0",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

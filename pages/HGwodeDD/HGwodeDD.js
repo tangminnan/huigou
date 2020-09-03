@@ -68,6 +68,27 @@ Page({
     }
     
   },
+
+  //封装异步请求的返回值
+  subOrder: async function(path1,options1) {
+    var returnData = await getsubOrder(path1,options1);
+    return returnData ;
+   },
+
+  getsubOrder:function(path1,options1) {
+    return new  Promise((resolve, reject)=>{
+      wx.request({
+        url: path1,
+        data: options1,
+        header: { 'content-type': 'application/json'},
+        success:res=>{
+          resolve(res);
+        }
+      })
+    });
+  },
+  
+
 //获取全部订单
   getUserAllOrder:function(){
     wx.request({
@@ -80,51 +101,29 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        //console.info(res.data);
-        
-        var ordergood = [];
         if (res.data.code == 0 && res.data.data.length >0) {
           for(let i = 0;i<res.data.data.length;i++){
-            let order;
+              let order;
             
-            for(let j = 0;j<res.data.data[i].orderTables.length;j++){
-              let goodsId = res.data.data[i].orderTables[j].goodsId;
-              order = res.data.data[i];
-              let orderTables = res.data.data[i].orderTables[j];
-            wx.request({
-              url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
-              data: { goodsId : goodsId},
-              header: { 'content-type': 'application/json'},
-              success:res=>{
-                //console.info(res.data.data);
-                if(res.data.code == 0){
-                  if(order.payStatus==0){
-                    order.orderTables[j].hgGoods=res.data.data
-                  }else{
-                    this.setData({
-                      orderList: this.data.orderList.concat({goods:res.data.data,order:order,orderTables:orderTables}),
-                      ifnull: 1
-                    })
-                  }
-                  //console.info(this.data.orderList);
-                  //ordergood.concat({goods:res.data.data,order:order})
-                }
+            for(let j = 0;j<res.data.data.length;j++){
+                order = res.data.data[i];  
+                if(order.payStatus!=0){
+                  let orderTables = res.data.data[i].orderTables[j];
+                  this.setData({ 
+                    orderList: this.data.orderList.concat({goods:res.data.data,order:order,orderTables:orderTables}),
+                    ifnull: 1
+                  })
+                } 
               }
-            })
-            }
-            if(res.data.data[i].payStatus==0){
+            if(res.data.data[i].payStatus==0){console.info("--------");console.info(this.data.orderList);
               this.setData({
                 orderList: this.data.orderList.concat({order:order}),
                 ifnull: 1
               })
+            
             }
             
           }
-          //console.info(this.data.orderList);
-          // this.setData({
-          //   orderList: ordergood,
-          //   ifnull: 1
-          // })
         }else{
           this.setData({
             ifnull: 0
@@ -133,9 +132,9 @@ Page({
       }
     })
   },
+   
 //获取用户订单
   getUserOrder: function (condition){
-    //console.info(condition);
     wx.request({
       method: 'GET',
       url: 'https://testh5.server012.com/api/home/searchOrderByCondition',
@@ -147,48 +146,31 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
-        //console.info(res.data);
         if (res.data.code == 0 && res.data.data != null) {
           for(let i = 0;i<res.data.data.length;i++){
-            let order;
-            for(let j = 0;j<res.data.data[i].orderTables.length;j++){
-              let goodsId = res.data.data[i].orderTables[j].goodsId;
-              order = res.data.data[i];
-              let orderTables = res.data.data[i].orderTables[j];
-              wx.request({
-                url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
-                data: { goodsId : goodsId},
-                header: { 'content-type': 'application/json'},
-                success:res=>{
-                  //console.info(res.data.data);
-                  if(res.data.code == 0){
-                    if(condition==0){
-                      order.orderTables[j].hgGoods=res.data.data
-                    }else{
-                      this.setData({
-                        orderList: this.data.orderList.concat({goods:res.data.data,order:order,orderTables:orderTables}),
-                        ifnull: 1
-                      })
-                    }
-                    
-                    //console.info(this.data.orderList);
-                    //ordergood.concat({goods:res.data.data,order:order})
-                  }
-                }
-              })
+            let order = res.data.data[i];
+            if(condition!=0){
+              for(let j = 0;j<res.data.data[i].orderTables.length;j++){
+                  let orderTables = res.data.data[i].orderTables[j];
+                  if(order.payStatus!=0){
+                    let orderTables = res.data.data[i].orderTables[j];
+                    this.setData({ 
+                      orderList: this.data.orderList.concat({goods:res.data.data,order:order,orderTables:orderTables}),
+                      ifnull: 1
+                    })  
+                } 
+              }
             }    
             if(condition==0){
               this.setData({
                 orderList: this.data.orderList.concat({order:order}),
                 ifnull: 1
               }) 
+              console.info(this.data.orderList);
             }
-            //console.info(this.data.orderList);
+          
           }
-          // this.setData({
-          //   orderList: res.data.data,
-          //   ifnull: 1
-          // })
+         
         }else{
           this.setData({
             ifnull: 0

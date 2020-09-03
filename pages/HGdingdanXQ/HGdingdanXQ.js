@@ -305,6 +305,7 @@ Page({
 
     var start = new Date(starttime.replace(/-/g, "/")).getTime()
     var endTime = start + 30 * 60000
+    
 
     var date = new Date(); //现在时间
     var now = date.getTime(); //现在时间戳
@@ -332,12 +333,14 @@ Page({
       header:{"Content-Type": "application/x-www-form-urlencoded"},
       success:res=>{
         if(res.data.code == 0){
-          if(this.data.type==1){
-            this.getfudingdanxx(this.data.orderId);
-          }else{
-            this.getdingdanxx(this.data.orderId);
-          }
-            
+          wx.showToast({
+            title: '订单已取消',
+            icon: 'none',
+            duration: 2000
+          })
+          wx.navigateTo({
+            url: '../HGwodeDD/HGwodeDD'
+          })
         }
       }
     })
