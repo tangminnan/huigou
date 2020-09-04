@@ -83,7 +83,7 @@
                 <view data-id="{{item.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
             </view>
         </view>
-        </view>
+        <!-- </view> -->
 <!--  
         <view class="itemBox">
             <view class="ddHao">
