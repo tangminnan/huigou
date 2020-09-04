@@ -1,4 +1,5 @@
-const app = getApp()
+const app = getApp();
+
 
 Page({
   data: {
@@ -115,18 +116,19 @@ Page({
                   })
                 } 
               }
-            if(res.data.data[i].payStatus==0){console.info("--------");console.info(this.data.orderList);
-              this.setData({
-                orderList: this.data.orderList.concat({order:order}),
-                ifnull: 1
-              })
+            // if(res.data.data[i].payStatus==0){
+            //   this.setData({
+            //     orderList: this.data.orderList.concat({order:order}),
+            //     ifnull: 1
+            //   })
             
-            }
+            // }
             this.setData({
               orderList: this.data.orderList.concat({order:order}),
               ifnull: 1
-            })
-            //console.info(this.data.orderList);
+            });
+            console.info("全部订单");
+            console.info(this.data.orderList);
           }
         }else{
           this.setData({
@@ -186,29 +188,30 @@ Page({
   },
 //取消订单
   quxiao:function(e){
-    var orderId = e.currentTarget.dataset.orderId;
-    wx.request({
-      method:'POST',
-      url: 'https://testh5.server012.com/api/home/deleteOrderById',
-      data:{orderId:orderId},
-      header:{"Content-Type": "application/x-www-form-urlencoded"},
-      success:res=>{
-        if(res.data.code == 0){
-          wx.showToast({
-            title: '操作成功',
-            icon:'none',
-            duration:2000
-          })
-          this.jiazai();
-        }else{
-          wx.showToast({
-            title: '操作失败,请稍后重试',
-            icon:'none',
-            duration:2000
-          })
-        }
-      }
-    })
+    var orderId = e.currentTarget.dataset.id;
+    console.info(orderId);
+     wx.request({
+     method:'POST',
+       url: 'https://testh5.server012.com/api/home/deleteOrderById',
+       data:{orderId:orderId},
+       header:{"Content-Type": "application/x-www-form-urlencoded"},
+       success:res=>{
+         if(res.data.code == 0){
+           wx.showToast({
+             title: '操作成功',
+             icon:'none',
+             duration:2000
+           })
+           this.jiazai();
+         }else{
+           wx.showToast({
+             title: '操作失败,请稍后重试',
+             icon:'none',
+             duration:2000
+         })
+         }
+       }
+     })
 
   },
 
@@ -375,13 +378,16 @@ Page({
       url: '../HGtuihuo/HGtuihuo?orderId='+orderId,
     })
   },
-  goPay: function (e) { 
-    var orderId = e.currentTarget.dataset.id;
-    var ddzt = e.currentTarget.dataset.ddzt
-    var addid = e.currentTarget.dataset.addid
-    wx.navigateTo({
-      url: '../HGdingdanXQ/HGdingdanXQ?orderId='+orderId+'&ddzt='+ddzt+'&addressId='+addid,
-    })
-  },
 
+  //去支付
+   goPay: function (e) { 
+     var orderId = e.currentTarget.dataset.id;
+     var ddzt = e.currentTarget.dataset.ddzt
+     var addid = e.currentTarget.dataset.addid
+     wx.navigateTo({
+       url: '../HGdingdanXQ/HGdingdanXQ?orderId='+orderId+'&ddzt='+ddzt+'&addressId='+addid,
+     })
+   }
+
+  
 })

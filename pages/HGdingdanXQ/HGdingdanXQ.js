@@ -1,4 +1,5 @@
 const payApi = require('../../api/order');
+
 //index.js
 //获取应用实例
 const app = getApp()
@@ -276,27 +277,27 @@ Page({
       })
     },
 
-    zhifu: async function () {
-      await getApp().getUserInfo();
-      try {
-        await Promise.all(
-          this.data.orderList.map(async order => {
-            await payApi.wxPay({
-              orderNo: order.orderId,
-              type: 1,
-              openId: getApp().globalData.openId,
-            });
-          }))
+    // zhifu: async function () {
+    //   await getApp().getUserInfo();
+    //   try {
+    //     await Promise.all(
+    //       this.data.orderList.map(async order => {
+    //         await payApi.wxPay({
+    //           orderNo: this.data.orderId;
+    //           type: 1,
+    //           openId: getApp().globalData.openId,
+    //         });
+    //       }))
   
-        wx.navigateTo({
-          url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}`,
-        })
-      } catch (e) {
-        wx.navigateTo({
-          url: `/pages/shopping-cart/result/index?type=fail`,
-        })
-      }
-    },
+    //     wx.navigateTo({
+    //       url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}`,
+    //     })
+    //   } catch (e) {
+    //     wx.navigateTo({
+    //       url: `/pages/shopping-cart/result/index?type=fail`,
+    //     })
+    //   }
+    // },
 
   countDown() {
     var that = this
@@ -350,6 +351,32 @@ Page({
     }
   },
 
+  zhifu: async function (e) {
+     await getApp().getUserInfo();
+     console.info(this.data.orderId);
+     wx.showLoading({
+       title: '提交中',
+       mask: true
+     })
+     console.info(this.data.orderId);
+     console.info(getApp().globalData.openId);
+       try {
+          await payApi.wxPay({
+            orderNo: this.data.orderId,
+            type: 1,
+            openId: getApp().globalData.openId
+        });
+         wx.hideLoading()
+          wx.navigateTo({
+           url: `/pages/shopping-cart/result/index?type=success`
+          })
+       } catch (e) {console.info(e);
+           wx.hideLoading()
+             wx.navigateTo({
+              url: `/pages/shopping-cart/result/index?type=fail`
+             })
+       }
+     }
 })
 
 
