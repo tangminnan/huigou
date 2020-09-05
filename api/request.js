@@ -20,14 +20,15 @@ async function request(url, params, options) {
       return `${key}=${encodeURIComponent(params[key])}`
     }).join('&');
     newUrl = `${newUrl}?${query}`
+  
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {console.info(newUrl);
     wx.request({
       url: newUrl,
       method: 'GET',
       ...options,
-      success(res) {
+      success(res) {console.info("eeee"); console.info(res);
         const {
           statusCode,
           data
@@ -82,7 +83,7 @@ async function uploadImage({
   })
 }
 // businessOrExtension: 0商家 1推广
-// type: 0营业执照或许可证 1物业图 2商品图 3品牌授权 4其他
+// type: 0营业执照或许可证 1物业图 2商品图 3品牌授权 4其他 5认证图
 async function saveImage(filePath, userId, type, businessOrExtension) {
   const fileUrl = await uploadImage({
     filePath

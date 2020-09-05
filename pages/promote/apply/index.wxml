@@ -1,34 +1,39 @@
+<form bindsubmit="formSubmit" bindreset="formReset">
 <view class="container">
   <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
   <mp-form id="form" rules="{{rules}}" models="{{formData}}">
     <mp-cells>
       <mp-cell prop="name" title="填写姓名">
-        <input data-field="name" class="weui-input" type="text" placeholder="姓名"></input>
+        <input data-field="name" name="name" class="weui-input" type="text" placeholder="姓名"></input>
       </mp-cell>
       <view class="weui-cell weui-cell_select">
         <view class="weui-cell__hd weui-cell__hd_in-select-after">
           <view class="weui-label mg-l-32">性别</view>
         </view>
         <view class="weui-cell__bd">
-          <picker value="{{userInfo.selectedSexIndex}}" range="{{sexList}}" range-key="label" bindchange="onSexChange">
+          <picker data-field="selectedSexIndex" value="{{info.selectedSexIndex}}" range="{{sexList}}" range-key="label" bindchange="onSexChange">
             <view class="weui-select fake-input">
-              {{sexList[userInfo.selectedSexIndex || 0].label || '请选择性别'}}
+              {{sexList[info.selectedSexIndex || 1].label || '请选择性别'}}
             </view>
           </picker>
         </view>
       </view>
       <mp-cell prop="mobile" title="联系方式">
-        <input data-field="mobile" class="weui-input" type="text" placeholder="联系电话"></input>
+        <input data-field="mobile" class="weui-input" name="phone" type="text" placeholder="联系电话"></input>
       </mp-cell>
       <mp-cell prop="shopName" title="物业/社区">
-        <input data-field="shopName" class="weui-input" type="text" placeholder="请输入商铺名称"></input>
+        <picker data-field="communityIndex" value="{{info.communityIndex}}" range="{{communityList}}" range-key="communityName" bindchange="onSexChange">
+            <view class="weui-select fake-input">
+              {{communityList[info.communityIndex].communityName }}
+            </view>
+          </picker>
       </mp-cell>
     </mp-cells>
     <view class="img-uploader">
       <view class="img-uploader-title">上传认证资料</view>
-      <view class="img-uploader-btn" bindtap="onUploadCert">
-        <block wx:if="{{userInfo.cert}}">
-          <image class="upload-preview-image" src="{{userInfo.cert}}"></image>
+      <view class="img-uploader-btn" bindtap="onUploadCert" data-type="5">
+        <block wx:if="{{info.path}}">
+          <image class="upload-preview-image" src="{{info.path}}"></image>
         </block>
         <block wx:else>
           <mp-icon icon="add" size="48" color="#999"></mp-icon>
@@ -55,6 +60,7 @@
     </checkbox-group>
   </mp-form>
   <view class="next-btn">
-    <button class="weui-btn" type="primary" bindtap="submitForm">提交</button>
+    <button class="weui-btn" type="primary" form-type="submit">提交</button>
   </view>
 </view>
+</form>

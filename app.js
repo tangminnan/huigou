@@ -23,13 +23,17 @@ App({
         userInfo: app.globalData.user,
       });
     }
+  
     return new Promise((resolve, reject) => {
       wx.login({
         success: async function (res) {
-          const data = await api.getData('/api/info/saveOpenId', {
-            code: res.code
-          })
-          //console.info(data)
+        
+           console.info(res);
+           const data = await api.getData('/api/info/saveOpenId', {
+             code: res.code
+           })
+          
+          console.info(data)
           app.globalData.openid = data.openId;
           app.globalData.openId = data.openId;
           app.globalData.sessionKey = data.sessionKey;
