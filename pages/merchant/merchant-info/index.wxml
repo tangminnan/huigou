@@ -56,7 +56,7 @@
       <view class="img-uploader-title">品牌授权</view>
       <view class="img-uploader-btn" data-type="3" data-field="certification" bindtap="onUploadImage">
         <block wx:if="{{info.certification && info.certification.length}}">
-          <image wx:for="{{info.auth}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
+          <image wx:for="{{info.certification}}" wx:key="item" class="upload-preview-image" src="{{item}}"></image>
         </block>
         <view class="addbtn" wx:else>
             <mp-icon icon="add" size="48" color="#999"></mp-icon>
