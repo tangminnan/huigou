@@ -39,7 +39,7 @@ Page({
           price: it.hgSpecifications.goodsPresentPrice,
           skuId: it.hgSpecifications.id,
           goodsId: it.hgSpecifications.goodsId,
-          count: 1,
+          count: it.count,
           expressFee: it.expressFee,
           hgCartId: it.hgCartId
         }
