@@ -23,16 +23,20 @@ App({
         userInfo: app.globalData.user,
       });
     }
-  
-    return new Promise((resolve, reject) => {
+
+    if (this._userPromise) {
+      return this._userPromise;
+    }
+
+    this._userPromise = new Promise((resolve, reject) => {
       wx.login({
         success: async function (res) {
-        
-           console.info(res);
-           const data = await api.getData('/api/info/saveOpenId', {
-             code: res.code
-           })
-          
+
+          console.info(res);
+          const data = await api.getData('/api/info/saveOpenId', {
+            code: res.code
+          })
+
           console.info(data)
           app.globalData.openid = data.openId;
           app.globalData.openId = data.openId;
@@ -46,12 +50,15 @@ App({
             user: app.globalData.user,
             userInfo: app.globalData.user,
           })
+          this._userPromise = undefined;
         },
         fail(e) {
           reject(e);
+          this._userPromise = undefined;
         }
       })
     })
+    return this._userPromise;
   },
 
 })

@@ -31,6 +31,8 @@ Page({
       const shopId = item.hgUserInfo.id;
       const shopName = item.hgUserInfo.shopName;
       const skuList = item.hgGoodsSpecificationDto.map(it => {
+        console.log('it.hgSpecifications', !!it.hgSpecifications)
+        it.hgSpecifications = it.hgSpecifications || {}
         return {
           img: it.hgSpecifications.pic,
           title: it.title,

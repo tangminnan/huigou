@@ -51,7 +51,7 @@ Page({
     console.log('orderList', orderList)
     const list = [];
     orderList.data.forEach(porder => {
-      porder.orderTables.forEach(order => {
+      porder.orderTables && porder.orderTables.forEach(order => {
         list.push({
           shopId: order.hgGoods.merchantsId,
           pOrderId: porder.orderId,

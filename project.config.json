@@ -166,6 +166,13 @@
 					"pathName": "pages/merchant/merchant-info/index",
 					"query": "type=0",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/merchant/index/index",
+					"pathName": "pages/merchant/index/index",
+					"query": "orderId=1599062026235159906202623531",
+					"scene": null
 				}
 			]
 		}

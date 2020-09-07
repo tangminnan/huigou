@@ -112,11 +112,13 @@ Page({
       ...otherInfos
     } = this.data.info;
 
-    if (!certification || !certification.length) {
-      return wx.showToast({
-        title: '请上传品牌授权',
-        icon: 'none'
-      })
+    if (this.data.businessType === 0) {
+      if (!certification || !certification.length) {
+        return wx.showToast({
+          title: '请上传品牌授权',
+          icon: 'none'
+        })
+      }
     }
     if (!license || !license.length) {
       return wx.showToast({
@@ -124,11 +126,13 @@ Page({
         icon: 'none'
       })
     }
-    if (!otherAuth || !otherAuth.length) {
-      return wx.showToast({
-        title: '请上传相关证照',
-        icon: 'none'
-      })
+    if (this.data.businessType === 1) {
+      if (!otherAuth || !otherAuth.length) {
+        return wx.showToast({
+          title: '请上传相关证照',
+          icon: 'none'
+        })
+      }
     }
 
     if (!address) {
