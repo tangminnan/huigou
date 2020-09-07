@@ -109,7 +109,7 @@
   <view class='van-modal' style='height:{{windowHeight}}px;width: {{windowWidth}}px' bindtap='model1A'></view>
   <view class='shareMsg'>
       <view class='share-btn'>
-            <button open-type="share" data-type="2" style="width: 96rpx;height: 96rpx;border-radius: 50%;padding: 0;">
+             <button open-type="share" data-type="2" style="width: 96rpx;height: 96rpx;border-radius: 50%;padding: 0;">
                 <image class='share-icon' src='/images/share-3.png'></image>
             </button>
             <text>分享小程序</text>

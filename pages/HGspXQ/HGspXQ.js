@@ -443,19 +443,19 @@ onShareAppMessage: function (e) {
       }
     }
   }
-  if(type==2){
-    return {
-      title: '惠购',
-      path: 'pages/mine/mine?userId='+this.data.userInfo.id,
-      imageUrl: '',
-      success: (res) => {
+  if(type==2){console.info("===============");
+     return {
+       title: '惠购',
+       path: 'pages/mine/mine?userId='+this.data.userInfo.id,
+       imageUrl: '',
+       success: (res) => {
         
-      }
-    }
+       }
+     }
   }
   
 },
-onShareTimeline: function(ops) {
+onShareTimeline: function(ops) {console.info(" - - -- - - -");
   return {
     title: this.data.shangpin.title,
     path: 'pages/HGspXQ/HGspXQ?id=' + this.data.goodId+'&userId='+this.data.userInfo.id,

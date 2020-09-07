@@ -28,12 +28,17 @@ Page({
   },
 
   getdingdanxx:function(orderId){
+    console.info("=========传入的参数===");
+    console.info(orderId);
+    console.info("=========传入的参数===");
     wx.request({
       url: 'https://testh5.server012.com/api/home/searchOrderTable',
       data:{orderId:orderId},
       header:{'content-type': 'application/json'},
       success:res=>{
-        //console.info(res.data);
+        console.info("===========订单详情=====================");
+        console.info(res.data);
+        console.info("===============订单详情=================");
         if(res.data.code==0){
           this.setData({
             createTime: res.data.data.createTime,
@@ -57,9 +62,9 @@ Page({
               }
             }
           })
-          if(this.data.createTimeif==0){
-            this.countDown();
-          }
+        //  if(this.data.createTimeif==0){
+        //      this.countDown();
+        //    }
         }
       }
     })
@@ -73,7 +78,10 @@ Page({
       data:{orderId:orderId},
       header:{'content-type': 'application/json'},
       success:res=>{
+        console.info("===========订单详情=====================");
         console.info(res.data);
+        console.info("===============订单详情=================");
+        
         if(res.data.code==0){
           this.setData({
             createTime: res.data.data.hgOrder.createTime,
@@ -106,9 +114,10 @@ Page({
             dingdan: ddxq,
             
           })
-          if(this.data.createTimeif==0){
-            this.countDown();
-          }
+           if(this.data.createTimeif==0){
+
+             this.countDown();
+           }
         }
       }
     })

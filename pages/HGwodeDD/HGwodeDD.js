@@ -106,7 +106,7 @@ Page({
           for(let i = 0;i<res.data.data.length;i++){
               let order;
             
-            for(let j = 0;j<res.data.data.length;j++){
+            for(let j = 0;j<res.data.data[i].orderTables.length;j++){
                 order = res.data.data[i];  
                 if(order.payStatus!=0){
                   let orderTables = res.data.data[i].orderTables[j];
@@ -116,18 +116,14 @@ Page({
                   })
                 } 
               }
-            // if(res.data.data[i].payStatus==0){
-            //   this.setData({
-            //     orderList: this.data.orderList.concat({order:order}),
-            //     ifnull: 1
-            //   })
-            
-            // }
-            this.setData({
-              orderList: this.data.orderList.concat({order:order}),
-              ifnull: 1
-            });
-            console.info("全部订单");
+
+           if(order.payStatus==0){
+              this.setData({
+                orderList: this.data.orderList.concat({order:order}),
+                ifnull: 1
+              });
+            }
+            console.info("最终的");
             console.info(this.data.orderList);
           }
         }else{
@@ -151,7 +147,7 @@ Page({
       header: {
         'content-type': 'application/json' // 默认值
       },
-      success: (res) => {
+      success: (res) => {console.info(res);
         if (res.data.code == 0 && res.data.data != null) {
           for(let i = 0;i<res.data.data.length;i++){
             let order = res.data.data[i];
@@ -172,7 +168,6 @@ Page({
                 orderList: this.data.orderList.concat({order:order}),
                 ifnull: 1
               }) 
-              console.info(this.data.orderList);
             }
          
           }
@@ -227,7 +222,10 @@ Page({
   },
 
   shouhuo:function(e){
-    var orderId = e.currentTarget.dataset.orderId
+    var orderId = e.currentTarget.dataset.id
+    console.info("---订单------");
+    console.info(orderId);
+    console.info("---订单------");
     wx.request({
       method:"POST",
       url: 'https://testh5.server012.com/api/home/completeOrderById',
@@ -381,6 +379,7 @@ Page({
 
   //去支付
    goPay: function (e) { 
+     
      var orderId = e.currentTarget.dataset.id;
      var ddzt = e.currentTarget.dataset.ddzt
      var addid = e.currentTarget.dataset.addid
