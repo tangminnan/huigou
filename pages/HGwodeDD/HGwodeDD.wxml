@@ -84,7 +84,10 @@
                 <view data-id="{{items.orderTables.id}}" bindtap="shouhuo" >确认收货</view>
             </view>
         </view>
-     
+     <!--无相关订单-->
+        <view class="wuXG" wx:if="{{ifnull==0}}" >
+            <image src="/images/daifukuan.png"></image>
+        </view>
     </scroll-view>
     </swiper-item>
 

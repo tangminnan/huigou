@@ -155,3 +155,20 @@
   margin-bottom: 70rpx;
   height: 500rpx;
 }
+   button.empty::after {
+    border: none
+  } 
+  .empty.plain {
+    border: none;
+    border-color: transparent;
+  }
+  .empty.button-hover{
+    background-color: transparent;
+  }
+ 
+  button.empty{
+    line-height: 40rpx;
+    background-color: transparent;
+    padding-bottom: 20rpx;
+  }
+  

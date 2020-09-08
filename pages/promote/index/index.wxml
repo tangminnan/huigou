@@ -44,7 +44,9 @@
     <view class="action-item flex-hbox cross-center" bindtap="shareProductToFriend">
       <image class="icon" src="../../../assets/share-product.png"></image>
       <text class="content flex-spread">分享商品给好友</text>
+      <button class='empty' size="mini">
       <mp-icon icon="arrow" color="#ccc" size="12"></mp-icon>
+      </button>
     </view>
     
               
@@ -52,15 +54,17 @@
     <view class="action-item flex-hbox cross-center"  bindtap="shareMiniprogramToFriend">
       <image class="icon" src="../../../assets/share-miniprogram.png"></image>
       <text class="content flex-spread">分享小程序给好友</text>
-      <button open-type="share" data-type="2">
-        <mp-icon icon="arrow" color="#ccc" size="12"></mp-icon>
-      </button>
+        <button open-type="share" data-type="2" class='empty' size="mini">
+        <mp-icon class="cc" icon="arrow" color="#ccc" size="12"></mp-icon>
+       </button>
     </view>
     
     <view class="action-item flex-hbox cross-center" bindtap="shareQRCode">
       <image class="icon" src="../../../assets/share-qrcode.png"></image>
       <text class="content flex-spread">分享二维码图片给好友</text>
-      <mp-icon icon="arrow" color="#ccc" size="12"></mp-icon>
+      <button open-type="share" data-type="3" class='empty' size="mini">
+       <mp-icon icon="arrow" color="#ccc" size="12"></mp-icon>
+       </button>
     </view>
   </view>
 

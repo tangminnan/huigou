@@ -44,29 +44,40 @@ Page({
   //      } 
   // },
 
-
    onShareAppMessage: function (e) {
      var type = e.target.dataset.type;
-      if(type==1){
-        return {
-          title: this.data.shangpin.title,
-          path: 'pages/HGspXQ/HGspXQ?id=' + this.data.goodId+'&userId='+this.data.userInfo.id,
-         imageUrl: this.data.sptupian[0].picture,
-          success: (res) => {
+     var userInfo = app.globalData.userInfo
+      // if(type==1){
+      //   return {
+      //     title: this.data.shangpin.title,
+      //     path: 'pages/HGspXQ/HGspXQ?id=' + this.data.goodId+'&userId='+this.data.userInfo.id,
+      //    imageUrl: this.data.sptupian[0].picture,
+      //     success: (res) => {
           
-         }
-        }
-      }
-     if(type==2){console.info("===============");
+      //    }
+      //   }
+      // }
+     if(type==2){console.info("=======分享小程序给好友========");
         return {
-          title: '惠购',
-          path: 'pages/mine/mine?userId='+this.data.userInfo.id,
-          imageUrl: '',
+          title: '惠购小程序',
+          path: '/pages/index/index',
+          imageUrl: '../../../assets/share-miniprogram.png',
           success: (res) => {
           
           }
         }
      }
+
+     if(type==3){console.info("======分享二维码给好友=========");
+     return {
+       title: '惠购小程序二维码',
+       path: '/pages/index/index',
+       imageUrl: '../../../assets/share-qrcode.png',
+       success: (res) => {
+       
+       }
+     }
+  }
     
    },
 
@@ -76,6 +87,7 @@ Page({
 
   onLoad: async function (options) {
       this.getExtension();
+      wx.hideShareMenu();
   },
 
   /**
@@ -123,9 +135,14 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
+  //    return {
+  //      title: '微信小程序联盟',
+  //      desc: '最具人气的小程序开发联盟!',
+  //      path: '/pages/promote/index/index?id=123'
+  //    }
 
-  },
+  // },
   onShareTimeline: function () {
     return {
       title: ''
@@ -136,15 +153,17 @@ Page({
       url: '/pages/HGfenlei/HGfenlei',
     })
   },
-     shareMiniprogramToFriend: function () {
-       wx.showShareMenu({
+      shareMiniprogramToFriend: function () {console.info("微信分享");
+         wx.showShareMenu({
          menus: ['shareAppMessage', 'shareTimeline'],
-         withShareTicket: true,
-         success:(res)=>{
-
-         }
-       });
-     },
+           withShareTicket: true,
+           success:(res)=>{
+                 console.info("===分享success==");
+           }
+         });
+      //  this.onShareAppMessage();
+     
+      },
   sign: function (e) {
     wx.navigateTo({
       url: '/pages/promote/sign/index',

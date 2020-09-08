@@ -320,7 +320,7 @@ getgwcnum:function(){
   }
 },
 
-showok:function(e){
+showok:function(e){console.info("guanbi...");
   let type = e.currentTarget.dataset.type
   
   if(type==1){
@@ -328,6 +328,7 @@ showok:function(e){
   }else{
     this.goumai();
   }
+  this.hideModal();
 },
 
 goumai:function(){
