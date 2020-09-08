@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "OrderItem": "../../components/order-item"
+    "OrderItem": "../../../components/order-item"
   },
   "navigationBarTitleText": "退款退货"
 }

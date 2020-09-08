@@ -1,4 +1,5 @@
 const payApi = require('../../../api/order');
+const shoppingApi = require('../../../api/shopping-cart');
 
 Page({
 
@@ -43,11 +44,29 @@ Page({
       wx.navigateTo({
         url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}`,
       })
+      this.clearShoppingItem();
     } catch (e) {
       wx.hideLoading()
       wx.navigateTo({
         url: `/pages/shopping-cart/result/index?type=fail`,
       })
     }
+  },
+  clearShoppingItem: async function () {
+    const cartItemList = [];
+    this.data.shoppingList.forEach(shop => {
+      shop.skuList && shop.skuList.forEach(sku => {
+        cartItemList.push(sku.hgCartIds)
+      })
+    })
+    for (let i = 0, len = cartItemList.length; i < len; i++) {
+      const cartid = cartItemList[i];
+      try {
+        await shoppingApi.removeShoppingCartItem(cartid)
+      } catch (e) {
+        console.log('ignore error', e)
+      }
+    }
+
   }
 })

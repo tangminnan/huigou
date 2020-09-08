@@ -31,13 +31,15 @@ Page({
       const shopId = item.hgUserInfo.id;
       const shopName = item.hgUserInfo.shopName;
       const skuList = item.hgGoodsSpecificationDto.map(it => {
+        console.log('it.hgSpecifications', !!it.hgSpecifications)
+        it.hgSpecifications = it.hgSpecifications || {}
         return {
           img: it.hgSpecifications.pic,
           title: it.title,
           price: it.hgSpecifications.goodsPresentPrice,
           skuId: it.hgSpecifications.id,
           goodsId: it.hgSpecifications.goodsId,
-          count: 1,
+          count: it.count,
           expressFee: it.expressFee,
           hgCartId: it.hgCartId
         }
