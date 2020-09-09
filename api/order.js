@@ -24,7 +24,13 @@ async function wxPay(orderInfo) {
       }
     })
   })
+}
 
+async function wxRefund(pOrderId, orderId) {
+  return api.getData('/api/pay/wxRefund', {
+    order: pOrderId,
+    orderTableId: orderId
+  })
 }
 
 async function cancelOrder(orderId) {
@@ -71,7 +77,8 @@ async function returnGoods(orderId) {
   })
 }
 // 退货退款
-async function retreatGoods(orderId) {
+async function retreatGoods(orderId, parentOrderId) {
+  await wxRefund(parentOrderId, orderId);
   return api.postData('/api/business/updateOrderRetreat', {
     id: orderId
   })
@@ -80,6 +87,7 @@ async function retreatGoods(orderId) {
 module.exports = {
   saveOrder,
   wxPay,
+  wxRefund,
   cancelOrder,
   confirmOrder,
   updateExpressNo,

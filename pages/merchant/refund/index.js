@@ -82,7 +82,7 @@ Page({
   },
   onRetreatGoods: async function (e) {
     try {
-      await orderApi.retreatGoods(this.orderId);
+      await orderApi.retreatGoods(this.orderId, this.data.order.pOrderId);
       wx.showToast({
         title: '退货退款成功',
         icon: 'none'
