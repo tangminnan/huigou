@@ -27,7 +27,7 @@ async function wxPay(orderInfo) {
 }
 
 async function wxRefund(pOrderId, orderId) {
-  return api.getData('/api/pay/wxRefund', {
+  return api.postData('/api/pay/wxRefund', {
     order: pOrderId,
     orderTableId: orderId
   })
@@ -71,17 +71,31 @@ async function updateRetCourierNumber(orderId, retCourierNumber) {
   })
 }
 // 换货
-async function returnGoods(orderId) {
+// async function returnAndExchangeOfGoods(orderId) {
+//   return api.postData('/api/business/returnAndExchangeOfGoods', {
+//     id: orderId
+//   })
+// }
+// 退款
+// 8换货中 9退款中 10退货退款中
+async function processAfterSale(orderId, parentOrderId, status) {
+  if (status === 9 || status === 10) {
+    await wxRefund(parentOrderId, orderId);
+  }
   return api.postData('/api/business/returnGoods', {
-    id: orderId
+    orderId: orderId,
+    status
   })
 }
+async function tuikuan(orderId, parentOrderId) {
+  return processAfterSale(orderId, parentOrderId, 9)
+}
+async function huanhuo(orderId, parentOrderId) {
+  return processAfterSale(orderId, parentOrderId, 8)
+}
 // 退货退款
-async function retreatGoods(orderId, parentOrderId) {
-  await wxRefund(parentOrderId, orderId);
-  return api.postData('/api/business/updateOrderRetreat', {
-    id: orderId
-  })
+async function tuikuantuihuo(orderId, parentOrderId) {
+  return processAfterSale(orderId, parentOrderId, 10)
 }
 
 module.exports = {
@@ -94,6 +108,7 @@ module.exports = {
   confirmRefund,
   fetchOrderDetail,
   updateRetCourierNumber,
-  returnGoods,
-  retreatGoods
+  tuikuan,
+  huanhuo,
+  tuikuantuihuo
 }

@@ -40,8 +40,8 @@
       bindtap="onShowModal">填写快递单号</view>
     <view wx:if="{{order.distributionStatus === 5 || order.distributionStatus === 6 || order.distributionStatus === 7}}"
       class="action-btn" bindtap="onViewDetail" data-order-id="{{order.orderId}}">进入详情</view>
-    <view wx:if="{{order.distributionStatus === 9}}" class="action-btn" data-order-id="{{order.orderId}}"
-      bindtap="onConfirmRefund">确认退款</view>
+    <!-- <view wx:if="{{order.distributionStatus === 9}}" class="action-btn" data-order-id="{{order.orderId}}" data-parent-order-id="{{order.pOrderId}}"
+      bindtap="onConfirmRefund">确认退款</view> -->
   </view>
   <view wx:if="{{showPromptModal}}" class="modal-container">
     <view class="modal-mask"></view>

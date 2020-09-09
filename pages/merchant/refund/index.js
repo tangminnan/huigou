@@ -1,5 +1,4 @@
 const orderApi = require('../../../api/order');
-const order = require('../../../api/order');
 
 Page({
   data: {
@@ -80,9 +79,9 @@ Page({
       return;
     }
   },
-  onRetreatGoods: async function (e) {
+  onTuihuoTuikuan: async function (e) {
     try {
-      await orderApi.retreatGoods(this.orderId, this.data.order.pOrderId);
+      await orderApi.tuikuantuihuo(this.orderId, this.data.order.pOrderId);
       wx.showToast({
         title: '退货退款成功',
         icon: 'none'
@@ -96,11 +95,11 @@ Page({
       return;
     }
   },
-  onReturnGoods: async function (e) {
+  onTuikuan: async function (e) {
     try {
-      await orderApi.returnGoods(this.orderId);
+      await orderApi.tuikuan(this.orderId, this.data.order.pOrderId);
       wx.showToast({
-        title: '退/换货成功',
+        title: '退款成功',
         icon: 'none'
       })
       this.getOrderDetail();
@@ -111,5 +110,21 @@ Page({
       })
       return;
     }
-  }
+  },
+  onHuanhuo: async function (e) {
+    try {
+      await orderApi.huanhuo(this.orderId, this.data.order.pOrderId);
+      wx.showToast({
+        title: '换货成功',
+        icon: 'none'
+      })
+      this.getOrderDetail();
+    } catch (e) {
+      wx.showToast({
+        title: e && e.msg || '出错了，请稍后再试',
+        icon: 'none'
+      })
+      return;
+    }
+  },
 })

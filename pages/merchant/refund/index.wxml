@@ -7,10 +7,13 @@
       <view class="address-user">买家姓名：{{order.address && order.address.recipient}}</view>
     </view>
     <view wx:if="{{order.distributionStatus === 7}}" class="action">
-      <view class="action-btn" data-order-id="{{order.orderId}}" bindtap="onRetreatGoods">同意退货退款</view>
+      <view class="action-btn" data-order-id="{{order.orderId}}" bindtap="onTuihuoTuikuan">同意退货退款</view>
     </view>
-    <view wx:if="{{order.distributionStatus === 5 || order.distributionStatus === 6}}" class="action">
-      <view class="action-btn" data-order-id="{{order.orderId}}" bindtap="onReturnGoods">同意退货</view>
+    <view wx:if="{{order.distributionStatus === 6}}" class="action">
+      <view class="action-btn" data-order-id="{{order.orderId}}" bindtap="onTuikuan">同意退款</view>
+    </view>
+    <view wx:if="{{order.distributionStatus === 5}}" class="action">
+      <view class="action-btn" data-order-id="{{order.orderId}}" bindtap="onHuanhuo">同意换货</view>
     </view>
   </view>
   <view class="next-btn" wx:if="{{}}">
