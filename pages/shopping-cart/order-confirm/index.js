@@ -27,6 +27,7 @@ Page({
         });
       })
     }
+    console.info(this.data.address.id);
   },
   onClickSubmit: async function () {
     await getApp().getUserInfo();
@@ -42,7 +43,7 @@ Page({
       });
       wx.hideLoading()
       wx.navigateTo({
-        url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}`,
+        url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}&orderNo=${this.data.orderId}&addressId=${this.data.address.id}`,
       })
       this.clearShoppingItem();
     } catch (e) {

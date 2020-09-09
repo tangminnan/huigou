@@ -4,6 +4,7 @@
         <image src="/images/DDxq.png"></image>
         <text wx:if="{{ddzt==99}}">待付款</text>
         <text wx:if="{{ddzt==1}}">待发货</text>
+        <text wx:if="{{ddzt==23}}">待发货</text>
         <text wx:if="{{ddzt==0}}">待收货</text>
         <text wx:if="{{ddzt==4}}">已完成</text>
         <text wx:if="{{ddzt==5}}">已取消</text>
@@ -18,7 +19,7 @@
     <text class="dz">{{address.detailAddress}}</text>
     <text>{{address.recipient}}{{address.phone}}</text>
 </view>
-<view wx:if="{{ddzt==99}}">
+<view wx:if="{{ddzt==99 || ddzt==23}}">
 <view class="DD-box3">
     <view class="upbox" wx:for-items="{{goods}}">
         <image src="{{item.shangpin.hgGoodsFiles[0].picture}}"></image>
@@ -112,6 +113,9 @@
     <button bindtap="quxiao" >取消订单</button>
 </view>
 <view wx:if="{{ddzt==0}}" class="fixBtn">
+    <button bindtap="shouhuo" >确认收货</button>
+</view>
+<view wx:if="{{ddzt==23}}" class="fixBtn">
     <button bindtap="shouhuo" >确认收货</button>
 </view>
 <view wx:if="{{ddzt==4}}" class="fixBtn">

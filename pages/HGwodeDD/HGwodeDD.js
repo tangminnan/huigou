@@ -31,6 +31,7 @@ Page({
       orderList: [],
       currentTab: e.currentTarget.dataset.idx
     })
+   
     //全局变量
     app.globalData.currentTab = e.currentTarget.dataset.idx;
     
@@ -123,8 +124,6 @@ Page({
                 ifnull: 1
               });
             }
-            console.info("最终的");
-            console.info(this.data.orderList);
           }
         }else{
           this.setData({
@@ -216,16 +215,16 @@ Page({
     })
     if(this.data.currentTab==0){
       this.getUserAllOrder(); 
+   
     }else{
-      this.getUserOrder(this.data.currentTab);
+      this.getUserOrder(this.data.currentTab-1);
+  
     }
   },
 
   shouhuo:function(e){
     var orderId = e.currentTarget.dataset.id
-    console.info("---订单------");
-    console.info(orderId);
-    console.info("---订单------");
+  
     wx.request({
       method:"POST",
       url: 'https://testh5.server012.com/api/home/completeOrderById',
@@ -313,7 +312,7 @@ Page({
   showview: function (e) {//弹框显示
     this.setData({
       model: 1,
-      orderId:e.currentTarget.dataset.orderId
+      orderId:e.currentTarget.dataset.id
     })
     console.log("111")
   },
@@ -352,10 +351,11 @@ Page({
       success:res=>{
         if(res.data.code==0){
           wx.showToast({
-            title: '已完成',
+            title: '运单号已提交',
             icon: 'success',
             duration: 2000
           })
+          this.model1();
           this.jiazai();
         }else{
           wx.showToast({
@@ -371,7 +371,7 @@ Page({
 
   //跳转
   tuiHuan: function (e) { 
-    var orderId = e.currentTarget.dataset.orderId;
+    var orderId = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: '../HGtuihuo/HGtuihuo?orderId='+orderId,
     })
@@ -383,6 +383,8 @@ Page({
      var orderId = e.currentTarget.dataset.id;
      var ddzt = e.currentTarget.dataset.ddzt
      var addid = e.currentTarget.dataset.addid
+     console.info("ddzt= "+ddzt);
+     console.info("addid= "+addid);
      wx.navigateTo({
        url: '../HGdingdanXQ/HGdingdanXQ?orderId='+orderId+'&ddzt='+ddzt+'&addressId='+addid,
      })

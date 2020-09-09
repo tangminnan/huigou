@@ -16,23 +16,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+     
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const addressId = options.addressId;
+    const orderId=options.orderNo;
     const type = options.type || 'success';
     const count = options.count || 1;
     const total = Math.floor(count * 4.2 * 100 + 0.5) / 100
     const originTotal = Math.floor(count * 5.2 * 100 + 0.5) / 100
     this.setData({
+      addressId,
+      orderId,
       count,
       total,
+      type,
       originTotal,
       ...config[type]
     })
+    console.info("成功交款的订单号 "+this.data.orderId);
+    console.info("成功交款后的地址 "+this.data.addressId);
+    console.info("成功提交订单 "+type);
   },
 
   /**
@@ -82,5 +90,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  //查看订单详情
+  getOrderDetail:function(){
+      wx.navigateTo({
+        url: `/pages/HGdingdanXQ/HGdingdanXQ?orderId=${this.data.orderId}&ddzt=23&addressId=${this.data.addressId}`,
+      })
   }
+
 })

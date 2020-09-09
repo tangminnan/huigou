@@ -57,6 +57,14 @@ Page({
       })
     }
   },
+  //拨打客服
+  bdkf:function(){
+    wx.makePhoneCall({
+
+      phoneNumber: '139xxxxxxxx'
+
+    })
+  },
 
   showview: function () { //弹框显示
     this.setData({

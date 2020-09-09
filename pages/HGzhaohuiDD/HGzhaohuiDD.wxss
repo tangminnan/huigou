@@ -11,11 +11,11 @@
   line-height: 100rpx;
 }
 .weui-search-bar__input {
-  padding:0 20rpx;
+   padding:0 20rpx;
   height: 100rpx;
   font-size: 30rpx;
   width:75%;
-  float: left;
+  float: left; 
 }
 .weui-search-bar__cancel-btn {
   width:25%;

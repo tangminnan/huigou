@@ -13,6 +13,7 @@ Page({
   },
 //查询订单
   showview:function(){
+    console.info("我要找回定案 "+this.data.orderId);
     wx.request({
       method:'Get',
       url: 'https://testh5.server012.com/api/order/selectOrderByOrderId',

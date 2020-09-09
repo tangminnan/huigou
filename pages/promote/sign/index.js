@@ -24,12 +24,15 @@ Page({
 
    //签到进度
    getqdjindu:function(){
+     console.info("===========");
+     console.info(this.data.userInfo.id);
+     console.info("===========");
     wx.request({
       url: 'https://testh5.server012.com/api/home/searchSingSchedule',
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
-        //console.info(res.data);
+        console.info(res.data);
         if(res.data.code == 0){
             this.setData({
               qiandaojd: res.data.data
@@ -47,7 +50,7 @@ Page({
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
-        //console.info(res.data);
+        console.info(res.data);
         if(res.data.code == 0){
             this.setData({
               qiandaozt: res.data.data.status
@@ -65,7 +68,8 @@ Page({
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
-        //console.info(res.data.data);
+        console.info("领取记录");
+        console.info(res.data.data);
         if(res.data.data.length>0){
           this.setData({
             lingqutask:res.data.data
@@ -81,7 +85,8 @@ Page({
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
-        //console.info(res.data);
+        console.info("领取任务");
+        console.info(res.data);
         if (res.data.code == 0) {
           this.setData({
             suoyou: res.data.data

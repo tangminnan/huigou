@@ -136,7 +136,7 @@
             <view class="huanhuo">
                 <view>快递单号：{{items.order.courierNumber}}</view>
             </view>
-            <view class="ddTxt"  bindtap="goPay"  data-id="{{items.orderTables.id}}"  data-addid="{{items.order.addressId}}" data-ddzt="{{items.order.payStatus==0?99:item.orderTables.distributionStatus}}">
+            <view class="ddTxt"  bindtap="goPay"  data-id="{{items.orderTables.id}}"  data-addid="{{items.order.addressId}}" data-ddzt="{{items.order.payStatus==0?99:items.orderTables.distributionStatus}}">
                 <image src="{{items.orderTables.hgGoods.hgGoodsFile.picture}}"></image>
                 <text class="t1">{{items.orderTables.hgGoods.title}}</text>
                 <text class="t2" style="float: right;width: 30rpx;margin-top: 70rpx;margin-right: -40rpx;">x{{items.orderTables.goodsNum}}</text>
@@ -167,7 +167,7 @@
                 <text class="fl">订单号：{{items.orderTables.id}}</text>
                 <text class="fr">已完成</text>
             </view>
-            <view class="ddTxt"  bindtap="goPay"  data-id="{{items.orderTables.id}}"  data-addid="{{items.order.addressId}}" data-ddzt="{{items.order.payStatus==0?99:item.orderTables.distributionStatus}}">
+            <view class="ddTxt"  bindtap="goPay"  data-id="{{items.orderTables.id}}"  data-addid="{{items.order.addressId}}" data-ddzt="{{items.order.payStatus==0?99:items.orderTables.distributionStatus}}">
                 <image src="{{items.orderTables.hgGoods.hgGoodsFile.picture}}"></image>
                 <text class="t1">{{items.orderTables.hgGoods.title}}</text>
                 <text class="t2" style="float: right;width: 30rpx;margin-top: 70rpx;margin-right: -40rpx;">x{{items.orderTables.goodsNum}}</text>

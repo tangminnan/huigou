@@ -85,7 +85,7 @@
     <view class="arrow"></view>
   </view>
 
-  <view class="Hlist">
+  <view class="Hlist" bindtap="bdkf">
     <image src="/images/gongju-3.png" mode='aspectFit'></image>
     <text>拨打客服</text>
     <view class="arrow"></view>

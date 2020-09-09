@@ -93,6 +93,7 @@ Page({
           for(let i =0;i<res.data.data.tableList.length;i++){
             var goodsId = res.data.data.tableList[i].goodsId
             var dd = res.data.data.tableList[i]
+            console.info("商品  "+goodsId);
             wx.request({
               url: 'https://testh5.server012.com/api/home/searchGoodsDetail',
               data: { goodsId : goodsId},
@@ -163,7 +164,8 @@ Page({
       ddzt:options.ddzt,
       addressId:options.addressId
     })
-    if(options.ddzt==99){
+    if(options.ddzt==99 || options.ddzt==23){
+      console.info("wewew");
       this.getfudingdanxx(options.orderId);
     }else{
       this.getdingdanxx(options.orderId);

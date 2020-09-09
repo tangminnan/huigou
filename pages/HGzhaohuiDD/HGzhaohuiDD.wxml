@@ -4,7 +4,7 @@
     <!-- 搜索框 -->
     <input type="text" class="weui-search-bar__input" bindinput="orderIdInput" value='{{orderId}}' placeholder="请输入订单号"/>
     <!-- 搜索按钮,调用搜索查询方法 -->
-    <view bindtap='showview' class="weui-search-bar__cancel-btn">查询</view>
+    <view bindtap='showview'>查询</view>
 </view>
 
 <!--订单搜索弹框  -->

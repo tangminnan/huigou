@@ -263,7 +263,7 @@ getUserxx:function(){
       url: 'https://testh5.server012.com/api/info/updateHgUserInfo',
       data: { 
         id: this.data.userInfo.id ,
-        name: this.data.userName,
+        userName: this.data.userName,
         sex: this.data.sex,
         phone: this.data.phone
       },

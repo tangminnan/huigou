@@ -3,5 +3,6 @@
     <image src="{{img}}"></image>
     <view class="desc">{{desc}}</view>
     <view class="detail">{{detail}}</view>
+    <button wx:if="{{type=='success'}}" bindtap="getOrderDetail">查看订单详情</button>
   </view>
 </view>

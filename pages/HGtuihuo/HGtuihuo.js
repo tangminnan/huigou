@@ -16,43 +16,54 @@ Page({
 
   //退货款
   huokuan:function(e){
+    var that=this;
     var type = e.currentTarget.dataset.type;
-    var status;
-    if(type=='1'){status == 7}
-    if (type=='2'){status == 8}
-    if (type=='3'){status == 9}
-    wx.request({
-      method:"POST",
-      url: 'https://testh5.server012.com/api/home/returnGoods',
-      data:{
-        orderId:this.data.orderId,
-        status:status
-      },
-      header:{"Content-Type": "application/x-www-form-urlencoded"},
-      success:res=>{
-        if(res.data.code== 0){
-            wx.showToast({
-              title: '操作成功',
-              icon:'none',
-              duration:200
-            })
-            let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
-            let prevPage = pages[ pages.length - 2 ];  
-            prevPage.jiazai();
-            wx.navigateBack({
-              delta: 1  
-            })
-        }else{
-          wx.showToast({
-            title: '操作失败，请稍后重试',
-            icon:'none',
-            duration:200
+    var status,content;
+    if(type==1){status = 7,content="确定要退货退款吗"}
+    if (type==2){status = 5,content="确定要换货吗"}
+    if (type==3){status = 6,content="确定要退款吗"}
+    wx.showModal({
+      title: '提示',
+      content: content,
+      success (res) {
+        if (res.confirm) {
+          wx.request({
+            method:"POST",
+            url: 'https://testh5.server012.com/api/home/returnGoods',
+            data:{
+              orderId:that.data.orderId,
+              status:status
+            },
+            header:{"Content-Type": "application/x-www-form-urlencoded"},
+            success:res=>{
+              if(res.data.code== 0){
+                  wx.showToast({
+                    title: '操作成功',
+                    icon:'none',
+                    duration:200
+                  })
+                  let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+                  let prevPage = pages[ pages.length - 2 ];  
+                  prevPage.jiazai();
+                  wx.navigateBack({
+                    delta: 1  
+                  })
+              }else{
+                wx.showToast({
+                  title: '操作失败，请稍后重试',
+                  icon:'none',
+                  duration:200
+                })
+                let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+                let prevPage = pages[ pages.length - 2 ];  
+                wx.navigateBack({
+                  delta: 1  
+                })
+              }
+            }
           })
-          let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
-          let prevPage = pages[ pages.length - 2 ];  
-          wx.navigateBack({
-            delta: 1  
-          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
         }
       }
     })
