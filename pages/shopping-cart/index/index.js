@@ -52,7 +52,8 @@ Page({
       }
     })
     this.setData({
-      shoppingList
+      shoppingList,
+      isAllChecked: false
     }, () => {
       this.setData({
         total: this.getTotal()
