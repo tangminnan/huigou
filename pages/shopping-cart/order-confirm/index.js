@@ -57,7 +57,7 @@ Page({
     const cartItemList = [];
     this.data.shoppingList.forEach(shop => {
       shop.skuList && shop.skuList.forEach(sku => {
-        cartItemList.push(sku.hgCartIds)
+        cartItemList.push(sku.hgCartId)
       })
     })
     for (let i = 0, len = cartItemList.length; i < len; i++) {
