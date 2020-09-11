@@ -20,6 +20,12 @@ Page({
     shareuId:0
   },
 
+  //微信小程序下拉刷新
+  onPullDownRefresh: function () {
+    console.log('onPullDownRefresh')
+    this.getUserxx();
+  },
+
   //获取用户信息
   getUserxx: async function () {
     //console.info(this.data.userInfo.id)
@@ -85,13 +91,16 @@ Page({
     })
   },
   findDD: function () {
+    
     wx.navigateTo({
       url: '../HGzhaohuiDD/HGzhaohuiDD',
     })
   },
-  allDD: function () {
+  allDD: function (e) {
+    console.info("发现订单");
+    console.info(e.currentTarget.dataset.type);
     wx.navigateTo({
-      url: '../HGwodeDD/HGwodeDD',
+      url: '../HGwodeDD/HGwodeDD?ztype='+type,
     })
   },
   myDZ: function () {

@@ -2,5 +2,7 @@
   "navigationBarTitleText": "国瑞熙墅",
   "navigationBarBackgroundColor": "#E42D2E",
   "navigationBarTextStyle": "white",
-  "onReachBottomDistance":100
+  "onReachBottomDistance":100,
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

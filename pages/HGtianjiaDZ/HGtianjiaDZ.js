@@ -91,6 +91,7 @@ Page({
       })
       return false;
     }
+   
     if (this.data.regionif == 0) {
       wx.showToast({
         title: '请选择城市',
@@ -99,6 +100,19 @@ Page({
       })
       return false;
     }
+
+    for(var i=0;i<this.data.region.length;i++){
+        console.info(this.data.region[i]);
+        if(this.data.region[i]=="请选择"){
+          wx.showToast({
+            title: '请输入正确的地址',
+            icon: 'none',
+            duration: 2000
+          })
+          return false;
+        }
+    }
+
     if (this.data.detailAddress == '') {
       wx.showToast({
         title: '请输入详细地址',

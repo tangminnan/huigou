@@ -253,7 +253,8 @@ Page({
   },
 
   //高度
-  onLoad: function () {
+  onLoad: function (options) {
+    
     var that = this
     wx.getSystemInfo({
       success: function (res) {

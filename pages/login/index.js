@@ -52,13 +52,21 @@ Page({
 
   },
   bindGetUserInfo: function (e) {
+    console.info("==================================");
+    console.info("==================================");
+    console.info("==================================");
+    console.info("==================================");
+    console.info("==================================");
     //console.info(e.detail.userInfo);
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
       var that = this;
       //插入登录的用户的相关信息到数据库
       var openid = getApp().globalData.openid; 
-      var data={}
+      var data={};
+      console.info("----ww")
+      console.info(this.data.shareuId);
+      console.info("----ww")
       if(this.data.shareuId==0){
         data = {
           id:getApp().globalData.userInfo.id,
@@ -66,6 +74,7 @@ Page({
           sex: e.detail.userInfo.gender,
           userLogo: e.detail.userInfo.avatarUrl,
           phone:'18711111111',
+          invitationNum:this.data.shareuId,
           isUser:0,
           labelId:1,
           communityId:1,

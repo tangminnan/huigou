@@ -66,7 +66,8 @@
         <view class="rank" wx:for-items="{{shangpintuijian}}" data-id='{{item.hgGoods.id}}' bindtap='shangpinxq' >
             <image src="{{item.hgGoodsFiles[0].picture}}" mode='aspectFit'></image>
             <view class="txt1">{{item.hgGoods.title}}</view>
-            <view class="txt2">￥{{item.hgSpecifications[0].goodsPresentPrice}}  <text>￥{{item.hgSpecifications[0].goodsOriginalPrice}}</text></view>
+            <view class="txt2">￥{{item.hgSpecifications[0].goodsPresentPrice}}  <text>￥{{item.hgSpecifications[0].goodsOriginalPrice}}</text>
+            </view>
         </view>
 
         <!-- <view class="rank" bindtap='more'>
@@ -100,9 +101,11 @@
         </view> -->
 
     </view>
-    <view class="loading" style="text-align:center;" hidden="{{!searchLoadingComplete}}">已加载全部</view>
+    
 </view>
 
-<view class="loading" style="text-align:center;" hidden="{{!searchLoading}}">正在载入更多...</view>  
+  <view class="loading" style="text-align:center;" hidden="{{!searchLoadingComplete}}">已加载全部</view>
+  <view class="loading" style="text-align:center;" hidden="{{!searchLoading}}">正在载入更多...</view>  
+ 
 
 

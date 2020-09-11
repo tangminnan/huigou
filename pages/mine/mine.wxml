@@ -21,24 +21,24 @@
       <view class="right" bindtap='findDD'><image src="/images/search.png"></image>找回订单</view>
   </view>
   <view class="mine_DDlist">
-      <view bindtap='allDD'>
-        <image src="/images/mine-1.png" mode='aspectFit'></image>
+      <view bindtap='allDD' data-type="1">
+        <image src="/images/mine-1.png"  mode='aspectFit'></image>
         <text>待支付</text>
       </view>
-      <view bindtap='allDD'>
-        <image src="/images/mine-2.png" mode='aspectFit'></image>
+      <view bindtap='allDD' data-type="2">
+        <image src="/images/mine-2.png"  mode='aspectFit'></image>
         <text>待收货</text>
       </view>
-      <view bindtap='allDD'>
-        <image src="/images/mine-3.png" mode='aspectFit'></image>
+      <view bindtap='allDD' data-type="3">
+        <image src="/images/mine-3.png"  mode='aspectFit'></image>
         <text>已完成</text>
       </view>
-      <view bindtap='allDD'>
-        <image src="/images/mine-4.png" mode='aspectFit'></image>
+      <view bindtap='allDD' data-type="4">
+        <image src="/images/mine-4.png"  mode='aspectFit'></image>
         <text>退换/售后</text>
       </view>
-      <view bindtap='allDD'>
-        <image src="/images/mine-5.png" mode='aspectFit'></image>
+      <view bindtap='allDD' data-type="0">
+        <image src="/images/mine-5.png"  mode='aspectFit'></image>
         <text>全部</text>
       </view>
   </view>

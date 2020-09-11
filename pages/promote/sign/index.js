@@ -32,6 +32,8 @@ Page({
       data: { userId: this.data.userInfo.id },
       header: { 'content-type': 'application/json' },
       success: res => {
+        console.info("签到进度");
+        console.info(this.data.userInfo.id);
         console.info(res.data);
         if(res.data.code == 0){
             this.setData({
@@ -101,7 +103,8 @@ Page({
       url: 'https://testh5.server012.com/api/home/searchSigns',
       header: { 'content-type': 'application/json' },
       success: res => {
-        //console.info(res.data);
+        console.info("签到列表");
+        console.info(res.data);
         if (res.data.code == 0) {
           this.setData({
             syqiandao: res.data.data
@@ -231,9 +234,11 @@ Page({
 
   },
   sign: function () {
+    console.info("今日签到");
+    console.info(this.data.userInfo.id);
     wx.request({
       method:"POST",
-      url: 'https://testh5.server012.com/api/home/singEverydayTaskByUserId',
+      url: 'https://testh5.server012.com/api/home/singEverydayTaskByUserId', 
       data: { userId: this.data.userInfo.id },
       header: { "Content-Type": "application/x-www-form-urlencoded" },
       success: res => {

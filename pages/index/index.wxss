@@ -53,7 +53,13 @@
 .tuijian .rank{width: 340rpx;background: #fff;border-radius:10rpx;margin-bottom:30rpx;padding-bottom:24rpx;}
 .tuijian .rank image{width: 340rpx;height: 340rpx;}
 .tuijian .rank view{padding:0 24rpx;}
-
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  width: 100%;
+  height: 100%;
+}
 
 
 

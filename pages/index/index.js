@@ -25,6 +25,15 @@ Page({
     //console.log(e.detail.value)
   },
 
+  //微信小程序下拉刷新
+  onPullDownRefresh: function () {
+    console.log('onPullDownRefresh')
+    this.getbanner();
+    this.getfenlei();
+    this.gettopph();
+    this.getshangpin();
+  },
+
   // 点击键盘上的搜索
   bindconfirm:function(e){
     var that=this;
