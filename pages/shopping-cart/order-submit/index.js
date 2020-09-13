@@ -11,11 +11,11 @@ Page({
     expressFee: 0,
     total: 0,
     shoppingList: [],
-    bz:''
+    remarks:''
   },
 
   beizhu:function(e){
-      this.data.bz=e.detail.value;
+      this.data.remarks=e.detail.value;
   },
 
   /**
@@ -76,7 +76,8 @@ Page({
         addressId: this.data.address.id,
         payType: 1,
         userId: userInfo.userId,
-        account: total + expressFee
+        account: total + expressFee,
+        remarks: this.data.remarks
       },
       hgOrderTables: []
     };
