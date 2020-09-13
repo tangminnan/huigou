@@ -48,8 +48,9 @@ Page({
       this.clearShoppingItem();
     } catch (e) {
       wx.hideLoading()
+      const msg = e && e.msg || '支付失败，请重新支付'
       wx.navigateTo({
-        url: `/pages/shopping-cart/result/index?type=fail`,
+        url: `/pages/shopping-cart/result/index?type=fail&msg=${encodeURIComponent(msg)}`,
       })
     }
   },
