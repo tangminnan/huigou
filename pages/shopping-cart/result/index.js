@@ -15,13 +15,13 @@ Page({
     const addressId = options.addressId;
     const orderId = options.orderNo;
     const type = options.type || 'success';
-    const msg = options.msg;
+    // const msg = options.msg;
     this.setData({
       addressId,
       orderId,
       type,
       ...config[type],
-      detail: msg || config[type].detail
+      // detail: msg || config[type].detail
     })
   },
   getOrderDetail: function () {
