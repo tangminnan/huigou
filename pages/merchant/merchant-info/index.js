@@ -7,10 +7,10 @@ const merchantApi = require('../../../api/merchant');
 Page({
   data: {
     sexList: [{
-      key: 1,
+      key: 0,
       label: "男"
     }, {
-      key: 0,
+      key: 1,
       label: "女"
     }],
     info: {
@@ -24,7 +24,7 @@ Page({
       businessType
     });
     wx.setNavigationBarTitle({
-      title: businessType === 1 ? '个人经营' : '品牌商家'
+      title: businessType == 1 ? '个人经营' : '品牌商家'
     })
   },
   onFormChage: function (e) {
@@ -112,7 +112,7 @@ Page({
       ...otherInfos
     } = this.data.info;
 
-    if (this.data.businessType === 0) {
+    if (this.data.businessType == 0) {
       if (!certification || !certification.length) {
         return wx.showToast({
           title: '请上传品牌授权',
@@ -122,11 +122,11 @@ Page({
     }
     if (!license || !license.length) {
       return wx.showToast({
-        title: '请上传营业支招',
+        title: '请上传营业执照',
         icon: 'none'
       })
     }
-    if (this.data.businessType === 1) {
+    if (this.data.businessType == 1) {
       if (!otherAuth || !otherAuth.length) {
         return wx.showToast({
           title: '请上传相关证照',
@@ -141,9 +141,15 @@ Page({
         icon: 'none'
       })
     }
-    if (!otherInfos.phone) {
+    if (!otherInfos.phone || !/^1\d{10}$/.test(otherInfos.phone)) {
       return wx.showToast({
-        title: '请输入手机号码',
+        title: '请输入正确的手机号码',
+        icon: 'none'
+      })
+    }
+    if (!otherInfos.name) {
+      return wx.showToast({
+        title: '请输入姓名',
         icon: 'none'
       })
     }

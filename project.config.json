@@ -173,6 +173,20 @@
 					"pathName": "pages/merchant/index/index",
 					"query": "orderId=1599062026235159906202623531",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/merchant/merchant-class/index",
+					"pathName": "pages/merchant/merchant-class/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 16,
+					"name": "pages/merchant/audit-result/index",
+					"pathName": "pages/merchant/audit-result/index",
+					"query": "type=success",
+					"scene": null
 				}
 			]
 		}
