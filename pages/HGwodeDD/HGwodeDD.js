@@ -34,26 +34,28 @@ Page({
    
     //全局变量
     app.globalData.currentTab = e.currentTarget.dataset.idx;
-    
+    this.getOrderzt(e.currentTarget.dataset.idx);
   },
   onShow() {
-    this.setData({
-      //currentTab: app.globalData.currentTab
-      currentTab: 0
-    })
+    // this.setData({
+    //   //currentTab: app.globalData.currentTab
+    //   currentTab: 0
+    // })
     
   },
 
-  swiperChange: function (e) {
-    this.setData({
-      orderList: [],
-      currentTab: e.detail.current,
-    })
-    //全局变量
-    app.globalData.currentTab = e.detail.current;
+    // swiperChange: function (e) {
+    
+    //   this.setData({
+    //     orderList: [],
+    //     currentTab: e.detail.current,
+    //   })
+   
+    //   //全局变量
+    //   app.globalData.currentTab = e.detail.current;
 
-    this.getOrderzt(e.detail.current);
-  },
+    //   this.getOrderzt(e.detail.current);
+    // },
 
   getOrderzt: function (orderFlag){
     //console.info(orderFlag);
@@ -254,7 +256,6 @@ Page({
 
   //高度
   onLoad: function (options) {
-    
     var that = this
     wx.getSystemInfo({
       success: function (res) {
@@ -290,18 +291,19 @@ Page({
         }
       })
     }
-    this.getUserAllOrder(); 
-    //this.getUserOrder(0)
-    
+      var type=options.type;
+      this.setData({
+        currentTab: type
+    });
+   
+
+      if(type==0){
+        this.getUserAllOrder();
+      }else{
+        this.getUserOrder(type-1);
+      }
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
+
 
   danhao:function(e){
     this.setData({

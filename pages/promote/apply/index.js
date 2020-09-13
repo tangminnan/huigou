@@ -47,6 +47,21 @@ Page({
         })
   },
 
+  phoneInput: function (e) {
+   
+    if (!(/^1[34578]\d{9}$/.test(phone))) {
+
+  
+      if (phone.length >= 11) {
+        wx.showToast({
+          title: '手机号有误',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    } 
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -158,32 +173,7 @@ Page({
     })
   },
 
-   //保存数据
-  //  formSubmit: function (event) {
-  //   const userInfo = await userApi.getOpenId();
-  //   CONSOLOE
-  //   var that = this;
-  //   var post = event.detail.value;
-  //  wx.request({
-  //    url: 'http://localhost:8087/address/saveAddress',
-  //    method:'POST',
-  //    header: {"Content-Type": "application/x-www-form-urlencoded"},
-  //    data: {
-  //      id: that.data.address.id == undefined ? 0 : that.data.address.id,
-  //      name: post.name,
-  //      phone: post.phone,
-  //      address: post.address,
-  //      defaultAddress: that.data.defaultAddress
-  //    },
-  //    success: function (res) {
-  //      console.info(res);
-  //      if (res.data.code == 0)
-  //        wx.navigateTo({
-  //          url: '../shouhuoDD/shouhuoDD'
-  //        })
-  //    }
-  //  })
-  //},
+  
 
   formSubmit: async function (event) {
     var selectedSexIndex=this.data.info.selectedSexIndex;
@@ -209,17 +199,18 @@ Page({
       })
     }
 
-    // if (!sex) {
-    //   return wx.showToast({
-    //     title: '请选择性别',
-    //     icon: 'none'
-    //   })
-    // }
   if (!phone) {
       return wx.showToast({
-        title: '请输入联系方式',
+        title: '请输入手机号',
         icon: 'none'
       })
+    }else{
+      if (!(/^1[34578]\d{9}$/.test(phone))) {
+        return wx.showToast({
+          title: '请输入正确的手机号',
+          icon: 'none'
+        })
+      }
     }
 
     if (!communityId) {
@@ -236,57 +227,29 @@ Page({
       })
     }
 
-     wx.request({
-        url: 'https://testh5.server012.com/api/extension/user/becomeExtension',
-         method:'POST',
-         header: {"Content-Type": "application/x-www-form-urlencoded"},
-         data: {
-           id:user.userId,
-           name:name,
-           sex:sex,
-           phone:phone,
-           communityId:communityId,
-           certification:certification
-           },
-           success: res=>{console.info(res);
-                wx.showToast({
-                      icon: 'none',
-                      title: res.data.msg
-                    });
-              if(res.data.code==0){console.info("-------------------");
-                         wx.navigateTo({
-                          url: '/pages/promote/index/index'          
+      wx.request({
+         url: 'https://testh5.server012.com/api/extension/user/becomeExtension',
+          method:'POST',
+          header: {"Content-Type": "application/x-www-form-urlencoded"},
+          data: {
+            id:user.userId,
+            name:name,
+            sex:sex,
+            phone:phone,
+            communityId:communityId,
+            certification:certification
+            },
+            success: res=>{console.info(res);
+                 wx.showToast({
+                       icon: 'none',
+                       title: res.data.msg
+                     });
+               if(res.data.code==0){console.info("-------------------");
+                          wx.navigateTo({
+                           url: '/pages/promote/index/index'          
                         })
+                        }
                        }
-                      }
-         });
-    
-
-  //   this.selectComponent('#form').validate((valid, errors) => {
-  //     console.log(valid, errors);
-  //     if (!valid) {
-  //       const firstError = Object.keys(errors)
-  //       if (firstError.length) {
-  //         this.setData({
-  //           error: errors[firstError[0]].message
-  //         })
-  //       }
-  //     } else {
-  //       wx.showToast({
-  //         title: '校验通过'
-  //       });
-  //       wx.showNavigationBarLoading();
-  //       setTimeout(() => {
-  //         wx.hideNavigationBarLoading();
-  //         getApp().globalData.isPromote = true;
-  //         wx.redirectTo({
-  //           url: '/pages/promote/index/index',
-  //         })
-  //         wx.showToast({
-  //           title: '保存成功',
-  //         })
-  //       }, 2000)
-  //     }
-  //   })
+          });
    }
 })

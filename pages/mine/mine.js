@@ -97,10 +97,9 @@ Page({
     })
   },
   allDD: function (e) {
-    console.info("发现订单");
-    console.info(e.currentTarget.dataset.type);
+    var type = e.currentTarget.dataset.type;
     wx.navigateTo({
-      url: '../HGwodeDD/HGwodeDD?ztype='+type,
+      url: '../HGwodeDD/HGwodeDD?type='+type,
     })
   },
   myDZ: function () {

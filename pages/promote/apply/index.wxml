@@ -19,7 +19,7 @@
         </view>
       </view>
       <mp-cell prop="mobile" title="联系方式">
-        <input data-field="mobile" class="weui-input" name="phone" type="text" placeholder="联系电话"></input>
+        <input data-field="mobile" class="weui-input" name="phone"   type="text" placeholder="联系电话"></input>
       </mp-cell>
       <mp-cell prop="shopName" title="物业/社区">
         <picker data-field="communityIndex" value="{{info.communityIndex}}" range="{{communityList}}" range-key="communityName" bindchange="onSexChange">

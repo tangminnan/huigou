@@ -30,7 +30,7 @@
       </view>
       <view class="remark-container">
         <text class="font-28 font-bold mg-l-16">订单备注</text>
-        <textarea class="order-remark" placeholder="请填写您的备注（30字以内）"></textarea>
+        <textarea class="order-remark" placeholder="请填写您的备注（30字以内）" bindinput="beizhu"></textarea>
       </view>
     </view>
     <view class="panel panel-stack express-panel flex-vbox">

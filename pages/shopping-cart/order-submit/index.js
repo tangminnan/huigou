@@ -10,7 +10,12 @@ Page({
   data: {
     expressFee: 0,
     total: 0,
-    shoppingList: []
+    shoppingList: [],
+    bz:''
+  },
+
+  beizhu:function(e){
+      this.data.bz=e.detail.value;
   },
 
   /**
@@ -52,6 +57,7 @@ Page({
     }
   },
   onClickSubmit: async function () {
+   
     const userInfo = await userApi.getOpenId();
 
     const total = this.getTotal();
@@ -82,7 +88,7 @@ Page({
           merchantsId: shop.shopId,
           userId: userInfo.userId,
           goodsNum: sku.count,
-          goodsPrices: sku.price
+          goodsPrices: sku.price,
         })
       })
     })
@@ -104,17 +110,17 @@ Page({
     console.log('data', data);
     const orderId = data.data.orderId;
 
-    wx.navigateTo({
-      url: `/pages/shopping-cart/order-confirm/index?orderId=${orderId}`,
-      success: (res) => {
-        res.eventChannel.emit('orderList', {
-          shoppingList: this.data.shoppingList,
-          address: this.data.address,
-          total: this.data.total,
-          expressFee: this.data.expressFee
-        });
-      }
-    })
+     wx.navigateTo({
+       url: `/pages/shopping-cart/order-confirm/index?orderId=${orderId}`,
+       success: (res) => {
+         res.eventChannel.emit('orderList', {
+           shoppingList: this.data.shoppingList,
+           address: this.data.address,
+           total: this.data.total,
+           expressFee: this.data.expressFee
+         });
+       }
+     })
   },
   onClickChooseAddress: function () {
     wx.navigateTo({

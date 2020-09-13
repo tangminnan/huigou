@@ -19,12 +19,14 @@ Page({
       data:{id: user.userId},
       success: (res) => {
         if (res.data.code == 0) {
+          console.info("-----------余数额度-----------------------");
           console.info(res);
+          console.info("-----------余数额度-----------------------");
           console.info(res.data.msg);
           this.setData({
            
-            notRecorded: res.data.data.hgExtensionAccount.arn,
-            balance:res.data.data.hgExtensionAccount.balance
+            notRecorded: res.data.data.hgUserInfo.arnExtension,
+            balance:res.data.data.hgUserInfo.balanceExtension
            });
           }
       }
