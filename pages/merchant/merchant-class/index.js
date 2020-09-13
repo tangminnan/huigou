@@ -7,7 +7,7 @@ Page({
    */
   data: {
     classList: [],
-    classifyId: null
+    classifyId: {}
   },
 
   /**
@@ -18,13 +18,17 @@ Page({
     console.log('data', data);
     this.setData({
       classList: data.data,
-      classifyId: data.data[0].id
+      classifyId: {}
     })
   },
   onSelectMerchantClass: function (e) {
     console.log('e', e.currentTarget.dataset.key);
+    const key = +e.currentTarget.dataset.key;
     this.setData({
-      classifyId: e.currentTarget.dataset.key
+      classifyId: {
+        ...this.data.classifyId,
+        [key]: !this.data.classifyId[key]
+      }
     })
   },
   onSubmitApplyInfo: async function () {
@@ -33,8 +37,9 @@ Page({
       title: '提交中',
     });
 
+    const types = Object.keys(this.data.classifyId).filter(item => !!this.data.classifyId[item]).join(',')
     try {
-      await merchantApi.setMerchantClass(this.data.classifyId);
+      await merchantApi.setMerchantClass(types);
       wx.hideLoading();
       wx.showToast({
         title: '提交成功',
