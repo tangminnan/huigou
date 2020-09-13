@@ -122,7 +122,7 @@ Page({
     }
     if (!license || !license.length) {
       return wx.showToast({
-        title: '请上传营业支招',
+        title: '请上传营业执照',
         icon: 'none'
       })
     }
@@ -141,9 +141,9 @@ Page({
         icon: 'none'
       })
     }
-    if (!otherInfos.phone) {
+    if (!otherInfos.phone || !/^1\d{10}$/.test(otherInfos.phone)) {
       return wx.showToast({
-        title: '请输入手机号码',
+        title: '请输入正确的手机号码',
         icon: 'none'
       })
     }
