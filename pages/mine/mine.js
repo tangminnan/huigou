@@ -17,7 +17,7 @@ Page({
 
     merchantApplyStatus: 0,
 
-    shareuId:0
+    shareuId: 0
   },
 
   //微信小程序下拉刷新
@@ -64,7 +64,7 @@ Page({
     }
   },
   //拨打客服
-  bdkf:function(){
+  bdkf: function () {
     wx.makePhoneCall({
 
       phoneNumber: '139xxxxxxxx'
@@ -91,7 +91,7 @@ Page({
     })
   },
   findDD: function () {
-    
+
     wx.navigateTo({
       url: '../HGzhaohuiDD/HGzhaohuiDD',
     })
@@ -99,7 +99,7 @@ Page({
   allDD: function (e) {
     var type = e.currentTarget.dataset.type;
     wx.navigateTo({
-      url: '../HGwodeDD/HGwodeDD?type='+type,
+      url: '../HGwodeDD/HGwodeDD?type=' + type,
     })
   },
   myDZ: function () {
@@ -159,27 +159,33 @@ Page({
   },
 
   onLoad: function (options) {
+    /* 跳转中转发页功能 */
+    if (options.url) {
+      return wx.navigateTo({
+        url: decodeURIComponent(options.url),
+      })
+    }
     //console.info(app.globalData.userInfo);
-    if(options.userId!=null){
+    if (options.userId != null) {
       this.setData({
-        shareuId:options.userId
+        shareuId: options.userId
       })
     }
     var shareuId = this.data.shareuId;
     wx.getSetting({
       success: function (res) {
-        if (!res.authSetting['scope.userInfo']) {//
+        if (!res.authSetting['scope.userInfo']) { //
           //未登录,跳转到登录页
-          if(shareuId==0){
+          if (shareuId == 0) {
             wx.redirectTo({
               url: '/pages/login/index',
             })
-          }else{
+          } else {
             wx.redirectTo({
-              url: '/pages/login/index?shareuId='+shareuId,
+              url: '/pages/login/index?shareuId=' + shareuId,
             })
           }
-          
+
         }
       }
     })

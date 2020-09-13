@@ -42,15 +42,18 @@ Page({
         openId: getApp().globalData.openId,
       });
       wx.hideLoading()
-      wx.navigateTo({
-        url: `/pages/shopping-cart/result/index?type=success&count=${this.data.count}&orderNo=${this.data.orderId}&addressId=${this.data.address.id}`,
+      // 利用我的页面来中专，进而消除购物中间流程页面
+      const targetUrl = `/pages/shopping-cart/result/index?type=success&count=${this.data.count}&orderNo=${this.data.orderId}&addressId=${this.data.address.id}`;
+      wx.reLaunch({
+        url: `/pages/mine/mine?url=${encodeURIComponent(targetUrl)}`,
       })
       this.clearShoppingItem();
     } catch (e) {
       wx.hideLoading()
       // const msg = e && e.msg || '支付失败，请重新支付'
-      wx.navigateTo({
-        url: `/pages/shopping-cart/result/index?type=fail`,
+      const targetUrl = `/pages/shopping-cart/result/index?type=fail`;
+      wx.reLaunch({
+        url: `/pages/mine/mine?url=${encodeURIComponent(targetUrl)}`,
       })
     }
   },

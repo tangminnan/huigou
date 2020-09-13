@@ -35,8 +35,9 @@ Page({
     })
     if (type === 'success') {
       setTimeout(() => {
-        wx.redirectTo({
-          url: '/pages/merchant/index/index',
+        const targetUrl = '/pages/merchant/index/index'
+        wx.reLaunch({
+          url: `/pages/mine/mine?url=${encodeURIComponent(targetUrl)}`,
         })
       }, 2000)
     }

@@ -60,22 +60,20 @@ Page({
     } catch (e) {
       merchantApplyStatus = -1;
     }
+    let targetUrl;
     switch (merchantApplyStatus) {
       case 0:
-        wx.navigateTo({
-          url: '/pages/merchant/audit-result/index?type=fail',
-        });
+        targetUrl = '/pages/merchant/audit-result/index?type=fail';
         break;
       case 2:
-        wx.navigateTo({
-          url: '/pages/merchant/audit-result/index?type=success',
-        });
+        targetUrl = '/pages/merchant/audit-result/index?type=success';
         break;
       case 1:
       default:
-        wx.navigateTo({
-          url: '/pages/merchant/audit-result/index?type=processing',
-        });
+        targetUrl = '/pages/merchant/audit-result/index?type=processing';
     }
+    wx.reLaunch({
+      url: `/pages/mine/mine?url=${encodeURIComponent(targetUrl)}`,
+    })
   },
 })

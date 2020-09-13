@@ -178,6 +178,14 @@
 					"id": -1,
 					"name": "pages/merchant/merchant-class/index",
 					"pathName": "pages/merchant/merchant-class/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 16,
+					"name": "pages/merchant/audit-result/index",
+					"pathName": "pages/merchant/audit-result/index",
+					"query": "type=success",
 					"scene": null
 				}
 			]
