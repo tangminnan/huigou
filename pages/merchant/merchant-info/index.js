@@ -24,7 +24,7 @@ Page({
       businessType
     });
     wx.setNavigationBarTitle({
-      title: businessType === 1 ? '个人经营' : '品牌商家'
+      title: businessType == 1 ? '个人经营' : '品牌商家'
     })
   },
   onFormChage: function (e) {
@@ -112,7 +112,7 @@ Page({
       ...otherInfos
     } = this.data.info;
 
-    if (this.data.businessType === 0) {
+    if (this.data.businessType == 0) {
       if (!certification || !certification.length) {
         return wx.showToast({
           title: '请上传品牌授权',
@@ -126,7 +126,7 @@ Page({
         icon: 'none'
       })
     }
-    if (this.data.businessType === 1) {
+    if (this.data.businessType == 1) {
       if (!otherAuth || !otherAuth.length) {
         return wx.showToast({
           title: '请上传相关证照',
