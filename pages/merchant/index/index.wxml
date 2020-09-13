@@ -9,7 +9,7 @@
 				{{shopName}}
 			</view>
 		</view>
-		<view class="profile-btn" bindtap="goEditProfile"><text class="iconfont icon-hgbianji font-24 mg-r-6"></text>编辑资料</view>
+		<!-- <view class="profile-btn" bindtap="goEditProfile"><text class="iconfont icon-hgbianji font-24 mg-r-6"></text>编辑资料</view> -->
 	</view>
 	<view class="panel order-panel">
 		<view class="order-panel-title">全部订单</view>
