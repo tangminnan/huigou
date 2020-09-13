@@ -7,10 +7,10 @@ const merchantApi = require('../../../api/merchant');
 Page({
   data: {
     sexList: [{
-      key: 1,
+      key: 0,
       label: "男"
     }, {
-      key: 0,
+      key: 1,
       label: "女"
     }],
     info: {
@@ -144,6 +144,12 @@ Page({
     if (!otherInfos.phone || !/^1\d{10}$/.test(otherInfos.phone)) {
       return wx.showToast({
         title: '请输入正确的手机号码',
+        icon: 'none'
+      })
+    }
+    if (!otherInfos.name) {
+      return wx.showToast({
+        title: '请输入姓名',
         icon: 'none'
       })
     }
