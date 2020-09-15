@@ -56,7 +56,7 @@ Page({
     let merchantApplyStatus;
     try {
       const data = await merchantApi.queryApplyStatus();
-      merchantApplyStatus = data.data;
+      merchantApplyStatus = data.data.auditState;
     } catch (e) {
       merchantApplyStatus = -1;
     }

@@ -2,7 +2,7 @@
 	<view class="result">
 		<image src="{{img}}"></image>
 		<view class="desc">{{desc}}</view>
-		<view class="detail">{{detail}}</view>
+		<view class="detail">{{ msg ||  detail}}</view>
 	</view>
 	<button class="retry-btn" wx:if="{{type === 'fail'}}" bindtap="retry">重新申请</button>
 </view>

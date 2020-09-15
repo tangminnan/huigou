@@ -29,10 +29,12 @@ Page({
    */
   onLoad: function (options) {
     const type = options.type || 'processing';
+    const msg = options.msg || '';
     console.log('type', type);
     this.setData({
       type,
-      ...config[type]
+      ...config[type],
+      msg
     })
     if (type === 'success') {
       setTimeout(() => {

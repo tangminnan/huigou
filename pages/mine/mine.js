@@ -54,8 +54,10 @@ Page({
   getMerchantApplyStatus: async function () {
     try {
       const data = await merchantApi.queryApplyStatus();
+      console.log('data', data)
       this.setData({
-        merchantApplyStatus: data.data
+        merchantApplyStatus: data.data.auditState,
+        merchantApplyMsg: data.msg
       })
     } catch (e) {
       this.setData({
@@ -127,7 +129,7 @@ Page({
     switch (this.data.merchantApplyStatus) {
       case 0:
         wx.navigateTo({
-          url: '/pages/merchant/audit-result/index?type=fail',
+          url: `/pages/merchant/audit-result/index?type=fail&msg=${encodeURIComponent(merchantApplyMsg)}`,
         })
         break;
       case 1:
