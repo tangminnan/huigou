@@ -53,17 +53,18 @@ Page({
       return;
     }
     // 根据返回审核结果来决定跳转
-    let merchantApplyStatus;
+    let merchantApplyStatus, reason;
     try {
       const data = await merchantApi.queryApplyStatus();
       merchantApplyStatus = data.data.auditState;
+      reason = data.data.reason;
     } catch (e) {
       merchantApplyStatus = -1;
     }
     let targetUrl;
     switch (merchantApplyStatus) {
       case 0:
-        targetUrl = '/pages/merchant/audit-result/index?type=fail';
+        targetUrl = `/pages/merchant/audit-result/index?type=fail&msg=${encodeURIComponent(reason)}`;
         break;
       case 2:
         targetUrl = '/pages/merchant/audit-result/index?type=success';

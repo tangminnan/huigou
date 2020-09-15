@@ -37,7 +37,13 @@
 		</view>
 	</view>
 	<view class="panel panel-square search-panel">
-		<mp-searchbar ext-class="search-bar" placerholder="搜索商品吧"></mp-searchbar>
+
+		<view class="search-view">
+			<text class="iconfont icon-hgsearch"></text>
+			<input type="search" bindconfirm="onSearch" />
+		</view>
+		<!-- <mp-searchbar ext-class="search-bar" placerholder="搜索商品" search="onSearch"></mp-searchbar> -->
+
 	</view>
 	<view class="panel product-list-panel">
 		<view class="product-item" wx:for="{{productList}}" wx:key="{{item.id}}">

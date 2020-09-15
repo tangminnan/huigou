@@ -57,7 +57,7 @@ Page({
       console.log('data', data)
       this.setData({
         merchantApplyStatus: data.data.auditState,
-        merchantApplyMsg: data.msg
+        merchantApplyMsg: data.data.reason
       })
     } catch (e) {
       this.setData({
@@ -129,7 +129,7 @@ Page({
     switch (this.data.merchantApplyStatus) {
       case 0:
         wx.navigateTo({
-          url: `/pages/merchant/audit-result/index?type=fail&msg=${encodeURIComponent(merchantApplyMsg)}`,
+          url: `/pages/merchant/audit-result/index?type=fail&msg=${encodeURIComponent(this.data.merchantApplyMsg)}`,
         })
         break;
       case 1:

@@ -57,7 +57,21 @@ async function getOrderList(condition) {
 
 async function getOrderListByGoodsId() {}
 
-async function getProductListByName() {}
+// 根据商品名字搜索商品列表
+async function selectAllGoodsByBusinessAndName(name) {
+  const userInfo = await userApi.getOpenId();
+  return api.getData('/api/business/selectAllGoodsByBusinessAndName', {
+    id: userInfo.userId,
+    name
+  })
+}
+// 查询所有的商品列表
+async function selectAllGoodsByBusiness() {
+  const userInfo = await userApi.getOpenId();
+  return api.getData('/api/business/selectAllGoodsByBusiness', {
+    id: userInfo.userId,
+  })
+}
 
 async function getOrderDetail(orderId) {
   return api.getData('/api/business/checkOrderTable', {
@@ -72,5 +86,7 @@ module.exports = {
   setMerchantClass,
   queryApplyStatus,
   getOrderList,
-  getOrderDetail
+  getOrderDetail,
+  selectAllGoodsByBusiness,
+  selectAllGoodsByBusinessAndName
 }

@@ -101,18 +101,32 @@
 .search-panel {
   height: 130rpx;
   margin-top: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.search-bar {
-  background-color: #fff;
+.search-panel .search-view {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12rpx;
+  width: 712rpx;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.search-bar .weui-search-bar__label {
-  background-color: #ededed;
+.search-panel .search-view .iconfont {
+  font-size: 28rpx;
+  padding: 0 20rpx;
+  color: #999;
 }
 
-.search-bar .weui-search-bar__input {
-  background-color: #ededed;
+.search-panel .search-view input {
+  flex: 1;
+  line-height: 50rpx;
 }
 
 /* 商品列表 panel */
@@ -130,6 +144,7 @@
   padding-bottom: 32rpx;
   position: relative;
 }
+
 .product-item::after {
   content: " ";
   display: block;
