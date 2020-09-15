@@ -31,6 +31,7 @@ Page({
     const type = options.type || 'processing';
     console.log('type', type);
     this.setData({
+      type,
       ...config[type]
     })
     if (type === 'success') {
@@ -41,5 +42,10 @@ Page({
         })
       }, 2000)
     }
+  },
+  retry: function (e) {
+    wx.redirectTo({
+      url: '/pages/merchant/merchant-apply/index'
+    })
   }
 })

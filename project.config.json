@@ -185,7 +185,7 @@
 					"id": 16,
 					"name": "pages/merchant/audit-result/index",
 					"pathName": "pages/merchant/audit-result/index",
-					"query": "type=success",
+					"query": "type=fail",
 					"scene": null
 				}
 			]
