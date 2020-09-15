@@ -40,7 +40,7 @@
 
 		<view class="search-view">
 			<text class="iconfont icon-hgsearch"></text>
-			<input type="search" bindconfirm="onSearch" />
+			<input type="search" placeholder="搜索商品" bindconfirm="onSearch" />
 		</view>
 		<!-- <mp-searchbar ext-class="search-bar" placerholder="搜索商品" search="onSearch"></mp-searchbar> -->
 
@@ -52,7 +52,7 @@
 				<text class="title">{{item.title}}</text>
 				<text class="price">¥{{item.price}}</text>
 			</view>
-			<view class="detail-btn" data-type="all" data-goodsId="{{item.id}}" bindtap="onClickOrder">
+			<view class="detail-btn" data-goodsId="{{item.id}}" bindtap="onClickOrder">
 				<text class="iconfont icon-hgsearch"></text>
 				<text>查看订单</text>
 			</view>

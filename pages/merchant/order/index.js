@@ -30,6 +30,7 @@ Page({
    */
   onLoad: function (options) {
     const type = options.type || 'notRecorded'
+    this.goodsId = options.goodsId;
     const idx = this.data.tabs.findIndex(tab => tab.type == type);
     console.log('type', type, idx);
     this.setData({
@@ -47,6 +48,13 @@ Page({
     })
   },
   getOrderList: async function () {
+    if (this.goodsId) {
+      this.getOrderListByGoodsId();
+    } else {
+      this.getOrderListByShop();
+    }
+  },
+  getOrderListByShop: async function () {
     const orderList = await merchantApi.getOrderList(this.data.activeTab);
     console.log('orderList', orderList)
     const list = [];
@@ -75,7 +83,36 @@ Page({
       orderList: list
     })
   },
-  onOrderStateChange: function(e) {
+  getOrderListByGoodsId: async function () {
+    const orderList = await merchantApi.searchBusinessOrderByCondition(this.goodsId, this.data.activeTab);
+    console.log('orderList', orderList)
+    const list = [];
+    orderList.data.forEach(porder => {
+      porder.orderTables && porder.orderTables.forEach(order => {
+        list.push({
+          shopId: order.hgGoods.merchantsId,
+          pOrderId: porder.orderId,
+          orderId: order.id,
+          goodsId: order.goodsId,
+          img: order.hgGoods.hgGoodsFile.picture,
+          title: order.hgGoods.title,
+          goodsNum: order.goodsNum,
+          goodsPrices: order.goodsPrices,
+          createTime: order.createTime,
+          expressFee: order.expressFee,
+          distributionStatus: order.distributionStatus,
+          remark: order.remarks,
+          courierNumber: order.courierNumber,
+          retCourierNumber: order.retCourierNumber
+        })
+      })
+    })
+
+    this.setData({
+      orderList: list
+    })
+  },
+  onOrderStateChange: function (e) {
     this.getOrderList()
   }
 })

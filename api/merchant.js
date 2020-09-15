@@ -72,6 +72,18 @@ async function selectAllGoodsByBusiness() {
     id: userInfo.userId,
   })
 }
+// 查询某商品下的所有订单
+// condition 0待确认 1待发货 2已发货 3退换/售后
+// goodsId
+async function searchBusinessOrderByCondition(goodsId, condition) {
+  const userInfo = await userApi.getOpenId();
+  return api.getData('/api/business/searchBusinessOrderByCondition', {
+    id: userInfo.userId,
+    goodsId,
+    condition
+  })
+}
+
 
 async function getOrderDetail(orderId) {
   return api.getData('/api/business/checkOrderTable', {
@@ -88,5 +100,6 @@ module.exports = {
   getOrderList,
   getOrderDetail,
   selectAllGoodsByBusiness,
-  selectAllGoodsByBusinessAndName
+  selectAllGoodsByBusinessAndName,
+  searchBusinessOrderByCondition
 }

@@ -25,8 +25,8 @@ Page({
   },
   getGoodsInfo: async function () {
     try {
-      const response = await merchantApi.selectAllGoodsByBusiness();
-      const productList = response.data.map(item => {
+      const list = await merchantApi.selectAllGoodsByBusiness();
+      const productList = list.map(item => {
         return {
           id: item.id,
           image: item.hgGoodsFiles[0].picture,
@@ -43,10 +43,10 @@ Page({
 
   },
   onClickOrder: function (e) {
-    const type = e.currentTarget.dataset.type;
+    // const type = e.currentTarget.dataset.type;
     const goodsId = e.currentTarget.dataset.goodsId;
     wx.navigateTo({
-      url: `/pages/merchant/order/index?type=${type}&goodsId=${goodsId||''}`,
+      url: `/pages/merchant/order/index?goodsId=${goodsId||''}`,
     })
   },
   onSearch: async function (e) {
@@ -55,8 +55,8 @@ Page({
       title: '处理中',
     })
     try {
-      const response = await merchantApi.selectAllGoodsByBusinessAndName(e.detail.value)
-      const productList = response.data.map(item => {
+      const list = await merchantApi.selectAllGoodsByBusinessAndName(e.detail.value)
+      const productList = list.map(item => {
         return {
           id: item.id,
           image: item.hgGoodsFiles[0].picture,
