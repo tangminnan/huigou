@@ -48,6 +48,46 @@ Component({
     }
   },
   methods: {
+    onRefusedApply: function (e) {
+      this.setData({
+        showRefusedModal: true,
+        refusedReason: ''
+      })
+    },
+    onConfirmRefusedApply: async function (e) {
+      const orderId = e.currentTarget.dataset.orderId;
+      if (!this.data.refusedReason) {
+        wx.showToast({
+          title: '请输入驳回原因',
+          icon: 'none'
+        })
+        return;
+      }
+      wx.showLoading({
+        title: '处理中',
+        mask: true
+      })
+      try {
+        const response = await orderApi.refuseAfterSale(orderId, this.data.refusedReason);
+        console.log('response', response);
+        this.setData({
+          showRefusedModal: false,
+          refusedReason: ''
+        })
+        wx.hideLoading();
+        wx.showToast({
+          title: '处理成功',
+          icon: 'none'
+        })
+        this.triggerEvent('stateChange')
+      } catch (e) {
+        wx.hideLoading();
+        wx.showToast({
+          title: e && e.msg || '出错了，请稍后再试',
+          icon: 'none'
+        })
+      }
+    },
     onOperateOrderDetail: function (e) {
       console.log('this', this);
       wx.navigateTo({
@@ -111,6 +151,11 @@ Component({
         expressNo: ''
       })
 
+    },
+    onRefusedReasonChange: function (e) {
+      this.setData({
+        refusedReason: e.detail.value
+      })
     },
     onExpressNoChange: function (e) {
       this.setData({

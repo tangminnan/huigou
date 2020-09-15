@@ -38,6 +38,10 @@
       bindtap="confirmOrder">确认订单</view>
     <view wx:if="{{order.distributionStatus === 1}}" class="action-btn" data-order-id="{{order.orderId}}"
       bindtap="onShowModal">填写快递单号</view>
+    <view class="desc flex-spread mg-r-16">
+      <view wx:if="{{order.distributionStatus === 5 || order.distributionStatus === 6 || order.distributionStatus === 7}}"
+      class="action-btn" bindtap="onRefusedApply" data-order-id="{{order.orderId}}">拒绝</view>
+    </view>
     <view wx:if="{{order.distributionStatus === 5 || order.distributionStatus === 6 || order.distributionStatus === 7}}"
       class="action-btn" bindtap="onViewDetail" data-order-id="{{order.orderId}}">进入详情</view>
     <!-- <view wx:if="{{order.distributionStatus === 9}}" class="action-btn" data-order-id="{{order.orderId}}" data-parent-order-id="{{order.pOrderId}}"
@@ -49,6 +53,14 @@
       <view class="font-28 font-bold">请输入快递单号:</view>
       <input type="text" value="{{expressNo}}" bindinput="onExpressNoChange" />
       <view class="btn" data-order-id="{{order.orderId}}" bindtap="onUpdateOrderExpressNo">确定</view>
+    </view>
+  </view>
+  <view wx:if="{{showRefusedModal}}" class="modal-container">
+    <view class="modal-mask"></view>
+    <view class="modal-win">
+      <view class="font-28 font-bold">请驳回原因:</view>
+      <input type="text" value="{{refusedReason}}" bindinput="onRefusedReasonChange" />
+      <view class="btn" data-order-id="{{order.orderId}}" bindtap="onConfirmRefusedApply">确定</view>
     </view>
   </view>
 </view>

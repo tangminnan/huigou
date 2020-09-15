@@ -98,6 +98,15 @@ async function tuikuantuihuo(orderId, parentOrderId) {
   return processAfterSale(orderId, parentOrderId, 10)
 }
 
+// 拒绝用户的售后申请
+async function refuseAfterSale(orderId, reason, status = 14) {
+  return api.postData('/api/business/refuseReturnGoods', {
+    orderId,
+    reason,
+    status
+  })
+}
+
 module.exports = {
   saveOrder,
   wxPay,
@@ -110,5 +119,6 @@ module.exports = {
   updateRetCourierNumber,
   tuikuan,
   huanhuo,
-  tuikuantuihuo
+  tuikuantuihuo,
+  refuseAfterSale
 }
