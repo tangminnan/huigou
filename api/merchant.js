@@ -62,7 +62,7 @@ async function selectAllGoodsByBusinessAndName(name) {
   const userInfo = await userApi.getOpenId();
   return api.getData('/api/business/selectAllGoodsByBusinessAndName', {
     id: userInfo.userId,
-    name
+    title: name
   })
 }
 // 查询所有的商品列表

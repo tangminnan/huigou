@@ -25,8 +25,8 @@ Page({
   },
   getGoodsInfo: async function () {
     try {
-      const list = await merchantApi.selectAllGoodsByBusiness();
-      const productList = list.map(item => {
+      const response = await merchantApi.selectAllGoodsByBusiness();
+      const productList = response.data.map(item => {
         return {
           id: item.id,
           image: item.hgGoodsFiles[0].picture,
@@ -55,8 +55,9 @@ Page({
       title: '处理中',
     })
     try {
-      const list = await merchantApi.selectAllGoodsByBusinessAndName(e.detail.value)
-      const productList = list.map(item => {
+      const response = await merchantApi.selectAllGoodsByBusinessAndName(e.detail.value)
+      console.log('response', response)
+      const productList = response.data.map(item => {
         return {
           id: item.id,
           image: item.hgGoodsFiles[0].picture,
